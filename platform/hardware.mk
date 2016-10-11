@@ -46,3 +46,7 @@ PRODUCT_PACKAGES += \
 # Custom NetworkSwitcher APK
 PRODUCT_PACKAGES += \
     NetworkSwitcher
+
+# Remove unwanted packages
+PRODUCT_PACKAGES += \
+    RemovePackages
