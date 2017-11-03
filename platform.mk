@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+$(call inherit-product, device/sony/common-treble/common.mk)
+
 PLATFORM_PATH := device/sony/yoshino
 
 ### PLATFORM INIT
