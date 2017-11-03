@@ -26,4 +26,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     bionic/libc/zoneinfo/tzdata:recovery/root/system/usr/share/zoneinfo/tzdata
 
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/recovery/vendor/manifest.xml:recovery/root/vendor/manifest.xml
+
 include $(PLATFORM_PATH)/system_prop.mk

@@ -12,6 +12,10 @@ on fs
     chmod 0664 /dev/ion
     chown system system /dev/ion
 
+    # IMPORTANT!
+    # This needs to be supported by the init binary!
+    install_keyring
+
 on post-fs
     # start clearpad_post_probe when filesystem is available for fwflash
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
@@ -20,3 +24,43 @@ on init
     # Mount cgroup for cpu accounting
     mount cgroup none /acct cpuacct
     mkdir /acct/uid
+
+on boot
+    setprop crypto.ready 1
+
+on property:crypto.ready=1
+    start sbin_qseecomd
+    start hwservicemanager
+    start gatekeeper-1-0
+    start keymaster-3-0
+
+on property:crypto.ready=0
+    stop keymaster-3-0
+    stop gatekeeper-1-0
+    stop hwservicemanager
+    stop sbin_qseecomd
+
+service hwservicemanager /sbin/hwservicemanager
+    user root
+    group root
+    disabled
+    onrestart setprop hwservicemanager.ready false
+    seclabel u:r:recovery:s0
+
+service keymaster-3-0 /sbin/android.hardware.keymaster@3.0-service
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service gatekeeper-1-0 /sbin/android.hardware.gatekeeper@1.0-service
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service sbin_qseecomd /sbin/qseecomd
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0

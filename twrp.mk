@@ -52,9 +52,84 @@ BOARD_HAS_NO_REAL_SDCARD := true
 # Media on data partition
 RECOVERY_SDCARD_ON_DATA := true
 
-# Enable support for encrypted fs
+### ENCRYPTED FILESYSTEMS
 TW_INCLUDE_CRYPTO := true
+# ext4 file based crypto
+TW_INCLUDE_CRYPTO_FBE := true
+TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
 
+# Dependencies of libsecureui.so
+TARGET_RECOVERY_DEVICE_MODULES      += libEGL
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libEGL.so
+TARGET_RECOVERY_DEVICE_MODULES      += libGLESv2
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libGLESv2.so
+TARGET_RECOVERY_DEVICE_MODULES      += android.hardware.graphics.allocator@2.0
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hardware.graphics.allocator@2.0.so
+TARGET_RECOVERY_DEVICE_MODULES      += android.hardware.graphics.common@1.0
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hardware.graphics.common@1.0.so
+TARGET_RECOVERY_DEVICE_MODULES      += android.hardware.graphics.mapper@2.0
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hardware.graphics.mapper@2.0.so
+TARGET_RECOVERY_DEVICE_MODULES      += android.hardware.configstore@1.0
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hardware.configstore@1.0.so
+TARGET_RECOVERY_DEVICE_MODULES      += android.hardware.configstore-utils
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hardware.configstore-utils.so
+TARGET_RECOVERY_DEVICE_MODULES      += android.hardware.graphics.bufferqueue@1.0
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hardware.graphics.bufferqueue@1.0.so
+TARGET_RECOVERY_DEVICE_MODULES      += android.hardware.media@1.0
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hardware.media@1.0.so
+TARGET_RECOVERY_DEVICE_MODULES      += android.hidl.base@1.0
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hidl.base@1.0.so
+TARGET_RECOVERY_DEVICE_MODULES      += android.hidl.token@1.0
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hidl.token@1.0.so
+TARGET_RECOVERY_DEVICE_MODULES      += android.hidl.token@1.0-utils
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hidl.token@1.0-utils.so
+TARGET_RECOVERY_DEVICE_MODULES      += libbinder
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libbinder.so
+TARGET_RECOVERY_DEVICE_MODULES      += libgui
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libgui.so
+TARGET_RECOVERY_DEVICE_MODULES      += libnativebridge
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libnativebridge.so
+TARGET_RECOVERY_DEVICE_MODULES      += libnativehelper
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libnativehelper.so
+TARGET_RECOVERY_DEVICE_MODULES      += libnativeloader
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libnativeloader.so
+TARGET_RECOVERY_DEVICE_MODULES      += libnativewindow
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libnativewindow.so
+TARGET_RECOVERY_DEVICE_MODULES      += libprotobuf-cpp-lite
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libprotobuf-cpp-lite.so
+TARGET_RECOVERY_DEVICE_MODULES      += libsync
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libsync.so
+TARGET_RECOVERY_DEVICE_MODULES      += libui
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libui.so
+
+# Required for keymaster
+TARGET_RECOVERY_DEVICE_MODULES      += hwservicemanager
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/bin/hwservicemanager
+TARGET_RECOVERY_DEVICE_MODULES      += libhidl-gen-utils
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libhidl-gen-utils.so
+TARGET_RECOVERY_DEVICE_MODULES      += libtinyxml2
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libtinyxml2.so
+TARGET_RECOVERY_DEVICE_MODULES      += libvintf
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libvintf.so
+
+# Required by android.hardware.keymaster@3.0-service
+TARGET_RECOVERY_DEVICE_MODULES      += libhardware_legacy
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libhardware_legacy.so
+
+# Required by android.hardware.gatekeeper-1.0-service
+TARGET_RECOVERY_DEVICE_MODULES      += android.hardware.gatekeeper@1.0
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hardware.gatekeeper@1.0.so
+
+### KEYMASTER
+# The security patch level of keys need to match the patch level of the
+# recovery so you can decrypt the /data partition
+PLATFORM_SECURITY_PATCH = 2017-10-01
+
+# Add strace
+TARGET_RECOVERY_DEVICE_MODULES      += strace
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/xbin/strace
+
+### TWRP FEATURES
 TW_NO_EXFAT_FUSE := true
 TW_EXCLUDE_SUPERSU := true
 
