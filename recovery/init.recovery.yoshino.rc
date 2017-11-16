@@ -16,3 +16,7 @@ on post-fs
     # start clearpad_post_probe when filesystem is available for fwflash
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
 
+on init
+    # Mount cgroup for cpu accounting
+    mount cgroup none /acct cpuacct
+    mkdir /acct/uid
