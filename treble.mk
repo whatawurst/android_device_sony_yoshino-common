@@ -1,108 +1,180 @@
-# RenderScript HAL
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
+# See build/make/target/product/treble_common.mk
+PRODUCT_PACKAGES := \
+    android.frameworks.displayservice@1.0 \
+    android.frameworks.schedulerservice@1.0 \
+    android.frameworks.sensorservice@1.0 \
+    android.frameworks.vr.composer@1.0 \
+    android.hardware.audio@2.0 \
+    android.hardware.audio.common@2.0 \
+    android.hardware.audio.common@2.0-util \
+    android.hardware.audio.effect@2.0 \
+    android.hardware.automotive.evs@1.0 \
+    android.hardware.automotive.vehicle@2.0 \
+    android.hardware.automotive.vehicle@2.0-manager-lib-shared \
+    android.hardware.automotive.vehicle@2.1 \
+    android.hardware.biometrics.fingerprint@2.1 \
+    android.hardware.bluetooth@1.0 \
+    android.hardware.boot@1.0 \
+    android.hardware.broadcastradio@1.0 \
+    android.hardware.broadcastradio@1.1 \
+    android.hardware.camera.common@1.0 \
+    android.hardware.camera.device@1.0 \
+    android.hardware.camera.device@3.2 \
+    android.hardware.camera.metadata@3.2 \
+    android.hardware.camera.provider@2.4 \
+    android.hardware.configstore-utils \
+    android.hardware.configstore@1.0 \
+    android.hardware.contexthub@1.0 \
+    android.hardware.drm@1.0 \
+    android.hardware.dumpstate@1.0 \
+    android.hardware.gatekeeper@1.0 \
+    android.hardware.gnss@1.0 \
+    android.hardware.graphics.allocator@2.0 \
+    android.hardware.graphics.bufferqueue@1.0 \
+    android.hardware.graphics.common@1.0 \
+    android.hardware.graphics.composer@2.1 \
+    android.hardware.graphics.mapper@2.0 \
+    android.hardware.health@1.0 \
+    android.hardware.ir@1.0 \
+    android.hardware.keymaster@3.0 \
+    android.hardware.light@2.0 \
+    android.hardware.media@1.0 \
+    android.hardware.media.omx@1.0 \
+    android.hardware.memtrack@1.0 \
+    android.hardware.nfc@1.0 \
+    android.hardware.oemlock@1.0 \
+    android.hardware.power@1.0 \
+    android.hardware.radio@1.0 \
+    android.hardware.radio.deprecated@1.0 \
+    android.hardware.sensors@1.0 \
+    android.hardware.soundtrigger@2.0 \
+    android.hardware.thermal@1.0 \
+    android.hardware.tv.cec@1.0 \
+    android.hardware.tv.input@1.0 \
+    android.hardware.usb@1.0 \
+    android.hardware.usb@1.1 \
+    android.hardware.vibrator@1.0 \
+    android.hardware.vr@1.0 \
+    android.hardware.weaver@1.0 \
+    android.hardware.wifi@1.0 \
+    android.hardware.wifi.supplicant@1.0 \
+    android.hidl.allocator@1.0 \
+    android.hidl.base@1.0 \
+    android.hidl.manager@1.0 \
+    android.hidl.memory@1.0 \
+    android.hidl.token@1.0 \
+    android.system.wifi.keystore@1.0 \
+    netutils-wrapper-1.0
 
+# VNDK:
+#   Some VNDK shared objects are automatically included indirectly.
+#   We list them all here to make it explicit and prevent possible mistakes.
+#   An example of one such mistake was libcurl, which is included in A/B
+#   devices because of update_engine, but not in non-A/B devices.
+PRODUCT_PACKAGES += \
+    libaudioroute \
+    libaudioutils \
+    libbinder \
+    libcamera_metadata \
+    libcap \
+    libcrypto \
+    libcrypto_utils \
+    libcups \
+    libcurl \
+    libdiskconfig \
+    libdumpstateutil \
+    libevent \
+    libexif \
+    libexpat \
+    libfmq \
+    libgatekeeper \
+    libgui \
+    libhardware_legacy \
+    libhidlmemory \
+    libicui18n \
+    libicuuc \
+    libjpeg \
+    libkeymaster1 \
+    libkeymaster_messages \
+    libldacBT_abr \
+    libldacBT_enc \
+    liblz4 \
+    liblzma \
+    libmdnssd \
+    libmemtrack \
+    libmemunreachable \
+    libmetricslogger \
+    libminijail \
+    libnetutils \
+    libnl \
+    libopus \
+    libpagemap \
+    libpcap \
+    libpcre2 \
+    libpcrecpp \
+    libpdfium \
+    libpiex \
+    libpower \
+    libprocessgroup \
+    libprocinfo \
+    libprotobuf-cpp-full \
+    libprotobuf-cpp-lite \
+    libradio_metadata \
+    libsoftkeymasterdevice \
+    libsonic \
+    libsonivox \
+    libspeexresampler \
+    libsqlite \
+    libssl \
+    libsuspend \
+    libsysutils \
+    libtinyalsa \
+    libtinyxml2 \
+    libui \
+    libusbhost \
+    libvixl-arm \
+    libvixl-arm64 \
+    libvorbisidec \
+    libwebrtc_audio_preprocessing \
+    libxml2 \
+    libyuv \
+    libziparchive
+
+# VNDK-SP:
+PRODUCT_PACKAGES += \
+    vndk-sp
+
+# LL-VNDK:
+PRODUCT_PACKAGES += \
+    libandroid_net \
+    libc \
+    libdl \
+    liblog \
+    libm \
+    libstdc++ \
+    libvndksupport \
+    libz
+
+# SP-NDK:
+PRODUCT_PACKAGES += \
+    libEGL \
+    libGLESv1_CM \
+    libGLESv2 \
+    libGLESv3 \
+    libnativewindow \
+    libsync \
+    libvulkan
+
+### SERVICES
 # Graphics
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
-    android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.composer@2.1-impl \
-    android.hardware.graphics.composer@2.1-service \
-    android.hardware.graphics.mapper@2.0-impl
+    android.hardware.graphics.allocator@2.0-service
 
-# Memtrack
+# Wifi service
 PRODUCT_PACKAGES += \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service
-
-# Configstore
-PRODUCT_PACKAGES += \
-    android.hardware.configstore@1.0-service
-
-# Audio
-PRODUCT_PACKAGES += \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio@2.0-service \
-    android.hardware.audio.effect@2.0-impl \
-    android.hardware.soundtrigger@2.0-impl
-
-# Camera
-PRODUCT_PACKAGES += \
-    camera.device@3.2-impl \
-    android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service
-
-# Netutils
-PRODUCT_PACKAGES += \
-    netutils-wrapper-1.0
-
-# Wi-Fi
-PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-impl \
     android.hardware.wifi@1.0-service
 
-# Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-impl \
-    android.hardware.bluetooth@1.0-service
-
-# NFC packages
-PRODUCT_PACKAGES += \
-    android.hardware.nfc@1.0-impl \
-    android.hardware.nfc@1.0-service
-
-# GNSS
-PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl \
-    android.hardware.gnss@1.0-service
-
-# Light
-PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service
-
-# Sensors
-PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl \
-    android.hardware.sensors@1.0-service
-
-# Vibrator
-PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl \
-    android.hardware.vibrator@1.0-service
-
-# Fingerprint
-PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service
-
-# Keymaster
-PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl \
-    android.hardware.keymaster@3.0-service
-
-# Gatekeeper
-PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-impl \
-    android.hardware.gatekeeper@1.0-service
-
-# DRM
-PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0-impl \
-    android.hardware.drm@1.0-service
-
-# Usb HAL
-PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service
-
-# Thermal HAL
-PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-impl \
-    android.hardware.thermal@1.0-service
-
-# Power
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl \
-    android.hardware.power@1.0-service
-
-# Default OMX service to non-Treble
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.media.treble_omx=false
+    wificond

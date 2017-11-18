@@ -24,6 +24,16 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 # Build ext4 tools - system/vold
 TARGET_USERIMAGES_USE_EXT4 := true
 
+### CHARGER
+WITH_LINEAGE_CHARGER := true
+# system/core/healthd/Android.mk 
+BOARD_CHARGER_DISABLE_INIT_BLANK := true
+BOARD_CHARGER_ENABLE_SUSPEND := true
+BOARD_CHARGER_ENABLE_SUSPEND := true
+
+# device/sony/treble/core/healthd
+BOARD_HAL_STATIC_LIBRARIES += libhealthd.$(TARGET_DEVICE)
+
 ### VENDOR MANIFEST AND MATRIX
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/vendor/manifest.xml
 DEVICE_MATRIX_FILE   := $(COMMON_PATH)/vendor/compatibility_matrix.xml
