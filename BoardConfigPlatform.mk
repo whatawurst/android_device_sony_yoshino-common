@@ -82,6 +82,11 @@ TARGET_COPY_OUT_VENDOR := system
 # Build ext4 tools - system/vold
 TARGET_USERIMAGES_USE_EXT4 := true
 
+### GRAPHICS
+TARGET_HAS_HDR_DISPLAY := true
+TARGET_USES_HWC2 := true
+TARGET_USES_GRALLOC1 := true
+
 # vendor/qcom/opensource/cryptfs_hw
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
