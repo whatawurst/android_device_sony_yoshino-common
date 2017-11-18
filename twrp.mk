@@ -120,11 +120,6 @@ TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libhardware_legacy.so
 TARGET_RECOVERY_DEVICE_MODULES      += android.hardware.gatekeeper@1.0
 TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hardware.gatekeeper@1.0.so
 
-### KEYMASTER
-# The security patch level of keys need to match the patch level of the
-# recovery so you can decrypt the /data partition
-PLATFORM_SECURITY_PATCH = 2017-10-01
-
 # Add strace
 TARGET_RECOVERY_DEVICE_MODULES      += strace
 TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/xbin/strace
