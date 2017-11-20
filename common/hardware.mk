@@ -17,3 +17,9 @@ PRODUCT_PACKAGES += \
 ### BLUETOOTH
 PRODUCT_PACKAGES += \
     macaddrsetup
+
+### NFC
+PRODUCT_PACKAGES += \
+    com.android.nfc_extras \
+    NfcNci \
+    Tag

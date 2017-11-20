@@ -45,3 +45,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.use_data_netmgrd=true \
     persist.data.netmgrd.qos.enable=true \
     ro.data.large_tcp_window_size=true
+
+### NFC
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.nfc.port=I2C
