@@ -39,3 +39,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/odm/lib64/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM
+
+### NETMGR
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.use_data_netmgrd=true \
+    persist.data.netmgrd.qos.enable=true \
+    ro.data.large_tcp_window_size=true

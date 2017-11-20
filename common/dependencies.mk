@@ -49,3 +49,7 @@ PRODUCT_PACKAGES += \
 ### RIL
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full
+
+### NETMGR
+PRODUCT_PACKAGES += \
+    librmnetctl
