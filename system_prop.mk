@@ -30,3 +30,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Property to choose between virtual/external wfd display
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.wfd.virtual=0
+
+### BLUETOOTH ADDRESS
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bt.bdaddr_path=/data/misc/bluetooth/bluetooth_bdaddr

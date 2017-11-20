@@ -41,3 +41,7 @@ PRODUCT_PACKAGES += \
     libloc_pla \
     libloc_stub \
     libgps.utils
+
+### BLUETOOTH
+PRODUCT_PACKAGES += \
+    libbt-vendor
