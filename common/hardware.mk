@@ -13,3 +13,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     timekeep \
     TimeKeep \
+
+### BLUETOOTH
+PRODUCT_PACKAGES += \
+    macaddrsetup
