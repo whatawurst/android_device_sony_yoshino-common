@@ -16,7 +16,8 @@
 
 ### USB
 PRODUCT_PROPERTY_OVERRIDES += \
-    sys.usb.controller=a800000.dwc3
+    sys.usb.controller=a800000.dwc3 \
+    sys.usb.rndis.func.name=gsi
 
 # OpenGLES version
 PRODUCT_PROPERTY_OVERRIDES += \
