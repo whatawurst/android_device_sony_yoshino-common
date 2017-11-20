@@ -24,6 +24,9 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 # Build ext4 tools - system/vold
 TARGET_USERIMAGES_USE_EXT4 := true
 
+# Override filesystem config
+TARGET_ANDROID_FILESYSTEM_CONFIG_H := $(COMMON_PATH)/fs/android_filesystem_config.h
+
 ### CHARGER
 WITH_LINEAGE_CHARGER := true
 # system/core/healthd/Android.mk 
