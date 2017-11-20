@@ -59,3 +59,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-threads=2 \
     dalvik.vm.image-dex2oat-threads=4
+
+### DATA
+# Platform specific default properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.data.qmi.adb_logmask=0
