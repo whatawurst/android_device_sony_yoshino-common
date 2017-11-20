@@ -53,3 +53,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ### WIFI
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
+
+### DEX2OAT
+# Limit dex2oat threads to improve thermals
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-threads=2 \
+    dalvik.vm.image-dex2oat-threads=4
