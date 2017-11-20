@@ -7,3 +7,17 @@ PRODUCT_PACKAGES += \
 ### POWER
 PRODUCT_PACKAGES += \
     librqbalance
+
+### AUDIO
+# For audio.primary
+PRODUCT_PACKAGES += \
+    libtinyalsa \
+    tinymix
+
+# Audio effects
+PRODUCT_PACKAGES += \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
+    libqcomvoiceprocessingdescriptors \
+    libqcompostprocbundle \
+    libvolumelistener
