@@ -40,6 +40,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/odm/lib64/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM
 
+# Default to LTE/GSM/WCDMA.
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.default_network=9
+
 ### NETMGR
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.use_data_netmgrd=true \
