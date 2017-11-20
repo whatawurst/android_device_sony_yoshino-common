@@ -23,3 +23,12 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     NfcNci \
     Tag
+
+### WIFI
+PRODUCT_PACKAGES += \
+    p2p_supplicant.conf \
+    hostapd \
+    libwpa_client \
+    wificond \
+    wpa_supplicant \
+    wpa_supplicant.conf

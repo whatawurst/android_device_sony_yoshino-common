@@ -49,3 +49,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ### NFC
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.nfc.port=I2C
+
+### WIFI
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0
