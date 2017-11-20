@@ -8,3 +8,8 @@ PRODUCT_PACKAGES += \
 ### THERMMANAGER
 PRODUCT_PACKAGES += \
     thermanager
+
+### TIMEKEEP
+PRODUCT_PACKAGES += \
+    timekeep \
+    TimeKeep \
