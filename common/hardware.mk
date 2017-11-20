@@ -5,3 +5,6 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     libaudio-resampler
 
+### THERMMANAGER
+PRODUCT_PACKAGES += \
+    thermanager
