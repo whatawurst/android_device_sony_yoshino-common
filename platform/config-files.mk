@@ -5,3 +5,8 @@ PRODUCT_COPY_FILES += \
 ### IDC
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/system/idc/clearpad.idc:system/usr/idc/clearpad.idc
+
+### IRCBALANCE
+# MSM IRQ Balancer configuration file
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/config/irqbalance/msm_irqbalance.conf:system/etc/msm_irqbalance.conf
