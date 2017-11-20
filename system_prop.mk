@@ -34,3 +34,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ### BLUETOOTH ADDRESS
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bt.bdaddr_path=/data/misc/bluetooth/bluetooth_bdaddr
+
+### RILD
+PRODUCT_PROPERTY_OVERRIDES += \
+    rild.libpath=/odm/lib64/libril-qc-qmi-1.so \
+    ril.subscription.types=NV,RUIM

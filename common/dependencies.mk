@@ -45,3 +45,7 @@ PRODUCT_PACKAGES += \
 ### BLUETOOTH
 PRODUCT_PACKAGES += \
     libbt-vendor
+
+### RIL
+PRODUCT_PACKAGES += \
+    libprotobuf-cpp-full
