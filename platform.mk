@@ -21,6 +21,7 @@ PLATFORM_PATH := device/sony/yoshino
 ### PLATFORM INIT
 PRODUCT_PACKAGES += \
     fstab.yoshino \
+    init.yoshino.usb \
     init.yoshino.pwr
 
 ### RECOVERY
