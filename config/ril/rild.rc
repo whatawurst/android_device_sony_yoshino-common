@@ -1,0 +1,6 @@
+# Use the open source rild
+service ril-daemon /system/bin/hw/rild
+    class main
+    user radio
+    group radio cache inet misc audio log readproc wakelock qcom_diag drmrpc trimarea
+    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW

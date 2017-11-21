@@ -110,6 +110,11 @@ QCOM_BT_USE_BTNV := true
 BOARD_HAS_QCA_BT_SIBS := true
 WCNSS_FILTER_USES_SIBS := true
 
+### RIL
+TARGET_RIL_VARIANT := caf
+TARGET_PER_MGR_ENABLED := true
+PROTOBUF_SUPPORTED := true
+
 # vendor/qcom/opensource/cryptfs_hw
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw

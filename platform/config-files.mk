@@ -32,3 +32,7 @@ endif
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
     $(PLATFORM_PATH)/config/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+
+### RIL
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/config/ril/rild.rc:system/etc/init/rild.rc
