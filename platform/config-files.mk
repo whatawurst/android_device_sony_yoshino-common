@@ -27,3 +27,8 @@ PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/media/media_codecs_performance.xml:vendor/etc/media_codecs_performance.xml \
     $(PLATFORM_PATH)/config/media/media_profiles_V1_0.xml:vendor/etc/media_profiles_V1_0.xml
 endif
+
+### WIFI
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/config/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    $(PLATFORM_PATH)/config/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf

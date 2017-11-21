@@ -94,6 +94,11 @@ on boot
     write /dev/cpuset/background/cpus 0
     write /dev/cpuset/system-background/cpus 0-1
 
+on property:wlan.driver.status=ok
+    # WLAN firmware config
+    # Change owner after the module has been loaded by the wifi service
+    chown wifi wifi /sys/module/wlan/parameters/fwpath
+
 # OSS WLAN and BT MAC setup
 service macaddrsetup /system/vendor/bin/macaddrsetup /data/misc/wifi/wlan_mac.bin
     class core
