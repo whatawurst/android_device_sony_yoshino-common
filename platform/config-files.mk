@@ -11,6 +11,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/irqbalance/msm_irqbalance.conf:system/etc/msm_irqbalance.conf
 
+### POWER
+# RQBalance-PowerHAL configuration
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/config/power/rqbalance_config.xml:system/etc/rqbalance_config.xml
+
 ### AUDIO
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/audio/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt
