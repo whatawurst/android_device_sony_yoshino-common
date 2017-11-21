@@ -71,3 +71,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ### AANC mixer tuning
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.aanc.enable=true
+
+### BLUETOOTH
+PRODUCT_PROPERTY_OVERRIDES += \
+    bt.max.hfpclient.connections=1 \
+    qcom.bluetooth.soc=cherokee
