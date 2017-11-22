@@ -100,10 +100,10 @@ on property:wlan.driver.status=ok
     chown wifi wifi /sys/module/wlan/parameters/fwpath
 
 # OSS WLAN and BT MAC setup
-service macaddrsetup /system/vendor/bin/macaddrsetup /data/misc/wifi/wlan_mac.bin
+service macaddrsetup /system/bin/macaddrsetup /data/misc/wifi/wlan_mac.bin
     class core
     user system
-    group system bluetooth
+    group system bluetooth wifi
     disabled
     oneshot
     writepid /dev/cpuset/system-background/tasks
