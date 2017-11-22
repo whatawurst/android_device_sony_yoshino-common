@@ -179,6 +179,8 @@ on boot
     #create netmgr log dir
     mkdir /data/misc/netmgr 0770 radio radio
     chmod 0770 /data/misc/netmgr
+    mkdir /data/vendor/netmgr 0770 radio radio
+    chmod 0770 /data/vendor/netmgr
 
     # Mark the copy complete flag to not completed
     write /data/misc/radio/copy_complete 0
