@@ -10,6 +10,8 @@ PRODUCT_PACKAGES += \
     fs_config_files \
     fs_config_dirs
 
+DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
+
 include $(COMMON_PATH)/common/*.mk
 include $(COMMON_PATH)/system_prop.mk
 
