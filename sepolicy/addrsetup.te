@@ -1,0 +1,14 @@
+type addrsetup, domain;
+type addrsetup_exec, exec_type, file_type;
+
+init_daemon_domain(addrsetup)
+
+unix_socket_connect(addrsetup, tad, tad)
+
+allow addrsetup bluetooth_data_file:dir rw_dir_perms;
+allow addrsetup bluetooth_data_file:file create_file_perms;
+
+allow addrsetup wifi_data_file:dir rw_dir_perms;
+allow addrsetup wifi_data_file:file create_file_perms;
+
+allow addrsetup sysfs_addrsetup:file rw_file_perms;

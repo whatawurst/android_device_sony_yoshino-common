@@ -1,0 +1,1 @@
+allow radio proc_cmdline:file r_file_perms;

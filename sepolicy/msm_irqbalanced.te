@@ -1,0 +1,5 @@
+allow msm_irqbalanced proc_irq:dir r_dir_perms;
+allow msm_irqbalanced proc_irq:file rw_file_perms;
+allow msm_irqbalanced sysfs_irq:file r_file_perms;
+
+r_dir_file(msm_irqbalanced, proc)

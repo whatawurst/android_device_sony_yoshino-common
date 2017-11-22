@@ -27,3 +27,8 @@ TARGET_USERIMAGES_USE_EXT4 := true
 ### VENDOR MANIFEST AND MATRIX
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/vendor/manifest.xml
 DEVICE_MATRIX_FILE   := $(COMMON_PATH)/vendor/compatibility_matrix.xml
+
+### SEPOLICY
+include device/qcom/sepolicy/sepolicy.mk
+BOARD_SEPOLICY_DIRS += \
+    device/sony/common-treble/sepolicy

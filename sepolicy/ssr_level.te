@@ -1,0 +1,4 @@
+type ssr_level, domain;
+type ssr_level_exec, exec_type, file_type, vendor_file_type;
+
+init_daemon_domain(ssr_level)

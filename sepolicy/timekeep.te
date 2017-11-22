@@ -1,0 +1,20 @@
+type timekeep, domain;
+type timekeep_exec, exec_type, file_type;
+
+init_daemon_domain(timekeep)
+
+# Grant permission to set system time and to set the real-time lock
+allow timekeep self:capability {
+    dac_override
+    fowner
+    fsetid
+    sys_time
+};
+
+allow timekeep time_data_file:dir create_dir_perms;
+allow timekeep time_data_file:file create_file_perms;
+
+set_prop(timekeep, timekeep_prop)
+
+r_dir_file(timekeep, sysfs_msm_subsys)
+r_dir_file(timekeep, sysfs_battery_supply)

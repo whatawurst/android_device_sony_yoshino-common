@@ -1,0 +1,8 @@
+# for diag over socket
+userdebug_or_eng(`
+  allow kernel self:socket create;
+')
+
+dontaudit kernel kernel:system module_request;
+
+allow kernel proc_cmdline:file r_file_perms;

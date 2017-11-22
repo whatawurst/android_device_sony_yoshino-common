@@ -1,0 +1,18 @@
+allow system_server self:socket ioctl;
+
+binder_call(system_server, hal_camera_default)
+
+# input files
+r_dir_file(system_server, idc_file)
+r_dir_file(system_server, keylayout_file)
+
+# TODO(b/30675296): Remove following dontaudit's upon resolution of this bug
+# The timerslack_ns denials spam the system really horribly
+dontaudit system_server audioserver:file write;
+dontaudit system_server untrusted_app:file write;
+dontaudit system_server hal_audio_default:file write;
+dontaudit system_server appdomain:file write;
+
+allow system_server proc_cmdline:file r_file_perms;
+# not allowed
+# allow system_server dalvikcache_data_file:file rx_file_perms;
