@@ -32,6 +32,10 @@ on fs
     write /sys/kernel/boot_slpi/boot 1
     write /dev/ipa 1
 
+on post-fs
+    # start clearpad_post_probe when filesystem is available for fwflash
+    write /sys/devices/virtual/input/clearpad/post_probe_start 1
+
 on boot
     # WLAN MAC
     chown wifi wifi /sys/module/wlan/parameters/fwpath
