@@ -20,6 +20,23 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/audio/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt
 
+# XML Audio configuration files
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/config/audio/audio_policy.conf:system/etc/audio_policy.conf \
+
+ifeq ($(WITH_VENDOR_IMAGE),true)
+PRODUCT_COPY_FILES += \
+    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:vendor/etc/a2dp_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:vendor/etc/audio_policy_volumes.xml \
+    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:vendor/etc/default_volume_tables.xml \
+    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:vendor/etc/r_submix_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:vendor/etc/usb_audio_policy_configuration.xml
+
+# Listen configuration file
+PRODUCT_COPY_FILES += \
+    hardware/qcom/audio-caf/msm8996/configs/msm8998/listen_platform_info.xml:vendor/etc/listen_platform_info.xml
+endif
+
 ### MEDIA
 ifeq ($(WITH_VENDOR_IMAGE),true)
 PRODUCT_COPY_FILES += \

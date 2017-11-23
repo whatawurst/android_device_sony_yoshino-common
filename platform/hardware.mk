@@ -8,7 +8,8 @@ PRODUCT_PACKAGES += \
 
 ### AUDIO
 PRODUCT_PACKAGES += \
-    audio.primary.msm8998
+    audio.primary.msm8998 \
+    libvolumelistener
 
 ### CAMERA
 PRODUCT_PACKAGES += \
