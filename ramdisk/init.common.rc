@@ -130,6 +130,12 @@ on early-boot
     # Permission for LED driver
     chown system system /sys/class/graphics/fb0/msm_fb_persist_mode
 
+    # ta_qmi_service use wakelock before on boot, so add permission here.
+    chown radio wakelock /sys/power/wake_lock
+    chown radio wakelock /sys/power/wake_unlock
+    chmod 0660 /sys/power/wake_lock
+    chmod 0660 /sys/power/wake_unlock
+
 on boot
     # Bluetooth modules
     chown system system /sys/module/bluetooth/parameters/disable_ertm
