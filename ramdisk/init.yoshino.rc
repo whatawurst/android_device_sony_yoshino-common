@@ -25,6 +25,7 @@ on init
     mkdir /acct/uid
 
 on fs
+    wait /dev/block/platform/soc/1da4000.ufshc
     symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
 
     mount_all ./fstab.yoshino
