@@ -22,7 +22,8 @@ PLATFORM_PATH := device/sony/yoshino
 PRODUCT_PACKAGES += \
     fstab.yoshino \
     init.yoshino.usb \
-    init.yoshino.pwr
+    init.yoshino.pwr \
+    init.qcom.early_boot.sh
 
 ### RECOVERY
 # Add Timezone database

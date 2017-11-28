@@ -49,5 +49,13 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
+include $(CLEAR_VARS)
+LOCAL_MODULE := init.qcom.early_boot.sh
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES := init.qcom.early_boot.sh
+LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
+include $(BUILD_PREBUILT)
+
 $(shell mkdir -p $(PRODUCT_OUT)/root)
 $(shell pushd $(PRODUCT_OUT)/root > /dev/null && ln -s fstab.yoshino fstab.$(TARGET_DEVICE) && popd > /dev/null)

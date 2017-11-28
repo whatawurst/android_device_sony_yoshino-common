@@ -36,6 +36,7 @@ on fs
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
     write /dev/ipa 1
+    exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
 
 on post-fs
     # start clearpad_post_probe when filesystem is available for fwflash
