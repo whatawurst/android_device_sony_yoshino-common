@@ -132,7 +132,7 @@ service pd_mapper /vendor/bin/pd-mapper
 service hci_filter /vendor/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth system wakelock
+    group bluetooth radio system wakelock
     disabled
 
 service cnss-daemon /vendor/bin/cnss-daemon -n -l
