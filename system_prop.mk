@@ -184,3 +184,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #offload pausetime out duration to 3 secs to inline with other outputs
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.offload.pstimeout.secs=3
+
+# SDM
+# Disable QC HDR and cabl
+PRODUCT_PROPERTY_OVERRIDES += \
+    sdm.disable_hdr_lut_gen=1 \
+    ro.qualcomm.cabl=0
