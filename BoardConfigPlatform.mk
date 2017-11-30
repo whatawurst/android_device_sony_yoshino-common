@@ -83,5 +83,9 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
 
+### SEPOLICY
+BOARD_SEPOLICY_DIRS += \
+    device/sony/yoshino/sepolicy
+
 ### RECOVERY
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab.yoshino
