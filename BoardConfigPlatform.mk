@@ -89,3 +89,7 @@ BOARD_SEPOLICY_DIRS += \
 
 ### RECOVERY
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab.yoshino
+
+ifeq ($(WITH_TWRP),true)
+-include $(PLATFORM_PATH)/twrp.mk
+endif
