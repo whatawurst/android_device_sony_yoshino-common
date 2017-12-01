@@ -13,11 +13,11 @@
 # limitations under the License.
 
 # Trim Area Daemon
-service tad_static /vendor/bin/tad_static /dev/block/bootdevice/by-name/TA 0,16
-    class core
-    user root
-    group root
-    socket tad stream 0660 system system
+service tad_static /sbin/tad_static /dev/block/bootdevice/by-name/TA 0,16
+    class trimarea
+    user tad
+    group tad root
+    socket tad stream 0660 system trimarea
     seclabel u:r:tad:s0
     writepid /dev/cpuset/system-background/tasks
 
