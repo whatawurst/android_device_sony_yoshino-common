@@ -119,6 +119,7 @@ service thermanager /vendor/bin/thermanager /system/etc/thermanager.xml
 # Offline charger
 service charger /charger
     class charger
+    group log
     critical
     seclabel u:r:charger:s0
     writepid /dev/cpuset/system-background/tasks
