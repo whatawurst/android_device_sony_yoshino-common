@@ -46,6 +46,35 @@ on fs
     exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
 
 on post-fs
+    # backlight
+    chown system system /sys/class/leds/wled/bl_scale
+    chown system system /sys/class/leds/wled/area_count
+
+    # led RGB
+    chown system system /sys/class/leds/rgb/sync_state
+    chown system system /sys/class/leds/rgb/start_blink
+    chown system system /sys/class/leds/led:rgb_red/brightness
+    chown system system /sys/class/leds/led:rgb_red/lut_pwm
+    chown system system /sys/class/leds/led:rgb_red/step_duration
+    chown system system /sys/class/leds/led:rgb_red/pause_lo_multi
+    chown system system /sys/class/leds/led:rgb_red/pause_hi_multi
+    chown system system /sys/class/leds/led:rgb_red/max_single_brightness
+    chown system system /sys/class/leds/led:rgb_red/max_mix_brightness
+    chown system system /sys/class/leds/led:rgb_green/brightness
+    chown system system /sys/class/leds/led:rgb_green/lut_pwm
+    chown system system /sys/class/leds/led:rgb_green/step_duration
+    chown system system /sys/class/leds/led:rgb_green/pause_lo_multi
+    chown system system /sys/class/leds/led:rgb_green/pause_hi_multi
+    chown system system /sys/class/leds/led:rgb_green/max_single_brightness
+    chown system system /sys/class/leds/led:rgb_green/max_mix_brightness
+    chown system system /sys/class/leds/led:rgb_blue/brightness
+    chown system system /sys/class/leds/led:rgb_blue/lut_pwm
+    chown system system /sys/class/leds/led:rgb_blue/step_duration
+    chown system system /sys/class/leds/led:rgb_blue/pause_lo_multi
+    chown system system /sys/class/leds/led:rgb_blue/pause_hi_multi
+    chown system system /sys/class/leds/led:rgb_blue/max_single_brightness
+    chown system system /sys/class/leds/led:rgb_blue/max_mix_brightness
+
     # start clearpad_post_probe when filesystem is available for fwflash
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
 
@@ -100,6 +129,13 @@ on post-fs-data
     chown radio radio /data/vendor/radio/db_check_done
     chmod 0660 /data/vendor/radio/db_check_done
 
+    # SONY: Camera
+    chown cameraserver camera /sys/devices/sony_camera_0/info
+    chmod 0770 /sys/devices/sony_camera_0/info
+    chown cameraserver camera /sys/devices/sony_camera_1/info
+    chmod 0770 /sys/devices/sony_camera_1/info
+    mkdir /data/vendor/somc_camera 0770 cameraserver camera
+
 on boot
     # WLAN MAC
     chown wifi wifi /sys/module/wlan/parameters/fwpath
@@ -153,6 +189,39 @@ on boot
     write /dev/cpuset/foreground/boost/cpus 0-7
     write /dev/cpuset/background/cpus 0
     write /dev/cpuset/system-background/cpus 0-1
+
+    # Tof sensor
+    chown cameraserver camera /dev/i2c-8
+    chmod 666 /dev/i2c-8
+    chown cameraserver camera /sys/devices/virtual/input/tof_sensor/tof_power_ctl
+    chmod 666 /sys/devices/virtual/input/tof_sensor/tof_power_ctl
+
+    # RGBC-IR sensor
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_Itime
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_all
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_auto_gain
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_blue
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_channel
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_clear
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_gain
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_green
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_persist
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_power_state
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_red
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_thres
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_thresh_deltaP
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/chip_id
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/chip_pow
+
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_Itime
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_auto_gain
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_channel
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_gain
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_persist
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_power_state
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_thres
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_thresh_deltaP
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/chip_pow
 
 on property:wlan.driver.status=ok
     # WLAN firmware config
