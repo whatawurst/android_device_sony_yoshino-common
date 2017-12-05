@@ -36,5 +36,10 @@ PRODUCT_COPY_FILES += \
 DEVICE_PACKAGE_OVERLAYS += \
     $(PLATFORM_PATH)/overlay
 
+# only include verity on user builds for LineageOS
+ifeq ($(TARGET_BUILD_VARIANT),user)
+$(call inherit-product, build/target/product/verity.mk)
+endif
+
 include $(PLATFORM_PATH)/platform/*.mk
 include $(PLATFORM_PATH)/system_prop.mk
