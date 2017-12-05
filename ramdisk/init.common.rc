@@ -227,6 +227,26 @@ on boot
     chmod 0664 /sys/class/graphics/fb1/video_mode
     chmod 0664 /sys/class/graphics/fb1/hdcp/tp
 
+    # Cameralight
+    chown cameraserver system /sys/class/leds/led:flash_0/brightness
+    chown cameraserver system /sys/class/leds/led:flash_1/brightness
+    chown cameraserver system /sys/class/leds/led:flash_0/max_brightness
+    chown cameraserver system /sys/class/leds/led:flash_1/max_brightness
+    chown cameraserver system /sys/class/leds/led:flash_0/ires_ua
+    chown cameraserver system /sys/class/leds/led:flash_1/ires_ua
+    chown cameraserver system /sys/class/leds/led:flash_0/strobe
+    chown cameraserver system /sys/class/leds/led:flash_1/strobe
+    chown cameraserver system /sys/class/leds/led:flash_0/duration
+    chown cameraserver system /sys/class/leds/led:flash_1/duration
+    chown cameraserver system /sys/class/leds/led:torch_0/brightness
+    chown cameraserver system /sys/class/leds/led:torch_1/brightness
+    chown cameraserver system /sys/class/leds/led:torch_0/max_brightness
+    chown cameraserver system /sys/class/leds/led:torch_1/max_brightness
+    chown cameraserver system /sys/class/leds/led:torch_0/ires_ua
+    chown cameraserver system /sys/class/leds/led:torch_1/ires_ua
+    chown cameraserver system /sys/class/leds/led:switch_0/brightness
+    chown cameraserver system /sys/class/leds/led:switch_0/fault_status
+
     # FB2 permissions
     chown system graphics /sys/class/graphics/fb2/ad
     chmod 0664 /sys/class/graphics/fb2/ad
