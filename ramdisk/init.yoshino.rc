@@ -24,6 +24,10 @@ on init
     mount cgroup none /acct cpuacct
     mkdir /acct/uid
 
+    wait /dev/block/sda1
+    chown tad tad /dev/block/sda1
+    chmod 0770 /dev/block/sda1
+
 on fs
     wait /dev/block/platform/soc/1da4000.ufshc
     symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
@@ -32,6 +36,9 @@ on fs
     swapon_all ./fstab.yoshino
 
     restorecon_recursive /persist
+
+    # Start tad_static early as other core services depend on it
+    start tad_static
 
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
