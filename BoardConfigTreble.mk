@@ -45,8 +45,10 @@ USE_XML_AUDIO_POLICY_CONF := 1
 BOARD_HAL_STATIC_LIBRARIES += libhealthd.$(TARGET_DEVICE)
 
 ### VENDOR MANIFEST AND MATRIX
+ifeq ($(WITH_VENDOR_IMAGE),true)
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/vendor/manifest.xml
 DEVICE_MATRIX_FILE   := $(COMMON_PATH)/vendor/compatibility_matrix.xml
+endif
 
 ### SEPOLICY
 include device/qcom/sepolicy/sepolicy.mk
