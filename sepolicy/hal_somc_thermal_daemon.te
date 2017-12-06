@@ -1,0 +1,6 @@
+type hal_somc_thermal_daemon, domain;
+hal_server_domain(hal_somc_thermal_daemon, hal_thermal)
+
+type hal_somc_thermal_daemon_exec, exec_type, vendor_file_type, vendor_file_type, file_type;
+init_daemon_domain(hal_somc_thermal_daemon)
+
