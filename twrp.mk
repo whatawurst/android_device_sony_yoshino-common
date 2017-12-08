@@ -21,6 +21,9 @@
 RECOVERY_VARIANT := twrp
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/twrp.fstab
 
+BOARD_NEEDS_VENDORIMAGE_SYMLINK := false
+TARGET_COPY_OUT_VENDOR := vendor
+
 ### INIT
 # Use rootdir/init.recovery.usb.rc
 TW_EXCLUDE_DEFAULT_USB_INIT := true
