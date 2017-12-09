@@ -29,9 +29,6 @@ on init
     chmod 0770 /dev/block/sda1
 
 on fs
-    wait /dev/block/platform/soc/1da4000.ufshc
-    symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
-
     mount_all ./fstab.yoshino
     swapon_all ./fstab.yoshino
 
