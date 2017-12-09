@@ -56,7 +56,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ### WIFI
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0
+    wifi.interface=wlan0 \
+    net.tcp.buffersize.wifi=524288,2097152,4194304,262144,524288,1048576
 
 ### DEX2OAT
 # Limit dex2oat threads to improve thermals
