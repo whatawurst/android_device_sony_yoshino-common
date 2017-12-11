@@ -68,6 +68,7 @@ on boot
     write /proc/sys/kernel/sched_downmigrate 90
     write /proc/sys/kernel/sched_group_upmigrate 100
     write /proc/sys/kernel/sched_group_downmigrate 95
+    write /proc/sys/kernel/sched_enable_thread_grouping 1
     write /proc/sys/kernel/sched_select_prev_cpu_us 0
     write /proc/sys/kernel/sched_freq_inc_notify 400000
     write /proc/sys/kernel/sched_freq_dec_notify 400000
@@ -149,11 +150,6 @@ on boot
     # disallow upmigrate for cgroup's tasks
     write /dev/cpuctl/cpu.upmigrate_discourage 1
 
-    #enable sched colocation and colocation inheritance
-    write /proc/sys/kernel/sched_upmigrate 130
-    write /proc/sys/kernel/sched_downmigrate 110
-    write /proc/sys/kernel/sched_enable_thread_grouping 1
-
     # set cpu_boost parameters
     write /sys/module/cpu_boost/parameters/input_boost_freq "0:1324800"
     write /sys/module/cpu_boost/parameters/input_boost_ms "80"
@@ -184,4 +180,3 @@ on boot
     write /sys/class/devfreq/soc:qcom,memlat-cpu4/mem_latency/ratio_ceil 400
 
     write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
-
