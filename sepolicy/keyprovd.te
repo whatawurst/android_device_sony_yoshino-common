@@ -1,0 +1,9 @@
+# keyprovd.te
+type keyprovd, domain;
+type keyprovd_exec, exec_type, file_type;
+
+init_daemon_domain(keyprovd)
+
+vndbinder_use(keyprovd)
+
+get_prop(keyprovd, keyprovd_prop)

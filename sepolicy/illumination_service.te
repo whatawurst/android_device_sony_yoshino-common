@@ -3,4 +3,22 @@ type illumination_service_exec, exec_type, file_type;
 
 init_daemon_domain(illumination_service)
 
+allow illumination_service self:capability {
+    setuid
+    setgid
+};
+
+wakelock_use(illumination_service)
 domain_trans(init, socket_device, illumination_service)
+
+# /sys/devices/soc/800f000.qcom,spmi
+allow illumination_service sysfs_msm_subsys:dir r_dir_perms;
+allow illumination_service sysfs_spmi_dev:dir r_dir_perms;
+allow illumination_service sysfs_graphics:dir r_dir_perms;
+allow illumination_service sysfs_graphics:file rw_file_perms;
+
+# /sys/devices/mdss_dsi_panel/panel_id
+r_dir_file(illumination_service, sysfs_mdss_dsi_panel)
+
+allow illumination_service sysfs_leds:dir r_dir_perms;
+allow illumination_service sysfs_leds:lnk_file r_file_perms;

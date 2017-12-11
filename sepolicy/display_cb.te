@@ -1,4 +1,22 @@
+# display_cb.te
 type display_cb, domain;
 type display_cb_exec, exec_type, file_type;
 
 init_daemon_domain(display_cb)
+
+hwbinder_use(display_cb)
+get_prop(display_cb, hwservicemanager_prop)
+
+binder_call(display_cb, hal_display_color_default)
+
+allow display_cb hal_display_color_hwservice:hwservice_manager { find };
+
+# /sys/devices/soc/800f000.qcom,spmi
+r_dir_file(display_cb, sysfs_mdss_dsi_panel)
+
+# /data/display/pcc_calib
+allow display_cb display_data_file:dir rw_dir_perms;
+allow display_cb display_data_file:file create_file_perms;
+
+# /odm
+r_dir_file(display_cb, oemfs)

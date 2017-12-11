@@ -1,12 +1,10 @@
+# HAL attributes
 attribute hal_idd;
 attribute hal_idd_client;
 attribute hal_idd_server;
 attribute hal_idd_fallback;
 attribute hal_idd_fallback_client;
 attribute hal_idd_fallback_server;
-attribute hal_mediadrm;
-attribute hal_mediadrm_client;
-attribute hal_mediadrm_server;
 attribute hal_miscta;
 attribute hal_miscta_client;
 attribute hal_miscta_server;

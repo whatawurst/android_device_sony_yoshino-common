@@ -1,5 +1,15 @@
+# hal_secd_default.te
 type hal_secd_default, domain;
 hal_server_domain(hal_secd_default, hal_secd)
 
 type hal_secd_default_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(hal_secd_default)
+
+add_hwservice(hal_secd_default, hal_secd_hwservice);
+
+unix_socket_connect(hal_secd_default, secd_devsec, secd)
+
+# /persist/pc/
+allow hal_secd_default persist_file:dir r_dir_perms;
+allow hal_secd_default simpin_cache_data_file:dir rw_dir_perms;
+allow hal_secd_default simpin_cache_data_file:file create_file_perms;

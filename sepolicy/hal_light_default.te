@@ -1,0 +1,5 @@
+# hal_light_default.te
+unix_socket_connect(hal_light_default, illumination, illumination_service)
+
+# /odm
+r_dir_file(hal_light_default, oemfs)

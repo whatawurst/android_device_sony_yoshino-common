@@ -1,0 +1,2 @@
+# kernel.te
+allow kernel debugfs_wcd:dir r_dir_perms;

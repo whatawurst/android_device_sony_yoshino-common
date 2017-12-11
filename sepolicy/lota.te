@@ -1,4 +1,12 @@
+# lota.te
 type lota, domain;
 type lota_exec, exec_type, file_type;
 
 init_daemon_domain(lota)
+
+get_prop(lota, hwservicemanager_prop)
+hwbinder_use(lota)
+
+allow lota hal_idd_hwservice:hwservice_manager { find };
+
+binder_call(lota, hal_idd_default)

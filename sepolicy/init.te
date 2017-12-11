@@ -1,0 +1,16 @@
+allow init per_mgr_service:service_manager find;
+
+# /dev/block/bootdevice/by-name/idd (sda58)
+allow init idd_block_device:blk_file rw_file_perms;
+
+# /dev/ipa
+allow init ipa_dev:chr_file rw_file_perms;
+
+# /dev/socket/cammw_tintless
+allow init camera_socket:sock_file create_file_perms;
+
+# /dev/socket/secd_devsec_sock
+allow init secd_devsec_socket:sock_file create_file_perms;
+
+# allow loading kscl.ko
+allow init system_file:system { module_load };
