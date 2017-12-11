@@ -66,6 +66,9 @@ on fs
     chmod 0750 /qns
     restorecon_recursive /qns
 
+    # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
+    insmod /system/lib/modules/kscl.ko
+
 on post-fs
     # backlight
     chown system system /sys/class/leds/wled/bl_scale

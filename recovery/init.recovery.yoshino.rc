@@ -12,6 +12,9 @@ on fs
     chmod 0664 /dev/ion
     chown system system /dev/ion
 
+    # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
+    insmod /system/lib/modules/kscl.ko
+
     # IMPORTANT!
     # This needs to be supported by the init binary!
     install_keyring
