@@ -200,7 +200,7 @@ BOARD_SEPOLICY_DIRS += \
     device/sony/yoshino/sepolicy
 
 ### RECOVERY
-TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab.yoshino
+TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab.recovery
 
 ifeq ($(WITH_TWRP),true)
 -include $(PLATFORM_PATH)/twrp.mk
