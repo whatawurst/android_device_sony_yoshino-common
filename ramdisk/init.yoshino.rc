@@ -18,9 +18,16 @@ import init.common.qcom.rc
 import init.yoshino.usb.rc
 import init.yoshino.pwr.rc
 
+on early-init
+    write /sys/module/msm_rtb/parameters/enable 0
+
 on init
     # Setup platform zram options
     write /sys/block/zram0/max_comp_streams 8
+
+    chmod 0664 /proc/rdtag
+    chown root system /proc/rdtag
+    write /proc/sys/vm/swappiness 100
 
     # Wait for trimarea
     wait /dev/block/sda1
@@ -28,6 +35,13 @@ on init
     chmod 0770 /dev/block/sda1
 
 on fs
+    # SONY: creat mount point for idd and rca
+    mkdir /idd 0751 idd idd
+    mkdir /rca 0750 idd idd
+
+    # SONY: creat mount point for qns
+    mkdir /qns 0750 qns qns
+
     mount_all ./fstab.yoshino
     swapon_all ./fstab.yoshino
 
@@ -36,44 +50,51 @@ on fs
     # Start tad_static early as other core services depend on it
     start tad_static
 
-    write /sys/kernel/boot_adsp/boot 1
-    write /sys/kernel/boot_slpi/boot 1
-    write /dev/ipa 1
-    exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
+    write /sys/devices/soc/c0a4900.sdhci/mmc_host/mmc0/clkgate_delay 1
+
+    # SONY: setup idd and rca partition
+    chown idd idd /idd
+    chmod 0751 /idd
+    exec /system/bin/rm -r /idd/lost+found
+    symlink /idd /mnt/idd
+    chown idd idd /rca
+    chmod 0750 /rca
+    exec /system/bin/rm -r /rca/lost+found
+
+    # SONY: setup qns partition
+    chown qns qns /qns
+    chmod 0750 /qns
+    restorecon_recursive /qns
 
 on post-fs
     # backlight
     chown system system /sys/class/leds/wled/bl_scale
     chown system system /sys/class/leds/wled/area_count
 
+    # panel ID
+    chown system system /sys/devices/mdss_dsi_panel/panel_id
+    chmod 0440 /sys/devices/mdss_dsi_panel/panel_id
+
+    # System setting access from white balance app into fb.
+    chown system graphics /dev/graphics/fb0
+    chown system graphics /dev/graphics/fb1
+    chown system graphics /dev/graphics/fb2
+
+    # Start qseecomd for vold
+    start qseecomd
+
+    # Trigger loading of ipa firmware
+    write /dev/ipa 1
+
     # start clearpad_post_probe when filesystem is available for fwflash
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
 
+    # Wait for qseecomd to finish
+    wait_for_prop sys.listeners.registered true
+
 on post-fs-data
-    # Create directories for Location services
-    mkdir /data/vendor/location 0770 gps gps
-    mkdir /data/vendor/location/mq 0770 gps gps
-    mkdir /data/vendor/location/xtwifi 0770 gps gps
-
-    # Create directory for radio
-    mkdir /data/vendor/radio 0770 system radio
-
-    # Mark the copy complete flag to not completed
-    write /data/vendor/radio/copy_complete 0
-    chown radio radio /data/vendor/radio/copy_complete
-    chmod 0660 /data/vendor/radio/copy_complete
-
-    # Copy prebuilt qcril.db files always
-    copy /vendor/radio/qcril_database/qcril.db /data/vendor/radio/qcril_prebuilt.db
-    chown radio radio /data/vendor/radio/qcril_prebuilt.db
-    chmod 0660 /data/vendor/radio/qcril_prebuilt.db
-    # File flags for prebuilt ril db file
-    write /data/vendor/radio/prebuilt_db_support 1
-    chown radio radio /data/vendor/radio/prebuilt_db_support
-    chmod 0400 /data/vendor/radio/prebuilt_db_support
-    write /data/vendor/radio/db_check_done 0
-    chown radio radio /data/vendor/radio/db_check_done
-    chmod 0660 /data/vendor/radio/db_check_done
+    # create directory for wfd
+    mkdir /data/wfd 0770 system system
 
     # SONY: Camera
     chown cameraserver camera /sys/devices/sony_camera_0/info
@@ -82,9 +103,30 @@ on post-fs-data
     chmod 0770 /sys/devices/sony_camera_1/info
     mkdir /data/vendor/somc_camera 0770 cameraserver camera
 
-on boot
-    chown system system /sys/kernel/boot_slpi/ssr
+    # create directory for scd
+    mkdir /dev/socket/scd 0705 system system
+    mkdir /data/scd 0700 system system
 
+    # create directory for widevine
+    mkdir /data/wv 0700 media media
+
+    # Create directory to store logs
+    mkdir /data/system/log 0770 root system
+    chown root system /data/system/log
+    chmod 0770 /data/system/log
+
+    # SONY: Create a dir on data partition not to be deleted during mr and wipedata
+    mkdir /data/persist 0770 persist_rw persist_rw
+
+    # Fingerprint data folder
+    mkdir /data/fpc 0770 system system
+
+on early-boot
+    write /sys/kernel/boot_adsp/boot 1
+    write /sys/kernel/boot_slpi/boot 1
+    exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
+
+on boot
     # Cover mode
     chown system system /sys/devices/virtual/input/clearpad/cover_mode_enabled
     chown system system /sys/devices/virtual/input/clearpad/cover_win_bottom
@@ -164,6 +206,32 @@ on boot
     chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_thresh_deltaP
     chmod 666 /sys/devices/virtual/input/rgbcir_sensor/chip_pow
 
+    write /proc/sys/vm/dirty_ratio 5
+    write /proc/sys/vm/dirty_background_ratio 1
+
+on property:sys.shutdown.requested=*
+    write /sys/class/power_supply/battery/int_cld 1
+
+on property:persist.service.battery.smt_chg=activate
+    write /sys/class/power_supply/battery/smart_charging_activation 1
+
+on property:persist.service.battery.smt_chg=charging_suspend
+    write /sys/class/power_supply/battery/smart_charging_interruption 1
+
+on property:persist.service.battery.smt_chg=charging_resume
+    write /sys/class/power_supply/battery/smart_charging_interruption 0
+
+# charger
+on property:persist.service.battery.charge=0
+    write /sys/class/power_supply/battery/lrc_enable 0
+    write /sys/class/power_supply/battery/lrc_socmax 0
+    write /sys/class/power_supply/battery/lrc_socmin 0
+
+on property:persist.service.battery.charge=1
+    write /sys/class/power_supply/battery/lrc_socmax 60
+    write /sys/class/power_supply/battery/lrc_socmin 40
+    write /sys/class/power_supply/battery/lrc_enable 1
+
 on property:wlan.driver.status=ok
     # WLAN firmware config
     # Change owner after the module has been loaded by the wifi service
@@ -208,6 +276,13 @@ service cnss-daemon /vendor/bin/cnss-daemon -n -l
     class late_start
     user system
     group system inet net_admin wifi
+
+# SONY: IDD daemon
+service iddd /vendor/bin/iddd
+    class core
+    user idd
+    group idd log inet trimarea
+    writepid /dev/cpuset/system-background/tasks
 
 service cacaoserver /system/bin/cacaoserver
     class main
