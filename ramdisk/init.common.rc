@@ -162,6 +162,12 @@ on boot
     # RQBalance-PowerHAL PowerServer
     mkdir /dev/socket/powerhal 0773 system system
 
+    # Create display socket area for surfaceflinger
+    mkdir /dev/socket/pdx 0775 system graphics
+    mkdir /dev/socket/pdx/system 0775 system graphics
+    mkdir /dev/socket/pdx/system/vr 0775 system graphics
+    mkdir /dev/socket/pdx/system/vr/display 0775 system graphics
+
     #create netmgr log dir
     mkdir /data/misc/netmgr 0770 radio radio
     chmod 0770 /data/misc/netmgr
