@@ -75,7 +75,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ### BLUETOOTH
 PRODUCT_PROPERTY_OVERRIDES += \
     bt.max.hfpclient.connections=1 \
-    qcom.bluetooth.soc=cherokee
+    qcom.bluetooth.soc=cherokee \
+    ro.bluetooth.hfp.ver=1.7 \
+    ro.bt.bdaddr_path="/data/etc/bluetooth_bdaddr" \
+    persist.vendor.bt.enable.splita2dp=false
 
 ### AUDIO
 # Reduce client buffer size for fast audio output tracks
