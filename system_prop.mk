@@ -193,3 +193,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     sdm.disable_hdr_lut_gen=1 \
     ro.qualcomm.cabl=0
+
+# Assertive display
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qcom.ad=1 \
+    ro.qcom.ad.calib.data=/vendor/etc/ad_calib.cfg \
+    ro.qcom.ad.sensortype=2
+
+# Enable display default color mode
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.enable_default_color_mode=true
+
+# Touch
+PRODUCT_PROPERTY_OVERRIDES += \
+    sys.backlight_on=1
