@@ -71,6 +71,31 @@ $(WCNSS_MAC_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(WCNSS_INI_SYMLINK) $(WCNSS_BDWLAN_SYMLINK) $(WCNSS_MAC_SYMLINK)
 
+else # WITH_VENDOR_IMAGE
+
+CAMERA_HAL_SYMLINK := $(TARGET_OUT)/lib/hw/camera.$(TARGET_DEVICE).so
+$(CAMERA_HAL_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@echo "Camera HAL link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /vendor/lib/hw/camera.qcom.so $@
+
+POWER_HAL_SYMLINK := $(TARGET_OUT)/lib/hw/power.$(TARGET_DEVICE).so
+$(POWER_HAL_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@echo "Power HAL link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /vendor/lib/hw/power.qcom.so $@
+
+POWER_HAL_64_SYMLINK := $(TARGET_OUT)/lib64/hw/power.$(TARGET_DEVICE).so
+$(POWER_HAL_64_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@echo "Power HAL link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /vendor/lib64/hw/power.qcom.so $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(CAMERA_HAL_SYMLINK) $(POWER_HAL_SYMLINK) $(POWER_HAL_64_SYMLINK)
+
 endif # WITH_VENDOR_IMAGE
 
 endif
