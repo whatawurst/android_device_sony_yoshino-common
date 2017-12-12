@@ -7,7 +7,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ### POWER
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=/vendor/lib64/librqbalance.so
+    ro.vendor.extension_library=/system/lib64/librqbalance.so
 
 ### AUDIO
 PRODUCT_PROPERTY_OVERRIDES += \
