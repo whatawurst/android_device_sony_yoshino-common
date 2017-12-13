@@ -108,9 +108,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.offload.buffer.size.kb=32
 
-#Enable offload audio video playback by default
+#Disable offload audio video playback by default
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.video=true
+    audio.offload.video=false
 
 #Enable audio track offload by default
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -133,9 +133,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.dolby.ds2.enabled=false\
     vendor.audio.dolby.ds2.hardbypass=false
 
-#Disable Multiple offload sesison
+#Enable Multiple offload session
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.audio.offload.multiple.enabled=false
+    vendor.audio.offload.multiple.enabled=true
 
 #Disable Compress passthrough playback
 PRODUCT_PROPERTY_OVERRIDES += \
