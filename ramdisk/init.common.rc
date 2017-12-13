@@ -103,6 +103,9 @@ on post-fs-data
 
     chown system /dev/block/bootdevice/by-name
 
+    # Audio/Media
+    mkdir /data/mediaserver 0770 media audio
+
     setprop vold.post_fs_data_done 1
 
 on early-boot
