@@ -2,6 +2,8 @@ allow system_server self:socket ioctl;
 
 binder_call(system_server, hal_camera_default)
 
+get_prop(system_server, alarm_boot_prop)
+
 # input files
 r_dir_file(system_server, idc_file)
 r_dir_file(system_server, keylayout_file)

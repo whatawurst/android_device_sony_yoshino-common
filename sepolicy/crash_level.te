@@ -2,3 +2,7 @@ type crash_level, domain;
 type crash_level_exec, exec_type, file_type, vendor_file_type;
 
 init_daemon_domain(crash_level)
+
+allow crash_level vendor_shell_exec:file { entrypoint };
+allow crash_level vendor_toolbox_exec:file { execute_no_trans };
+set_prop(crash_level, system_prop)

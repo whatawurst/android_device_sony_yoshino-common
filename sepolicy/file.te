@@ -14,6 +14,8 @@ type sysfs_bluetooth, sysfs_type, fs_type;
 type sysfs_pcc_profile, sysfs_type, fs_type;
 type sysfs_rtc, sysfs_type, fs_type;
 type sysfs_timekeep, sysfs_type, fs_type;
+type sysfs_switch, sysfs_type, fs_type;
+type sysfs_switch_lid, sysfs_type, fs_type;
 
 type debugfs_clk, debugfs_type, fs_type;
 type debugfs_ion, debugfs_type, fs_type;
@@ -23,15 +25,21 @@ type debugfs_rpm, debugfs_type, fs_type;
 type debugfs_rmt_storage, debugfs_type, fs_type;
 type debugfs_mdp, debugfs_type, fs_type;
 type debugfs_icnss, debugfs_type, fs_type;
+type debugfs_msm_subsys, debugfs_type, fs_type;
+type debugfs_wcd, debugfs_type, fs_type;
 
 type powerhal_socket, file_type;
 type qdsp_file, file_type, mlstrustedobject;
 type tad_socket, file_type;
+type fpc_socket, file_type;
 
 type persist_rfs_file, file_type;
 type persist_sensors_file, file_type;
 
-type netmgr_data_file, file_type, data_file_type;
+type ta_data_file, file_type, data_file_type;
+type display_data_file, file_type, data_file_type;
+type fpc_data_file, file_type, data_file_type;
+type credmgr_data_file, file_type, data_file_type;
 
 type nfc_vendor_data_file, file_type, data_file_type;
 type radio_vendor_data_file, file_type, data_file_type, mlstrustedobject;

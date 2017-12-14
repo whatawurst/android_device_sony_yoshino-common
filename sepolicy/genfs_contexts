@@ -43,3 +43,5 @@ genfscon debugfs /msm_ipc_router                      u:object_r:debugfs_ipc:s0
 genfscon debugfs /mdp                                 u:object_r:debugfs_mdp:s0
 genfscon debugfs /rmt_storage                         u:object_r:debugfs_rmt_storage:s0
 genfscon debugfs /icnss                               u:object_r:debugfs_icnss:s0
+genfscon debugfs /msm_subsys                          u:object_r:debugfs_msm_subsys:s0
+genfscon debugfs /wcd_cpe                             u:object_r:debugfs_wcd:s0

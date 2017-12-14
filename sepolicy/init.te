@@ -32,3 +32,6 @@ allow init sysfs_irq:file r_file_perms;
 # init_power.te
 allow init sysfs_devices_system_cpu:dir w_dir_perms;
 allow init sysfs_devices_system_cpu:file w_file_perms;
+
+allow init ta_block_device:blk_file { setattr };
+allow init proc_dirty_ratio:file w_file_perms;

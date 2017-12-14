@@ -1,1 +1,11 @@
+# hal_usb_default.te
+allow hal_usb_default self:capability {
+    dac_override
+};
+
 r_dir_file(hal_usb_default, sysfs_usbpd_device)
+
+allow hal_usb_default sysfs_msm_subsys:dir r_dir_perms;
+allow hal_usb_default sysfs_spmi_dev:dir r_dir_perms;
+
+allow hal_usb_default sysfs_usbpd_device:file rw_file_perms;

@@ -2,3 +2,18 @@ type taimport, domain;
 type taimport_exec, exec_type, file_type;
 
 init_daemon_domain(taimport)
+
+allow taimport self:capability {
+    setgid
+};
+
+set_prop(taimport, semc_prop)
+set_prop(taimport, somc_prop)
+set_prop(taimport, sony_prop)
+
+unix_socket_connect(taimport, tad, tad)
+
+set_prop(taimport, system_prop)
+
+allow taimport ta_data_file:dir rw_dir_perms;
+allow taimport ta_data_file:file create_file_perms;

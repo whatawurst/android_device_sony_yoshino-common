@@ -7,6 +7,8 @@
 /dev/socket/powerhal(/.*)?                      u:object_r:powerhal_socket:s0
 /dev/socket/tad                                 u:object_r:tad_socket:s0
 
+/dev/sony_hweffect_params                       u:object_r:audio_device:s0
+
 # files in /system
 /system/bin/macaddrsetup                        u:object_r:addrsetup_exec:s0
 /system/bin/sysinit                             u:object_r:sysinit_exec:s0
@@ -72,9 +74,21 @@
 /(odm|vendor)/lib(64)?/libqti-perfd-client\.so          u:object_r:same_process_hal_file:s0
 
 # data files
-/data/time(/.*)?                       u:object_r:time_data_file:s0
-/data/vendor/nfc(/.*)?                 u:object_r:nfc_data_file:s0
+/data/credmgr(/.*)?                                     u:object_r:credmgr_data_file:s0
+/data/display(/.*)?                                     u:object_r:display_data_file:s0
+/data/etc(/.*)?                                         u:object_r:ta_data_file:s0
+/data/fpc(/.*)?                                         u:object_r:fpc_data_file:s0
+/data/fpc/oem                                           u:object_r:fpc_socket:s0
+/data/mediaserver(/.*)?                                 u:object_r:media_data_file:s0
+/data/mediaserver/mic_gain_params_0                     u:object_r:audio_data_file:s0
+/data/time(/.*)?                                        u:object_r:time_data_file:s0
+/data/vendor/nfc(/.*)?                                  u:object_r:nfc_data_file:s0
 
 # input files
-/vendor/usr/idc(/.*)?                  u:object_r:idc_file:s0
-/vendor/usr/keylayout(/.*)?            u:object_r:keylayout_file:s0
+/vendor/usr/idc(/.*)?                                   u:object_r:idc_file:s0
+/vendor/usr/keylayout(/.*)?                             u:object_r:keylayout_file:s0
+
+# files in sys
+/sys/devices(/platform)?/soc/[a-f0-9]+.qcom,spmi/spmi-[0-9](/.*)?      u:object_r:sysfs_spmi_dev:s0
+/sys/class/switch(/.*)?                                 u:object_r:sysfs_switch:s0
+/sys/devices/virtual/switch/lid/state                   u:object_r:sysfs_switch_lid:s0

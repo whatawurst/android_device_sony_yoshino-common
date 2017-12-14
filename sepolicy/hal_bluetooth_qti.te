@@ -1,0 +1,2 @@
+# hal_bluetooth_qti.te
+r_dir_file(hal_bluetooth_qti, firmware_file)

@@ -1,3 +1,4 @@
+# timekeep.te
 type timekeep, domain;
 type timekeep_exec, exec_type, file_type;
 
@@ -18,3 +19,6 @@ set_prop(timekeep, timekeep_prop)
 
 r_dir_file(timekeep, sysfs_msm_subsys)
 r_dir_file(timekeep, sysfs_battery_supply)
+
+# /sys/devices/soc/800f000.qcom,spmi/spmi-0/spmi0-00/800f000.qcom,spmi:qcom,pm8998@0:qcom,pm8998_rtc/rtc/rtc0/since_epoch
+r_dir_file(timekeep, sysfs_spmi_dev)

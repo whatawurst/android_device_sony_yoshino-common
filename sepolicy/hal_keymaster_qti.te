@@ -1,0 +1,4 @@
+# hal_keymaster_qti.te
+set_prop(hal_keymaster_qti, tee_listener_prop)
+
+allow hal_keymaster_qti oemfs:dir r_dir_perms;
