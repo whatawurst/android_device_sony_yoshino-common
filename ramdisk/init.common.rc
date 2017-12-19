@@ -90,8 +90,6 @@ on post-fs-data
     mkdir /data/audio 0770 media audio
     chmod 2770 /data/audio
 
-    mkdir /data/data/media 0770 media media
-
     # NFC
     # Local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
