@@ -277,6 +277,9 @@ service cnss-daemon /vendor/bin/cnss-daemon -n -l
     user system
     group system inet net_admin wifi
 
+on property:sys.shutdown.requested=*
+    stop cnss-daemon
+
 # SONY: IDD daemon
 service iddd /vendor/bin/iddd
     class core
