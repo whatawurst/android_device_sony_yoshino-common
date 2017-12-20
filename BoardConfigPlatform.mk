@@ -171,8 +171,10 @@ BOARD_WLAN_DEVICE := qcwcn
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
 HOSTAPD_VERSION := VER_0_8_X
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
-WIFI_DRIVER_MODULE_NAME := "wlan"
+# This doesn't work because wifi driver is a background task
+# we would need to wait till the fwpath is ready
+# WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
+# WIFI_DRIVER_MODULE_NAME := "wlan"
 WIFI_DRIVER_FW_PATH_AP  := "ap"
 WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WIFI_DRIVER_FW_PATH_STA := "sta"
