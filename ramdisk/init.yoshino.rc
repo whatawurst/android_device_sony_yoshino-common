@@ -303,6 +303,16 @@ service cacaoserver /system/bin/cacaoserver
     ioprio rt 4
     writepid /dev/cpuset/camera-daemon/tasks /dev/stune/top-app/tasks
 
+service hvdcp_opti /vendor/bin/hvdcp_opti
+    class main
+    user root
+    group system wakelock
+    disabled
+
+on charger
+    start hvdcp_opti
+    setprop sys.usb.configfs 1
+
 on property:vold.post_fs_data_done=1
     # Generate Bluetooth MAC address file only when /data is ready
     start macaddrsetup
