@@ -4,7 +4,8 @@ COMMON_PATH := device/sony/common-treble
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/ramdisk/init.common.rc:root/init.common.rc \
     $(COMMON_PATH)/ramdisk/init.common.qcom.rc:root/init.common.qcom.rc \
-    $(COMMON_PATH)/ramdisk/init.common.srv.rc:root/init.common.srv.rc
+    $(COMMON_PATH)/ramdisk/init.common.srv.rc:root/init.common.srv.rc \
+    $(COMMON_PATH)/ramdisk/init.common.ims.rc:root/init.common.ims.rc
 
 # For android_filesystem_config.h permissions
 PRODUCT_PACKAGES += \

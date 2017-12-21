@@ -1,0 +1,45 @@
+# Copyright 2014 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+service imsqmidaemon /vendor/bin/imsqmidaemon
+    class main
+    user system
+    group radio log diag
+    socket ims_qmid stream 0660 system radio
+
+service imsdatadaemon /vendor/bin/imsdatadaemon
+    class main
+    user system
+    group system wifi radio inet log diag
+    socket ims_datad stream 0660 system radio
+    disabled
+
+on property:vendor.ims.QMI_DAEMON_STATUS=1
+    start imsdatadaemon
+
+service ims_rtp_daemon /vendor/bin/ims_rtp_daemon
+   class main
+   user system
+   group radio diag inet log
+   disabled
+
+service imsrcsservice /vendor/bin/imsrcsd
+   class main
+   user system
+   group radio diag inet log
+   disabled
+
+on property:vendor.ims.DATA_DAEMON_STATUS=1
+    start ims_rtp_daemon
+    start imsrcsservice
