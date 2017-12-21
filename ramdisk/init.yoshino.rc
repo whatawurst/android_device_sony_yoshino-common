@@ -14,6 +14,7 @@
 
 import init.common.rc
 import init.common.srv.rc
+import init.common.ims.rc
 import init.common.qcom.rc
 import init.yoshino.usb.rc
 import init.yoshino.pwr.rc
