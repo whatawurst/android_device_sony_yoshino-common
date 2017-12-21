@@ -31,18 +31,17 @@ TARGET_FS_CONFIG_GEN := \
 
 ### CHARGER
 WITH_LINEAGE_CHARGER := true
-# system/core/healthd/Android.mk 
+# system/core/healthd/Android.mk
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
-BOARD_CHARGER_ENABLE_SUSPEND := true
+
+# device/sony/treble/core/healthd
+BOARD_HAL_STATIC_LIBRARIES += libhealthd.$(TARGET_DEVICE)
 
 ### AUDIO
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 USE_XML_AUDIO_POLICY_CONF := 1
-
-# device/sony/treble/core/healthd
-BOARD_HAL_STATIC_LIBRARIES += libhealthd.$(TARGET_DEVICE)
 
 ### VENDOR MANIFEST AND MATRIX
 ifeq ($(WITH_VENDOR_IMAGE),true)

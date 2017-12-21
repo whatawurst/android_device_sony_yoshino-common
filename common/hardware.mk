@@ -32,3 +32,7 @@ PRODUCT_PACKAGES += \
     wificond \
     wpa_supplicant \
     wpa_supplicant.conf
+
+### CHARGER
+PRODUCT_PACKAGES += \
+    charger_res_images
