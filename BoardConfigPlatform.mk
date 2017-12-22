@@ -82,9 +82,6 @@ TARGET_COPY_OUT_VENDOR := system
 # Build ext4 tools - system/vold
 TARGET_USERIMAGES_USE_EXT4 := true
 
-PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/bootdevice/by-name/system
-#PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/bootdevice/by-name/vendor
-
 ### GRAPHICS
 TARGET_HAS_HDR_DISPLAY := true
 TARGET_USES_HWC2 := true

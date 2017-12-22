@@ -38,10 +38,12 @@ endif
 DEVICE_PACKAGE_OVERLAYS += \
     $(PLATFORM_PATH)/overlay
 
-# only include verity on user builds for LineageOS
-ifeq ($(TARGET_BUILD_VARIANT),user)
-$(call inherit-product, build/target/product/verity.mk)
-endif
+### VERITY
+# We can't make system a verity partition for now
+# The issue is that else we can't install the su-addon or opengapps
+#PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/bootdevice/by-name/system
+#PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/bootdevice/by-name/vendor
+#$(call inherit-product, build/target/product/verity.mk)
 
 include $(PLATFORM_PATH)/platform/*.mk
 include $(PLATFORM_PATH)/system_prop.mk
