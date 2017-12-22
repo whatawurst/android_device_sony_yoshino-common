@@ -23,6 +23,9 @@ on early-init
     write /sys/module/msm_rtb/parameters/enable 0
 
 on init
+    # Load persistent dm-verity state
+    verity_load_state
+
     # Setup platform zram options
     write /sys/block/zram0/max_comp_streams 8
 
@@ -128,6 +131,10 @@ on post-fs-data
 on early-boot
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
+
+    # Update dm-verity state and set partition.*.verified properties
+    verity_update_state
+
     exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
 
 on boot
