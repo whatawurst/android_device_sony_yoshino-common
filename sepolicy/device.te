@@ -6,3 +6,6 @@ type adsprpcd_block_device, dev_type;
 type rpmb_block_device, dev_type;
 type sd_block_device, dev_type;
 type ta_block_device, dev_type;
+
+type exfat, sdcard_type, fs_type, mlstrustedobject;
+type fuseblk, sdcard_type, fs_type, mlstrustedobject;

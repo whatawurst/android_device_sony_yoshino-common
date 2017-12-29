@@ -84,6 +84,9 @@
 /data/time(/.*)?                                        u:object_r:time_data_file:s0
 /data/vendor/nfc(/.*)?                                  u:object_r:nfc_data_file:s0
 
+# files in system
+/system/bin/fsck\.exfat                         --      u:object_r:fsck_exec:s0
+
 # input files
 /vendor/usr/idc(/.*)?                                   u:object_r:idc_file:s0
 /vendor/usr/keylayout(/.*)?                             u:object_r:keylayout_file:s0
