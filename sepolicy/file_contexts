@@ -62,6 +62,7 @@
 
 # files in system
 /system/bin/cacaoserver                                        u:object_r:cacaoserver_exec:s0
+/system/bin/secd                                               u:object_r:secd_exec:s0
 /system/bin/hw/rild                                            u:object_r:rild_exec:s0
 
 # files in idd
