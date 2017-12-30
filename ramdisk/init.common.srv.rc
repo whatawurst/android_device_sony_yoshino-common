@@ -121,7 +121,7 @@ service charger /charger
     class charger
     critical
     group system graphics log
-    seclabel u:r:healthd:s0
+    seclabel u:r:charger:s0
     writepid /dev/cpuset/system-background/tasks
 
 # OSS time
