@@ -127,6 +127,10 @@ PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service
 
+# POWER
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.2-service.yoshino
+
 # RADIO
 PRODUCT_PACKAGES += \
     android.hardware.broadcastradio@1.0-impl \
