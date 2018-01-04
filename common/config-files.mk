@@ -4,7 +4,7 @@ PRODUCT_COPY_FILES += \
 
 ### AUDIO
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/config/audio/audio_effects.conf:system/etc/audio_effects.conf
+    $(COMMON_PATH)/config/audio/audio_effects.xml:system/etc/audio_effects.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/audio_policy_configuration_generic.xml:system/etc/audio_policy_configuration.xml \
