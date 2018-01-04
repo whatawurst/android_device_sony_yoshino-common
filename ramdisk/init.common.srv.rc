@@ -116,6 +116,11 @@ service thermanager /vendor/bin/thermanager /system/etc/thermanager.xml
     group root
     writepid /dev/cpuset/system-background/tasks
 
+service xtra-daemon /vendor/bin/xtra-daemon
+    class late_start
+    user gps
+    group gps system
+
 # Offline charger
 service charger /charger
     class charger
