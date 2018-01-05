@@ -28,7 +28,7 @@ PRODUCT_PACKAGES += \
 ### RECOVERY
 # Add Timezone database
 PRODUCT_COPY_FILES += \
-    bionic/libc/zoneinfo/tzdata:recovery/root/system/usr/share/zoneinfo/tzdata
+    system/timezone/output_data/iana/tzdata:recovery/root/system/usr/share/zoneinfo/tzdata
 
 ifeq ($(WITH_TWRP),true)
 PRODUCT_COPY_FILES += \
