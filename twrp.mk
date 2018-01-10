@@ -18,6 +18,9 @@
 ### TWRP RECOVERY
 ###########################################################
 
+# Do not go full treble for recovery
+PRODUCT_FULL_TREBLE_OVERRIDE := false
+
 RECOVERY_VARIANT := twrp
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/twrp.fstab
 
@@ -127,8 +130,11 @@ TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hardware.gate
 TARGET_RECOVERY_DEVICE_MODULES      += strace
 TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/xbin/strace
 
+# /system/manifest.xml
+TARGET_RECOVERY_DEVICE_MODULES      += system_manifest.xml
+
 ### F2FS SUPPORT
-CM_PLATFORM_SDK_VERSION := $(LINEAGE_PLATFORM_SDK_VERSION)
+CM_PLATFORM_SDK_VERSION := 3
 TARGET_USERIMAGES_USE_F2FS := true
 
 ### TWRP FEATURES
