@@ -62,7 +62,7 @@ service netmgrd /vendor/bin/netmgrd
     writepid /dev/cpuset/system-background/tasks
 
 # QCOM prop
-service irsc_util /vendor/bin/irsc_util "/system/etc/sec_config"
+service irsc_util /vendor/bin/irsc_util "/system/vendor/etc/sec_config"
     class core
     user root
     oneshot
