@@ -1,0 +1,5 @@
+# property.te
+
+type secureadb_prop, property_type;
+type semc_version_prop, property_type;
+type sony_prop, property_type;

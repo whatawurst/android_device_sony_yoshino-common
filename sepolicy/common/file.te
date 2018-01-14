@@ -1,0 +1,31 @@
+# file.te
+
+# DEUBGFS
+type debugfs_rmt_storage, fs_type, debugfs_type;
+type debugfs_wlan_power, fs_type, debugfs_type;
+type ssr_crash_reason_file, file_type, debugfs_type;
+
+# DATA
+type display_color_calib_data_file, file_type, data_file_type;
+type fpc_data_file, file_type, data_file_type;
+type ta_data_file, file_type, data_file_type;
+type wlan_data_file, file_type, data_file_type;
+type crash_data_file, file_type, data_file_type;
+
+# PROC
+type proc_cmdline, fs_type;
+
+# SYSFS
+type sysfs_dsi_panel, fs_type, sysfs_type;
+type sysfs_fpc, fs_type, sysfs_type;
+type sysfs_fpc_irq, fs_type, sysfs_type;
+type sysfs_fpc_spi_prepare, fs_type, sysfs_type;
+type sysfs_fpc_wakeup, fs_type, sysfs_type;
+type sysfs_pm_wakeup, fs_type, sysfs_type;
+type sysfs_rmtfs, sysfs_type, fs_type;
+type sysfs_switch, fs_type, sysfs_type;
+type sysfs_switch_lid, fs_type, sysfs_type;
+
+# SOCKETS
+type fpc_socket, file_type, data_file_type;
+type tad_socket, file_type;

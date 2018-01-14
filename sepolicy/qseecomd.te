@@ -1,5 +1,0 @@
-set_prop(tee, tee_listener_prop)
-set_prop(tee, keymaster_prop)
-
-allow tee rpmb_block_device:blk_file rw_file_perms;
-allow tee ssd_block_device:blk_file rw_file_perms;

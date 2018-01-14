@@ -1,3 +1,0 @@
-allowxperm pd_mapper self:socket ioctl IPC_ROUTER_IOCTL_BIND_CONTROL_PORT;
-
-r_dir_file(pd_mapper, sysfs_msm_subsys)

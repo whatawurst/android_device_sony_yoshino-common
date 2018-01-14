@@ -1,7 +1,0 @@
-net.r_rmnet_data0                    u:object_r:net_rmnet_prop:s0
-persist.sys.timeadjust               u:object_r:timekeep_prop:s0
-ro.semc.version.cust.active          u:object_r:semc_prop:s0
-ro.somc.secureadb                    u:object_r:somc_prop:s0
-ro.sony.color_id                     u:object_r:sony_prop:s0
-sys.keymaster.loaded                 u:object_r:keymaster_prop:s0
-sys.listeners.registered             u:object_r:tee_listener_prop:s0

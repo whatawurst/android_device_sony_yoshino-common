@@ -76,5 +76,4 @@ endif
 
 ### SEPOLICY
 include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += \
-    device/sony/common-treble/sepolicy
+BOARD_SEPOLICY_DIRS += device/sony/common-treble/sepolicy/common

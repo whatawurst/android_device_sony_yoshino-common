@@ -1,4 +1,0 @@
-# /sys/devices/soc/800f000.qcom,spmi
-allow hal_health_default sysfs_spmi_dev:dir r_dir_perms;
-
-allow hal_health_default sysfs_msm_subsys:dir r_dir_perms;

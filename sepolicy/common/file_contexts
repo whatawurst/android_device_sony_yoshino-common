@@ -1,0 +1,20 @@
+# file_contexts
+
+# DEV
+/dev/socket/tad                                                 u:object_r:tad_socket:s0
+
+# DATA
+/data/display(/.*)?                                             u:object_r:display_color_calib_data_file:s0
+/data/etc(/.*)?                                                 u:object_r:ta_data_file:s0
+/data/etc/wlan.*                                                u:object_r:wlan_data_file:s0
+/data/etc/bluetooth.*                                           u:object_r:bluetooth_data_file:s0
+/data/fpc(/.*)?                                                 u:object_r:fpc_data_file:s0
+/data/fpc/oem                                                   u:object_r:fpc_socket:s0
+/data/crashdata(/.*)?                                           u:object_r:crash_data_file:s0
+
+# SYSTEM
+/system/bin/sysinit                                             u:object_r:sysinit_exec:s0
+
+# VENDOR
+/(vendor|system/vendor)/bin/mlog_qmi_service                    u:object_r:mlog_qmi_service_exec:s0
+/sbin/tad_static                                                u:object_r:rootfs:s0

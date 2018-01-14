@@ -1,0 +1,4 @@
+# hal_gnss_qti.te
+
+# /data/vendor/location/build_fingerprint
+allow hal_gnss_qti location_data_file:file create_file_perms;

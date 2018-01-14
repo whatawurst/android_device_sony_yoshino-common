@@ -1,0 +1,3 @@
+# hal_light_default.te
+
+binder_call(hal_light_default, hal_light_default)

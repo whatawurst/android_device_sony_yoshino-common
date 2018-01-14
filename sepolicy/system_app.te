@@ -1,7 +1,0 @@
-# ExtendedSettings props
-rw_dir_file(system_app, sysfs_pcc_profile)
-
-# TimeKeep Java service
-allow system_app time_data_file:dir create_dir_perms;
-allow system_app time_data_file:file create_file_perms;
-set_prop(system_app, timekeep_prop)

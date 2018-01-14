@@ -1,4 +1,0 @@
-# hal_gatekeeper_qti.te
-set_prop(hal_gatekeeper_qti, tee_listener_prop)
-
-allow hal_gatekeeper_qti oemfs:dir r_dir_perms;

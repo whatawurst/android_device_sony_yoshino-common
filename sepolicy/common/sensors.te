@@ -1,0 +1,3 @@
+# sensors.te
+
+get_prop(sensors, semc_version_prop)

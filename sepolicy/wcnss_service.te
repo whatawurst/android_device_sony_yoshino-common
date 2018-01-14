@@ -1,7 +1,0 @@
-# cnss-daemon
-get_prop(wcnss_service, wigig_prop)
-
-allow wcnss_service sysfs_msm_subsys:dir r_dir_perms;
-allow wcnss_service sysfs_soc:dir r_dir_perms;
-
-allow wcnss_service firmware_file:lnk_file r_file_perms;

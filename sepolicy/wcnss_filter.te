@@ -1,2 +1,0 @@
-# /dev/ttyHS0
-allow wcnss_filter hci_attach_dev:file { ioctl };

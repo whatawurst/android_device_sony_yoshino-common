@@ -1,3 +1,0 @@
-set_prop(hal_gatekeeper_default, keymaster_prop)
-# sys.listeners.registered
-allow hal_gatekeeper_default tee_listener_prop:file r_file_perms;

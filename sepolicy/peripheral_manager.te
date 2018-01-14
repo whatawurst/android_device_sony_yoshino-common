@@ -1,4 +1,0 @@
-# Policy for peripheral_manager
-# pm-service and pm-proxy
-
-r_dir_file(per_mgr, sysfs_msm_subsys)

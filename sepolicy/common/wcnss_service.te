@@ -1,0 +1,5 @@
+# wcnss-daemon.te
+
+get_prop(wcnss_service, wigig_prop)
+
+allow wcnss_service firmware_file:lnk_file r_file_perms;

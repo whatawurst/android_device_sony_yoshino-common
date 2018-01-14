@@ -1,0 +1,7 @@
+# vold.te
+
+# /proc/cmdline
+allow vold proc_cmdline:file r_file_perms;
+
+# /vendor/lib64/libcryptfs_hw.so
+allow vold vendor_file:file rx_file_perms;

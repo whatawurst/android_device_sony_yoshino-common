@@ -1,6 +1,0 @@
-allow hal_power_default powerhal_socket:dir rw_dir_perms;
-allow hal_power_default powerhal_socket:sock_file create_file_perms;
-
-allow hal_power_default sysfs_devices_system_cpu:file w_file_perms;
-
-allow hal_power_default sysfs_soc:dir r_dir_perms;

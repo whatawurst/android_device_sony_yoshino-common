@@ -1,7 +1,0 @@
-# hal_gnss_qti.te
-allow hal_gnss_qti sysfs_msm_subsys:dir r_dir_perms;
-allow hal_gnss_qti sysfs_soc:dir r_dir_perms;
-
-# /data/vendor/location/*
-allow hal_gnss_qti location_data_file:dir rw_dir_perms;
-allow hal_gnss_qti location_data_file:file create_file_perms;

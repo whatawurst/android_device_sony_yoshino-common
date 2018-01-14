@@ -1,0 +1,4 @@
+# hal_power_default.te
+
+# /sys/kernel/debug/wlan0/power_stats
+allow hal_power_default debugfs_wlan_power:file r_file_perms;

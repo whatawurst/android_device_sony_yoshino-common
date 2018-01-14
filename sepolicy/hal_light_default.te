@@ -1,2 +1,0 @@
-rw_dir_file(hal_light_default, sysfs_msm_subsys)
-binder_call(hal_light_default, hal_light_default)

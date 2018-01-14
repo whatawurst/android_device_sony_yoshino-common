@@ -1,0 +1,14 @@
+# sysinit.te
+
+type sysinit, domain;
+type sysinit_exec, exec_type, vendor_file_type, file_type;
+
+typeattribute sysinit coredomain;
+
+init_daemon_domain(sysinit)
+
+# /system/bin/sh
+allow sysinit shell_exec:file r_file_perms;
+
+# /system/etc/init.d
+allow sysinit system_file:dir r_file_perms;

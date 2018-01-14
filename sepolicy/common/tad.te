@@ -1,0 +1,13 @@
+# tad.te
+type tad, domain;
+type tad_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(tad)
+
+domain_trans(init, rootfs, tad)
+
+allow tad block_device:dir { getattr search };
+allow tad ta_block_device:blk_file rw_file_perms;
+
+allow tad proc_cmdline:file r_file_perms;
+allow tad rootfs:file r_file_perms;

@@ -1,4 +1,0 @@
-# location.te
-
-r_dir_file(location, sysfs_msm_subsys)
-r_dir_file(location, sysfs_soc)

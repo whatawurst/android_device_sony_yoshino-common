@@ -1,7 +1,0 @@
-type keymaster_prop, property_type;
-type net_rmnet_prop, property_type;
-type semc_prop, property_type;
-type somc_prop, property_type;
-type sony_prop, property_type;
-type tee_listener_prop, property_type;
-type timekeep_prop, property_type;
