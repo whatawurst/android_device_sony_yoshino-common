@@ -14,6 +14,10 @@
 
 COMMON_PATH := device/sony/common-treble
 
+### BOARD
+BOARD_USES_QCOM_HARDWARE := true
+BOARD_VENDOR := sony
+
 ### KERNEL
 BOARD_KERNEL_CMDLINE += console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0
 BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x3F ehci-hcd.park=3
