@@ -26,6 +26,7 @@ PRODUCT_PACKAGES += \
 # For audio.primary
 PRODUCT_PACKAGES += \
     libtinyalsa \
+    libtinycompress_vendor \
     tinymix
 
 # Audio effects
@@ -56,6 +57,11 @@ PRODUCT_PACKAGES += \
     libloc_stub \
     libgps.utils
 
+### GNS
+PRODUCT_PACKAGES += \
+    libgnss \
+    libgnsspps
+
 ### BLUETOOTH
 PRODUCT_PACKAGES += \
     libbt-vendor
@@ -67,3 +73,18 @@ PRODUCT_PACKAGES += \
 ### NETMGR
 PRODUCT_PACKAGES += \
     librmnetctl
+
+# IMS
+PRODUCT_PACKAGES += \
+    ims-ext-common
+
+### TELEPHONY
+PRODUCT_PACKAGES += \
+    telephony-ext
+
+### RCS
+PRODUCT_PACKAGES += \
+    rcs_service_aidl \
+    rcs_service_aidl.xml \
+    rcs_service_api \
+    rcs_service_api.xml
