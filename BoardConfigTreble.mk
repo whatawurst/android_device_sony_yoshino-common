@@ -60,7 +60,8 @@ BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
 # device/sony/treble/core/healthd
-BOARD_HAL_STATIC_LIBRARIES += libhealthd.$(TARGET_DEVICE)
+# FIXME Linking issues with libminui, it is not a dep to libhealthd
+#BOARD_HAL_STATIC_LIBRARIES += libhealthd.$(TARGET_DEVICE)
 
 ### AUDIO
 BOARD_USES_ALSA_AUDIO := true
