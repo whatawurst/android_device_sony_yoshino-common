@@ -46,8 +46,9 @@ on fs
     # SONY: creat mount point for qns
     mkdir /qns 0750 qns qns
 
-    mount_all ./fstab.yoshino
-    swapon_all ./fstab.yoshino
+    mount_all ./fstab.${ro.hardware}
+    # Enable ZRAM
+    swapon_all ./fstab.${ro.hardware}
 
     restorecon_recursive /persist
 
@@ -324,10 +325,6 @@ on charger
 on property:vold.post_fs_data_done=1
     # Generate Bluetooth MAC address file only when /data is ready
     start macaddrsetup
-
-on property:sys.boot_completed=1
-    # Start the WiFi only after secure services are up
-    write /sys/kernel/boot_wlan/boot_wlan 1
 
 on property:wc_transport.start_hci=true
     start hci_filter
