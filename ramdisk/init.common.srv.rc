@@ -21,18 +21,6 @@ service tad_static /sbin/tad_static /dev/block/bootdevice/by-name/TA 0,16
     seclabel u:r:tad:s0
     writepid /dev/cpuset/system-background/tasks
 
-# SONY misc
-service ta_qmi_service /vendor/bin/ta_qmi_service
-    class core
-    user root
-    writepid /dev/cpuset/system-background/tasks
-
-# SONY prop
-service sct_service /vendor/bin/sct_service
-    class core
-    user root
-    writepid /dev/cpuset/system-background/tasks
-
 # SONY prop
 service mlog_qmi_service /vendor/bin/mlog_qmi_service
     class core
