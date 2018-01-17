@@ -29,6 +29,6 @@ PRODUCT_PACKAGES += \
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
 
 include $(COMMON_PATH)/common/*.mk
-include $(COMMON_PATH)/system_prop.mk
+include $(COMMON_PATH)/vendor_prop.mk
 
 $(call inherit-product, device/sony/common-treble/treble.mk)
