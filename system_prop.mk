@@ -211,3 +211,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable sdcardfs filesystem
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.sdcardfs=1
+
+# SD Encryption supported
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sdcrypt.supported=true
