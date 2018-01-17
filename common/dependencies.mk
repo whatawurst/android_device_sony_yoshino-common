@@ -18,10 +18,6 @@ PRODUCT_PACKAGES += \
     libion \
     libxml2
 
-### POWER
-PRODUCT_PACKAGES += \
-    librqbalance
-
 ### AUDIO
 # For audio.primary
 PRODUCT_PACKAGES += \
