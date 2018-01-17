@@ -45,4 +45,4 @@ DEVICE_PACKAGE_OVERLAYS += \
 #$(call inherit-product, build/target/product/verity.mk)
 
 include $(PLATFORM_PATH)/platform/*.mk
-include $(PLATFORM_PATH)/system_prop.mk
+include $(PLATFORM_PATH)/vendor_prop.mk
