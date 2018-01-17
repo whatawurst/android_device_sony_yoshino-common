@@ -207,3 +207,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Touch
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.backlight_on=1
+
+# Enable sdcardfs filesystem
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sys.sdcardfs=1
