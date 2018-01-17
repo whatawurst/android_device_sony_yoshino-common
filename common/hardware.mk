@@ -38,3 +38,7 @@ PRODUCT_PACKAGES += \
 ### CHARGER
 PRODUCT_PACKAGES += \
     charger_res_images
+
+### CAMERA
+PRODUCT_PACKAGES += \
+    Snap
