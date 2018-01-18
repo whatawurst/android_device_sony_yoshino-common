@@ -184,6 +184,10 @@ TARGET_RIL_VARIANT := caf
 TARGET_PER_MGR_ENABLED := true
 PROTOBUF_SUPPORTED := true
 
+### HIDL
+DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
+
 # vendor/qcom/opensource/cryptfs_hw
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
