@@ -129,6 +129,9 @@ on post-fs-data
     # Fingerprint data folder
     mkdir /data/fpc 0770 system system
 
+    # Illumination service data folder
+    mkdir /data/vendor/illumination_service 0770 system system
+
     restorecon -RF /idd
     mkdir /rca/plugins 0750 idd idd
     restorecon -RF /rca
