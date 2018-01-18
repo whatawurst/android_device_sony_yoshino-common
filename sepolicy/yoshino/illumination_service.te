@@ -1,0 +1,21 @@
+# illumination_service.te
+
+type illumination_service, domain;
+type illumination_service_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(illumination_service)
+
+allow illumination_service self:capability {
+    setuid
+    setgid
+};
+
+wakelock_use(illumination_service)
+domain_trans(init, socket_device, illumination_service)
+
+allow illumination_service sysfs_dsi_panel:file r_file_perms;
+
+allow illumination_service sysfs_leds:dir r_dir_perms;
+allow illumination_service sysfs_leds:file rw_file_perms;
+
+allow illumination_service illumination_data_file:dir r_dir_perms;

@@ -1,0 +1,36 @@
+# hal_camera_somc.te
+type hal_camera_somc, domain;
+type hal_camera_somc_exec, exec_type, vendor_file_type, file_type;
+
+hal_server_domain(hal_camera_somc, hal_camera)
+init_daemon_domain(hal_camera_somc)
+
+binder_call(hal_camera_somc, hal_idd_default)
+binder_call(hal_camera_somc, hal_configstore_default)
+binder_call(hal_camera_somc, cacaoserver)
+
+unix_socket_connect(hal_camera_somc, tad, tad)
+unix_socket_connect(hal_camera_somc, secd_credmgr, secd)
+
+allow hal_camera_somc hal_graphics_mapper_hwservice:hwservice_manager find;
+allow hal_camera_somc hal_idd_hwservice:hwservice_manager find;
+allow hal_camera_somc hal_configstore_ISurfaceFlingerConfigs:hwservice_manager find;
+
+# /dev/socket/cammw_tintless
+allow hal_camera_somc camera_somc_socket:sock_file rw_file_perms;
+
+# /sys/devices/soc/8c0000.qcom,msm-cam/video4linux/video0/name
+r_dir_file(hal_camera_somc, sysfs_graphics)
+
+# /sys/devices/soc/ca0c000.qcom,cci/ca0c000.qcom,cci:qcom,camera@0/video4linux/video1/name
+allow hal_camera_somc sysfs_graphics:file r_file_perms;
+
+# /sys/devices/sony_camera_0/info
+# /sys/devices/sony_camera_1/info
+allow hal_camera_somc sysfs_sony_camera:file rw_file_perms;
+
+# /sys/devices/virtual/input/input3/chip_pow
+allow hal_camera_somc sysfs_tof_rgbcir:file rw_file_perms;
+
+# /dev/socket/cammw_tintless
+allow hal_camera_somc camera_somc_socket:sock_file r_file_perms;

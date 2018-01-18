@@ -1,0 +1,34 @@
+# file.te
+
+# idd
+type idd_crashdata_file, file_type;
+type idd_data_file, file_type;
+type idd_fsck_file, file_type;
+type idd_lostfound_file, file_type;
+type idd_output_file, file_type;
+type idd_rca_dir, file_type;
+type idd_rca_file, file_type;
+type idd_rca_lostfound_file, file_type;
+type idd_root_dir, file_type;
+type idd_socket, file_type;
+type idd_socket_file, file_type;
+type qns_file, file_type;
+type simpin_cache_data_file, file_type;
+type startupprober_file, file_type;
+
+# data
+type credmgrd_data_file, file_type, data_file_type;
+type illumination_data_file, file_type, data_file_type;
+
+# sockets
+type camera_somc_socket, file_type;
+type illumination_socket, file_type;
+type secd_credmgr_socket, file_type;
+type secd_devsec_socket, file_type;
+
+# sysfs
+type sysfs_mdss_dsi_panel, fs_type, sysfs_type;
+type sysfs_nfc_i2c, fs_type, sysfs_type;
+type sysfs_qns, fs_type, sysfs_type;
+type sysfs_sony_camera, fs_type, sysfs_type;
+type sysfs_tof_rgbcir, fs_type, sysfs_type;

@@ -1,0 +1,22 @@
+# taimport.te
+
+type taimport, domain;
+type taimport_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(taimport)
+
+unix_socket_connect(taimport, tad, tad)
+
+allow taimport self:capability {
+    setgid
+};
+
+set_prop(taimport, semc_version_prop)
+set_prop(taimport, secureadb_prop)
+set_prop(taimport, sony_prop)
+
+# /data/etc/wlan_macaddr0
+allow taimport ta_data_file:dir rw_dir_perms;
+allow taimport ta_data_file:file create_file_perms;
+allow taimport bluetooth_data_file:file create_file_perms;
+allow taimport wlan_data_file:file create_file_perms;

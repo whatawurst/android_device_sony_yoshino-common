@@ -1,0 +1,9 @@
+# hal_wifi_hostapd.te
+
+type hal_wifi_hostapd, domain;
+type hal_wifi_hostapd_exec, exec_type, vendor_file_type, file_type;
+
+hal_server_domain(hal_wifi_hostapd, hal_wifi)
+init_daemon_domain(hal_wifi_hostapd)
+
+add_hwservice(hal_wifi_hostapd, hal_wifi_somc_hwservice)

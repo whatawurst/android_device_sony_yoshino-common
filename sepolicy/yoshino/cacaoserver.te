@@ -1,0 +1,19 @@
+# cacaoserver.te
+type cacaoserver, domain;
+type cacaoserver_exec, exec_type, file_type;
+
+typeattribute cacaoserver coredomain;
+
+init_daemon_domain(cacaoserver)
+
+add_service(cacaoserver, cacao_service)
+
+binder_use(cacaoserver)
+hwbinder_use(cacaoserver)
+get_prop(cacaoserver, hwservicemanager_prop)
+binder_call(cacaoserver, hal_camera_somc)
+
+allow cacaoserver hal_camera_hwservice:hwservice_manager { find };
+
+r_dir_file(hwservicemanager, cacaoserver)
+r_dir_file(servicemanager, cacaoserver)

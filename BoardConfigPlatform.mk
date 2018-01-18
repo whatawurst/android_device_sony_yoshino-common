@@ -193,8 +193,8 @@ TARGET_HW_DISK_ENCRYPTION := true
 TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
 
 ### SEPOLICY
-BOARD_SEPOLICY_DIRS += \
-    device/sony/yoshino/sepolicy
+BOARD_SEPOLICY_DIRS += device/sony/yoshino/sepolicy/yoshino
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino/sepolicy/private
 
 ### RECOVERY
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab.recovery

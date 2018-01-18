@@ -1,4 +1,0 @@
-# ims.te
-r_dir_file(ims, sysfs_msm_subsys)
-r_dir_file(ims, sysfs_soc)
-r_dir_file(ims, sysfs)

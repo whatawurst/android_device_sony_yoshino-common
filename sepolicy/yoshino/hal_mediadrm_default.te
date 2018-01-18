@@ -1,0 +1,7 @@
+type hal_mediadrm_default, domain;
+type hal_mediadrm_default_exec, exec_type, vendor_file_type, file_type;
+
+hal_server_domain(hal_mediadrm_default, hal_drm)
+init_daemon_domain(hal_mediadrm_default)
+
+vndbinder_use(hal_mediadrm_default)

@@ -1,3 +1,0 @@
-allow fsck appslog_block_device:blk_file rw_file_perms;
-allow fsck diag_block_device:blk_file rw_file_perms;
-allow fsck qnovo_block_device:blk_file rw_file_perms;

@@ -1,3 +1,0 @@
-# hal_nfc_default.te
-allow hal_nfc_default sysfs_nfc_i2c:dir r_dir_perms;
-allow hal_nfc_default sysfs_nfc_i2c:file rw_file_perms;

@@ -1,4 +1,0 @@
-# hal_graphics_allocator_default.te
-
-# /odm
-r_dir_file(hal_graphics_allocator_default, oemfs)

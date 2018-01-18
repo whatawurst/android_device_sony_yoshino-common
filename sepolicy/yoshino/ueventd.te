@@ -1,0 +1,3 @@
+# ueventd.te
+
+allow ueventd sysfs_qns:dir { relabelto };

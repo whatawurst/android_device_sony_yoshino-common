@@ -1,0 +1,4 @@
+# property_contexts
+
+persist.keyprovd.suntory.prov        u:object_r:keyprovd_prop:s0
+persist.tareset.notfirstboot         u:object_r:trimarea_prop:s0

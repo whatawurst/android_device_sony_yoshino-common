@@ -1,0 +1,16 @@
+# ssr_level.te
+
+type ssr_level, domain;
+type ssr_level_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(ssr_level)
+
+# /system/bin/sh
+allow ssr_level vendor_toolbox_exec:file { execute_no_trans };
+allow ssr_level vendor_shell_exec:file { entrypoint };
+
+# /sys/devices/soc/soc:qcom,ipa_fws@1e08000/subsys0/name
+allow ssr_level sysfs_data:file r_file_perms;
+
+# /sys/devices/soc/soc:qcom,ipa_fws@1e08000/subsys0/restart_level
+allow ssr_level sysfs_ssr_toggle:file rw_file_perms;

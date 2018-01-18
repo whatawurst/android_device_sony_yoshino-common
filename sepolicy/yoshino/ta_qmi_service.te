@@ -1,0 +1,18 @@
+# ta_qmi_service.te
+
+type ta_qmi_service, domain;
+type ta_qmi_service_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(ta_qmi_service)
+
+wakelock_use(ta_qmi_service)
+
+unix_socket_connect(ta_qmi_service, tad, tad)
+
+allow ta_qmi_service self:capability {
+    net_raw
+    setgid
+    setuid
+};
+
+allow ta_qmi_service self:socket create_socket_perms_no_ioctl;

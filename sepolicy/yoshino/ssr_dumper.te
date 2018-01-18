@@ -1,0 +1,25 @@
+# ssr_dumper.te
+
+type ssr_dumper, domain;
+type ssr_dumper_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(ssr_dumper)
+
+allow ssr_dumper vendor_toolbox_exec:file { execute_no_trans };
+
+allow ssr_dumper kernel:system { syslog_read };
+
+# /dev/kmsg
+allow ssr_dumper kmsg_device:chr_file r_file_perms;
+
+# /proc/cmdline
+allow ssr_dumper proc_cmdline:file r_file_perms;
+
+# /data/bluetooth
+r_dir_file(ssr_dumper, bluetooth_data_file)
+
+# /sys/kernel/debug/msm_subsys/crash_reason/adsp
+r_dir_file(ssr_dumper, ssr_crash_reason_file)
+
+# /data/crashdata/tlcore_subsystem_00
+r_dir_file(ssr_dumper, crash_data_file)
