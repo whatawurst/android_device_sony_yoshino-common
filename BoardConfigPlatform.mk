@@ -18,12 +18,8 @@ include device/sony/common-treble/BoardConfigTreble.mk
 PLATFORM_PATH := device/sony/yoshino
 
 ### BOARD
-BOARD_VENDOR := sony
-
 TARGET_BOARD_PLATFORM := msm8998
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno540
-
-BOARD_USES_QCOM_HARDWARE := true
 
 ### PROCESSOR
 TARGET_ARCH := arm64
