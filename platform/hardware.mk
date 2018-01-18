@@ -9,3 +9,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     audio.primary.msm8998 \
     libvolumelistener
+
+# IPACM
+PRODUCT_PACKAGES += \
+    ipacm \
+    IPACM_cfg.xml \
+    libipanat \
+    liboffloadhal
