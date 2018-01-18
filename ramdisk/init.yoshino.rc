@@ -129,6 +129,10 @@ on post-fs-data
     # Fingerprint data folder
     mkdir /data/fpc 0770 system system
 
+    restorecon -RF /idd
+    mkdir /rca/plugins 0750 idd idd
+    restorecon -RF /rca
+
 on early-boot
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
