@@ -6,14 +6,13 @@ on early-init
 on fs
     wait /dev/block/platform/soc/1da4000.ufshc
     symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
-    symlink /system/vendor /vendor
     chmod 0660 /dev/qseecom
     chown system drmrpc /dev/qseecom
     chmod 0664 /dev/ion
     chown system system /dev/ion
 
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
-    insmod /system/lib/modules/kscl.ko
+    insmod /lib/modules/kscl.ko
 
     # IMPORTANT!
     # This needs to be supported by the init binary!

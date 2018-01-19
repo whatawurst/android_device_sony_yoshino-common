@@ -35,6 +35,9 @@ TARGET_RECOVERY_DEVICE_MODULES := init.recovery.usb.rc
 ### KERNEL
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
+# Install kernel modules to root directory
+NEED_KERNEL_MODULE_ROOT := true
+
 ### QCOM
 TW_TARGET_USES_QCOM_BSP := true
 TW_NEW_ION_HEAP := true
