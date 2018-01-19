@@ -34,6 +34,10 @@ on boot
 on property:crypto.ready=1
     start sbin_qseecomd
     start hwservicemanager
+
+    # Wait for qseecomd to finish
+    wait_for_prop sys.listeners.registered true
+
     start gatekeeper-1-0
     start keymaster-3-0
 
