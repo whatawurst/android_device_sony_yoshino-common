@@ -43,6 +43,8 @@
 /sys/devices/soc/[a-z0-9]+.qcom,ssc/subsys[0-9]/restart_level   u:object_r:sysfs_ssr_toggle:s0
 /sys/devices/soc/[a-z0-9]+.qcom,spss/subsys[0-9]/restart_level  u:object_r:sysfs_ssr_toggle:s0
 /sys/devices/soc/[a-z0-9]+.qcom,lpass/subsys4/restart_level     u:object_r:sysfs_ssr_toggle:s0
+/sys/devices/soc/[a-z0-9]+.qcom,mss/subsys6/restart_level       u:object_r:sysfs_ssr_toggle:s0
+/sys/devices/soc/[a-z0-9]+.qcom,mss/subsys6/system_debug        u:object_r:sysfs_ssr_toggle:s0
 
 /sys/devices/soc/[a-z0-9]+.qcom,mdss_rotator/caps               u:object_r:sysfs_graphics:s0
 
@@ -51,9 +53,14 @@
 /sys/devices/soc/soc:fpc1145/spi_prepare                        u:object_r:sysfs_fpc_spi_prepare:s0
 /sys/devices/soc/soc:fpc1145/wakeup_enable                      u:object_r:sysfs_fpc_wakeup:s0
 
-/sys/devices/virtual/input/input3/chip_pow                      u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input3/als_Itime                     u:object_r:sysfs_tof_rgbcir:s0
 /sys/devices/virtual/input/input3/als_gain                      u:object_r:sysfs_tof_rgbcir:s0
 /sys/devices/virtual/input/input3/als_power_state               u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input3/als_thres                     u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input3/chip_pow                      u:object_r:sysfs_tof_rgbcir:s0
+
+/sys/devices/sony_camera_1/info                                 u:object_r:sysfs_sony_camera:s0
+/sys/devices/sony_camera_0/info                                 u:object_r:sysfs_sony_camera:s0
 
 /sys/kernel/debug/msm_subsys/crash_reason(/.*)?                 u:object_r:ssr_crash_reason_file:s0
 

@@ -19,7 +19,7 @@ allow ssr_dumper proc_cmdline:file r_file_perms;
 r_dir_file(ssr_dumper, bluetooth_data_file)
 
 # /sys/kernel/debug/msm_subsys/crash_reason/adsp
-r_dir_file(ssr_dumper, ssr_crash_reason_file)
+rw_dir_file(ssr_dumper, ssr_crash_reason_file)
 
 # /data/crashdata/tlcore_subsystem_00
 r_dir_file(ssr_dumper, crash_data_file)

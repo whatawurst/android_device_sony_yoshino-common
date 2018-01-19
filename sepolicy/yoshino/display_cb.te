@@ -22,4 +22,5 @@ allow display_cb display_misc_file:file create_file_perms;
 allow display_cb sysfs_dsi_panel:file r_file_perms;
 
 # /data/display/pcc_calib
-allow display_cb display_color_calib_data_file:file r_file_perms;
+allow display_cb display_color_calib_data_file:dir rw_dir_perms;
+allow display_cb display_color_calib_data_file:file create_file_perms;

@@ -9,8 +9,7 @@ binder_call(idd, hal_idd_default)
 unix_socket_connect(idd, tad, tad)
 
 # /dev/socket/logdr
-#allow idd logdr_socket:sock_file rw_file_perms;
-unix_socket_connect(idd, logd, logd)
+unix_socket_connect(idd, logdr, logd)
 
 allow idd hal_idd_hwservice:hwservice_manager { find };
 

@@ -8,6 +8,8 @@ init_daemon_domain(hal_fingerprint_fpc)
 
 unix_socket_connect(hal_fingerprint_fpc, illumination, illumination_service)
 
+binder_call(hal_fingerprint_fpc, hal_idd_default)
+
 # /data/fpc/oem
 allow hal_fingerprint_fpc fpc_socket:sock_file create_file_perms;
 
@@ -26,6 +28,16 @@ allow hal_fingerprint_fpc fpc_data_file:sock_file create_file_perms;
 # /sys/devices/soc/soc:fpc1145/spi_prepare
 allow hal_fingerprint_fpc sysfs_fpc_spi_prepare:dir r_dir_perms;
 allow hal_fingerprint_fpc sysfs_fpc_spi_prepare:file rw_file_perms;
+
+# /sys/devices/soc/soc:fpc1145/wakeup_enable
+allow hal_fingerprint_fpc sysfs_fpc_wakeup:file rw_file_perms;
+
+# /sys/devices/soc/soc:fpc1145/irq
+allow hal_fingerprint_fpc sysfs_fpc_irq:file rw_file_perms;
+
+# /sys/devices/soc/800f000.qcom,spmi/spmi-0/spmi0-02/.../battery/temp
+allow hal_fingerprint_fpc sysfs_battery_supply:dir r_dir_perms;
+allow hal_fingerprint_fpc sysfs_battery_supply:file r_file_perms;
 
 # /vendor/firmware/tzfingerprint.mdt
 r_dir_file(hal_fingerprint_fpc, firmware_file)
