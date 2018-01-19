@@ -1,3 +1,5 @@
 # sensors.te
 
+unix_socket_connect(sensors, tad, tad)
+
 get_prop(sensors, semc_version_prop)
