@@ -5,6 +5,10 @@ type ta_qmi_service_exec, exec_type, vendor_file_type, file_type;
 
 init_daemon_domain(ta_qmi_service)
 
+# Required to use qmi sockets
+allow ta_qmi_service self:socket create_socket_perms;
+allowxperm ta_qmi_service self:socket ioctl msm_sock_ipc_ioctls;
+
 wakelock_use(ta_qmi_service)
 
 unix_socket_connect(ta_qmi_service, tad, tad)
@@ -14,5 +18,3 @@ allow ta_qmi_service self:capability {
     setgid
     setuid
 };
-
-allow ta_qmi_service self:socket create_socket_perms_no_ioctl;
