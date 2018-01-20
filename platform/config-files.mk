@@ -16,6 +16,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/power/rqbalance_config.xml:system/etc/rqbalance_config.xml
 
+# QTI low power whitelist
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/config/power/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
+
 ### AUDIO
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/audio/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt
