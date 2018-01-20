@@ -24,16 +24,6 @@ PRODUCT_PACKAGES += \
     init.yoshino.pwr \
     init.qcom.early_boot.sh
 
-### RECOVERY
-# Add Timezone database
-PRODUCT_COPY_FILES += \
-    system/timezone/output_data/iana/tzdata:recovery/root/system/usr/share/zoneinfo/tzdata
-
-ifeq ($(WITH_TWRP),true)
-PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/recovery/vendor/manifest.xml:recovery/root/vendor/manifest.xml
-endif
-
 DEVICE_PACKAGE_OVERLAYS += \
     $(PLATFORM_PATH)/overlay
 
@@ -44,5 +34,17 @@ DEVICE_PACKAGE_OVERLAYS += \
 #PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/bootdevice/by-name/vendor
 #$(call inherit-product, build/target/product/verity.mk)
 
+### RECOVERY
+ifeq ($(WITH_TWRP),true)
+# Add Timezone database
+PRODUCT_COPY_FILES += \
+    system/timezone/output_data/iana/tzdata:recovery/root/system/usr/share/zoneinfo/tzdata
+
+# Add manifest for hwservicemanager
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/recovery/vendor/manifest.xml:recovery/root/vendor/manifest.xml
+
+else # WITH_TWRP
 include $(PLATFORM_PATH)/platform/*.mk
 include $(PLATFORM_PATH)/vendor_prop.mk
+endif # WITH_TWRP
