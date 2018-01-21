@@ -113,9 +113,19 @@ service xtra-daemon /vendor/bin/xtra-daemon
 service charger /charger
     class charger
     critical
-    group system graphics log
+    group system graphics input log
     seclabel u:r:charger:s0
     writepid /dev/cpuset/system-background/tasks
+
+service qbcharger /charger -m 1
+    disabled
+    oneshot
+
+on property:sys.qbcharger.enable=true
+    start qbcharger
+
+on property:sys.qbcharger.enable=false
+    stop qbcharger
 
 # OSS time
 service timekeep /system/bin/timekeep restore

@@ -44,18 +44,6 @@ on init
     mount cgroup none /acct cpuacct
     mkdir /acct/uid
 
-on charger
-    # Booting modem
-    wait /dev/block/bootdevice/by-name/system
-    mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
-    wait /dev/block/bootdevice/by-name/oem
-    mount ext4 /dev/block/bootdevice/by-name/oem /odm ro barrier=1
-    wait /dev/block/bootdevice/by-name/vendor
-    mount ext4 /dev/block/bootdevice/by-name/vendor /vendor ro barrier=1
-    start rmt_storage
-    start mlog_qmi_service
-    start irsc_util
-
 on post-fs
     chmod 0755 /sys/kernel/debug/tracing
 
