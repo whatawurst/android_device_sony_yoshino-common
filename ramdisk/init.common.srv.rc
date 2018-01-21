@@ -32,14 +32,14 @@ service rmt_storage /vendor/bin/rmt_storage
     class core
     user root
     group system wakelock
-    writepid /dev/cpuset/system-background/tasks
+    shutdown critical
+    ioprio rt 0
 
 # QCOM prop
-service qmuxd /vendor/bin/qmuxd
+service cnd /vendor/bin/cnd
     class main
-    user radio
-    group radio audio bluetooth wakelock gps nfc diag
-    disabled
+    user system
+    group system wifi inet radio wakelock net_admin
     writepid /dev/cpuset/system-background/tasks
 
 # QCOM prop
@@ -70,6 +70,21 @@ service per_proxy /vendor/bin/pm-proxy
     disabled
     writepid /dev/cpuset/system-background/tasks
 
+# QCOM prop
+service tftp_server /vendor/bin/tftp_server
+   class core
+   user root
+
+# QCOM prop
+service pd_mapper /vendor/bin/pd-mapper
+     class core
+
+# QCOM prop
+service cnss-daemon /vendor/bin/cnss-daemon -n -l
+    class late_start
+    user system
+    group system inet net_admin wifi
+
 service msm_irqbalance /vendor/bin/msm_irqbalance -f /system/etc/msm_irqbalance.conf
     socket msm_irqbalance seqpacket 660 root system
     class core
@@ -96,13 +111,6 @@ service adsprpcd /vendor/bin/adsprpcd
    class main
    user media
    group media
-
-# OSS thermal management
-service thermanager /vendor/bin/thermanager /system/etc/thermanager.xml
-    class main
-    user root
-    group root
-    writepid /dev/cpuset/system-background/tasks
 
 service xtra-daemon /vendor/bin/xtra-daemon
     class late_start
