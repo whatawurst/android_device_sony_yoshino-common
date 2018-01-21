@@ -262,15 +262,6 @@ on property:wlan.driver.status=ok
     chown wifi wifi /sys/module/wlan/parameters/fwpath
     restorecon /sys/module/wlan/parameters/fwpath
 
-# OSS WLAN and BT MAC setup
-service macaddrsetup /system/bin/macaddrsetup /data/misc/wifi/wlan_mac.bin
-    class core
-    user system
-    group system bluetooth wifi
-    disabled
-    oneshot
-    writepid /dev/cpuset/system-background/tasks
-
 service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \
@@ -320,10 +311,6 @@ on charger
 
     start hvdcp_opti
     setprop sys.usb.configfs 1
-
-on property:vold.post_fs_data_done=1
-    # Generate Bluetooth MAC address file only when /data is ready
-    start macaddrsetup
 
 on property:wc_transport.start_hci=true
     start hci_filter
