@@ -319,6 +319,7 @@ service cacaoserver /system/bin/cacaoserver
     ioprio rt 4
     writepid /dev/cpuset/camera-daemon/tasks /dev/stune/top-app/tasks
 
+# QCOM Quick Charge
 service hvdcp_opti /vendor/bin/hvdcp_opti
     class main
     user root
@@ -326,6 +327,9 @@ service hvdcp_opti /vendor/bin/hvdcp_opti
     disabled
 
 on charger
+    setprop sys.usb.config mass_storage
+    load_system_props
+
     start hvdcp_opti
     setprop sys.usb.configfs 1
 
