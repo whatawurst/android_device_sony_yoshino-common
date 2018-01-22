@@ -37,6 +37,7 @@
 /persist/pc(/.*)?                                               u:object_r:simpin_cache_data_file:s0
 
 # SYSFS
+/sys/devices/soc/[a-z0-9]+.qcom,mdss_mdp/[a-z0-9]+.qcom,mdss_mdp:qcom,mdss_fb_primary/leds/lcd-backlight(/.*)?		u:object_r:sysfs_graphics:s0
 /sys/devices/soc/soc:qcom,ipa_fws@[a-f0-9]+/subsys0/restart_level   u:object_r:sysfs_ssr_toggle:s0
 /sys/devices/soc/soc:qcom,kgsl-hyp/subsys[0-9]/restart_level    u:object_r:sysfs_ssr_toggle:s0
 /sys/devices/soc/[a-z0-9]+.qcom,venus/subsys[0-9]/restart_level u:object_r:sysfs_ssr_toggle:s0
