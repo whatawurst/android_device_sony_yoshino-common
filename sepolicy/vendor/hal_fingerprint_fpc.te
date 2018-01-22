@@ -10,6 +10,8 @@ unix_socket_connect(hal_fingerprint_fpc, illumination, illumination_service)
 
 binder_call(hal_fingerprint_fpc, hal_idd_default)
 
+allow hal_fingerprint_fpc hal_idd_hwservice:hwservice_manager { find };
+
 # /data/fpc/oem
 allow hal_fingerprint_fpc fpc_socket:sock_file create_file_perms;
 
