@@ -12,9 +12,6 @@
 /data/fpc/oem                                                   u:object_r:fpc_socket:s0
 /data/crashdata(/.*)?                                           u:object_r:crash_data_file:s0
 
-# SYSTEM
-/system/bin/sysinit                                             u:object_r:sysinit_exec:s0
-
 # VENDOR
 /(vendor|system/vendor)/bin/mlog_qmi_service                    u:object_r:mlog_qmi_service_exec:s0
 /sbin/tad_static                                                u:object_r:rootfs:s0
