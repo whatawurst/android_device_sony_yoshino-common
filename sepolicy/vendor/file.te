@@ -29,7 +29,3 @@ type sysfs_switch_lid, fs_type, sysfs_type;
 # SOCKETS
 type fpc_socket, file_type, data_file_type;
 type tad_socket, file_type;
-
-# FS
-type exfat, sdcard_type, fs_type, mlstrustedobject;
-type fuseblk, sdcard_type, fs_type, mlstrustedobject;

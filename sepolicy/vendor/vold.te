@@ -5,6 +5,3 @@ allow vold proc_cmdline:file r_file_perms;
 
 # /vendor/lib64/libcryptfs_hw.so
 allow vold vendor_file:file rx_file_perms;
-
-# mount.exfat
-allow vold mnt_media_rw_stub_file:dir { read open };
