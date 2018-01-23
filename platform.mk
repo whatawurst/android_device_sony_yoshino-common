@@ -27,13 +27,6 @@ PRODUCT_PACKAGES += \
 DEVICE_PACKAGE_OVERLAYS += \
     $(PLATFORM_PATH)/overlay
 
-### VERITY
-# We can't make system a verity partition for now
-# The issue is that else we can't install the su-addon or opengapps
-#PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/bootdevice/by-name/system
-#PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/bootdevice/by-name/vendor
-#$(call inherit-product, build/target/product/verity.mk)
-
 ### RECOVERY
 ifeq ($(WITH_TWRP),true)
 # Add Timezone database
@@ -45,6 +38,11 @@ PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/recovery/vendor/manifest.xml:recovery/root/vendor/manifest.xml
 
 else # WITH_TWRP
+### VERITY
+PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/soc/1da4000.ufshc/by-name/system
+PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc/1da4000.ufshc/by-name/vendor
+$(call inherit-product, build/target/product/verity.mk)
+
 include $(PLATFORM_PATH)/platform/*.mk
 include $(PLATFORM_PATH)/vendor_prop.mk
 endif # WITH_TWRP
