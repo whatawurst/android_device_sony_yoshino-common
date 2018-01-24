@@ -68,24 +68,6 @@ TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
 
-# Required for keymaster
-TARGET_RECOVERY_DEVICE_MODULES      += hwservicemanager
-TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/bin/hwservicemanager
-TARGET_RECOVERY_DEVICE_MODULES      += libhidl-gen-utils
-TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libhidl-gen-utils.so
-TARGET_RECOVERY_DEVICE_MODULES      += libtinyxml2
-TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libtinyxml2.so
-TARGET_RECOVERY_DEVICE_MODULES      += libvintf
-TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libvintf.so
-
-# Required by android.hardware.keymaster@3.0-service
-TARGET_RECOVERY_DEVICE_MODULES      += libhardware_legacy
-TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/libhardware_legacy.so
-
-# Required by android.hardware.gatekeeper-1.0-service
-TARGET_RECOVERY_DEVICE_MODULES      += android.hardware.gatekeeper@1.0
-TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/lib64/android.hardware.gatekeeper@1.0.so
-
 # Add strace
 TARGET_RECOVERY_DEVICE_MODULES      += strace
 TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(OUT)/system/xbin/strace
