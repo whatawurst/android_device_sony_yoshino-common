@@ -16,6 +16,7 @@
 PRODUCT_PACKAGES += \
     libjson \
     libion \
+    libtinyxml \
     libxml2
 
 ### AUDIO
