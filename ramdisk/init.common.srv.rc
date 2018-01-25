@@ -28,25 +28,10 @@ service mlog_qmi_service /vendor/bin/mlog_qmi_service
     writepid /dev/cpuset/system-background/tasks
 
 # QCOM prop
-service rmt_storage /vendor/bin/rmt_storage
-    class core
-    user root
-    group system wakelock
-    shutdown critical
-    ioprio rt 0
-
-# QCOM prop
 service cnd /vendor/bin/cnd
     class main
     user system
     group system wifi inet radio wakelock net_admin
-    writepid /dev/cpuset/system-background/tasks
-
-# QCOM prop
-service netmgrd /vendor/bin/netmgrd
-    class main
-    group system wakelock
-    disabled
     writepid /dev/cpuset/system-background/tasks
 
 # QCOM prop
@@ -55,14 +40,82 @@ service irsc_util /vendor/bin/irsc_util "/system/vendor/etc/sec_config"
     user root
     oneshot
 
+### RADIO
+
 # QCOM prop
+service rmt_storage /vendor/bin/rmt_storage
+    class core
+    user root
+    group system wakelock
+    shutdown critical
+    ioprio rt 0
+
+# QCOM prop
+service tftp_server /vendor/bin/tftp_server
+   class core
+   user root
+
+# QCOM prop radio
+service port-bridge /vendor/bin/port-bridge
+    class main
+    user radio
+    group radio system inet
+    disabled
+    writepid /dev/cpuset/system-background/tasks
+
+# QCOM prop radio
+service netmgrd /vendor/bin/netmgrd
+    class main
+    group system wakelock
+    disabled
+    writepid /dev/cpuset/system-background/tasks
+
+on property:ro.use_data_netmgrd=false
+    # netmgr not supported on specific target
+    stop netmgrd
+
+# QCOM prop radio
+service ipacm-diag /vendor/bin/ipacm-diag
+    class main
+    user radio
+    socket ipacm_log_file dgram 660 radio radio
+    group radio diag oem_2901
+    disabled
+    writepid /dev/cpuset/system-background/tasks
+
+# QCOM prop radio
+service qti /vendor/bin/qti
+    class main
+    user radio
+    group radio net_raw diag usb net_admin
+    disabled
+    writepid /dev/cpuset/system-background/tasks
+
+on property:ro.boot.baseband=msm
+    enable ipacm-diag
+    enable qti
+    enable netmgrd
+    enable port-bridge
+
+# QCOM prop radio
+service atfwd /vendor/bin/ATFWD-daemon
+    class late_start
+    user system
+    group system radio
+
+# QCOM prop
+service spdaemon /vendor/bin/spdaemon
+    class core
+    user system
+    group system
+
+### Peripheral Manager
 service per_mgr /vendor/bin/pm-service
     class core
     user system
     group system
     writepid /dev/cpuset/system-background/tasks
 
-# QCOM prop
 service per_proxy /vendor/bin/pm-proxy
     class core
     user system
@@ -70,20 +123,45 @@ service per_proxy /vendor/bin/pm-proxy
     disabled
     writepid /dev/cpuset/system-background/tasks
 
-# QCOM prop
-service tftp_server /vendor/bin/tftp_server
-   class core
-   user root
+on property:init.svc.per_mgr=running
+    start per_proxy
+
+on property:sys.shutdown.requested=*
+    stop per_proxy
+    # Disable subsystem restart
+    write /sys/module/subsystem_restart/parameters/disable_restart_work 0x9889deed
 
 # QCOM prop
 service pd_mapper /vendor/bin/pd-mapper
      class core
 
 # QCOM prop
+service cnss_diag /system/vendor/bin/cnss_diag -q -f
+    class main
+    user system
+    group system wifi inet net_admin sdcard_rw media_rw diag
+    oneshot
+
+# QCOM prop
 service cnss-daemon /vendor/bin/cnss-daemon -n -l
     class late_start
     user system
-    group system inet net_admin wifi
+    group system inet net_admin wifi oem_2901
+
+on property:sys.shutdown.requested=*
+    stop cnss-daemon
+
+### GNSS
+
+# loc_launcher will start as root and set its uid to gps
+service loc_launcher /vendor/bin/loc_launcher
+    class late_start
+    group gps inet diag wifi
+
+service xtra-daemon /vendor/bin/xtra-daemon
+    class late_start
+    user gps
+    group gps system
 
 service msm_irqbalance /vendor/bin/msm_irqbalance -f /system/etc/msm_irqbalance.conf
     socket msm_irqbalance seqpacket 660 root system
@@ -92,30 +170,95 @@ service msm_irqbalance /vendor/bin/msm_irqbalance -f /system/etc/msm_irqbalance.
     group root
     writepid /dev/cpuset/system-background/tasks
 
-# QCOM sensors
+### SENSORS
 service sensors /vendor/bin/sensors.qcom
     class core
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
 
-# QCOM Secure
+### TEE
 service qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
 
-# QCOM ADSP FastRPC
+### Thermal Manager
+service thermal-engine /system/vendor/bin/thermal-engine
+    class main
+    user root
+    socket thermal-send-client stream 0666 system system
+    socket thermal-recv-client stream 0660 system system
+    socket thermal-recv-passive-client stream 0666 system system
+    socket thermal-send-rule stream 0660 system system
+    group root
+
+### ADSP FastRPC
 service adsprpcd /vendor/bin/adsprpcd
    class main
    user media
    group media
 
-service xtra-daemon /vendor/bin/xtra-daemon
+### TimeService
+service time_daemon /vendor/bin/time_daemon
+    class main
+    user root
+    group root
+
+### Touchscreen
+service hbtp /system/vendor/bin/hbtp_daemon
+    class main
+    user system
+    group system
+    capabilities SYS_NICE
+    disabled
+
+### Display
+service ppd /vendor/bin/mm-pp-dpps
     class late_start
-    user gps
-    group gps system
+    user system
+    group system graphics
+    socket pps stream 0660 system system
+    disabled
+
+on property:init.svc.surfaceflinger=stopped
+    stop ppd
+
+on property:init.svc.surfaceflinger=running
+    start ppd
+
+on property:init.svc.surfaceflinger=restarting
+    stop ppd
+
+on property:init.svc.zygote=stopped
+    stop ppd
+
+on property:init.svc.zygote=running
+    start ppd
+
+on property:init.svc.zygote=restarting
+    stop ppd
+
+### PERF
+service energy-awareness /system/vendor/bin/energy-awareness
+    class main
+    user root
+    group system
+    oneshot
+
+### BLUETOOTH
+service start_hci_filter /system/vendor/bin/wcnss_filter
+    class late_start
+    user bluetooth
+    group bluetooth diag system wakelock
+    disabled
+
+on property:wc_transport.start_hci=true
+    start start_hci_filter
+
+on property:wc_transport.start_hci=false
+    stop start_hci_filter
 
 # Offline charger
 service charger /charger
@@ -135,14 +278,6 @@ on property:sys.qbcharger.enable=true
 on property:sys.qbcharger.enable=false
     stop qbcharger
 
-# OSS time
-service timekeep /system/bin/timekeep restore
-    class late_start
-    user root
-    group root
-    oneshot
-    writepid /dev/cpuset/system-background/tasks
-
 # DSDS second ril
 service ril-daemon2 /system/vendor/bin/hw/rild -c 2
     class main
@@ -154,20 +289,9 @@ service ril-daemon2 /system/vendor/bin/hw/rild -c 2
 on property:ro.boot.baseband=apq
     setprop ro.radio.noril yes
     stop ril-daemon
-    enable qmuxd
-
-on property:ro.boot.baseband=msm
-    enable qmuxd
-    enable netmgrd
 
 on property:persist.radio.multisim.config=dsds
     enable ril-daemon2
-
-on property:init.svc.per_mgr=running
-    start per_proxy
-
-on property:sys.shutdown.requested=*
-    stop per_proxy
 
 # adb over network
 on property:adb.network.port.es=*
