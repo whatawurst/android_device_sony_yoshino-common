@@ -21,6 +21,7 @@ PRODUCT_PACKAGES += \
 ### AUDIO
 # For audio.primary
 PRODUCT_PACKAGES += \
+    libaudio-resampler \
     libtinyalsa \
     libtinycompress_vendor \
     tinymix
@@ -35,13 +36,17 @@ PRODUCT_PACKAGES += \
 
 ### OMX
 PRODUCT_PACKAGES += \
-    libc2dcolorconvert \
-    libstagefrighthw \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc \
     libOmxCore \
-    libmm-omxcore \
     libOmxVdec \
     libOmxVdecHevc \
-    libOmxVenc
+    libOmxVenc \
+    libc2dcolorconvert \
+    libmm-omxcore \
+    libstagefrighthw
 
 ### GPS
 PRODUCT_PACKAGES += \
