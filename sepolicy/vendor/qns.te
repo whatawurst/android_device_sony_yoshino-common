@@ -1,0 +1,18 @@
+# qns.te
+
+type qns, domain;
+type qns_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(qns)
+
+# /qns
+allow qns qns_file:dir rw_dir_perms;
+allow qns qns_file:file create_file_perms;
+
+# /sys/class/qns/
+allow qns sysfs_qns:dir r_dir_perms;
+allow qns sysfs_qns:file rw_file_perms;
+
+# /sys/devices/soc/800f000.qcom,spmi/spmi-0/spmi0-02/.../battery/temp
+allow qns sysfs_battery_supply:dir r_dir_perms;
+allow qns sysfs_battery_supply:file r_file_perms;

@@ -29,9 +29,10 @@
 /dev/block/platform/soc/1da4000\.ufshc/by-name/rdimage          u:object_r:ramdump_block_device:s0
 
 /dev/socket/cammw_tintless                                      u:object_r:camera_somc_socket:s0
-/dev/socket/secd_devsec_sock                                    u:object_r:secd_devsec_socket:s0
-/dev/socket/secd_credmgr_sock                                   u:object_r:secd_credmgr_socket:s0
 /dev/socket/illumination                                        u:object_r:illumination_socket:s0
+/dev/socket/qnsbsd                                              u:object_r:qns_socket:s0
+/dev/socket/secd_credmgr_sock                                   u:object_r:secd_credmgr_socket:s0
+/dev/socket/secd_devsec_sock                                    u:object_r:secd_devsec_socket:s0
 
 # PERSIST
 /persist/pc(/.*)?                                               u:object_r:simpin_cache_data_file:s0
@@ -88,6 +89,7 @@
 /(vendor|system/vendor)/bin/iddd                                u:object_r:idd_exec:s0
 /(vendor|system/vendor)/bin/keyprovd                            u:object_r:keyprovd_exec:s0
 /(vendor|system/vendor)/bin/mssconfig                           u:object_r:mss_config_exec:s0
+/(vendor|system/vendor)/bin/qns                                 u:object_r:qns_exec:s0
 /(vendor|system/vendor)/bin/sct_service                         u:object_r:sct_service_exec:s0
 /(vendor|system/vendor)/bin/secd                                u:object_r:secd_exec:s0
 /(vendor|system/vendor)/bin/ssr_dumper                          u:object_r:ssr_dumper_exec:s0

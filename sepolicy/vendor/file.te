@@ -25,6 +25,7 @@ type camera_somc_socket, file_type;
 type illumination_socket, file_type;
 type secd_credmgr_socket, file_type;
 type secd_devsec_socket, file_type;
+type qns_socket, file_type;
 
 # sysfs
 type sysfs_mdss_dsi_panel, fs_type, sysfs_type;
