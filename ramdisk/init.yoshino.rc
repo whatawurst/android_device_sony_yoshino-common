@@ -144,6 +144,22 @@ on post-fs-data
     mkdir /rca/plugins 0750 idd idd
     restorecon -RF /rca
 
+    # QNS
+    chown qns qns /sys/class/qns
+    chown qns qns /sys/class/qns/alarm
+    chown qns qns /sys/class/qns/charge_current
+    chown qns qns /sys/class/qns/charge_voltage
+    chown qns qns /sys/class/qns/charging_state
+    chown qns qns /sys/class/qns/current_now
+    chown qns qns /sys/class/qns/design
+    chown qns qns /sys/class/qns/fcc
+    chown qns qns /sys/class/qns/options
+    chown qns qns /sys/class/qns/soc
+    chown qns qns /sys/class/qns/temp
+    chown qns qns /sys/class/qns/voltage
+    chown qns qns /sys/class/qns/battery_type
+    start qns
+
 on early-boot
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
@@ -304,9 +320,31 @@ service hvdcp_opti /vendor/bin/hvdcp_opti
     group system wakelock
     disabled
 
+service qns /vendor/bin/qns -d /qns -l /qns
+    user qns
+    group qns
+    socket qnsbsd stream 660 qns system
+    disabled
+
 on charger
     setprop sys.usb.config mass_storage
     load_system_props
 
     start hvdcp_opti
+
+    chown qns qns /sys/class/qns
+    chown qns qns /sys/class/qns/alarm
+    chown qns qns /sys/class/qns/charge_current
+    chown qns qns /sys/class/qns/charge_voltage
+    chown qns qns /sys/class/qns/charging_state
+    chown qns qns /sys/class/qns/current_now
+    chown qns qns /sys/class/qns/design
+    chown qns qns /sys/class/qns/fcc
+    chown qns qns /sys/class/qns/options
+    chown qns qns /sys/class/qns/soc
+    chown qns qns /sys/class/qns/temp
+    chown qns qns /sys/class/qns/voltage
+    chown qns qns /sys/class/qns/battery_type
+    start qns
+
     setprop sys.usb.configfs 1
