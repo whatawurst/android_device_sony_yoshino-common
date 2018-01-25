@@ -275,15 +275,6 @@ service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
     disabled
     oneshot
 
-service hci_filter /vendor/bin/wcnss_filter
-    class late_start
-    user bluetooth
-    group bluetooth radio system wakelock
-    disabled
-
-on property:sys.shutdown.requested=*
-    stop cnss-daemon
-
 # SONY: IDD daemon
 service iddd /vendor/bin/iddd
     class core
@@ -311,9 +302,3 @@ on charger
 
     start hvdcp_opti
     setprop sys.usb.configfs 1
-
-on property:wc_transport.start_hci=true
-    start hci_filter
-
-on property:wc_transport.start_hci=false
-    stop hci_filter
