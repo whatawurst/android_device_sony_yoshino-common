@@ -46,14 +46,14 @@ on fs
     # SONY: creat mount point for qns
     mkdir /qns 0750 qns qns
 
-    mount_all ./fstab.${ro.hardware}
+    mount_all fstab.${ro.hardware}
+
+    # change the compression algorithm for zRAM
+    write /sys/block/zram0/comp_algorithm lz4
     # Enable ZRAM
     swapon_all ./fstab.${ro.hardware}
 
     restorecon_recursive /persist
-
-    # Start tad_static early as other core services depend on it
-    start tad_static
 
     write /sys/devices/soc/c0a4900.sdhci/mmc_host/mmc0/clkgate_delay 1
 
@@ -71,10 +71,21 @@ on fs
     chmod 0750 /qns
     restorecon_recursive /qns
 
+    # Start tad_static early as other core services depend on it
+    wait /dev/block/sda1
+    chown tad tad /dev/block/sda1
+    chmod 0770 /dev/block/sda1
+    start tad_static
+
+    start hwservicemanager
+
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
     insmod /vendor/lib/modules/kscl.ko
 
 on post-fs
+    # Start qseecomd for vold
+    start qseecomd
+
     # backlight
     chown system system /sys/class/leds/wled/bl_scale
     chown system system /sys/class/leds/wled/area_count
@@ -87,9 +98,6 @@ on post-fs
     chown system graphics /dev/graphics/fb0
     chown system graphics /dev/graphics/fb1
     chown system graphics /dev/graphics/fb2
-
-    # Start qseecomd for vold
-    start qseecomd
 
     # Trigger loading of ipa firmware
     write /dev/ipa 1
