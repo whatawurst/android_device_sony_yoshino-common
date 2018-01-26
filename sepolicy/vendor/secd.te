@@ -16,7 +16,12 @@ binder_call(secd, hal_idd_default)
 
 allow secd hal_idd_hwservice:hwservice_manager { find };
 
+# Allow to preload libta_drm_ext for secd
+allow init secd:process { noatsecure };
+
+# /dev/qseecom
 allow secd tee_device:chr_file rw_file_perms;
+# /dev/ion
 allow secd ion_device:chr_file r_file_perms;
 
 # /data/credmgr/credmgr.db

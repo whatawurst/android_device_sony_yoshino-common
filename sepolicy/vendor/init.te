@@ -7,8 +7,5 @@ allow init camera_socket:sock_file create_file_perms;
 # /dev/socket/secd_devsec_sock
 allow init secd_devsec_socket:sock_file create_file_perms;
 
-# Allow to preload the drmfix for secd
-allow init secd:process { noatsecure };
-
 # Allow loading kscl.ko
 allow init system_file:system { module_load };
