@@ -39,9 +39,11 @@ PRODUCT_COPY_FILES += \
 
 else # WITH_TWRP
 ### VERITY
+ifeq ($(WITH_VERITY),true)
 PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/soc/1da4000.ufshc/by-name/system
 PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc/1da4000.ufshc/by-name/vendor
 $(call inherit-product, build/target/product/verity.mk)
+endif # WITH_VERITY
 
 include $(PLATFORM_PATH)/platform/*.mk
 include $(PLATFORM_PATH)/vendor_prop.mk
