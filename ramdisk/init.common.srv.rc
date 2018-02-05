@@ -84,6 +84,14 @@ service ipacm-diag /vendor/bin/ipacm-diag
     disabled
     writepid /dev/cpuset/system-background/tasks
 
+# QCOM radio tethering
+service ipacm /system/vendor/bin/ipacm
+    class main
+    user radio
+    group radio inet
+    disabled
+    writepid /dev/cpuset/system-background/tasks
+
 # QCOM prop radio
 service qti /vendor/bin/qti
     class main
@@ -94,6 +102,7 @@ service qti /vendor/bin/qti
 
 on property:ro.boot.baseband=msm
     enable ipacm-diag
+    enable ipacm
     enable qti
     enable netmgrd
     enable port-bridge
