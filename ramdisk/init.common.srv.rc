@@ -20,6 +20,7 @@ service tad_static /sbin/tad_static /dev/block/bootdevice/by-name/TA 0,16
     socket tad stream 0660 system trimarea
     seclabel u:r:tad:s0
     writepid /dev/cpuset/system-background/tasks
+    shutdown critical
 
 # SONY prop
 service mlog_qmi_service /vendor/bin/mlog_qmi_service
@@ -115,6 +116,7 @@ service per_mgr /vendor/bin/pm-service
     user system
     group system
     writepid /dev/cpuset/system-background/tasks
+    shutdown critical
 
 service per_proxy /vendor/bin/pm-proxy
     class core
@@ -183,6 +185,7 @@ service qseecomd /vendor/bin/qseecomd
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
+    shutdown critical
 
 ### Thermal Manager
 service thermal-engine /system/vendor/bin/thermal-engine
