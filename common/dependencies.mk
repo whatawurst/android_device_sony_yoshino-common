@@ -35,6 +35,10 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libvolumelistener
 
+### MEDIA
+PRODUCT_PACKAGES += \
+    libqdMetaData.system
+
 ### OMX
 PRODUCT_PACKAGES += \
     libOmxAacEnc \
