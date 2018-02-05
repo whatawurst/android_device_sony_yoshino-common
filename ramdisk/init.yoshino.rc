@@ -299,6 +299,12 @@ service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
     disabled
     oneshot
 
+# QMI DPM
+service dpmQmiMgr /vendor/bin/dpmQmiMgr
+    class main
+    user system
+    group system
+
 # SONY: IDD daemon
 service iddd /vendor/bin/iddd
     class core
