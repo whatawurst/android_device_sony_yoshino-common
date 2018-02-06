@@ -12,9 +12,8 @@ PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/irqbalance/msm_irqbalance.conf:system/etc/msm_irqbalance.conf
 
 ### POWER
-# RQBalance-PowerHAL configuration
 PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/config/power/rqbalance_config.xml:system/etc/rqbalance_config.xml
+    $(PLATFORM_PATH)/config/power/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
 # QTI low power whitelist
 PRODUCT_COPY_FILES += \
