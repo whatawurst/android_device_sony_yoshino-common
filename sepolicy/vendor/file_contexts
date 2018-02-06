@@ -64,6 +64,7 @@
 /sys/devices/sony_camera_1/info                                 u:object_r:sysfs_sony_camera:s0
 /sys/devices/sony_camera_0/info                                 u:object_r:sysfs_sony_camera:s0
 
+/sys/kernel/boot_wlan(/.*)?                                     u:object_r:sysfs_wlan:s0
 /sys/kernel/debug/msm_subsys/crash_reason(/.*)?                 u:object_r:ssr_crash_reason_file:s0
 
 ### SERVICES

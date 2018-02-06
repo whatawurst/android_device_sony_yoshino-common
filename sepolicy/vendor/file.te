@@ -33,3 +33,4 @@ type sysfs_nfc_i2c, fs_type, sysfs_type;
 type sysfs_qns, fs_type, sysfs_type;
 type sysfs_sony_camera, fs_type, sysfs_type;
 type sysfs_tof_rgbcir, fs_type, sysfs_type;
+type sysfs_wlan, fs_type, sysfs_type;

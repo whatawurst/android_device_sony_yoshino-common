@@ -252,8 +252,9 @@ on boot
     write /proc/sys/vm/dirty_ratio 5
     write /proc/sys/vm/dirty_background_ratio 1
 
-    # Load wifi module
-    insmod /vendor/lib/modules/wlan.ko
+    # Wifi firmware reload path
+    chown wifi wifi /sys/module/wlan/parameters/fwpath
+    chown wifi wifi /sys/kernel/boot_wlan/boot_wlan
 
 on property:sys.shutdown.requested=*
     write /sys/class/power_supply/battery/int_cld 1
