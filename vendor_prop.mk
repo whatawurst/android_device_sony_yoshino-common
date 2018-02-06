@@ -112,3 +112,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_small_cache_height=1024 \
     ro.hwui.text_large_cache_width=2048 \
     ro.hwui.text_large_cache_height=1024
+
+# IMS
+PRODUCT_PROPERTY_OVERRIDES += \
+    service.qti.ims.enabled=1
