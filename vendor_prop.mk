@@ -89,34 +89,35 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio_hal.period_size=192
 
-##fluencetype can be "fluence" or "fluencepro" or "none"
+# Audio fluence
+# fluencetype can be "fluence" or "fluencepro" or "none"
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.audio.sdk.fluencetype=none\
+    ro.vendor.audio.sdk.fluencetype=none \
+    persist.vendor.audio.fluence.speaker=true \
     persist.vendor.audio.fluence.voicecall=true\
-    persist.vendor.audio.fluence.voicerec=false\
-    persist.vendor.audio.fluence.speaker=true
+    persist.vendor.audio.fluence.voicerec=false
 
-#disable tunnel encoding
+# Disable tunnel encoding
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.tunnel.encode=false
 
-#Disable RAS Feature by default
+# Disable RAS Feature by default
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.audio.ras.enabled=false
 
-#Buffer size in kbytes for compress offload playback
+# Buffer size in kbytes for compress offload playback
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.offload.buffer.size.kb=32
 
-#Disable offload audio video playback by default
+# Disable offload audio video playback by default
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.video=false
+    audio.offload.video=true
 
-#Enable audio track offload by default
+# Enable audio track offload by default
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.offload.track.enable=true
 
-#Enable music through deep buffer
+# Enable music through deep buffer
 PRODUCT_PROPERTY_OVERRIDES += \
     audio.deep_buffer.media=true
 
@@ -124,7 +125,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.voice.path.for.pcm.voip=true
 
-#Enable multi channel aac through offload
+# Enable multi channel aac through offload
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.offload.multiaac.enable=true
 
@@ -133,7 +134,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.dolby.ds2.enabled=false\
     vendor.audio.dolby.ds2.hardbypass=false
 
-#Enable Multiple offload session
+# Enable Multiple offload session
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.offload.multiple.enabled=true
 
@@ -145,34 +146,34 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.audio.sdk.ssr=false
 
-#enable dsp gapless mode by default
+# Enable dsp gapless mode by default
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.offload.gapless.enabled=true
 
-#enable pbe effects
+# Enable pbe effects
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.safx.pbe.enabled=true
 
-#parser input buffer size(256kb) in byte stream mode
+# Parser input buffer size(256kb) in byte stream mode
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.parser.ip.buffer.size=262144
 
-#flac sw decoder 24 bit decode capability
+# Flac sw decoder 24 bit decode capability
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.flac.sw.decoder.24bit=true
 
-#split a2dp DSP supported encoder list
+# Split a2dp DSP supported encoder list
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.bt.a2dp_offload_cap=sbc-aptx-aptxhd-aac
 
-#enable software decoders for ALAC and APE
+# Enable software decoders for ALAC and APE
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.use.sw.alac.decoder=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.use.sw.ape.decoder=true
 
-#enable hw aac encoder by default
+# Enable hw aac encoder by default
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.hw.aac.encoder=true
 
@@ -180,15 +181,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.fm.a2dp.conc.disabled=true
 
-#audio becoming noisy intent broadcast delay
+# Audio becoming noisy intent broadcast delay
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.noisy.broadcast.delay=600
 
-#offload pausetime out duration to 3 secs to inline with other outputs
+# Offload pausetime out duration to 3 secs to inline with other outputs
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.offload.pstimeout.secs=3
 
-# SDM
+### SDM
 # Disable QC HDR and cabl
 PRODUCT_PROPERTY_OVERRIDES += \
     sdm.disable_hdr_lut_gen=1 \
@@ -215,3 +216,22 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # SD Encryption supported
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sdcrypt.supported=true
+
+# Radio
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.cne.feature=1 \
+    persist.dpm.feature=3 \
+    persist.data.df.dev_name=rmnet_usb0 \
+    persist.data.df.iwlan_mux=9 \
+    persist.data.iwlan.enable=true \
+    persist.data.mode=concurrent \
+    persist.data.netmgrd.qos.enable=true \
+    persist.radio.VT_CAM_INTERFACE=2 \
+    persist.radio.VT_ENABLE=1 \
+    persist.radio.VT_HYBRID_ENABLE=1 \
+    persist.radio.apm_sim_not_pwdn=1 \
+    persist.vendor.radio.custom_ecc=1 \
+    persist.radio.data_con_rprt=true \
+    persist.vendor.radio.rat_on=combine \
+    persist.vendor.radio.sib16_support=1 \
+    persist.rmnet.data.enable=true
