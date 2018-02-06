@@ -98,3 +98,8 @@ PRODUCT_PACKAGES += \
 ### VNDK
 PRODUCT_PACKAGES += \
     vndk-sp
+
+### IPV6
+PRODUCT_PACKAGES += \
+    ebtables \
+    ethertypes
