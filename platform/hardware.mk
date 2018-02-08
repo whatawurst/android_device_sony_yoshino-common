@@ -10,7 +10,8 @@ PRODUCT_PACKAGES += \
 ### AUDIO
 PRODUCT_PACKAGES += \
     audio.primary.msm8998 \
-    libvolumelistener
+    libvolumelistener \
+    bthost_if
 
 # IPACM
 PRODUCT_PACKAGES += \
