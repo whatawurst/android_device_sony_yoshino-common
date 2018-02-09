@@ -28,10 +28,6 @@ PRODUCT_COPY_FILES += \
 
 #################### VENDOR ######################
 
-# AUDIO
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/config/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
-
 # ISRC
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/config/irsc/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
