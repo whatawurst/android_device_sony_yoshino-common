@@ -256,7 +256,7 @@ on boot
     chown wifi wifi /sys/module/wlan/parameters/fwpath
     chown wifi wifi /sys/kernel/boot_wlan/boot_wlan
 
-on property:sys.shutdown.requested=*
+on shutdown
     write /sys/class/power_supply/battery/int_cld 1
 
 on property:persist.service.battery.smt_chg=activate
