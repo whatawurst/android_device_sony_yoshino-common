@@ -99,14 +99,14 @@ on post-fs
     chown system graphics /dev/graphics/fb1
     chown system graphics /dev/graphics/fb2
 
+    # Wait for qseecomd to finish
+    wait_for_prop sys.listeners.registered true
+
     # Trigger loading of ipa firmware
     write /dev/ipa 1
 
     # start clearpad_post_probe when filesystem is available for fwflash
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
-
-    # Wait for qseecomd to finish
-    wait_for_prop sys.listeners.registered true
 
 on post-fs-data
     # create directory for wfd
