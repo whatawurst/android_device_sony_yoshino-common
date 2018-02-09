@@ -144,6 +144,10 @@ on post-fs-data
     mkdir /rca/plugins 0750 idd idd
     restorecon -RF /rca
 
+    # ADSP
+    # Audio HAL has to write to boot_adsp sysfs entry to unload image
+    chown root audio /sys/kernel/boot_adsp/boot
+
     # QNS
     chown qns qns /sys/class/qns
     chown qns qns /sys/class/qns/alarm
