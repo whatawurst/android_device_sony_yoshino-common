@@ -2,6 +2,7 @@
 
 # DEV
 /dev/socket/tad                                                 u:object_r:tad_socket:s0
+/dev/pn54x                                                      u:object_r:nfc_device:s0
 
 # DATA
 /data/display(/.*)?                                             u:object_r:display_color_calib_data_file:s0
