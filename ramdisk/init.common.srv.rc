@@ -137,7 +137,7 @@ service per_proxy /vendor/bin/pm-proxy
 on property:init.svc.per_mgr=running
     start per_proxy
 
-on property:sys.shutdown.requested=*
+on shutdown
     stop per_proxy
     # Disable subsystem restart
     write /sys/module/subsystem_restart/parameters/disable_restart_work 0x9889deed
@@ -159,7 +159,7 @@ service cnss-daemon /vendor/bin/cnss-daemon -n -l
     user system
     group system inet net_admin wifi oem_2901
 
-on property:sys.shutdown.requested=*
+on shutdown
     stop cnss-daemon
 
 ### GNSS
