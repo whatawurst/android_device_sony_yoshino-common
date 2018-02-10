@@ -2186,6 +2186,32 @@
    </path>
 
    <path name="sidetone-iir">
+        <!-- Sidetone settings -->
+        <ctl name="IIR0 Band1" id ="0" value="268435456" />
+        <ctl name="IIR0 Band1" id ="1" value="443935179" />
+        <ctl name="IIR0 Band1" id ="2" value="269358496" />
+        <ctl name="IIR0 Band1" id ="3" value="955060837" />
+        <ctl name="IIR0 Band1" id ="4" value="33343805" />
+        <ctl name="IIR0 Band2" id ="0" value="268435456" />
+        <ctl name="IIR0 Band2" id ="1" value="7710844" />
+        <ctl name="IIR0 Band2" id ="2" value="268283273" />
+        <ctl name="IIR0 Band2" id ="3" value="840117549" />
+        <ctl name="IIR0 Band2" id ="4" value="139712744" />
+        <ctl name="IIR0 Band3" id ="0" value="258528060" />
+        <ctl name="IIR0 Band3" id ="1" value="556685704" />
+        <ctl name="IIR0 Band3" id ="2" value="258528060" />
+        <ctl name="IIR0 Band3" id ="3" value="556885097" />
+        <ctl name="IIR0 Band3" id ="4" value="248820056" />
+        <ctl name="IIR0 Band4" id ="0" value="230046983" />
+        <ctl name="IIR0 Band4" id ="1" value="613647857" />
+        <ctl name="IIR0 Band4" id ="2" value="230046983" />
+        <ctl name="IIR0 Band4" id ="3" value="542681029" />
+        <ctl name="IIR0 Band4" id ="4" value="263035084" />
+        <ctl name="IIR0 Band5" id ="0" value="268435456" />
+        <ctl name="IIR0 Band5" id ="1" value="536870912" />
+        <ctl name="IIR0 Band5" id ="2" value="268435456" />
+        <ctl name="IIR0 Band5" id ="3" value="551775077" />
+        <ctl name="IIR0 Band5" id ="4" value="253934019" />
         <ctl name="IIR0 Enable Band1" value="1" />
         <ctl name="IIR0 Enable Band2" value="1" />
         <ctl name="IIR0 Enable Band3" value="1" />
