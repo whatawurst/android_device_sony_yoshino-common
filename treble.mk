@@ -186,3 +186,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.vr@1.0-impl \
     android.hardware.vr@1.0-service
+
+# RADIO
+PRODUCT_PACKAGES += \
+    android.hardware.broadcastradio@1.0-impl
