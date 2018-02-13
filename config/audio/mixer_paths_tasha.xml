@@ -1539,11 +1539,6 @@
         <path name="compress-offload-playback8" />
     </path>
 
-    <path name="compress-offload-playback8 speaker-and-headphones">
-        <path name="compress-offload-playback8 headphones" />
-        <path name="compress-offload-playback8" />
-    </path>
-
     <path name="compress-offload-playback8 speaker-and-bt-sco">
         <path name="compress-offload-playback8 bt-sco" />
         <path name="compress-offload-playback8" />
