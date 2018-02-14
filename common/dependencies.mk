@@ -88,6 +88,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     telephony-ext
 
+PRODUCT_BOOT_JARS += \
+    telephony-ext
+
 ### RCS
 PRODUCT_PACKAGES += \
     rcs_service_aidl \
