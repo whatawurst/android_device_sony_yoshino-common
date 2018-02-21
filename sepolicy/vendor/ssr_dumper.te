@@ -23,3 +23,6 @@ rw_dir_file(ssr_dumper, ssr_crash_reason_file)
 
 # /data/crashdata/tlcore_subsystem_00
 r_dir_file(ssr_dumper, crash_data_file)
+
+# /idd
+r_dir_file(ssr_dumper, idd_data_file)
