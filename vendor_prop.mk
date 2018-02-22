@@ -215,21 +215,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.cne.feature=1 \
-    persist.dpm.feature=3 \
-    persist.data.df.dev_name=rmnet_usb0 \
-    persist.data.df.iwlan_mux=9 \
-    persist.data.iwlan.enable=true \
-    persist.radio.VT_CAM_INTERFACE=2 \
-    persist.radio.VT_ENABLE=1 \
-    persist.radio.VT_HYBRID_ENABLE=1 \
     persist.radio.apm_sim_not_pwdn=1 \
-    persist.vendor.radio.custom_ecc=1 \
-    persist.radio.data_con_rprt=true \
-    persist.vendor.radio.rat_on=combine \
     persist.vendor.radio.sib16_support=1 \
-    persist.rmnet.data.enable=true
-
+    persist.vendor.radio.custom_ecc=1 \
+    persist.vendor.radio.rat_on=combine
 
 # CAMERA
 PRODUCT_PROPERTY_OVERRIDES += \
