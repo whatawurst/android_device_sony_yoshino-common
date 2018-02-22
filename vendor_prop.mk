@@ -52,6 +52,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=10 \
     telephony.lteOnCdmaDevice=1
 
+# Enable netmgr
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.use_data_netmgrd=true \
     persist.data.netmgrd.qos.enable=true \
@@ -68,15 +69,26 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rild.nitz_short_ons_2="" \
     persist.rild.nitz_short_ons_3=""
 
-# Default to LTE/GSM/WCDMA.
+# Enable CNE
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.default_network=9
+    persist.cne.feature=1
 
-### NETMGR
+# Enable dpm module
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.use_data_netmgrd=true \
-    persist.data.netmgrd.qos.enable=true \
-    ro.data.large_tcp_window_size=true
+    persist.vendor.dpm.feature=1 \
+    persist.dpm.feature=3 \
+
+# Enable rmnet data
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.rmnet.data.enable=true \
+    persist.data.wda.enable=true \
+    persist.data.df.dl_mode=5 \
+    persist.data.df.ul_mode=5 \
+    persist.data.df.agg.dl_pkt=10 \
+    persist.data.df.agg.dl_size=4096 \
+    persist.data.df.mux_count=8 \
+    persist.data.df.iwlan_mux=9 \
+    persist.data.df.dev_name=rmnet_usb0
 
 ### NFC
 PRODUCT_PROPERTY_OVERRIDES += \
