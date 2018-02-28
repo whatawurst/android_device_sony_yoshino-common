@@ -78,12 +78,6 @@ BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 USE_XML_AUDIO_POLICY_CONF := 1
 
-### VENDOR MANIFEST AND MATRIX
-ifeq ($(WITH_VENDOR_IMAGE),true)
-DEVICE_MANIFEST_FILE := $(COMMON_PATH)/vendor/manifest.xml
-DEVICE_MATRIX_FILE   := $(COMMON_PATH)/vendor/compatibility_matrix.xml
-endif
-
 ### SEPOLICY
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += device/sony/common-treble/sepolicy/vendor
