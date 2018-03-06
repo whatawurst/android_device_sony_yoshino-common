@@ -220,6 +220,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.custom_ecc=1 \
     persist.vendor.radio.rat_on=combine
 
+# Radio IMS
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.dbg.ims_volte_enable=1 \
+    persist.dbg.volte_avail_ovr=1 \
+    persist.dbg.vt_avail_ovr=1 \
+    persist.dbg.wfc_avail_ovr=1
+
 # CAMERA
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.HAL3.enabled=1
