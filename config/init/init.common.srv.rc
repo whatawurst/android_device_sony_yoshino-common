@@ -210,22 +210,13 @@ service ssgqmigd /vendor/bin/ssgqmigd
     group radio gps system
     socket ssgqmig seqpacket 0660 radio inet
 
-on property:init.svc.surfaceflinger=stopped
+on property:init.svc.hwcomposer-2-1=stopped
     stop ppd
 
-on property:init.svc.surfaceflinger=running
+on property:init.svc.hwcomposer-2-1=running
     start ppd
 
-on property:init.svc.surfaceflinger=restarting
-    stop ppd
-
-on property:init.svc.zygote=stopped
-    stop ppd
-
-on property:init.svc.zygote=running
-    start ppd
-
-on property:init.svc.zygote=restarting
+on property:init.svc.hwcomposer-2-1=restarting
     stop ppd
 
 ### PERF
