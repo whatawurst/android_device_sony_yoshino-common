@@ -1,11 +1,11 @@
 Device configuration for yoshino platform
 =========================================
 
-This is the Android 8.0+ device configuration for yoshino platform.
+This is the Lineage 15.1 device configuration for the Yoshino platform.
 
-Devices based on yoshino platform:
+Devices based on Yoshino platform:
 
-* Xperia XZ Premium (maple)
+* Xperia XZ Premium and Dual (maple)
 * XPeria XZ1 (poplar)
 * Xperia XZ1 Compact (lilac)
 
