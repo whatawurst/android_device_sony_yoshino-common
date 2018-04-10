@@ -58,6 +58,8 @@
         <device name="SND_DEVICE_IN_VOICE_SPEAKER_DMIC" acdb_id="11"/>
         <device name="SND_DEVICE_IN_VOICE_SPEAKER_MIC" acdb_id="11"/>
         <device name="SND_DEVICE_IN_VOICE_SPEAKER_QMIC" acdb_id="11"/>
+        <!-- OK Google -->
+        <device name="SND_DEVICE_IN_VOICE_REC_MIC" acdb_id="4"/>
         <!-- Custom mapping ends here -->
     </acdb_ids>
     <bit_width_configs>
