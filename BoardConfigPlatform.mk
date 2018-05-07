@@ -210,7 +210,6 @@ DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
 
 # vendor/qcom/opensource/cryptfs_hw
 TARGET_HW_DISK_ENCRYPTION := true
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
 
 ### SEPOLICY
 BOARD_SEPOLICY_DIRS += device/sony/yoshino/sepolicy/vendor

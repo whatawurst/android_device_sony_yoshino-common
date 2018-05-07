@@ -66,7 +66,6 @@ RECOVERY_SDCARD_ON_DATA := true
 TW_INCLUDE_CRYPTO := true
 # ext4 file based crypto
 TW_INCLUDE_CRYPTO_FBE := true
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
 
 # Add strace
 TARGET_RECOVERY_DEVICE_MODULES      += strace
