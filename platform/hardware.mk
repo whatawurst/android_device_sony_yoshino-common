@@ -23,3 +23,7 @@ PRODUCT_PACKAGES += \
 # GPS
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl-qti
+
+# DISPLAY
+PRODUCT_PACKAGES += \
+    vendor.lineage.livedisplay@1.0-service-sdm
