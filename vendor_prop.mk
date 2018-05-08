@@ -230,3 +230,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # CAMERA
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.HAL3.enabled=1
+
+# DISPLAY_HDR
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qcom.hdr.config=/vendor/etc/hdr_tm_config.xml
