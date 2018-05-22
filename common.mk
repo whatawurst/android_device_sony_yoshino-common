@@ -26,6 +26,10 @@ PRODUCT_PACKAGES += \
     fs_config_files \
     fs_config_dirs
 
+### Additional native libraries
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/config/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
+
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
 
 include $(COMMON_PATH)/common/*.mk
