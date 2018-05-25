@@ -1,0 +1,14 @@
+# modem_switcher.te
+
+type modem_switcher, domain;
+type modem_switcher_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(modem_switcher)
+
+unix_socket_connect(modem_switcher, tad, tad)
+
+allow modem_switcher cache_file:dir rw_dir_perms;
+
+type_transition modem_switcher cache_file:{ dir file } modemsw_cache_file;
+allow modem_switcher modemsw_cache_file:dir rw_dir_perms;
+allow modem_switcher modemsw_cache_file:file create_file_perms;

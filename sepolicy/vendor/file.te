@@ -16,6 +16,9 @@ type qns_file, file_type;
 type simpin_cache_data_file, file_type;
 type startupprober_file, file_type;
 
+# cache
+type modemsw_cache_file, file_type;
+
 # data
 type credmgrd_data_file, file_type, data_file_type;
 type illumination_data_file, file_type, data_file_type;

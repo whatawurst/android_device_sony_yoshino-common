@@ -108,6 +108,9 @@ on post-fs
     # start clearpad_post_probe when filesystem is available for fwflash
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
 
+    # configure the modem
+    start modem_switcher
+
 on post-fs-data
     # create directory for wfd
     mkdir /data/wfd 0770 system system
@@ -317,6 +320,13 @@ service cacaoserver /system/bin/cacaoserver
     group audio camera input drmrpc
     ioprio rt 4
     writepid /dev/cpuset/camera-daemon/tasks /dev/stune/top-app/tasks
+
+service modem_switcher /vendor/bin/sony-modem-switcher
+    class main
+    user root
+    group root system trimarea cache
+    disabled
+    oneshot
 
 # QCOM Quick Charge
 service hvdcp_opti /vendor/bin/hvdcp_opti

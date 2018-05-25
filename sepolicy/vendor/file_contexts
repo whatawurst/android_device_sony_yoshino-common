@@ -11,6 +11,9 @@
 /idd/startup-prober(/.*)?                                       u:object_r:startupprober_file:s0
 /qns(/.*)?                                                      u:object_r:qns_file:s0
 
+### CACHE
+/cache/modem(/.*)?                                              u:object_r:modemsw_cache_file:s0
+
 ### DATA
 /data/credmgr(/.*)?                                             u:object_r:credmgrd_data_file:s0
 /data/vendor/illumination_service(/.*)?                         u:object_r:illumination_data_file:s0
@@ -94,6 +97,7 @@
 /(vendor|system/vendor)/bin/sct_service                         u:object_r:sct_service_exec:s0
 /(vendor|system/vendor)/bin/secd                                u:object_r:secd_exec:s0
 /(vendor|system/vendor)/bin/ssr_dumper                          u:object_r:ssr_dumper_exec:s0
+/(vendor|system/vendor)/bin/sony-modem-switcher                 u:object_r:modem_switcher_exec:s0
 /(vendor|system/vendor)/bin/startup-prober                      u:object_r:startupprober_exec:s0
 /(vendor|system/vendor)/bin/startup-logger                      u:object_r:startup-logger_exec:s0
 /(vendor|system/vendor)/bin/ta_qmi_service                      u:object_r:ta_qmi_service_exec:s0
