@@ -70,10 +70,6 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 ### PARTITIONS
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 
-# Build vendor.img
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-TARGET_COPY_OUT_VENDOR := vendor
-
 # Build ext4 tools - system/vold
 TARGET_USERIMAGES_USE_EXT4 := true
 
