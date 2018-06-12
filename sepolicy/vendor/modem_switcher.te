@@ -3,12 +3,21 @@
 type modem_switcher, domain;
 type modem_switcher_exec, exec_type, vendor_file_type, file_type;
 
+allow modem_switcher self:capability {
+    chown
+};
+
 init_daemon_domain(modem_switcher)
 
 unix_socket_connect(modem_switcher, tad, tad)
 
-allow modem_switcher cache_file:dir rw_dir_perms;
+# /dev/block
+allow modem_switcher block_device:dir r_dir_perms;
 
+# /dev/block/bootdevice/by-name/fsg
+allow modem_switcher modem_efs_partition_device:blk_file rw_file_perms;
+
+allow modem_switcher cache_file:dir rw_dir_perms;
 type_transition modem_switcher cache_file:{ dir file } modemsw_cache_file;
-allow modem_switcher modemsw_cache_file:dir rw_dir_perms;
+allow modem_switcher modemsw_cache_file:dir create_dir_perms;
 allow modem_switcher modemsw_cache_file:file create_file_perms;
