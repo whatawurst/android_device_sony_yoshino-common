@@ -30,8 +30,7 @@ on init
     start hwservicemanager
 
 on boot
-    start predecrypt
-    #setprop crypto.ready 1
+    setprop crypto.ready 1
 
 on property:crypto.ready=1
     start sbin_qseecomd
@@ -48,13 +47,6 @@ on property:crypto.ready=0
     stop gatekeeper-1-0
     stop servicemanager
     stop sbin_qseecomd
-
-service predecrypt /sbin/predecrypt.sh
-    oneshot
-    disabled
-    user root
-    group root
-    seclabel u:r:recovery:s0
 
 service hwservicemanager /sbin/hwservicemanager
     user root
