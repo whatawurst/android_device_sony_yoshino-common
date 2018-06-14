@@ -1,0 +1,8 @@
+# thermal-engine.te
+
+# /tmp/test_sensor.in
+rw_dir_file(thermal-engine, tmpfs)
+allow thermal-engine thermal-engine_tmpfs:file create_file_perms;
+
+# /sys/devices/soc/0.qcom,rmtfs_sharedmem
+r_dir_file(thermal-engine, sysfs_rmtfs)
