@@ -12,6 +12,7 @@
 /data/fpc(/.*)?                                                 u:object_r:fpc_data_file:s0
 /data/fpc/oem                                                   u:object_r:fpc_socket:s0
 /data/crashdata(/.*)?                                           u:object_r:crash_data_file:s0
+/data/vendor/nfc(/.*)?                                          u:object_r:nfc_data_file:s0
 
 # VENDOR
 /(vendor|system/vendor)/bin/mlog_qmi_service                    u:object_r:mlog_qmi_service_exec:s0
