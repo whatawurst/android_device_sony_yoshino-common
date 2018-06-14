@@ -11,13 +11,26 @@ init_daemon_domain(modem_switcher)
 
 unix_socket_connect(modem_switcher, tad, tad)
 
+get_prop(modem_switcher, semc_version_prop)
+
 # /dev/block
 allow modem_switcher block_device:dir r_dir_perms;
 
 # /dev/block/bootdevice/by-name/fsg
 allow modem_switcher modem_efs_partition_device:blk_file rw_file_perms;
 
+# /cache/modem
 allow modem_switcher cache_file:dir rw_dir_perms;
 type_transition modem_switcher cache_file:{ dir file } modemsw_cache_file;
 allow modem_switcher modemsw_cache_file:dir create_dir_perms;
 allow modem_switcher modemsw_cache_file:file create_file_perms;
+
+# /tmp/oem
+allow modem_switcher tmpfs:lnk_file r_file_perms;
+
+# /oem/modem-config/modem.conf
+allow modem_switcher oemfs:dir r_dir_perms;
+allow modem_switcher oemfs:file r_file_perms;
+
+# /system/etc/customization/modem
+r_dir_file(modem_switcher, system_file)
