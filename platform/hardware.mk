@@ -27,3 +27,7 @@ PRODUCT_PACKAGES += \
 # DISPLAY
 PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay@1.0-service-sdm
+
+# MODEM
+PRODUCT_PACKAGES += \
+    init.sony.modem.sh

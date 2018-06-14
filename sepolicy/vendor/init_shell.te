@@ -1,0 +1,17 @@
+# init_shell.te
+
+# /tmp/oem
+allow qti_init_shell tmpfs:dir create_dir_perms;
+# /tmp/oem/modem-config
+allow qti_init_shell tmpfs:lnk_file create_file_perms;
+allow qti_init_shell qti_init_shell_tmpfs:file create_file_perms;
+
+# mount /oem
+allow qti_init_shell rootfs:dir { mounton };
+
+dontaudit qti_init_shell cache_file:dir { getattr };
+dontaudit qti_init_shell idd_rca_file:dir { getattr };
+dontaudit qti_init_shell idd_data_file:dir { getattr };
+dontaudit qti_init_shell adsprpcd_file:dir { getattr };
+dontaudit qti_init_shell qns_file:dir { getattr };
+dontaudit qti_init_shell storage_file:dir { getattr };

@@ -91,6 +91,7 @@
 /(vendor|system/vendor)/bin/bt_ssr_dumper                       u:object_r:ssr_dumper_exec:s0
 /(vendor|system/vendor)/bin/idd-logreader                       u:object_r:idd_exec:s0
 /(vendor|system/vendor)/bin/iddd                                u:object_r:idd_exec:s0
+/(vendor|system/vendor)/bin/init\.sony\.modem\.sh               u:object_r:qti_init_shell_exec:s0
 /(vendor|system/vendor)/bin/keyprovd                            u:object_r:keyprovd_exec:s0
 /(vendor|system/vendor)/bin/mssconfig                           u:object_r:mss_config_exec:s0
 /(vendor|system/vendor)/bin/qns                                 u:object_r:qns_exec:s0
