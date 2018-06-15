@@ -11,5 +11,6 @@ allow startup-logger self:capability {
     dac_override
 };
 
-r_dir_file(startup-logger, idd_rca_dir)
-r_dir_file(startup-logger, idd_rca_file)
+rw_dir_file(startup-logger, idd_rca_dir)
+allow startup-logger idd_rca_file:dir rw_dir_perms;
+allow startup-logger idd_rca_file:file create_file_perms;
