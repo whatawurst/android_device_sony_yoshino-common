@@ -27,3 +27,6 @@ allow secd ion_device:chr_file r_file_perms;
 # /data/credmgr/credmgr.db
 allow secd credmgrd_data_file:dir rw_dir_perms;
 allow secd credmgrd_data_file:file create_file_perms;
+
+# Allow access to firmware files
+allow secd firmware_file:file r_file_perms;
