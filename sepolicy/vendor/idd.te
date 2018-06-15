@@ -20,13 +20,16 @@ hwbinder_use(idd)
 get_prop(idd, hwservicemanager_prop)
 get_prop(idd, semc_version_prop)
 
+# /proc/sys/kernel/random/uuid
+allow idd proc:file r_file_perms;
+
 allow idd idd_data_file:dir create_dir_perms;
 allow idd idd_data_file:file create_file_perms;
 
 allow idd idd_rca_dir:dir r_dir_perms;
 allow idd idd_rca_dir:file r_file_perms;
 
-allow idd idd_rca_file:dir rw_dir_perms;
+allow idd idd_rca_file:dir create_dir_perms;
 allow idd idd_rca_file:file create_file_perms;
 
 allow idd idd_root_dir:dir rw_dir_perms;
