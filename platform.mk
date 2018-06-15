@@ -21,8 +21,7 @@ PLATFORM_PATH := device/sony/yoshino
 ### PLATFORM INIT
 PRODUCT_PACKAGES += \
     init.yoshino.usb \
-    init.yoshino.pwr \
-    init.qcom.early_boot.sh
+    init.yoshino.pwr
 
 DEVICE_PACKAGE_OVERLAYS += \
     $(PLATFORM_PATH)/overlay
