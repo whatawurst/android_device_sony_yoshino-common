@@ -109,7 +109,7 @@ on post-fs
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
 
     # configure the modem
-    exec u:r:sony_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
+    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
     start modem_switcher
 
 on post-fs-data
