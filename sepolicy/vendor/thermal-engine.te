@@ -1,5 +1,7 @@
 # thermal-engine.te
 
+get_prop(thermal-engine, hwservicemanager_prop)
+
 # /tmp/test_sensor.in
 rw_dir_file(thermal-engine, tmpfs)
 allow thermal-engine thermal-engine_tmpfs:file create_file_perms;
