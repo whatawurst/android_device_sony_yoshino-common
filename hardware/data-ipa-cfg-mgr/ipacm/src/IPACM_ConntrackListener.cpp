@@ -1090,8 +1090,8 @@ void IPACM_ConntrackListener::ProcessTCPorUDPMsg(
 #ifdef CT_OPT
 			HandleLan2Lan(ct, type, &rule);
 #endif
-			IPACMDBG("Neither source Nor destination nat\n");
-			goto IGNORE;
+		 	IPACMDBG("Neither source Nor destination nat\n");
+		 	goto IGNORE;
 		}
 	}
 
