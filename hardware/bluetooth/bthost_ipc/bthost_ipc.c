@@ -1168,7 +1168,7 @@ void* audio_get_next_codec_config(uint8_t idx, audio_format_t *codec_type)
 
 int audio_check_a2dp_ready()
 {
-    int i;
+    int i, ack_ret;
     ALOGW("audio_check_a2dp_ready: state %s", dump_a2dp_hal_state(audio_stream.state));
     tA2DP_CTRL_ACK status;
     pthread_mutex_lock(&audio_stream.lock);
@@ -1180,37 +1180,42 @@ int audio_check_a2dp_ready()
         pthread_mutex_unlock(&audio_stream.lock);
         return 0;
     }
-    if (stack_cb != NULL)
+
+    for (i = 0; i < CHECK_A2DP_READY_MAX_COUNT; i++)
     {
-        audio_stream.ack_status = A2DP_CTRL_ACK_UNKNOWN;
-        stack_cb->a2dp_check_ready_cb();
-        ack_recvd = 0;
-        status = audio_stream.ack_status;
-        if (status == A2DP_CTRL_ACK_UNKNOWN)
-        {
-            for (i = 0; i < CHECK_A2DP_READY_MAX_COUNT; i++)
-            {
-                 wait_for_stack_response(1);
-                 status = audio_stream.ack_status;
-                 if (status == A2DP_CTRL_ACK_SUCCESS)
-                 {
-                     ALOGW("audio_check_a2dp_ready : %s",dump_a2dp_ctrl_ack(status));
-                     pthread_mutex_unlock(&audio_stream.lock);
-                     return 1;
-                 }
-                 ALOGW("audio_check_a2dp_ready(): a2dp stream not ready, wait 200msec & retry");
-                 usleep(200000);
-            }
+        pthread_mutex_lock(&audio_stream.ack_lock);
+        if (stack_cb != NULL) {
+            audio_stream.ack_status = A2DP_CTRL_ACK_UNKNOWN;
+            ack_recvd = 0;
+            stack_cb->a2dp_check_ready_cb();
+            pthread_mutex_unlock(&audio_stream.ack_lock);
+        } else {
+            ALOGW("audio_check_a2dp_ready = NOT ready - callbacks not registered");
+            pthread_mutex_unlock(&audio_stream.ack_lock);
+            pthread_mutex_unlock(&audio_stream.lock);
+            return 0;
         }
-        audio_stream.ack_status = A2DP_CTRL_ACK_UNKNOWN;
-        ALOGW("audio_check_a2dp_ready = %s",dump_a2dp_ctrl_ack(status));
+
+        ack_ret = wait_for_stack_response(1);
+        status = audio_stream.ack_status;
+        if (status == A2DP_CTRL_ACK_SUCCESS)
+        {
+            ALOGW("audio_check_a2dp_ready : %s",dump_a2dp_ctrl_ack(status));
+            pthread_mutex_unlock(&audio_stream.lock);
+            return 1;
+        }
+        if (ack_ret == CTRL_CHAN_RETRY_COUNT && !ack_recvd)
+        {
+            ALOGE("audio_check_a2dp_ready: Failed to get ack from stack");
+            pthread_mutex_unlock(&audio_stream.lock);
+            return 0;
+        }
+        ALOGW("audio_check_a2dp_ready(): a2dp stream not ready, wait 200msec & retry");
+        usleep(200000);
     }
-    else
-    {
-        ALOGW("audio_check_a2dp_ready = NOT ready - callbacks not registered");
-        pthread_mutex_unlock(&audio_stream.lock);
-        return 0;
-    }
+    audio_stream.ack_status = A2DP_CTRL_ACK_UNKNOWN;
+    ALOGW("audio_check_a2dp_ready = %s",dump_a2dp_ctrl_ack(status));
+
     pthread_mutex_unlock(&audio_stream.lock);
     return status == A2DP_CTRL_ACK_SUCCESS;
 }
