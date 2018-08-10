@@ -51,4 +51,5 @@ static inline const char* getBTDefaultName()
 // QCOM power management workaround
 #define BT_CLEAN_TURN_ON_DISABLED TRUE
 
+#undef PROPERTY_VALUE_MAX
 #endif
