@@ -46,6 +46,14 @@ on charger
     write /sys/module/msm_thermal/core_control/enabled 1
 
 on property:sys.boot_completed=1
+    # Setup big cluster
+    write /sys/devices/system/cpu/cpu4/core_ctl/min_cpus 2
+    write /sys/devices/system/cpu/cpu4/core_ctl/busy_up_thres 60
+    write /sys/devices/system/cpu/cpu4/core_ctl/busy_down_thres 30
+    write /sys/devices/system/cpu/cpu4/core_ctl/offline_delay_ms 100
+    write /sys/devices/system/cpu/cpu4/core_ctl/is_big_cluster 1
+    write /sys/devices/system/cpu/cpu4/core_ctl/task_thres 4
+
     # Apply Scheduler and Governor settings for 8998
     # HMP scheduler (big.Little cluster related) settings
     write /proc/sys/kernel/sched_migration_fixup 1
@@ -53,18 +61,18 @@ on property:sys.boot_completed=1
     write /proc/sys/kernel/sched_downmigrate 90
     write /proc/sys/kernel/sched_group_upmigrate 100
     write /proc/sys/kernel/sched_group_downmigrate 95
-    write /proc/sys/kernel/sched_enable_thread_grouping 1
     write /proc/sys/kernel/sched_select_prev_cpu_us 0
     write /proc/sys/kernel/sched_freq_inc_notify 77000
     write /proc/sys/kernel/sched_freq_dec_notify 77000
     write /proc/sys/kernel/sched_spill_nr_run 5
     write /proc/sys/kernel/sched_restrict_cluster_spill 1
-    write /proc/sys/kernel/sched_prefer_sync_wakee_to_waker 1
+    # From SODP
+    write /proc/sys/kernel/sched_enable_thread_grouping 1
 
-    # Disable thermal
+    # Disable thermal to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
 
-    # enable governor for power cluster
+    # Configure governor for little cluster
     write /sys/devices/system/cpu/cpu0/online 1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 1
@@ -80,7 +88,7 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif 1
 
-    # enable governor for perf cluster
+    # Configure governor for big cluster
     write /sys/devices/system/cpu/cpu4/online 1
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load 1
@@ -96,41 +104,14 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/ignore_hispeed_on_notif 1
 
-    write /proc/sys/kernel/sched_boost 0
-
-    # re-enable thermal
+    # Re-enable thermal
     write /sys/module/msm_thermal/core_control/enabled 1
 
-    # Bring up all cores online
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-    write /sys/devices/system/cpu/cpu4/online 1
-    write /sys/devices/system/cpu/cpu5/online 1
-    write /sys/devices/system/cpu/cpu6/online 1
-    write /sys/devices/system/cpu/cpu7/online 1
-
-    # Enable Low power modes
-    write /sys/module/lpm_levels/system/pwr/cpu0/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/pwr/cpu1/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/pwr/cpu2/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/pwr/cpu3/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/perf/cpu4/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/perf/cpu5/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/perf/cpu6/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/perf/cpu7/ret/idle_enabled N
-    write /sys/module/lpm_levels/system/pwr/pwr-l2-dynret/idle_enabled N
-    write /sys/module/lpm_levels/system/pwr/pwr-l2-ret/idle_enabled N
-    write /sys/module/lpm_levels/system/perf/perf-l2-dynret/idle_enabled N
-    write /sys/module/lpm_levels/system/perf/perf-l2-ret/idle_enabled N
-    write /sys/module/lpm_levels/parameters/sleep_disabled N
-
-    # set cpu_boost parameters
+    # Enable input boost configuration
     write /sys/module/cpu_boost/parameters/input_boost_freq "0:1324800"
-    write /sys/module/cpu_boost/parameters/input_boost_ms "80"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 80
 
-    # Enable accounting on CPUs hwmon and bus speed decision algos
-    # This allows to scale bus frequencies based on bandwidth calc
+    # Enable bus-dcvs
     write /sys/class/devfreq/soc:qcom,cpubw/governor "bw_hwmon"
     write /sys/class/devfreq/soc:qcom,cpubw/polling_interval 50
     write /sys/class/devfreq/soc:qcom,cpubw/min_freq 1525
@@ -155,3 +136,34 @@ on property:sys.boot_completed=1
     write /sys/class/devfreq/soc:qcom,memlat-cpu4/mem_latency/ratio_ceil 400
 
     write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
+
+    # SOMC tuning parameters for scheduler and others
+    # For task packing criteria
+    write /proc/sys/kernel/sched_short_burst_ns 500000
+    # Binder performance
+    # Wakeup on same core as caller for sync wakeups
+    write /proc/sys/kernel/sched_prefer_sync_wakee_to_waker 1
+    # avoid using the same cluster/same core shortcut for really big tasks
+    write /proc/sys/kernel/sched_small_wakee_task_load 95
+    # But the load of the caller should not influence this
+    write /proc/sys/kernel/sched_big_waker_task_load 0
+
+    # Enable Low power modes
+    write /sys/module/lpm_levels/system/pwr/cpu0/ret/idle_enabled N
+    write /sys/module/lpm_levels/system/pwr/cpu1/ret/idle_enabled N
+    write /sys/module/lpm_levels/system/pwr/cpu2/ret/idle_enabled N
+    write /sys/module/lpm_levels/system/pwr/cpu3/ret/idle_enabled N
+    write /sys/module/lpm_levels/system/perf/cpu4/ret/idle_enabled N
+    write /sys/module/lpm_levels/system/perf/cpu5/ret/idle_enabled N
+    write /sys/module/lpm_levels/system/perf/cpu6/ret/idle_enabled N
+    write /sys/module/lpm_levels/system/perf/cpu7/ret/idle_enabled N
+    write /sys/module/lpm_levels/system/pwr/pwr-l2-dynret/idle_enabled N
+    write /sys/module/lpm_levels/system/pwr/pwr-l2-ret/idle_enabled N
+    write /sys/module/lpm_levels/system/perf/perf-l2-dynret/idle_enabled N
+    write /sys/module/lpm_levels/system/perf/perf-l2-ret/idle_enabled N
+    write /sys/module/lpm_levels/parameters/sleep_disabled N
+
+    write /dev/cpuset/background/cpus "0-3"
+    write /dev/cpuset/system-background/cpus "0-3"
+    write /proc/sys/kernel/sched_boost 0
+
