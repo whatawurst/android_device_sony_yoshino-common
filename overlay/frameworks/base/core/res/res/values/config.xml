@@ -254,7 +254,7 @@
         <item>SUPL_HOST=supl.sonyericsson.com</item>
         <item>SUPL_PORT=7275</item>
         <item>SUPL_VER=0x30000</item>
-        <item>SUPL_MODE=0X2</item>
+        <item>SUPL_MODE=2</item>
         <item>SUPL_ES=1</item>
         <item>LPP_PROFILE=3</item>
         <item>USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL=1</item>
