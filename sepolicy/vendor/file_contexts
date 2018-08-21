@@ -58,6 +58,8 @@
 /sys/devices/soc/soc:fpc1145/spi_prepare                        u:object_r:sysfs_fpc_spi_prepare:s0
 /sys/devices/soc/soc:fpc1145/wakeup_enable                      u:object_r:sysfs_fpc_wakeup:s0
 
+/sys/devices/virtual/input/input2/tof_power_ctl                 u:object_r:sysfs_tof_rgbcir:s0
+
 /sys/devices/virtual/input/input3/als_Itime                     u:object_r:sysfs_tof_rgbcir:s0
 /sys/devices/virtual/input/input3/als_gain                      u:object_r:sysfs_tof_rgbcir:s0
 /sys/devices/virtual/input/input3/als_power_state               u:object_r:sysfs_tof_rgbcir:s0
