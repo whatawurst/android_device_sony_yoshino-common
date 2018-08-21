@@ -1,1 +1,1 @@
-type cacao_service, service_manager_type;
+type cacaoserver_service, service_manager_type;

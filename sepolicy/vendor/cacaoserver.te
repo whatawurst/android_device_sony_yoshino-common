@@ -6,7 +6,7 @@ typeattribute cacaoserver coredomain;
 
 init_daemon_domain(cacaoserver)
 
-add_service(cacaoserver, cacao_service)
+add_service(cacaoserver, cacaoserver_service)
 
 binder_use(cacaoserver)
 hwbinder_use(cacaoserver)
