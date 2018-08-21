@@ -12,6 +12,8 @@ binder_use(cacaoserver)
 hwbinder_use(cacaoserver)
 get_prop(cacaoserver, hwservicemanager_prop)
 binder_call(cacaoserver, hal_camera_somc)
+# Allow camera app access
+binder_call(cacaoserver, appdomain)
 
 allow cacaoserver hal_camera_hwservice:hwservice_manager { find };
 
