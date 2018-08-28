@@ -31,5 +31,8 @@ chmod 0755 "${OEM_DIR}/system-properties"
 mount --bind /oem-modem/system-properties ${OEM_DIR}/system-properties
 mount -o remount,bind,ro /oem-modem/system-properties ${OEM_DIR}/system-properties
 
+### SET PROP FOR INIT
+setprop ro.boot.oem.ready true
+
 ### DONE
 exit 0
