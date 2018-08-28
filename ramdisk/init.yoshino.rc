@@ -82,6 +82,10 @@ on fs
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
     insmod /vendor/lib/modules/kscl.ko
 
+    # configure the modem
+    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
+    start modem_switcher
+
 on post-fs
     # Start qseecomd for vold
     start qseecomd
@@ -107,10 +111,6 @@ on post-fs
 
     # start clearpad_post_probe when filesystem is available for fwflash
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
-
-    # configure the modem
-    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
-    start modem_switcher
 
 on post-fs-data
     # create directory for wfd
