@@ -1,3 +1,9 @@
+# init.te
+
+# Allow to connect to tad to read cust_version
+# This is needed to read carrier customization settings
+unix_socket_connect(init, tad, tad)
+
 # /dev/block/bootdevice/by-name/idd (sda58)
 allow init idd_block_device:blk_file rw_file_perms;
 

@@ -80,6 +80,9 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 # Native sdfat (exfat) support - system/vold
 TARGET_EXFAT_DRIVER := sdfat
 
+# Init
+TARGET_INIT_VENDOR_LIB := libinit_yoshino
+
 ### AUDIO
 # BOARD_SUPPORTS_QAHW := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
