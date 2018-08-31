@@ -3,11 +3,11 @@ allow toolbox self:capability {
 };
 
 # rm -r /idd/lost+found
-allow toolbox idd_data_file:dir r_dir_perms;
+allow toolbox idd_data_file:dir rw_dir_perms;
 allow toolbox idd_root_dir:dir rw_dir_perms;
 allow toolbox idd_lostfound_file:dir create_dir_perms;
 
 # rm -r /rca/lost+found
-allow toolbox idd_rca_file:dir r_dir_perms;
+allow toolbox idd_rca_file:dir rw_dir_perms;
 allow toolbox idd_rca_dir:dir rw_dir_perms;
 allow toolbox idd_rca_lostfound_file:dir create_dir_perms;
