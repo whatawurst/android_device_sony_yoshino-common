@@ -1,0 +1,7 @@
+# system_app.te
+
+allow system_app hal_miscta_default:binder call;
+allow system_app hal_miscta_hwservice:hwservice_manager find;
+
+allow system_app modemsw_cache_file:dir rw_dir_perms;
+allow system_app modemsw_cache_file:file create_file_perms;
