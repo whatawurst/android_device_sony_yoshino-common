@@ -2,3 +2,5 @@
 
 binder_call(rild, hal_secd_default)
 allow rild hal_secd_hwservice:hwservice_manager { find };
+
+get_prop(rild, semc_version_prop)
