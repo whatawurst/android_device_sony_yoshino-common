@@ -140,8 +140,6 @@ BOARD_VENDOR_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
 
 ### TREBLE
-# Enable treble
-PRODUCT_FULL_TREBLE_OVERRIDE ?= true
 # Split build properties
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
