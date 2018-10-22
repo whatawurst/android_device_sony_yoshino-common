@@ -28,22 +28,25 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/properties.h>
+#include <sstream>
 
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
 
 #include "vendor_init.h"
 #include "property_service.h"
-#include "util.h"
 
 #include "ta.h"
 
 using android::base::GetProperty;
 using android::base::WaitForProperty;
-using android::init::ReadFile;
+using android::base::ReadFileToString;
 using android::init::property_set;
+
+using namespace std::chrono_literals;
 
 static void load_properties_from_file(const char *, const char *);
 
@@ -93,9 +96,9 @@ static void load_properties(char *data, const char *filter)
 
 static void load_properties_from_file(const char* filename, const char* filter) {
     std::string data;
-    std::string err;
-    if (!ReadFile(filename, &data, &err)) {
-        PLOG(WARNING) << "Couldn't load property file: " << err;
+
+    if (!ReadFileToString(filename, &data)) {
+        PLOG(WARNING) << "Couldn't load property file";
         return;
     }
     data.push_back('\n');
