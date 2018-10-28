@@ -4,11 +4,7 @@
 genfscon debugfs /rmt_storage                           u:object_r:debugfs_rmt_storage:s0
 genfscon debugfs /wlan0/power_stats                     u:object_r:debugfs_wlan_power:s0
 
-# PROC
-genfscon proc /cmdline                                  u:object_r:proc_cmdline:s0
-
 # SYSFS
-genfscon sysfs /class/switch                            u:object_r:sysfs_switch:s0
 genfscon sysfs /class/uio                               u:object_r:sysfs_uio:s0
 genfscon sysfs /devices/mdss_dsi_panel/                 u:object_r:sysfs_dsi_panel:s0
 genfscon sysfs /devices/soc/0.qcom,rmtfs_sharedmem      u:object_r:sysfs_rmtfs:s0

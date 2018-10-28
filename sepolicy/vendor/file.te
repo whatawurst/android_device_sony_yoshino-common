@@ -12,9 +12,6 @@ type ta_data_file, file_type, data_file_type;
 type wlan_data_file, file_type, data_file_type;
 type crash_data_file, file_type, data_file_type;
 
-# PROC
-type proc_cmdline, fs_type;
-
 # SYSFS
 type sysfs_dsi_panel, fs_type, sysfs_type;
 type sysfs_fpc, fs_type, sysfs_type;
@@ -23,7 +20,6 @@ type sysfs_fpc_spi_prepare, fs_type, sysfs_type;
 type sysfs_fpc_wakeup, fs_type, sysfs_type;
 type sysfs_pm_wakeup, fs_type, sysfs_type;
 type sysfs_rmtfs, sysfs_type, fs_type;
-type sysfs_switch, fs_type, sysfs_type;
 type sysfs_switch_lid, fs_type, sysfs_type;
 
 # SOCKETS
