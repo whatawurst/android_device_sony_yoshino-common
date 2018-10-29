@@ -89,7 +89,7 @@
 /(vendor|system/vendor)/bin/hw/vendor\.semc\.system\.idd\.fallback@1\.0-service u:object_r:hal_idd_fallback_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.camera\.provider@1\.0-service    u:object_r:hal_camera_somc_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.miscta@1\.0-service  u:object_r:hal_miscta_default_exec:s0
-/(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.wifi@1\.0-service    u:object_r:hal_wifi_hostapd_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.wifi@1\.0-service    u:object_r:hal_wifi_hostapd_default_exec:s0
 /(vendor|system/vendor)/bin/bt_ssr_dumper                       u:object_r:ssr_dumper_exec:s0
 /(vendor|system/vendor)/bin/idd-logreader                       u:object_r:idd_exec:s0
 /(vendor|system/vendor)/bin/iddd                                u:object_r:idd_exec:s0

@@ -8,7 +8,7 @@ unix_socket_connect(init, tad, tad)
 allow init idd_block_device:blk_file rw_file_perms;
 
 # /dev/socket/cammw_tintless
-allow init camera_socket:sock_file create_file_perms;
+#allow init camera_socket:sock_file create_file_perms;
 
 # /dev/socket/secd_devsec_sock
 allow init secd_devsec_socket:sock_file create_file_perms;
