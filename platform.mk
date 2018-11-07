@@ -39,6 +39,8 @@ PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
 DEVICE_PACKAGE_OVERLAYS += \
     $(PLATFORM_PATH)/overlay
 
+PRODUCT_ENFORCE_RRO_TARGETS += *
+
 ### Additional native libraries
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
