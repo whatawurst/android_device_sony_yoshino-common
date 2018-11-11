@@ -51,10 +51,10 @@ static int bt_split_a2dp_enabled = 0;
 **  Constants & Macros
 ******************************************************************************/
 /* Below two values adds up to 8 sec retry to address IOT issues*/
-#define STREAM_START_MAX_RETRY_COUNT 10
-#define STREAM_START_MAX_RETRY_LOOPER 8
+#define STREAM_START_MAX_RETRY_COUNT 5
+#define STREAM_START_MAX_RETRY_LOOPER 6
 #define CTRL_CHAN_RETRY_COUNT 3
-#define CHECK_A2DP_READY_MAX_COUNT 20
+#define CHECK_A2DP_READY_MAX_COUNT 5
 
 #define CASE_RETURN_STR(const) case const: return #const;
 
