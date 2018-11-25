@@ -67,6 +67,9 @@ TW_INCLUDE_CRYPTO := true
 # ext4 file based crypto
 TW_INCLUDE_CRYPTO_FBE := true
 
+TARGET_RECOVERY_DEVICE_MODULES      += android.hardware.weaver@1.0
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(PRODUCT_OUT)/system/lib64/android.hardware.weaver@1.0.so
+
 # Add strace
 TARGET_RECOVERY_DEVICE_MODULES      += strace
 TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(PRODUCT_OUT)/system/xbin/strace
