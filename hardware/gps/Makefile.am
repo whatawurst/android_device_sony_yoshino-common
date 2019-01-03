@@ -1,10 +1,10 @@
-# Makefile.am for gps loc-pla
+# Makefile.am - Automake script for gps loc_api
 #
 
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = src
+SUBDIRS = gnss
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = loc-pla.pc
+pkgconfig_DATA = loc-hal.pc
 EXTRA_DIST = $(pkgconfig_DATA)

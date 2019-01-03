@@ -1,17 +1,17 @@
-# configure.ac -- Autoconf script for gps gps-utils
+# configure.ac -- Autoconf script for gps loc-core
 #
 # Process this file with autoconf to produce a configure script
 
 # Requires autoconf tool later than 2.61
 AC_PREREQ(2.61)
-# Initialize the gps gps-utils package version 1.0.0
-AC_INIT([gps-utils],1.0.0)
+# Initialize the gps loc-hal package version 1.0.0
+AC_INIT([loc-core],1.0.0)
 # Does not strictly follow GNU Coding standards
 AM_INIT_AUTOMAKE([foreign])
 # Disables auto rebuilding of configure, Makefile.ins
 AM_MAINTAINER_MODE
 # Verifies the --srcdir is correct by checking for the path
-AC_CONFIG_SRCDIR([Makefile.am])
+AC_CONFIG_SRCDIR([loc-core.pc.in])
 # defines some macros variable to be included by source
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -29,9 +29,9 @@ AC_PROG_MAKE_SET
 PKG_PROG_PKG_CONFIG
 
 # Checks for libraries.
-PKG_CHECK_MODULES([CUTILS], [libcutils])
-AC_SUBST([CUTILS_CFLAGS])
-AC_SUBST([CUTILS_LIBS])
+PKG_CHECK_MODULES([GPSUTILS], [gps-utils])
+AC_SUBST([GPSUTILS_CFLAGS])
+AC_SUBST([GPSUTILS_LIBS])
 
 AC_ARG_WITH([core_includes],
       AC_HELP_STRING([--with-core-includes=@<:@dir@:>@],
@@ -76,7 +76,7 @@ AM_CONDITIONAL(USE_GLIB, test "x${with_glib}" = "xyes")
 
 AC_CONFIG_FILES([ \
         Makefile \
-        gps-utils.pc
+        loc-core.pc \
         ])
 
 AC_OUTPUT
