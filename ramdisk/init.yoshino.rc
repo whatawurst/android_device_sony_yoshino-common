@@ -16,10 +16,27 @@ import init.common.rc
 import init.common.srv.rc
 import init.common.ims.rc
 import init.common.qcom.rc
+
 import init.yoshino.usb.rc
 import init.yoshino.pwr.rc
 
 on early-init
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
+
+    # create symlink for vendor mount points
+    symlink /vendor/firmware_mnt /firmware
+    symlink /vendor/bt_firmware /bt_firmware
+    symlink /vendor/dsp /dsp
+
+    # Change ownership of hw_recovery related nodes
+    chown system graphics /sys/kernel/debug/dri/0/debug/dump
+    chown system graphics /sys/kernel/debug/dri/0/debug/recovery_reg
+    chown system graphics /sys/kernel/debug/dri/0/debug/recovery_dbgbus
+    chown system graphics /sys/kernel/debug/dri/0/debug/recovery_vbif_dbgbus
+
+    chown root system /dev/kmsg
+    chmod 0620 /dev/kmsg
     write /sys/module/msm_rtb/parameters/enable 0
 
 on init
@@ -33,43 +50,37 @@ on init
     chown root system /proc/rdtag
     write /proc/sys/vm/swappiness 100
 
+    # Create cgroup mount point for memory
+    mkdir /sys/fs/cgroup/memory/bg 0750 root system
+    write /sys/fs/cgroup/memory/bg/memory.swappiness 140
+    write /sys/fs/cgroup/memory/bg/memory.move_charge_at_immigrate 1
+    chown root system /sys/fs/cgroup/memory/bg/tasks
+    chmod 0660 /sys/fs/cgroup/memory/bg/tasks
+
     # Wait for trimarea
     wait /dev/block/sda1
     chown tad tad /dev/block/sda1
     chmod 0770 /dev/block/sda1
 
 on fs
-    # SONY: creat mount point for idd and rca
-    mkdir /idd 0751 idd idd
-    mkdir /rca 0750 idd idd
+    mount_all /vendor/etc/fstab.${ro.hardware}
 
-    # SONY: creat mount point for qns
-    mkdir /qns 0750 qns qns
-
-    mount_all fstab.${ro.hardware}
+    chown root system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
 
     # change the compression algorithm for zRAM
     write /sys/block/zram0/comp_algorithm lz4
-    # Enable ZRAM
-    swapon_all ./fstab.${ro.hardware}
+    swapon_all /vendor/etc/fstab.${ro.hardware}
 
-    restorecon_recursive /persist
+    # Keeping following partitions outside fstab file. As user may not have
+    # these partition flashed on the device. Failure to mount any partition in fstab file
+    # results in failure to launch late-start class.
+
+    restorecon_recursive /mnt/vendor/persist
+
+    mkdir /mnt/vendor/persist/data 0700 system system
 
     write /sys/devices/soc/c0a4900.sdhci/mmc_host/mmc0/clkgate_delay 1
-
-    # SONY: setup idd and rca partition
-    chown idd idd /idd
-    chmod 0751 /idd
-    exec /system/bin/rm -r /idd/lost+found
-    symlink /idd /mnt/idd
-    chown idd idd /rca
-    chmod 0750 /rca
-    exec /system/bin/rm -r /rca/lost+found
-
-    # SONY: setup qns partition
-    chown qns qns /qns
-    chmod 0750 /qns
-    restorecon_recursive /qns
 
     # Start tad_static early as other core services depend on it
     wait /dev/block/sda1
@@ -170,7 +181,26 @@ on post-fs-data
 
 on early-boot
     write /sys/kernel/boot_adsp/boot 1
+    write /sys/kernel/boot_cdsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
+
+    # for backward compatibility
+    chown system system /persist/sensors
+    chown system system /persist/sensors/registry
+    chown system system /persist/sensors/registry/registry
+    chown system system /persist/sensors/registry/registry/sensors_registry
+    chown system system /persist/sensors/sensors_settings
+    chown system system /persist/sensors/registry/config
+    chmod 0664 /persist/sensors/sensors_settings
+
+    chown system system /mnt/vendor/persist/sensors
+    chown system system /mnt/vendor/persist/sensors/registry
+    chown system system /mnt/vendor/persist/sensors/registry/registry
+    chown system system /mnt/vendor/persist/sensors/registry/registry/sensors_registry
+    chown system system /mnt/vendor/persist/sensors/sensors_settings
+    chown system system /mnt/vendor/persist/sensors/registry/sns_reg_config
+    chown system system /mnt/vendor/persist/sensors/registry/config
+    chmod 0664 /mnt/vendor/persist/sensors/sensors_settings
 
     # Update dm-verity state and set partition.*.verified properties
     verity_update_state
