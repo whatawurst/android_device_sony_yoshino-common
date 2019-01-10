@@ -13,7 +13,21 @@
 # limitations under the License.
 
 on early-init
-    mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
+    mount debugfs debugfs /sys/kernel/debug mode=755
+
+    # Create symlink for vendor mount points
+    symlink /vendor/firmware_mnt /firmware
+    symlink /vendor/bt_firmware /bt_firmware
+    symlink /vendor/dsp /dsp
+
+    # Change ownership of hw_recovery related nodes
+    chown system graphics /sys/kernel/debug/dri/0/debug/dump
+    chown system graphics /sys/kernel/debug/dri/0/debug/recovery_reg
+    chown system graphics /sys/kernel/debug/dri/0/debug/recovery_dbgbus
+    chown system graphics /sys/kernel/debug/dri/0/debug/recovery_vbif_dbgbus
+
+    chown root system /dev/kmsg
+    chmod 0620 /dev/kmsg
 
 on init
     write /dev/stune/foreground/schedtune.sched_boost_no_override 1
@@ -35,6 +49,7 @@ on init
     mkdir /dev/bus/usb 0755 root root
 
     # Support legacy paths
+    symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
     # Create cgroup mount point for memory
@@ -118,6 +133,24 @@ on early-boot
     chown radio wakelock /sys/power/wake_unlock
     chmod 0660 /sys/power/wake_lock
     chmod 0660 /sys/power/wake_unlock
+
+    # for backward compatibility
+    chown system system /persist/sensors
+    chown system system /persist/sensors/registry
+    chown system system /persist/sensors/registry/registry
+    chown system system /persist/sensors/registry/registry/sensors_registry
+    chown system system /persist/sensors/sensors_settings
+    chown system system /persist/sensors/registry/config
+    chmod 0664 /persist/sensors/sensors_settings
+
+    chown system system /mnt/vendor/persist/sensors
+    chown system system /mnt/vendor/persist/sensors/registry
+    chown system system /mnt/vendor/persist/sensors/registry/registry
+    chown system system /mnt/vendor/persist/sensors/registry/registry/sensors_registry
+    chown system system /mnt/vendor/persist/sensors/sensors_settings
+    chown system system /mnt/vendor/persist/sensors/registry/sns_reg_config
+    chown system system /mnt/vendor/persist/sensors/registry/config
+    chmod 0664 /mnt/vendor/persist/sensors/sensors_settings
 
 on boot
     # Bluetooth modules

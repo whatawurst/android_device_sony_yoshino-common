@@ -29,7 +29,7 @@ service mlog_qmi_service /vendor/bin/mlog_qmi_service
     writepid /dev/cpuset/system-background/tasks
 
 # QCOM prop
-service cnd /vendor/bin/cnd
+service vendor.cnd /vendor/bin/cnd
     class main
     user system
     group system wifi inet radio wakelock net_admin
@@ -44,7 +44,7 @@ service irsc_util /vendor/bin/irsc_util "/system/vendor/etc/sec_config"
 ### RADIO
 
 # QCOM prop
-service rmt_storage /vendor/bin/rmt_storage
+service vendor.rmt_storage /vendor/bin/rmt_storage
     class core
     user root
     group system wakelock
@@ -52,13 +52,13 @@ service rmt_storage /vendor/bin/rmt_storage
     ioprio rt 0
 
 # QCOM prop
-service tftp_server /vendor/bin/tftp_server
+service vendor.tftp_server /vendor/bin/tftp_server
    class core
    user root
    group root system
 
 # QCOM prop radio
-service port-bridge /vendor/bin/port-bridge
+service vendor.port-bridge /vendor/bin/port-bridge
     class main
     user radio
     group radio system inet
@@ -66,7 +66,7 @@ service port-bridge /vendor/bin/port-bridge
     writepid /dev/cpuset/system-background/tasks
 
 # QCOM prop radio
-service netmgrd /vendor/bin/netmgrd
+service vendor.netmgrd /vendor/bin/netmgrd
     class main
     group system wakelock
     disabled
@@ -176,14 +176,26 @@ service msm_irqbalance /vendor/bin/msm_irqbalance -f /system/etc/msm_irqbalance.
     writepid /dev/cpuset/system-background/tasks
 
 ### SENSORS
-service sensors /vendor/bin/sensors.qcom
+service vendor.sensors /vendor/bin/sensors.qti
     class core
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
 
+service ssgqmigd /vendor/bin/ssgqmigd
+    class late_start
+    user radio
+    group radio gps system
+    socket ssgqmig seqpacket 0660 radio inet
+
+service ssgtzd /vendor/bin/ssgtzd
+    class late_start
+    user system
+    group system
+    socket ssgtzd stream 0660 system inet
+
 ### TEE
-service qseecomd /vendor/bin/qseecomd
+service vendor.qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
@@ -211,14 +223,6 @@ service time_daemon /vendor/bin/time_daemon
     class main
     user root
     group root
-
-### Touchscreen
-service hbtp /system/vendor/bin/hbtp_daemon
-    class main
-    user system
-    group system
-    capabilities SYS_NICE
-    disabled
 
 ### Display
 service ppd /vendor/bin/mm-pp-dpps

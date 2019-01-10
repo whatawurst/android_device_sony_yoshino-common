@@ -66,17 +66,14 @@ on post-fs-data
     mkdir /data/vendor/misc/qti_fp/calib_test 0770 system system
     mkdir /data/vendor/misc/qti_fp/database 0770 system system
 
-    # Create directory for TZ Apps
-    mkdir /data/misc/qsee 0770 system system
-
     # Create directory for apps access via QTEEConnector
     mkdir /data/vendor/qtee 0770 system system
 
-    # Create directory for voiceprint
-    mkdir /data/misc/qvop 0771 system system
+    # Create /data/vendor/tzstorage directory for SFS listener
+    mkdir /data/vendor/tzstorage 0770 system system
 
-    # Create folder for mm-qcamera-daemon
-    mkdir /data/misc/camera 0770 camera camera
+    #Create folder of camera
+    mkdir /data/vendor/camera 0770 camera camera
 
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
