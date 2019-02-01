@@ -144,7 +144,7 @@ TARGET_USES_OLD_MNC_FORMAT := true
 ### SEPOLICY
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
+PRODUCT_PRIVATE_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/private
 
 ### VENDOR FILE OVERRIDE
 BUILD_BROKEN_DUP_RULES := true
