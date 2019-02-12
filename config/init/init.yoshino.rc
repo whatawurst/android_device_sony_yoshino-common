@@ -98,6 +98,18 @@ on fs
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
     insmod /vendor/lib/modules/kscl.ko
 
+    # Kernel module for fingerprint sensor
+    insmod /vendor/lib/modules/fpc1145_platform.ko
+    write /sys/devices/soc/soc:fpc1145/uevent add
+
+    # Kernel module for wifi
+    insmod /system/vendor/lib/modules/qca_cld3_wlan.ko
+
+    # Kernel modules for SIM, vibrator and bus
+    insmod /vendor/lib/modules/bu520x1nvx
+    insmod /vendor/lib/modules/sim_detect
+    insmod /vendor/lib/modules/ldo_vibrator
+
     # configure the modem
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
     start modem_switcher
