@@ -125,9 +125,6 @@ on post-fs
     # Trigger loading of ipa firmware
     write /dev/ipa 1
 
-    # start clearpad_post_probe when filesystem is available for fwflash
-    write /sys/devices/virtual/input/clearpad/post_probe_start 1
-
 on post-fs-data
     # create directory for wfd
     mkdir /data/wfd 0770 system system
@@ -168,6 +165,36 @@ on post-fs-data
     # Audio HAL has to write to boot_adsp sysfs entry to unload image
     chown root audio /sys/kernel/boot_adsp/boot
 
+    #### CHARGING
+    # power_supply sysfs
+    chmod 0664 /sys/class/power_supply/battery/charging_enabled
+    chmod 0664 /sys/class/power_supply/battery/lrc_socmax
+    chmod 0664 /sys/class/power_supply/battery/lrc_socmin
+    chmod 0664 /sys/class/power_supply/battery/lrc_enable
+    chmod 0664 /sys/class/power_supply/battery/system_temp_level
+    chmod 0664 /sys/class/power_supply/battery/uevent
+    chmod 0664 /sys/class/power_supply/battery/running_status
+    chmod 0664 /sys/class/power_supply/battery/device/enable_shutdown_at_low_battery
+    chmod 0664 /sys/class/power_supply/bms/charge_full
+    chmod 0664 /sys/class/power_supply/bms/charge_full_raw
+    chmod 0664 /sys/class/power_supply/bms/device/batt_aging_level
+
+    # The charge_service/chargemon/hvdcp_opti use wakelock before on boot, so add permission here.
+    chown radio wakelock /sys/power/wake_lock
+    chown radio wakelock /sys/power/wake_unlock
+    chmod 0660 /sys/power/wake_lock
+    chmod 0660 /sys/power/wake_unlock
+
+    # chargemon use brightness and autosleep before on boot, so add permission here.
+    chown system system /sys/class/backlight/panel0-backlight/brightness
+    chown system system /sys/power/autosleep
+
+    # hvdcp_opti
+    start vendor.hvdcp_opti
+
+    # charge_service
+    start vendor.charge_service
+
     # QNS
     chown oem_2985 oem_2985 /sys/class/qns
     chown oem_2985 oem_2985 /sys/class/qns/alarm
@@ -182,7 +209,32 @@ on post-fs-data
     chown oem_2985 oem_2985 /sys/class/qns/temp
     chown oem_2985 oem_2985 /sys/class/qns/voltage
     chown oem_2985 oem_2985 /sys/class/qns/battery_type
-    start qns
+
+    start vendor.qns
+
+    # prepare for chargemon
+    write /config/usb_gadget/g1/os_desc/use 0
+
+    # Set USB mode to MSC for SDP charging
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration mass_storage
+    write /config/usb_gadget/g1/idProduct 0xeeee
+    write /config/usb_gadget/g1/idVendor 0x0fce
+    symlink /config/usb_gadget/g1/functions/mass_storage.0 /config/usb_gadget/g1/configs/b.1/f1
+    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
+
+    # chargemon
+    # Add oem_2993 to the group of chargemon for access MiscTA.
+    # Add wakelock to the group of chargemon for access "/sys/power/wake_lock" and "/sys/power/wake_unlock".
+    # Add input to the group of chargemon for access "/dev/input/event"
+    exec - system system root oem_2993 wakelock input -- /vendor/bin/chargemon
+    exec - root root -- /vendor/bin/chargemon_shutdown
+
+    # enable os_desc after chargemon
+    write /config/usb_gadget/g1/os_desc/use 1
+
+    # start clearpad_post_probe when filesystem is available for fwflash
+    write /sys/devices/virtual/input/clearpad/post_probe_start 1
+
 
 on early-boot
     write /sys/kernel/boot_adsp/boot 1
@@ -365,10 +417,20 @@ service modem_switcher /vendor/bin/sony-modem-switcher
     oneshot
 
 # QCOM Quick Charge
-service hvdcp_opti /vendor/bin/hvdcp_opti
+service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
     class main
     user root
     group system wakelock
+    disabled
+
+# Charge service
+service vendor.charge_service /vendor/bin/charge_service
+    user system
+    # Add oem_2993 to the group of charge_service for access MiscTA.
+    # Add wakelock to the group of charge_service for access "/sys/power/wake_lock" and "/sys/power/wake_unlock".
+    group system root oem_2993 wakelock
+    # For reducing CPU loads, charge service runs as system-background process.
+    writepid /dev/cpuset/system-background/tasks
     disabled
 
 service vendor.qns /vendor/bin/qns -d /mnt/qns -l /mnt/qns
@@ -381,8 +443,36 @@ on charger
     setprop sys.usb.config mass_storage
     load_system_props
 
-    start hvdcp_opti
+    # power_supply sysfs
+    chmod 0664 /sys/class/power_supply/battery/charging_enabled
+    chmod 0664 /sys/class/power_supply/battery/lrc_socmax
+    chmod 0664 /sys/class/power_supply/battery/lrc_socmin
+    chmod 0664 /sys/class/power_supply/battery/lrc_enable
+    chmod 0664 /sys/class/power_supply/battery/system_temp_level
+    chmod 0664 /sys/class/power_supply/battery/uevent
+    chmod 0664 /sys/class/power_supply/battery/running_status
+    chmod 0664 /sys/class/power_supply/battery/device/enable_shutdown_at_low_battery
+    chmod 0664 /sys/class/power_supply/bms/charge_full
+    chmod 0664 /sys/class/power_supply/bms/charge_full_raw
+    chmod 0664 /sys/class/power_supply/bms/device/batt_aging_level
 
+    # The charge_service/chargemon/hvdcp_opti use wakelock before on boot, so add permission here.
+    chown radio wakelock /sys/power/wake_lock
+    chown radio wakelock /sys/power/wake_unlock
+    chmod 0660 /sys/power/wake_lock
+    chmod 0660 /sys/power/wake_unlock
+
+    # chargemon use brightness and autosleep before on boot, so add permission here.
+    chown system system /sys/class/backlight/panel0-backlight/brightness
+    chown system system /sys/power/autosleep
+
+    # hvdcp_opti
+    start vendor.hvdcp_opti
+
+    # charge_service
+    start vendor.charge_service
+
+    # QNS
     chown oem_2985 oem_2985 /sys/class/qns
     chown oem_2985 oem_2985 /sys/class/qns/alarm
     chown oem_2985 oem_2985 /sys/class/qns/charge_current
@@ -396,9 +486,24 @@ on charger
     chown oem_2985 oem_2985 /sys/class/qns/temp
     chown oem_2985 oem_2985 /sys/class/qns/voltage
     chown oem_2985 oem_2985 /sys/class/qns/battery_type
+
     start vendor.qns
 
+    # prepare for chargemon
+    write /config/usb_gadget/g1/os_desc/use 0
+
     setprop sys.usb.configfs 1
+
+# Set value in property to sysfs for LRC mode
+on property:persist.vendor.battery.charge=0
+    write /sys/class/power_supply/battery/lrc_enable 0
+    write /sys/class/power_supply/battery/lrc_socmax 0
+    write /sys/class/power_supply/battery/lrc_socmin 0
+
+on property:persist.vendor.battery.charge=1
+    write /sys/class/power_supply/battery/lrc_socmax 60
+    write /sys/class/power_supply/battery/lrc_socmin 40
+    write /sys/class/power_supply/battery/lrc_enable 1
 
 # Set touch sleep mode on backlight_on
 on property:vendor.backlight_on=0
