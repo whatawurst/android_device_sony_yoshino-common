@@ -82,13 +82,18 @@ on fs
 
     write /sys/devices/soc/c0a4900.sdhci/mmc_host/mmc0/clkgate_delay 1
 
-    # Start tad_static early as other core services depend on it
+    # Start vendor.tad early as other core services depend on it
     wait /dev/block/sda1
-    chown tad tad /dev/block/sda1
+    chown oem_2997 oem_2997 /dev/block/sda1
     chmod 0770 /dev/block/sda1
-    start tad_static
+    start vendor.tad
 
+    # These are needed for MiscTA HIDL service
     start hwservicemanager
+    start hidl_memory
+
+    # UFS firmware update
+    exec u:r:ffu:s0 -- /vendor/bin/ffu
 
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
     insmod /vendor/lib/modules/kscl.ko
@@ -99,7 +104,7 @@ on fs
 
 on post-fs
     # Start qseecomd for vold
-    start qseecomd
+    start vendor.qseecomd
 
     # backlight
     chown system system /sys/class/leds/wled/bl_scale
@@ -156,7 +161,7 @@ on post-fs-data
     mkdir /data/vendor/illumination_service 0770 system system
 
     restorecon -RF /idd
-    mkdir /rca/plugins 0750 idd idd
+    mkdir /rca/plugins 0750 oem_2987 oem_2987
     restorecon -RF /rca
 
     # ADSP
@@ -164,19 +169,19 @@ on post-fs-data
     chown root audio /sys/kernel/boot_adsp/boot
 
     # QNS
-    chown qns qns /sys/class/qns
-    chown qns qns /sys/class/qns/alarm
-    chown qns qns /sys/class/qns/charge_current
-    chown qns qns /sys/class/qns/charge_voltage
-    chown qns qns /sys/class/qns/charging_state
-    chown qns qns /sys/class/qns/current_now
-    chown qns qns /sys/class/qns/design
-    chown qns qns /sys/class/qns/fcc
-    chown qns qns /sys/class/qns/options
-    chown qns qns /sys/class/qns/soc
-    chown qns qns /sys/class/qns/temp
-    chown qns qns /sys/class/qns/voltage
-    chown qns qns /sys/class/qns/battery_type
+    chown oem_2985 oem_2985 /sys/class/qns
+    chown oem_2985 oem_2985 /sys/class/qns/alarm
+    chown oem_2985 oem_2985 /sys/class/qns/charge_current
+    chown oem_2985 oem_2985 /sys/class/qns/charge_voltage
+    chown oem_2985 oem_2985 /sys/class/qns/charging_state
+    chown oem_2985 oem_2985 /sys/class/qns/current_now
+    chown oem_2985 oem_2985 /sys/class/qns/design
+    chown oem_2985 oem_2985 /sys/class/qns/fcc
+    chown oem_2985 oem_2985 /sys/class/qns/options
+    chown oem_2985 oem_2985 /sys/class/qns/soc
+    chown oem_2985 oem_2985 /sys/class/qns/temp
+    chown oem_2985 oem_2985 /sys/class/qns/voltage
+    chown oem_2985 oem_2985 /sys/class/qns/battery_type
     start qns
 
 on early-boot
@@ -341,8 +346,8 @@ service dpmQmiMgr /vendor/bin/dpmQmiMgr
 # SONY: IDD daemon
 service iddd /vendor/bin/iddd
     class core
-    user idd
-    group idd log inet trimarea
+    user oem_2987
+    group oem_2987 oem_2993 log inet
     writepid /dev/cpuset/system-background/tasks
 
 service cacaoserver /system/bin/cacaoserver
@@ -355,7 +360,7 @@ service cacaoserver /system/bin/cacaoserver
 service modem_switcher /vendor/bin/sony-modem-switcher
     class main
     user root
-    group root system trimarea cache
+    group root system oem_2993 cache
     disabled
     oneshot
 
@@ -366,10 +371,10 @@ service hvdcp_opti /vendor/bin/hvdcp_opti
     group system wakelock
     disabled
 
-service qns /vendor/bin/qns -d /qns -l /qns
-    user qns
-    group qns
-    socket qnsbsd stream 660 qns system
+service vendor.qns /vendor/bin/qns -d /mnt/qns -l /mnt/qns
+    user oem_2985
+    group oem_2985
+    socket qnsbsd stream 660 oem_2985 system
     disabled
 
 on charger
@@ -378,19 +383,25 @@ on charger
 
     start hvdcp_opti
 
-    chown qns qns /sys/class/qns
-    chown qns qns /sys/class/qns/alarm
-    chown qns qns /sys/class/qns/charge_current
-    chown qns qns /sys/class/qns/charge_voltage
-    chown qns qns /sys/class/qns/charging_state
-    chown qns qns /sys/class/qns/current_now
-    chown qns qns /sys/class/qns/design
-    chown qns qns /sys/class/qns/fcc
-    chown qns qns /sys/class/qns/options
-    chown qns qns /sys/class/qns/soc
-    chown qns qns /sys/class/qns/temp
-    chown qns qns /sys/class/qns/voltage
-    chown qns qns /sys/class/qns/battery_type
-    start qns
+    chown oem_2985 oem_2985 /sys/class/qns
+    chown oem_2985 oem_2985 /sys/class/qns/alarm
+    chown oem_2985 oem_2985 /sys/class/qns/charge_current
+    chown oem_2985 oem_2985 /sys/class/qns/charge_voltage
+    chown oem_2985 oem_2985 /sys/class/qns/charging_state
+    chown oem_2985 oem_2985 /sys/class/qns/current_now
+    chown oem_2985 oem_2985 /sys/class/qns/design
+    chown oem_2985 oem_2985 /sys/class/qns/fcc
+    chown oem_2985 oem_2985 /sys/class/qns/options
+    chown oem_2985 oem_2985 /sys/class/qns/soc
+    chown oem_2985 oem_2985 /sys/class/qns/temp
+    chown oem_2985 oem_2985 /sys/class/qns/voltage
+    chown oem_2985 oem_2985 /sys/class/qns/battery_type
+    start vendor.qns
 
     setprop sys.usb.configfs 1
+
+# Set touch sleep mode on backlight_on
+on property:vendor.backlight_on=0
+    write /sys/devices/virtual/input/clearpad/force_sleep 2
+on property:vendor.backlight_on=1
+    write /sys/devices/virtual/input/clearpad/force_sleep 0
