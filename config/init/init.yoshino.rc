@@ -19,6 +19,7 @@ import init.common.qcom.rc
 
 import init.yoshino.usb.rc
 import init.yoshino.pwr.rc
+import init.yoshino.idd.rc
 import init.yoshino.qns.rc
 
 on early-init
@@ -169,10 +170,6 @@ on post-fs-data
 
     # Illumination service data folder
     mkdir /data/vendor/illumination_service 0770 system system
-
-    restorecon -RF /idd
-    mkdir /rca/plugins 0750 oem_2987 oem_2987
-    restorecon -RF /rca
 
     # ADSP
     # Audio HAL has to write to boot_adsp sysfs entry to unload image
@@ -393,13 +390,6 @@ service dpmQmiMgr /vendor/bin/dpmQmiMgr
     class main
     user system
     group system
-
-# SONY: IDD daemon
-service iddd /vendor/bin/iddd
-    class core
-    user oem_2987
-    group oem_2987 oem_2993 log inet
-    writepid /dev/cpuset/system-background/tasks
 
 service cacaoserver /system/bin/cacaoserver
     class main

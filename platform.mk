@@ -22,7 +22,9 @@ PLATFORM_PATH := device/sony/yoshino
 PRODUCT_PACKAGES += \
     init.yoshino.usb \
     init.yoshino.pwr \
+    init.yoshino.idd.rc \
     init.yoshino.qns.rc \
+    idd.fstab \
     qns.fstab
 
 DEVICE_PACKAGE_OVERLAYS += \
