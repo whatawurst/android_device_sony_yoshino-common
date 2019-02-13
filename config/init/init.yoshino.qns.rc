@@ -1,0 +1,32 @@
+on fs
+    # SONY: creat mount point for qns
+    mkdir /mnt/qns 0750 oem_2985 oem_2985
+    wait /dev/block/bootdevice/by-name/Qnovo
+    mount_all /vendor/etc/qns.fstab --early
+
+    # SONY: setup qns partition
+    chown oem_2985 oem_2985 /mnt/qns
+    chmod 0750 /mnt/qns
+    restorecon_recursive /mnt/qns
+
+    # qns
+    chown oem_2985 oem_2985 /sys/class/qns
+    chown oem_2985 oem_2985 /sys/class/qns/alarm
+    chown oem_2985 oem_2985 /sys/class/qns/charge_current
+    chown oem_2985 oem_2985 /sys/class/qns/charge_voltage
+    chown oem_2985 oem_2985 /sys/class/qns/charging_state
+    chown oem_2985 oem_2985 /sys/class/qns/current_now
+    chown oem_2985 oem_2985 /sys/class/qns/design
+    chown oem_2985 oem_2985 /sys/class/qns/fcc
+    chown oem_2985 oem_2985 /sys/class/qns/options
+    chown oem_2985 oem_2985 /sys/class/qns/soc
+    chown oem_2985 oem_2985 /sys/class/qns/temp
+    chown oem_2985 oem_2985 /sys/class/qns/voltage
+    chown oem_2985 oem_2985 /sys/class/qns/battery_type
+
+# qns
+service vendor.qns /vendor/bin/qns -d /mnt/qns -l /mnt/qns
+    user oem_2985
+    group oem_2985
+    socket qnsbsd stream 660 oem_2985 system
+    disabled

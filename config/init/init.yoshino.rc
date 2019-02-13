@@ -19,6 +19,7 @@ import init.common.qcom.rc
 
 import init.yoshino.usb.rc
 import init.yoshino.pwr.rc
+import init.yoshino.qns.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -208,20 +209,6 @@ on post-fs-data
     start vendor.charge_service
 
     # QNS
-    chown oem_2985 oem_2985 /sys/class/qns
-    chown oem_2985 oem_2985 /sys/class/qns/alarm
-    chown oem_2985 oem_2985 /sys/class/qns/charge_current
-    chown oem_2985 oem_2985 /sys/class/qns/charge_voltage
-    chown oem_2985 oem_2985 /sys/class/qns/charging_state
-    chown oem_2985 oem_2985 /sys/class/qns/current_now
-    chown oem_2985 oem_2985 /sys/class/qns/design
-    chown oem_2985 oem_2985 /sys/class/qns/fcc
-    chown oem_2985 oem_2985 /sys/class/qns/options
-    chown oem_2985 oem_2985 /sys/class/qns/soc
-    chown oem_2985 oem_2985 /sys/class/qns/temp
-    chown oem_2985 oem_2985 /sys/class/qns/voltage
-    chown oem_2985 oem_2985 /sys/class/qns/battery_type
-
     start vendor.qns
 
     # prepare for chargemon
