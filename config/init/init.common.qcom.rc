@@ -293,10 +293,6 @@ on property:persist.debug.trace=1
     mkdir /data/core 0777 root root
     write /proc/sys/kernel/core_pattern "/data/core/%E.%p.%e"
 
-on property:init.svc.surfaceflinger=restarting
-    stop  vendor.hwcomposer-2-1
-    start vendor.hwcomposer-2-1
-
 #Set gpu available frequencies property
 on property:vendor.gpu.available_frequencies=*
     setprop ro.gpu.available_frequencies ${vendor.gpu.available_frequencies}
