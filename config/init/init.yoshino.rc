@@ -105,12 +105,12 @@ on fs
     write /sys/devices/soc/soc:fpc1145/uevent add
 
     # Kernel module for wifi
-    insmod /system/vendor/lib/modules/qca_cld3_wlan.ko
+    insmod /vendor/lib/modules/wlan.ko
 
     # Kernel modules for SIM, vibrator and bus
-    insmod /vendor/lib/modules/bu520x1nvx
-    insmod /vendor/lib/modules/sim_detect
-    insmod /vendor/lib/modules/ldo_vibrator
+    insmod /vendor/lib/modules/bu520x1nvx.ko
+    insmod /vendor/lib/modules/sim_detect.ko
+    insmod /vendor/lib/modules/ldo_vibrator.ko
 
     # configure the modem
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
