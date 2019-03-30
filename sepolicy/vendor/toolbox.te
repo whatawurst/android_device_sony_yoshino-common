@@ -1,6 +1,6 @@
-allow toolbox self:capability {
-    dac_override
-};
+#allow toolbox self:capability {
+#    dac_override
+#};
 
 # rm -r /idd/lost+found
 allow toolbox idd_data_file:dir { read write getattr search rmdir open };

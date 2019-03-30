@@ -7,9 +7,9 @@ init_daemon_domain(startup-logger)
 
 unix_socket_connect(startup-logger, tad, tad)
 
-allow startup-logger self:capability {
-    dac_override
-};
+#allow startup-logger self:capability {
+#    dac_override
+#};
 
 rw_dir_file(startup-logger, idd_rca_dir)
 allow startup-logger idd_rca_file:dir rw_dir_perms;
