@@ -10,19 +10,19 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := fstab.idd
-LOCAL_SRC_FILES := fstab.idd
+LOCAL_MODULE := idd.fstab
+LOCAL_SRC_FILES := idd.fstab
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_STEM := fstab.idd
+LOCAL_MODULE_STEM := idd.fstab
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := fstab.qns
-LOCAL_SRC_FILES := fstab.qns
+LOCAL_MODULE := qns.fstab
+LOCAL_SRC_FILES := qns.fstab
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_STEM := fstab.qns
+LOCAL_MODULE_STEM := qns.fstab
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)
 include $(BUILD_PREBUILT)
@@ -38,20 +38,20 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)/init/hw
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := init.qns.rc
-LOCAL_SRC_FILES := init.qns.rc
+LOCAL_MODULE := init.yoshino.qns.rc
+LOCAL_SRC_FILES := init.yoshino.qns.rc
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_STEM := init.qns.rc
+LOCAL_MODULE_STEM := init.yoshino.qns.rc
 LOCAL_MODULE_SUFFIX := .rc
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)/init/hw
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := init.idd.rc
-LOCAL_SRC_FILES := init.idd.rc
+LOCAL_MODULE := init.yoshino.idd.rc
+LOCAL_SRC_FILES := init.yoshino.idd.rc
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_STEM := init.idd.rc
+LOCAL_MODULE_STEM := init.yoshino.idd.rc
 LOCAL_MODULE_SUFFIX := .rc
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)/init/hw
