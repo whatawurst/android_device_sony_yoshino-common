@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import init.common.rc
-import init.common.srv.rc
-import init.common.ims.rc
-import init.common.qcom.rc
+import /vendor/etc/init/hw/init.common.rc
+import /vendor/etc/init/hw/init.common.srv.rc
+import /vendor/etc/init/hw/init.common.ims.rc
+import /vendor/etc/init/hw/init.common.qcom.rc
 
-import init.yoshino.usb.rc
-import init.yoshino.pwr.rc
-import init.yoshino.idd.rc
-import init.yoshino.qns.rc
+import /vendor/etc/init/hw/init.yoshino.usb.rc
+import /vendor/etc/init/hw/init.yoshino.pwr.rc
+import /vendor/etc/init/hw/init.yoshino.idd.rc
+import /vendor/etc/init/hw/init.yoshino.qns.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
