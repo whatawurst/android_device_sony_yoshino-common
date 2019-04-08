@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+on early-init
+    write /proc/sys/kernel/sched_boost 1
+
 on charger
     # Disable thermal
     write /sys/module/msm_thermal/core_control/enabled 0

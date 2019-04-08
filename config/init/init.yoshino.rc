@@ -41,6 +41,15 @@ on early-init
     chmod 0620 /dev/kmsg
     write /sys/module/msm_rtb/parameters/enable 0
 
+    # Kernel modules for SIM, vibrator and bus
+    insmod /vendor/lib/modules/bu520x1nvx.ko
+    insmod /vendor/lib/modules/sim_detect.ko
+    insmod /vendor/lib/modules/ldo_vibrator.ko
+
+    # Kernel module for fingerprint sensor
+    insmod /vendor/lib/modules/fpc1145_platform.ko
+    write /sys/devices/soc/soc:fpc1145/uevent add
+
 on init
     # Load persistent dm-verity state
     verity_load_state
@@ -65,6 +74,9 @@ on init
     chmod 0770 /dev/block/sda1
 
 on fs
+    wait /dev/block/platform/soc/1da4000.ufshc
+    symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
+
     mount_all /vendor/etc/fstab.${ro.hardware}
 
     chown root system /mnt/vendor/persist
@@ -100,25 +112,19 @@ on fs
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
     insmod /vendor/lib/modules/kscl.ko
 
-    # Kernel module for fingerprint sensor
-    insmod /vendor/lib/modules/fpc1145_platform.ko
-    write /sys/devices/soc/soc:fpc1145/uevent add
-
-    # Kernel module for wifi
-    insmod /vendor/lib/modules/wlan.ko
-
-    # Kernel modules for SIM, vibrator and bus
-    insmod /vendor/lib/modules/bu520x1nvx.ko
-    insmod /vendor/lib/modules/sim_detect.ko
-    insmod /vendor/lib/modules/ldo_vibrator.ko
-
     # configure the modem
-    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
-    start modem_switcher
+#    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
+#    start modem_switcher
 
 on post-fs
+
+    start logcat_charger
+
     # Start qseecomd for vold
     start vendor.qseecomd
+
+    # Display
+    chown system system /sys/devices/mdss_dsi_panel/c_mode
 
     # backlight
     chown system system /sys/class/leds/wled/bl_scale
@@ -139,6 +145,9 @@ on post-fs
     # Trigger loading of ipa firmware
     write /dev/ipa 1
 
+    # Update dm-verity state and set partition.*.verified properties
+    verity_update_state
+
 on post-fs-data
     # create directory for wfd
     mkdir /data/wfd 0770 system system
@@ -151,7 +160,7 @@ on post-fs-data
     mkdir /data/vendor/somc_camera 0770 cameraserver camera
 
     # create directory for scd
-    mkdir /dev/socket/scd 0705 system system
+    mkdir /dev/socket/scd 0755 system system
     mkdir /data/scd 0700 system system
 
     # create directory for widevine
@@ -166,7 +175,7 @@ on post-fs-data
     mkdir /data/persist 0770 persist_rw persist_rw
 
     # Fingerprint data folder
-    mkdir /data/fpc 0770 system system
+    mkdir /data/vendor/fpc 0770 system system
 
     # Illumination service data folder
     mkdir /data/vendor/illumination_service 0770 system system
@@ -206,7 +215,7 @@ on post-fs-data
     start vendor.charge_service
 
     # QNS
-    start vendor.qns
+    start qns
 
     # prepare for chargemon
     write /config/usb_gadget/g1/os_desc/use 0
@@ -231,34 +240,28 @@ on post-fs-data
     # start clearpad_post_probe when filesystem is available for fwflash
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
 
-
 on early-boot
+    start mlog_qmi_service
+
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_cdsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
 
-    # for backward compatibility
-    chown system system /persist/sensors
-    chown system system /persist/sensors/registry
-    chown system system /persist/sensors/registry/registry
-    chown system system /persist/sensors/registry/registry/sensors_registry
-    chown system system /persist/sensors/sensors_settings
-    chown system system /persist/sensors/registry/config
-    chmod 0664 /persist/sensors/sensors_settings
-
-    chown system system /mnt/vendor/persist/sensors
-    chown system system /mnt/vendor/persist/sensors/registry
-    chown system system /mnt/vendor/persist/sensors/registry/registry
-    chown system system /mnt/vendor/persist/sensors/registry/registry/sensors_registry
-    chown system system /mnt/vendor/persist/sensors/sensors_settings
-    chown system system /mnt/vendor/persist/sensors/registry/sns_reg_config
-    chown system system /mnt/vendor/persist/sensors/registry/config
-    chmod 0664 /mnt/vendor/persist/sensors/sensors_settings
-
-    # Update dm-verity state and set partition.*.verified properties
-    verity_update_state
-
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.qcom.early_boot.sh
+
+    # Debug config for clearpad
+    chown system system /sys/devices/virtual/input/clearpad/fwrevision
+    chmod 0600 /sys/devices/virtual/input/clearpad/fwrevision
+    restorecon /sys/devices/virtual/input/clearpad/fwrevision
+    chown system system /sys/devices/virtual/input/clearpad/fwfamily
+    chmod 0600 /sys/devices/virtual/input/clearpad/fwfamily
+    restorecon /sys/devices/virtual/input/clearpad/fwfamily
+    chown system system /sys/devices/virtual/input/clearpad/fwstate
+    chmod 0600 /sys/devices/virtual/input/clearpad/fwstate
+    restorecon /sys/devices/virtual/input/clearpad/fwstate
+    chown system system /sys/devices/virtual/input/clearpad/fwinfo
+    chmod 0600 /sys/devices/virtual/input/clearpad/fwinfo
+    restorecon /sys/devices/virtual/input/clearpad/fwinfo
 
 on boot
     # Cover mode
@@ -337,6 +340,9 @@ on boot
     write /proc/sys/vm/dirty_ratio 5
     write /proc/sys/vm/dirty_background_ratio 1
 
+    # Kernel module for wifi
+    insmod /vendor/lib/modules/wlan.ko
+
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
     chown wifi wifi /sys/kernel/boot_wlan/boot_wlan
@@ -413,7 +419,7 @@ service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
     disabled
 
 # Charge service
-service vendor.charge_service /vendor/bin/charge_service
+service charge_service /vendor/bin/charge_service
     user system
     # Add oem_2993 to the group of charge_service for access MiscTA.
     # Add wakelock to the group of charge_service for access "/sys/power/wake_lock" and "/sys/power/wake_unlock".
@@ -459,7 +465,7 @@ on charger
     start vendor.hvdcp_opti
 
     # charge_service
-    start vendor.charge_service
+    start charge_service
 
     # QNS
     chown oem_2985 oem_2985 /sys/class/qns
@@ -476,7 +482,7 @@ on charger
     chown oem_2985 oem_2985 /sys/class/qns/voltage
     chown oem_2985 oem_2985 /sys/class/qns/battery_type
 
-    start vendor.qns
+    start qns
 
     # prepare for chargemon
     write /config/usb_gadget/g1/os_desc/use 0

@@ -24,8 +24,12 @@ on fs
     chown oem_2985 oem_2985 /sys/class/qns/voltage
     chown oem_2985 oem_2985 /sys/class/qns/battery_type
 
+on property:sys.user.0.ce_available=true
+    # Remounting partitions here just in case vold restarts
+    mount_all /vendor/etc/qns.fstab --early
+
 # qns
-service vendor.qns /vendor/bin/qns -d /mnt/qns -l /mnt/qns
+service qns /vendor/bin/qns -d /mnt/qns -l /mnt/qns
     user oem_2985
     group oem_2985
     socket qnsbsd stream 660 oem_2985 system
