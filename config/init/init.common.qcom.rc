@@ -66,6 +66,9 @@ on post-fs-data
     mkdir /data/vendor/misc/qti_fp/calib_test 0770 system system
     mkdir /data/vendor/misc/qti_fp/database 0770 system system
 
+    # Create /data/vendor/tzstorage directory for SFS listener
+    mkdir /data/vendor/tzstorage 0770 system system
+
     # Create directory for apps access via QTEEConnector
     mkdir /data/vendor/qtee 0770 system system
 
