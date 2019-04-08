@@ -221,8 +221,18 @@ on post-fs-data
     # Create directory to backup kernel panic logs
     mkdir /data/misc/pstore 0770 system system
 
+    # Create directories for tombstones
+    mkdir /data/tombstones 0771 system system
+    mkdir /tombstones/modem 0771 system system
+    mkdir /tombstones/lpass 0771 system system
+    mkdir /tombstones/wcnss 0771 system system
+    mkdir /tombstones/dsps 0771 system system
+
     # Create directory for hbtp
     mkdir /data/vendor/hbtp 0750 system system
+
+    # Create directory for qvr
+    mkdir /data/misc/qvr 0770 system system
 
     # set aggressive read ahead for dm-0 and dm-1 during boot up
     write /sys/block/dm-0/queue/read_ahead_kb 2048
