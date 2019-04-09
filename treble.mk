@@ -14,6 +14,9 @@
 
 ### build/make/target/product/treble_common.mk
 
+# Enable dynamic partition size
+PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
+
 # Split build properties
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
@@ -25,37 +28,23 @@ PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_PACKAGES += \
     messaging
 
-# All VNDK libraries (HAL interfaces, VNDK, VNDK-SP, LL-NDK)
-PRODUCT_PACKAGES += vndk_package
-
-# SP-NDK:
-PRODUCT_PACKAGES += \
-    libvulkan \
-
-# Audio:
-USE_XML_AUDIO_POLICY_CONF := 1
-# The following policy XML files are used as fallback for
-# vendors/devices not using XML to configure audio policy.
+# NFC:
+#   Provide default libnfc-nci.conf file for devices that does not have one in
+#   vendor/etc
 PRODUCT_COPY_FILES += \
-    frameworks/av/services/audiopolicy/config/audio_policy_configuration_generic.xml:system/etc/audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/primary_audio_policy_configuration.xml:system/etc/primary_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:system/etc/r_submix_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:system/etc/audio_policy_volumes.xml \
-    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:system/etc/default_volume_tables.xml \
+    device/generic/common/nfc/libnfc-nci.conf:system/etc/libnfc-nci.conf
 
-# Bluetooth:
-#   audio.a2dp.default is a system module. Generic system image includes
-#   audio.a2dp.default to support A2DP if board has the capability.
-PRODUCT_PACKAGES += \
-    audio.a2dp.default
+# Support for the O-MR1 devices
+PRODUCT_COPY_FILES += \
+    build/make/target/product/vndk/init.gsi.rc:system/etc/init/init.gsi.rc \
+    build/make/target/product/vndk/init.vndk-27.rc:system/etc/init/gsi/init.vndk-27.rc
 
-# Net:
-#   Vendors can use the platform-provided network configuration utilities (ip,
-#   iptable, etc.) to configure the Linux networking stack, but these utilities
-#   do not yet include a HIDL interface wrapper. This is a solution on
-#   Android O.
+# Name space configuration file for non-enforcing VNDK
 PRODUCT_PACKAGES += \
-    netutils-wrapper-1.0
+    ld.config.vndk_lite.txt
+
+# Support addtional O-MR1 vendor interface
+PRODUCT_EXTRA_VNDK_VERSIONS := 27
 
 ### build/make/target/product/treble_common_64.mk
 
