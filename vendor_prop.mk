@@ -206,6 +206,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.enable_default_color_mode=true
 
+# Disable HDR
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.hwc_disable_hdr=1 \
+    vendor.vidc.enc.disable.pq=true
+
 # Touch
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.backlight_on=1
