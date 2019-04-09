@@ -140,7 +140,7 @@ on post-fs
     chown system graphics /dev/graphics/fb2
 
     # Wait for qseecomd to finish
-    wait_for_prop sys.listeners.registered true
+    wait_for_prop vendor.sys.listeners.registered true
 
     # Trigger loading of ipa firmware
     write /dev/ipa 1
