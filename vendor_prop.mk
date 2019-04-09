@@ -193,8 +193,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ### SDM
 # Disable QC HDR and cabl
 PRODUCT_PROPERTY_OVERRIDES += \
-    sdm.disable_hdr_lut_gen=1 \
-    ro.qualcomm.cabl=0
+    vendor.display.disable_hdr_lut_gen=1 \
+    ro.vendor.display.cabl=2
 
 # Assertive display
 PRODUCT_PROPERTY_OVERRIDES += \
