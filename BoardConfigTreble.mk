@@ -78,6 +78,9 @@ BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 USE_XML_AUDIO_POLICY_CONF := 1
 
+### DRM
+TARGET_ENABLE_MEDIADRM_64 := true
+
 ### SEPOLICY
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += device/sony/common-treble/sepolicy/vendor
