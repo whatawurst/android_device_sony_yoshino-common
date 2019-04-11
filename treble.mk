@@ -179,3 +179,8 @@ PRODUCT_PACKAGES += \
 # RADIO
 PRODUCT_PACKAGES += \
     android.hardware.broadcastradio@1.0-impl
+
+# SECURE ELEMENT
+PRODUCT_PACKAGES += \
+    android.hardware.secure_element@1.0-service \
+    SecureElement
