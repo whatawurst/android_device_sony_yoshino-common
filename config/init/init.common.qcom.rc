@@ -115,10 +115,6 @@ on post-fs-data
     mkdir /data/vendor/ipa 0770 radio radio
     chmod 0770 /data/vendor/ipa
 
-    # Create the directories used by CnE subsystem
-    mkdir /data/connectivity 0771 system system
-    chown system system /data/connectivity
-
     # Create the directories used by DPM subsystem
     mkdir /data/dpm 0771 system system
     chown system system /data/dpm
@@ -129,6 +125,7 @@ on post-fs-data
     # Create the directories used by IMS profile override
     mkdir /data/vendor/connectivity 0750 system system
     mkdir /data/vendor/connectivity/wqeclient 0750 system system
+    symlink /data/vendor/connectivity /data/connectivity
 
     # Create directory used by audio subsystem
     mkdir /data/vendor/audio/ 0770 media audio
