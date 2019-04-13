@@ -148,27 +148,6 @@ on early-boot
     chmod 0664 /mnt/vendor/persist/sensors/sensors_settings
 
 on boot
-    # Bluetooth modules
-    chown system system /sys/module/bluetooth/parameters/disable_ertm
-    chown system system /sys/module/bluetooth/parameters/disable_esco
-    chown system system /sys/module/bluetooth/parameters/enable_hs
-    chmod 0644 /sys/module/bluetooth/parameters/disable_ertm
-    chmod 0644 /sys/module/bluetooth/parameters/disable_esco
-    chmod 0644 /sys/module/bluetooth/parameters/enable_hs
-
-    # Bluetooth rfkill
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chmod 0660 /sys/class/rfkill/rfkill0/state
-
-    # Bluetooth LPM
-    chown bluetooth bluetooth /proc/bluetooth/sleep/proto
-    chown bluetooth bluetooth /proc/bluetooth/sleep/lpm
-    chown bluetooth bluetooth /proc/bluetooth/sleep/btwrite
-    chmod 0660 /proc/bluetooth/sleep/proto
-    chmod 0660 /proc/bluetooth/sleep/lpm
-    chmod 0660 /proc/bluetooth/sleep/btwrite
-
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio

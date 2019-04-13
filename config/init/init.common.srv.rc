@@ -105,20 +105,14 @@ on property:ro.boot.baseband=msm
     enable ipacm-diag
     enable ipacm
     enable qti
-    enable netmgrd
-    enable port-bridge
+    enable vendor.netmgrd
+    enable vendor.port-bridge
 
 # QCOM prop radio
 service atfwd /vendor/bin/ATFWD-daemon
     class late_start
     user system
     group system radio
-
-# QCOM prop
-service spdaemon /vendor/bin/spdaemon
-    class core
-    user system
-    group system
 
 ### Peripheral Manager
 service per_mgr /vendor/bin/pm-service
@@ -147,11 +141,31 @@ on shutdown
 service pd_mapper /vendor/bin/pd-mapper
      class core
 
+service cnss_diag /vendor/bin/cnss_diag -q -f -t HELIUM
+   class main
+   user system
+   group system wifi inet sdcard_rw media_rw diag
+   disabled
+   oneshot
+
 # QCOM prop
 service cnss-daemon /vendor/bin/cnss-daemon -n -l
     class late_start
     user system
     group system inet net_admin wifi oem_2901
+
+# DRM widevine
+service wvkbd_installer /vendor/bin/wvkbd
+    class late_start
+    user system
+    group system
+    oneshot
+
+# Secure Clock service
+service scd /system/bin/scd
+    class late_start
+    user system
+    group system
 
 on shutdown
     stop cnss-daemon
