@@ -207,7 +207,7 @@ on post-fs-data
     start vendor.hvdcp_opti
 
     # charge_service
-    start vendor.charge_service
+    start charge_service
 
     # QNS
     start qns
