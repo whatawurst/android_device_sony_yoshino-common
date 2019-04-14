@@ -71,7 +71,7 @@ on boot
     mkdir /mnt/vendor/persist/vpp 0770 media media
 
     # Create hvdcp_opti directory
-    mkdir /mnt/vendor/persist/hvdcp_opti 0770 root syst
+    mkdir /mnt/vendor/persist/hvdcp_opti 0770 root system
 
     # bond0 used by FST Manager
     chown wifi wifi /sys/class/net/bond0/bonding/queue_id
