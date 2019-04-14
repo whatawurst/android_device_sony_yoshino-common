@@ -45,12 +45,8 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 ### PARTITIONS
 BOARD_ROOT_EXTRA_FOLDERS := \
-    bt_firmware \
-    dsp \
-    firmware \
     idd \
     misc \
-    persist \
     qns \
     rca
 
