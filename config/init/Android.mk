@@ -87,9 +87,3 @@ LOCAL_MODULE_CLASS := ETC
 # This needs to be /vendor/ueventd.rc
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)
 include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-# Create folders on /vendor needed for symlinking by init
-$(shell mkdir -p $(TARGET_OUT_VENDOR)/bt_firmware/)
-$(shell mkdir -p $(TARGET_OUT_VENDOR)/dsp/)
-$(shell mkdir -p $(TARGET_OUT_VENDOR)/firmware_mnt/)
