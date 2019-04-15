@@ -41,20 +41,20 @@ ENABLE_CPUSETS := true
 TARGET_KERNEL_VERSION := 4.4
 TARGET_KERNEL_SOURCE  := kernel/sony/msm8998
 
-BOARD_KERNEL_CMDLINE += androidboot.bootdevice=1da4000.ufshc
-BOARD_KERNEL_CMDLINE += display_status=on
-BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
-
-# See README_Xperia in Kernel source
+# Taken from unpacked stock boot.img / README_Xperia in Kernel source
 BOARD_KERNEL_CMDLINE += user_debug=31
 BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x37
 BOARD_KERNEL_CMDLINE += ehci-hcd.park=3
+BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
 BOARD_KERNEL_CMDLINE += sched_enable_hmp=1
 BOARD_KERNEL_CMDLINE += sched_enable_power_aware=1
 BOARD_KERNEL_CMDLINE += service_locator.enable=1
-BOARD_KERNEL_CMDLINE += zram.backend=z3fold
-BOARD_KERNEL_CMDLINE += buildvariant=userdebug
+BOARD_KERNEL_CMDLINE += swiotlb=2048
+BOARD_KERNEL_CMDLINE += androidboot.configfs=true
+BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=a800000.dwc3
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware_mnt/image
+BOARD_KERNEL_CMDLINE += loop.max_part=7
+BOARD_KERNEL_CMDLINE += zram.backend=z3fold
 
 # See README_Xperia in Kernel Source
 BOARD_KERNEL_BASE        := 0x00000000
