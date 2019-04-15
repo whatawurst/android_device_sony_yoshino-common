@@ -16,6 +16,9 @@
 
 $(call inherit-product, device/sony/common-treble/common.mk)
 
+# Enable updating of APEXes
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 PLATFORM_PATH := device/sony/yoshino
 
 ### PLATFORM INIT
