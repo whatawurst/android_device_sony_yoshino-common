@@ -68,11 +68,6 @@ on init
     chown root system /sys/fs/cgroup/memory/bg/tasks
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
 
-    # Wait for trimarea
-    wait /dev/block/sda1
-    chown tad tad /dev/block/sda1
-    chmod 0770 /dev/block/sda1
-
 on fs
     wait /dev/block/platform/soc/1da4000.ufshc
     symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
