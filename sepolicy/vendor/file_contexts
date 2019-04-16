@@ -1,18 +1,23 @@
 # file_contexts
 
 # DEV
+/dev/socket/fpc_oem                                             u:object_r:fpc_socket:s0
 /dev/socket/tad                                                 u:object_r:tad_socket:s0
-/dev/pn54x                                                      u:object_r:nfc_device:s0
+/dev/pn553                                                      u:object_r:nfc_device:s0
 
 # DATA
-/data/display(/.*)?                                             u:object_r:display_color_calib_data_file:s0
-/data/etc(/.*)?                                                 u:object_r:ta_data_file:s0
-/data/etc/wlan.*                                                u:object_r:wlan_data_file:s0
-/data/etc/bluetooth.*                                           u:object_r:bluetooth_data_file:s0
-/data/fpc(/.*)?                                                 u:object_r:fpc_data_file:s0
-/data/fpc/oem                                                   u:object_r:fpc_socket:s0
-/data/crashdata(/.*)?                                           u:object_r:crash_data_file:s0
+/data/vendor/etc(/.*)?                                          u:object_r:ta_vendor_data_file:s0
+/data/vendor/etc/wlan.*                                         u:object_r:wifi_vendor_data_file:s0
+/data/vendor/etc/bluetooth.*                                    u:object_r:bluetooth_vendor_data_file:s0
+/data/vendor/fpc(/.*)?                                          u:object_r:fpc_vendor_data_file:s0
+/data/vendor/crashdata(/.*)?                                    u:object_r:crash_vendor_data_file:s0
+
+# SYSTEM
+/system/bin/mssconfig                                           u:object_r:mss_config_exec:s0
 
 # VENDOR
 /(vendor|system/vendor)/bin/mlog_qmi_service                    u:object_r:mlog_qmi_service_exec:s0
+/(vendor|system/vendor)/bin/tad                                 u:object_r:tad_exec:s0
+/(vendor|system/vendor)/usr/idc(/.*)?                           u:object_r:vendor_idc_file:s0
+
 /sbin/tad_static                                                u:object_r:rootfs:s0

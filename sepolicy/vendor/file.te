@@ -6,11 +6,10 @@ type debugfs_wlan_power, fs_type, debugfs_type;
 type ssr_crash_reason_file, file_type, debugfs_type;
 
 # DATA
-type display_color_calib_data_file, file_type, data_file_type;
-type fpc_data_file, file_type, data_file_type;
-type ta_data_file, file_type, data_file_type;
-type wlan_data_file, file_type, data_file_type;
-type crash_data_file, file_type, data_file_type;
+type bluetooth_vendor_data_file, file_type, data_file_type;
+type fpc_vendor_data_file, file_type, data_file_type;
+type ta_vendor_data_file, file_type, data_file_type;
+type crash_vendor_data_file, file_type, data_file_type;
 
 # SYSFS
 type sysfs_dsi_panel, fs_type, sysfs_type;
@@ -23,5 +22,8 @@ type sysfs_rmtfs, sysfs_type, fs_type;
 type sysfs_switch_lid, fs_type, sysfs_type;
 
 # SOCKETS
-type fpc_socket, file_type, data_file_type;
+type fpc_socket, file_type;
 type tad_socket, file_type;
+
+# VENDOR
+type vendor_idc_file, file_type, vendor_file_type;

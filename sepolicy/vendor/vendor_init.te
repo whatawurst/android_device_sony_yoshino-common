@@ -1,0 +1,12 @@
+# vendor_init.te
+
+allow vendor_init rootfs:dir { create rw_dir_perms };
+
+allow vendor_init ta_block_device:blk_file { setattr };
+
+# neverallow
+#allow vendor_init bluetooth_data_file:dir { setattr };
+#allow vendor_init dhcp_data_file:dir { setattr };
+
+# neverallow:
+#allow vendor_init system_data_file:dir { create_dir_perms };

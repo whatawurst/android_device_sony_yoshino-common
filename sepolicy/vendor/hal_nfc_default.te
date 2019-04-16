@@ -1,4 +1,0 @@
-# hal_nfc_default.te
-
-# /data/vendor/nfc/*
-r_dir_file(hal_nfc_default, nfc_data_file)

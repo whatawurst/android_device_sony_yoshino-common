@@ -8,3 +8,11 @@ allow init proc_dirty_ratio:file rw_file_perms;
 
 # TA
 allow init ta_block_device:blk_file { setattr };
+
+# debugfs
+allow init debugfs:dir { mounton };
+
+# sysfs
+allow init sysfs:file { setattr };
+
+allow init sysfs_graphics:lnk_file { r_file_perms };

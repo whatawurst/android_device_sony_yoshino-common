@@ -1,5 +1,6 @@
 # property_contexts
 
+ro.vendor.semc.version               u:object_r:semc_version_prop:s0
 ro.semc.version                      u:object_r:semc_version_prop:s0
 ro.somc.secureadb                    u:object_r:secureadb_prop:s0
 ro.sony                              u:object_r:sony_prop:s0

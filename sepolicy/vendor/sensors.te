@@ -1,5 +1,10 @@
 # sensors.te
 
+# neverallow
+#allow sensors self:capability {
+#    dac_override
+#};
+
 unix_socket_connect(sensors, tad, tad)
 
 get_prop(sensors, semc_version_prop)
