@@ -125,7 +125,7 @@ PRODUCT_PACKAGES += \
 # NFC
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0-impl \
-    android.hardware.nfc@1.0-service
+    android.hardware.nfc@1.1-service
 
 # GNSS
 PRODUCT_PACKAGES += \
@@ -180,7 +180,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.broadcastradio@1.0-impl
 
-# SECURE ELEMENT
+# NFC - SECURE ELEMENT
 PRODUCT_PACKAGES += \
     android.hardware.secure_element@1.0-service \
     SecureElement

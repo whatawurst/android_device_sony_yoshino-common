@@ -22,9 +22,14 @@ PRODUCT_PACKAGES += \
 
 ### NFC
 PRODUCT_PACKAGES += \
+    com.nxp.nfc.nq \
+    com.nxp.nfc.nq.xml \
+    libnqnfc-nci \
+    libnqp61-jcop-kit \
     com.android.nfc_extras \
     NfcNci \
-    Tag
+    Tag \
+    vendor.nxp.hardware.nfc@1.1-service
 
 ### WIFI
 PRODUCT_PACKAGES += \
