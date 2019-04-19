@@ -178,7 +178,8 @@ PRODUCT_PACKAGES += \
 
 # RADIO
 PRODUCT_PACKAGES += \
-    android.hardware.broadcastradio@1.0-impl
+    android.hardware.broadcastradio@1.0-impl \
+    android.hardware.radio.config@1.0
 
 # NFC - SECURE ELEMENT
 PRODUCT_PACKAGES += \
