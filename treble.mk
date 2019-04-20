@@ -68,7 +68,8 @@ PRODUCT_PACKAGES += \
     libaudioroute \
     libaudioutils \
     libavservices_minijail \
-    libminijail
+    libminijail \
+    libstdc++.vendor
 
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1 \
