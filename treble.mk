@@ -34,18 +34,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/generic/common/nfc/libnfc-nci.conf:system/etc/libnfc-nci.conf
 
-# Support for the O-MR1 devices
-PRODUCT_COPY_FILES += \
-    build/make/target/product/vndk/init.gsi.rc:system/etc/init/init.gsi.rc \
-    build/make/target/product/vndk/init.vndk-27.rc:system/etc/init/gsi/init.vndk-27.rc
-
-# Name space configuration file for non-enforcing VNDK
-PRODUCT_PACKAGES += \
-    ld.config.vndk_lite.txt
-
-# Support addtional O-MR1 vendor interface
-PRODUCT_EXTRA_VNDK_VERSIONS := 27
-
 ### build/make/target/product/treble_common_64.mk
 
 # For now this will allow 64-bit apps, but still compile all apps with JNI
