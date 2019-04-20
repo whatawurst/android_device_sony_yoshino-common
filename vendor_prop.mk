@@ -76,9 +76,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ### BLUETOOTH
 PRODUCT_PROPERTY_OVERRIDES += \
     bt.max.hfpclient.connections=1 \
-    qcom.bluetooth.soc=cherokee \
-    ro.bluetooth.hfp.ver=1.7 \
-    ro.bt.bdaddr_path="/data/etc/bluetooth_bdaddr" \
+    vendor.qcom.bluetooth.soc=cherokee \
+    ro.vendor.btstack.hfp.ver=1.7 \
+    ro.vendor.bt.bdaddr_path="/data/vendor/etc/bluetooth_bdaddr" \
     persist.vendor.bt.enable.splita2dp=false
 
 ### AUDIO
