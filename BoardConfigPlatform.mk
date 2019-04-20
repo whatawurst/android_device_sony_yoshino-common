@@ -221,7 +221,7 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino/sepolicy/private
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab.recovery
 
 ### VENDOR SECURITY PATCH LEVEL
-VENDOR_SECURITY_PATCH := 2019-03-05
+VENDOR_SECURITY_PATCH := 2019-04-01
 
 ifeq ($(WITH_TWRP),true)
 -include $(PLATFORM_PATH)/twrp.mk
