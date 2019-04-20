@@ -43,10 +43,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.wfd.virtual=0
 
-### BLUETOOTH ADDRESS
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bt.bdaddr_path=/data/misc/bluetooth/bluetooth_bdaddr
-
 ### RILD
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
