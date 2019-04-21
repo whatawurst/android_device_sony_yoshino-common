@@ -67,6 +67,31 @@ on init
 on post-fs
     chmod 0755 /sys/kernel/debug/tracing
 
+    # led RGB
+    chown system system /sys/class/leds/rgb/sync_state
+    chown system system /sys/class/leds/rgb/start_blink
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/red/lut_pwm
+    chown system system /sys/class/leds/red/step_duration
+    chown system system /sys/class/leds/red/pause_lo_multi
+    chown system system /sys/class/leds/red/pause_hi_multi
+    chown system system /sys/class/leds/red/max_single_brightness
+    chown system system /sys/class/leds/red/max_mix_brightness
+    chown system system /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/green/lut_pwm
+    chown system system /sys/class/leds/green/step_duration
+    chown system system /sys/class/leds/green/pause_lo_multi
+    chown system system /sys/class/leds/green/pause_hi_multi
+    chown system system /sys/class/leds/green/max_single_brightness
+    chown system system /sys/class/leds/green/max_mix_brightness
+    chown system system /sys/class/leds/blue/brightness
+    chown system system /sys/class/leds/blue/lut_pwm
+    chown system system /sys/class/leds/blue/step_duration
+    chown system system /sys/class/leds/blue/pause_lo_multi
+    chown system system /sys/class/leds/blue/pause_hi_multi
+    chown system system /sys/class/leds/blue/max_single_brightness
+    chown system system /sys/class/leds/blue/max_mix_brightness
+
 on post-fs-data
     # Create directory used by bluetooth subsystem
     mkdir /data/misc/bluetooth 2770 bluetooth bluetooth
@@ -214,31 +239,6 @@ on boot
     chmod 0664 /sys/class/graphics/fb1/vendor_name
     chmod 0664 /sys/class/graphics/fb1/video_mode
     chmod 0664 /sys/class/graphics/fb1/hdcp/tp
-
-    # led RGB
-    chown system system /sys/class/leds/rgb/sync_state
-    chown system system /sys/class/leds/rgb/start_blink
-    chown system system /sys/class/leds/led:rgb_red/brightness
-    chown system system /sys/class/leds/led:rgb_red/lut_pwm
-    chown system system /sys/class/leds/led:rgb_red/step_duration
-    chown system system /sys/class/leds/led:rgb_red/pause_lo_multi
-    chown system system /sys/class/leds/led:rgb_red/pause_hi_multi
-    chown system system /sys/class/leds/led:rgb_red/max_single_brightness
-    chown system system /sys/class/leds/led:rgb_red/max_mix_brightness
-    chown system system /sys/class/leds/led:rgb_green/brightness
-    chown system system /sys/class/leds/led:rgb_green/lut_pwm
-    chown system system /sys/class/leds/led:rgb_green/step_duration
-    chown system system /sys/class/leds/led:rgb_green/pause_lo_multi
-    chown system system /sys/class/leds/led:rgb_green/pause_hi_multi
-    chown system system /sys/class/leds/led:rgb_green/max_single_brightness
-    chown system system /sys/class/leds/led:rgb_green/max_mix_brightness
-    chown system system /sys/class/leds/led:rgb_blue/brightness
-    chown system system /sys/class/leds/led:rgb_blue/lut_pwm
-    chown system system /sys/class/leds/led:rgb_blue/step_duration
-    chown system system /sys/class/leds/led:rgb_blue/pause_lo_multi
-    chown system system /sys/class/leds/led:rgb_blue/pause_hi_multi
-    chown system system /sys/class/leds/led:rgb_blue/max_single_brightness
-    chown system system /sys/class/leds/led:rgb_blue/max_mix_brightness
 
     # Cameralight
     chown cameraserver system /sys/class/leds/led:flash_0/brightness
