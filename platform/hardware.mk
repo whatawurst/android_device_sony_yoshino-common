@@ -27,3 +27,7 @@ PRODUCT_PACKAGES += \
 # MODEM
 PRODUCT_PACKAGES += \
     init.sony.modem.sh
+
+# SENSORS
+PRODUCT_PACKAGES += \
+    libsensorndkbridge
