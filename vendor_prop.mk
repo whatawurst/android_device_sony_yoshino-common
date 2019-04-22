@@ -240,3 +240,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # DISPLAY_HDR
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qcom.hdr.config=/vendor/etc/hdr_tm_config.xml
+
+# Thermal
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.thermal=somc
