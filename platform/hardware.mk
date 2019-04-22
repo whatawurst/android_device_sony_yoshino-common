@@ -31,3 +31,7 @@ PRODUCT_PACKAGES += \
 # SENSORS
 PRODUCT_PACKAGES += \
     libsensorndkbridge
+
+# VR
+PRODUCT_PACKAGES += \
+    vr.msm8998
