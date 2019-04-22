@@ -32,6 +32,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libsensorndkbridge
 
+# THERMAL
+PRODUCT_PACKAGES += \
+    thermal.msm8998
+
 # VR
 PRODUCT_PACKAGES += \
     vr.msm8998
