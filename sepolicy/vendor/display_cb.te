@@ -7,9 +7,15 @@ init_daemon_domain(display_cb)
 hwbinder_use(display_cb)
 get_prop(display_cb, hwservicemanager_prop)
 
+# WHAT PROP TO SET?
+set_prop(display_cb, vendor_pcc_mdp_prop)
+
 binder_call(display_cb, hal_display_color_default)
+binder_call(display_cb, hal_graphics_composer_default)
+vndbinder_use(display_cb)
 
 allow display_cb hal_display_color_hwservice:hwservice_manager { find };
+allow display_cb qdisplay_service:service_manager { find };
 
 # /sys/devices/soc/800f000.qcom,spmi
 r_dir_file(display_cb, sysfs_mdss_dsi_panel)
@@ -21,6 +27,4 @@ allow display_cb display_vendor_data_file:file create_file_perms;
 # /sys/devices/mdss_dsi_panel/c_mode
 allow display_cb sysfs_dsi_panel:file r_file_perms;
 
-# /data/display/pcc_calib
-allow display_cb display_color_calib_data_file:dir rw_dir_perms;
-allow display_cb display_color_calib_data_file:file create_file_perms;
+allow display_cb vndbinder_device:chr_file r_file_perms;

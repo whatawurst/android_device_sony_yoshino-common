@@ -1,6 +1,0 @@
-# somc_wifi_hal_service.te
-
-type somc_wifi_hal_service, domain;
-type somc_wifi_hal_service_exec, exec_type, vendor_file_type, file_type;
-
-init_daemon_domain(somc_wifi_hal_service)

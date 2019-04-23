@@ -20,8 +20,9 @@ type startupprober_file, file_type;
 type modemsw_cache_file, file_type;
 
 # data
-type credmgrd_data_file, file_type, data_file_type;
-type illumination_data_file, file_type, data_file_type;
+type credmgrd_vendor_data_file, file_type, data_file_type;
+type illumination_vendor_data_file, file_type, data_file_type;
+type wfd_vendor_data_file, file_type, data_file_type;
 
 # sockets
 type camera_somc_socket, file_type;
@@ -37,3 +38,6 @@ type sysfs_qns, fs_type, sysfs_type;
 type sysfs_sony_camera, fs_type, sysfs_type;
 type sysfs_tof_rgbcir, fs_type, sysfs_type;
 type sysfs_wlan, fs_type, sysfs_type;
+
+# vendor
+type ffu_firmware_file, file_type, vendor_file_type;

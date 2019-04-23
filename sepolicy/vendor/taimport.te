@@ -14,9 +14,8 @@ allow taimport self:capability {
 set_prop(taimport, semc_version_prop)
 set_prop(taimport, secureadb_prop)
 set_prop(taimport, sony_prop)
+set_prop(taimport, taimport_prop)
 
-# /data/etc/wlan_macaddr0
-allow taimport ta_data_file:dir rw_dir_perms;
-allow taimport ta_data_file:file create_file_perms;
-allow taimport bluetooth_data_file:file create_file_perms;
-allow taimport wlan_data_file:file create_file_perms;
+allow taimport hidl_allocator_hwservice:hwservice_manager { find };
+allow taimport hidl_memory_hwservice:hwservice_manager { find };
+allow taimport hal_miscta_hwservice:hwservice_manager { find };

@@ -1,22 +1,23 @@
 # file_contexts
 
 ### ROOT
-/rca(/.*)?                                                      u:object_r:idd_rca_file:s0
-/idd(/.*)?                                                      u:object_r:idd_data_file:s0
-/idd/crashdata(/.*)?                                            u:object_r:idd_crashdata_file:s0
-/idd/fsck(/.*)?                                                 u:object_r:idd_fsck_file:s0
-/idd/lost\+found(/.*)?                                          u:object_r:idd_lostfound_file:s0
-/idd/output(/.*)?                                               u:object_r:idd_output_file:s0
-/idd/socket(/.*)?                                               u:object_r:idd_socket_file:s0
-/idd/startup-prober(/.*)?                                       u:object_r:startupprober_file:s0
-/qns(/.*)?                                                      u:object_r:qns_file:s0
+/mnt/rca(/.*)?                                                  u:object_r:idd_rca_file:s0
+/mnt/idd(/.*)?                                                  u:object_r:idd_data_file:s0
+/mnt/idd/crashdata(/.*)?                                        u:object_r:idd_crashdata_file:s0
+/mnt/idd/fsck(/.*)?                                             u:object_r:idd_fsck_file:s0
+/mnt/idd/lost\+found(/.*)?                                      u:object_r:idd_lostfound_file:s0
+/mnt/idd/output(/.*)?                                           u:object_r:idd_output_file:s0
+/mnt/idd/socket(/.*)?                                           u:object_r:idd_socket_file:s0
+/mnt/idd/startup-prober(/.*)?                                   u:object_r:startupprober_file:s0
+/mnt/qns(/.*)?                                                  u:object_r:qns_file:s0
 
 ### CACHE
 /cache/modem(/.*)?                                              u:object_r:modemsw_cache_file:s0
 
 ### DATA
-/data/credmgr(/.*)?                                             u:object_r:credmgrd_data_file:s0
-/data/vendor/illumination_service(/.*)?                         u:object_r:illumination_data_file:s0
+/data/vendor/credmgr(/.*)?                                      u:object_r:credmgrd_vendor_data_file:s0
+/data/vendor/illumination_service(/.*)?                         u:object_r:illumination_vendor_data_file:s0
+/data/vendor/wfd(/.*)?                                          u:object_r:wfd_vendor_data_file:s0
 
 ### DEVICES
 /dev/block/mmcblk0                                              u:object_r:root_block_device:s0
@@ -38,10 +39,18 @@
 /dev/socket/secd_devsec_sock                                    u:object_r:secd_devsec_socket:s0
 
 # PERSIST
-/persist/pc(/.*)?                                               u:object_r:simpin_cache_data_file:s0
+/mnt/vendor/persist/pc(/.*)?                                    u:object_r:simpin_cache_data_file:s0
+/mnt/vendor/persist/credmgr(/.*)?                               u:object_r:credmgrd_vendor_data_file:s0
 
 # SYSFS
-/sys/devices/soc/[a-z0-9]+.qcom,mdss_mdp/[a-z0-9]+.qcom,mdss_mdp:qcom,mdss_fb_primary/leds/lcd-backlight(/.*)?		u:object_r:sysfs_graphics:s0
+/sys/class/leds/vibrator/activate                               u:object_r:sysfs_leds:s0
+
+/sys/devices/soc/[a-z0-9]+.qcom,spmi/spmi-[0-9]/spmi0-0[0-9]/[a-z0-9]+.qcom,spmi:qcom,[a-z0-9]+@[0-9]:qpnp,fg/rated_capacity u:object_r:sysfs_battery_supply:s0
+/sys/devices/soc/[a-z0-9]+.qcom,spmi/spmi-[0-9]/spmi0-0[0-9]/[a-z0-9]+.qcom,spmi:qcom,[a-z0-9]+@[0-9]:qpnp,fg/batt_aging_level u:object_r:sysfs_battery_supply:s0
+
+/sys/devices/soc/[a-z0-9]+.qcom,spmi/spmi-[0-9]/spmi0-0[0-9]/[a-z0-9]+.qcom,spmi:qcom,[a-z0-9]+@[0-9]:qcom,qpnp-smb2/power_supply/usb(/.*)? u:object_r:sysfs_usb_supply:s0
+
+/sys/devices/soc/[a-z0-9]+.qcom,mdss_mdp/[a-z0-9]+.qcom,mdss_mdp:qcom,mdss_fb_primary/leds/lcd-backlight(/.*)? u:object_r:sysfs_graphics:s0
 /sys/devices/soc/soc:qcom,ipa_fws@[a-f0-9]+/subsys0/restart_level   u:object_r:sysfs_ssr_toggle:s0
 /sys/devices/soc/soc:qcom,kgsl-hyp/subsys[0-9]/restart_level    u:object_r:sysfs_ssr_toggle:s0
 /sys/devices/soc/[a-z0-9]+.qcom,venus/subsys[0-9]/restart_level u:object_r:sysfs_ssr_toggle:s0
@@ -64,7 +73,9 @@
 /sys/devices/virtual/input/input3/als_gain                      u:object_r:sysfs_tof_rgbcir:s0
 /sys/devices/virtual/input/input3/als_power_state               u:object_r:sysfs_tof_rgbcir:s0
 /sys/devices/virtual/input/input3/als_thres                     u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input3/als_all                       u:object_r:sysfs_tof_rgbcir:s0
 /sys/devices/virtual/input/input3/chip_pow                      u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input3/notify                        u:object_r:sysfs_tof_rgbcir:s0
 
 /sys/devices/sony_camera_1/info                                 u:object_r:sysfs_sony_camera:s0
 /sys/devices/sony_camera_0/info                                 u:object_r:sysfs_sony_camera:s0
@@ -75,6 +86,8 @@
 ### SERVICES
 # system services
 /system/bin/cacaoserver                                         u:object_r:cacaoserver_exec:s0
+/system/bin/ssr_dumper                                          u:object_r:ssr_dumper_exec:s0
+/system/bin/bt_ssr_dumper                                       u:object_r:ssr_dumper_exec:s0
 
 # vendor services
 /(vendor|system/vendor)/bin/hw/display_cb                       u:object_r:display_cb_exec:s0
@@ -89,20 +102,22 @@
 /(vendor|system/vendor)/bin/hw/vendor\.semc\.system\.idd\.fallback@1\.0-service u:object_r:hal_idd_fallback_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.camera\.provider@1\.0-service    u:object_r:hal_camera_somc_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.miscta@1\.0-service  u:object_r:hal_miscta_default_exec:s0
-/(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.wifi@1\.0-service    u:object_r:hal_wifi_hostapd_default_exec:s0
-/(vendor|system/vendor)/bin/bt_ssr_dumper                       u:object_r:ssr_dumper_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.wifi@2\.0-service    u:object_r:hal_wifi_hostapd_default_exec:s0
+/(vendor|system/vendor)/bin/charge_service                      u:object_r:charge_service_exec:s0
+/(vendor|system/vendor)/bin/ffu                                 u:object_r:ffu_exec:s0
 /(vendor|system/vendor)/bin/idd-logreader                       u:object_r:idd_exec:s0
 /(vendor|system/vendor)/bin/iddd                                u:object_r:idd_exec:s0
 /(vendor|system/vendor)/bin/init\.sony\.modem\.sh               u:object_r:qti_init_shell_exec:s0
 /(vendor|system/vendor)/bin/keyprovd                            u:object_r:keyprovd_exec:s0
-/(vendor|system/vendor)/bin/mssconfig                           u:object_r:mss_config_exec:s0
 /(vendor|system/vendor)/bin/qns                                 u:object_r:qns_exec:s0
 /(vendor|system/vendor)/bin/sct_service                         u:object_r:sct_service_exec:s0
 /(vendor|system/vendor)/bin/secd                                u:object_r:secd_exec:s0
-/(vendor|system/vendor)/bin/ssr_dumper                          u:object_r:ssr_dumper_exec:s0
 /(vendor|system/vendor)/bin/sony-modem-switcher                 u:object_r:modem_switcher_exec:s0
 /(vendor|system/vendor)/bin/startup-prober                      u:object_r:startupprober_exec:s0
 /(vendor|system/vendor)/bin/startup-logger                      u:object_r:startup-logger_exec:s0
 /(vendor|system/vendor)/bin/ta_qmi_service                      u:object_r:ta_qmi_service_exec:s0
 /(vendor|system/vendor)/bin/taimport                            u:object_r:taimport_exec:s0
+/(vendor|system/vendor)/bin/taimport_vendor                     u:object_r:taimport_vendor_exec:s0
 /(vendor|system/vendor)/bin/updatemiscta                        u:object_r:updatemiscta_exec:s0
+
+/(vendor|system/vendor)/etc/firmware/01AD-483238553632333031414D5220202020-D003.bin u:object_r:ffu_firmware_file:s0

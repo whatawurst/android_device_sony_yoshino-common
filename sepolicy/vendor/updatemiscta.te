@@ -9,3 +9,5 @@ unix_socket_connect(updatemiscta, tad, tad)
 
 set_prop(updatemiscta, trimarea_prop)
 get_prop(updatemiscta, semc_version_prop)
+
+allow updatemiscta hal_miscta_hwservice:hwservice_manager { find };

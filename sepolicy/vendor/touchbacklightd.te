@@ -6,4 +6,5 @@ type touchbacklightd_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(touchbacklightd)
 
 unix_socket_connect(touchbacklightd, illumination, illumination_service)
-set_prop(touchbacklightd, system_prop)
+
+set_prop(touchbacklightd, vendor_backlighton_prop)

@@ -20,4 +20,5 @@ allow hal_idd_default idd:fd { use };
 allow hal_idd_default idd_data_file:file r_file_perms;
 
 # /idd
+allow hal_idd_default idd_root_dir:dir r_dir_perms;
 allow hal_idd_default idd_data_file:dir r_dir_perms;

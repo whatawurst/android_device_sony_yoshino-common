@@ -1,6 +1,7 @@
 # rild.te
 
 binder_call(rild, hal_secd_default)
+# NOT ALLOWED allow rild default_android_hwservice:hwservice_manager { find };
 allow rild hal_secd_hwservice:hwservice_manager { find };
 
 get_prop(rild, semc_version_prop)

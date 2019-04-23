@@ -6,7 +6,13 @@ hal_server_domain(hal_secd_default, hal_secd)
 init_daemon_domain(hal_secd_default)
 add_hwservice(hal_secd_default, hal_secd_hwservice);
 
+binder_call(hal_secd_default, hal_idd_default)
+
 unix_socket_connect(hal_secd_default, secd_devsec, secd)
+
+get_prop(hal_secd_default, vendor_tee_listener_prop)
+
+allow hal_secd_default hal_idd_hwservice:hwservice_manager { find };
 
 # /dev/ion
 allow hal_secd_default ion_device:chr_file r_file_perms;
@@ -20,3 +26,6 @@ allow hal_secd_default simpin_cache_data_file:file create_file_perms;
 
 # /persist
 allow hal_secd_default persist_file:dir r_dir_perms;
+
+# /data/vendor
+allow hal_secd_default mnt_vendor_file:dir r_dir_perms;

@@ -1,1 +1,0 @@
-add_hwservice(hal_wifi_hostapd, hal_wifi_somc_hwservice)

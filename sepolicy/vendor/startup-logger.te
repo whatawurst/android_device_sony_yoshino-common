@@ -10,6 +10,9 @@ unix_socket_connect(startup-logger, tad, tad)
 #allow startup-logger self:capability {
 #    dac_override
 #};
+allow startup-logger hidl_allocator_hwservice:hwservice_manager { find };
+allow startup-logger hidl_memory_hwservice:hwservice_manager { find };
+allow startup-logger hal_miscta_hwservice:hwservice_manager { find };
 
 rw_dir_file(startup-logger, idd_rca_dir)
 allow startup-logger idd_rca_file:dir rw_dir_perms;

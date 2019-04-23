@@ -1,0 +1,14 @@
+# taimport_vendor.te
+
+type taimport_vendor, domain;
+type taimport_vendor_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(taimport_vendor)
+
+unix_socket_connect(taimport_vendor, tad, tad)
+
+allow taimport_vendor self:capability {
+    setgid
+};
+
+set_prop(taimport_vendor, semc_version_prop);
