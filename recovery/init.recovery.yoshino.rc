@@ -11,6 +11,9 @@ on fs
     chmod 0664 /dev/ion
     chown system system /dev/ion
 
+    insmod /lib/modules/bu520x1nvx.ko
+    insmod /lib/modules/ldo_vibrator.ko
+
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
     insmod /lib/modules/kscl.ko
 
