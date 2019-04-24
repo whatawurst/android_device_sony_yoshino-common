@@ -224,6 +224,4 @@ BUILD_BROKEN_DUP_RULES := true
 ### ALLOW USE OF BUILD_COPY_HEADERS
 BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
 
-ifeq ($(WITH_TWRP),true)
--include $(PLATFORM_PATH)/twrp.mk
-endif
+include $(PLATFORM_PATH)/twrp.mk
