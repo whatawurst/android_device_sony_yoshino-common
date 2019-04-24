@@ -38,7 +38,8 @@ PRODUCT_COPY_FILES += \
 
 # Add manifest for hwservicemanager
 PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/recovery/vendor/manifest.xml:recovery/root/vendor/manifest.xml
+    $(PLATFORM_PATH)/recovery/root/system/etc/vintf/manifest.xml:recovery/root/system/etc/vintf/manifest.xml \
+    $(PLATFORM_PATH)/recovery/root/vendor/etc/vintf/manifest.xml:recovery/root/vendor/etc/vintf/manifest.xml
 
 else # WITH_TWRP
 ### VERITY
