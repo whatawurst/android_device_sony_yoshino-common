@@ -79,7 +79,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.qcom.bluetooth.soc=cherokee \
     ro.vendor.btstack.hfp.ver=1.7 \
     ro.vendor.bt.bdaddr_path="/data/vendor/etc/bluetooth_bdaddr" \
-    persist.vendor.bt.enable.splita2dp=false
+    persist.vendor.bt.enable.splita2dp=false \
+    persist.vendor.btstack.a2dp_offload_cap=false
 
 ### AUDIO
 # Reduce client buffer size for fast audio output tracks
