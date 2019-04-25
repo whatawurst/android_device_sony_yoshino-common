@@ -104,10 +104,9 @@ on post-fs-data
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
-    chown system system /persist
-    chmod 0771 /persist
+    chown system system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
 
-    mkdir /data/etc 0775
     mkdir /data/system 0775 system system
 
     # Create directories for Location services
@@ -120,16 +119,13 @@ on post-fs-data
     chown system system /data/shared
 
     # Enable the setgid bit on the directory
-    mkdir /data/audio 0770 media audio
-    chmod 2770 /data/audio
+    mkdir /data/vendor/audio 0770 media audio
+    chmod 2770 /data/vendor/audio
 
     # FM Radio
     mkdir /data/misc/fm 0770 system system
 
     chown system /dev/block/bootdevice/by-name
-
-    # Audio/Media
-    mkdir /data/mediaserver 0770 media audio
 
     setprop vold.post_fs_data_done 1
 
@@ -195,13 +191,8 @@ on boot
     mkdir /data/vendor/netmgr 0770 radio radio
     chmod 0770 /data/vendor/netmgr
 
-    # Mark the copy complete flag to not completed
-    write /data/misc/radio/copy_complete 0
-    chown radio radio /data/misc/radio/copy_complete
-    chmod 0660 /data/misc/radio/copy_complete
-
-    # Create folder for timekeep
-    mkdir /data/time/ 0700 system system
+    # Create folder for time_daemon
+    mkdir /data/vendor/time/ 0700 system system
 
     # Camera Recording
     mkdir /dev/video
