@@ -68,7 +68,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Enable CNE
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.cne.feature=1
+    persist.vendor.cne.feature=1
 
 # Enable dpm module
 PRODUCT_PROPERTY_OVERRIDES += \
