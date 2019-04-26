@@ -214,7 +214,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Touch
 PRODUCT_PROPERTY_OVERRIDES += \
-    sys.backlight_on=1
+    vendor.backlight_on=1
 
 # SD Encryption supported
 PRODUCT_PROPERTY_OVERRIDES += \
