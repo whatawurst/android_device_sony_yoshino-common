@@ -7,4 +7,6 @@ init_daemon_domain(hal_miscta_default)
 add_hwservice(hal_miscta_default, hal_miscta_hwservice)
 unix_socket_connect(hal_miscta_default, tad, tad)
 
+binder_call(hal_miscta_default, hal_allocator)
+
 allow hal_miscta_default hidl_memory_hwservice:hwservice_manager { find };

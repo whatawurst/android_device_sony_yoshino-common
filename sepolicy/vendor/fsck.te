@@ -4,4 +4,5 @@ allow fsck diag_block_device:blk_file rw_file_perms;
 allow fsck qnovo_block_device:blk_file rw_file_perms;
 allow fsck idd_rca_dir:dir { getattr };
 allow fsck idd_root_dir:dir { getattr };
+allow fsck idd_rca_file:dir { getattr };
 allow fsck media_rw_data_file:dir { getattr };

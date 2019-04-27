@@ -5,9 +5,14 @@ allow init idd_block_device:blk_file rw_file_perms;
 
 # /mnt/rca
 allow init idd_rca_dir:dir { mounton };
+allow init idd_rca_file:dir { mounton };
 
 # /mnt/idd
 allow init idd_root_dir:dir { mounton };
+allow init idd_data_file:dir { mounton };
+
+# /mnt/qns
+allow init qns_file:dir { mounton };
 
 # /dev/socket/cammw_tintless
 #allow init camera_socket:sock_file create_file_perms;
@@ -15,5 +20,5 @@ allow init idd_root_dir:dir { mounton };
 # /dev/socket/secd_devsec_sock
 allow init secd_devsec_socket:sock_file create_file_perms;
 
-# Allow loading kscl.ko
+# Allow loading kscl.ko etc.
 allow init system_file:system { module_load };

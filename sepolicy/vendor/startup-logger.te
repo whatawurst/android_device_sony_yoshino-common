@@ -10,6 +10,7 @@ get_prop(startup-logger, hwservicemanager_prop)
 hwbinder_use(startup-logger)
 
 binder_call(startup-logger, hal_allocator)
+binder_call(startup-logger, hal_miscta_default)
 
 #allow startup-logger self:capability {
 #    dac_override

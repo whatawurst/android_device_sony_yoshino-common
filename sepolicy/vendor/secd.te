@@ -10,7 +10,7 @@ unix_socket_connect(secd, tad, tad)
 hwbinder_use(secd)
 get_prop(secd, hwservicemanager_prop)
 set_prop(secd, property_socket)
-set_prop(secd, keyprovd_prop)
+set_prop(secd, suntory_prop)
 
 binder_call(secd, hal_idd_default)
 

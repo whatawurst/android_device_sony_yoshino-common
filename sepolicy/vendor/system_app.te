@@ -1,6 +1,8 @@
 # system_app.te
 
-allow system_app hal_miscta_default:binder call;
+binder_call(system_app, cacaoserver)
+binder_call(system_app, hal_miscta_default)
+
 allow system_app hal_miscta_hwservice:hwservice_manager find;
 
 allow system_app modemsw_cache_file:dir rw_dir_perms;

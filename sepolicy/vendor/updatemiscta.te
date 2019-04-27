@@ -15,8 +15,8 @@ allow updatemiscta hal_miscta_hwservice:hwservice_manager { find };
 allow updatemiscta hidl_allocator_hwservice:hwservice_manager { find };
 allow updatemiscta hidl_memory_hwservice:hwservice_manager { find };
 
-set_prop(updatemiscta, trimarea_prop)
 set_prop(updatemiscta, semc_version_prop)
 get_prop(updatemiscta, semc_product_prop)
+set_prop(updatemiscta, tareset_notfirstboot_prop)
 
 allow updatemiscta system_file:dir { r_dir_perms };

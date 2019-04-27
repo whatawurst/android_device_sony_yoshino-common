@@ -41,9 +41,12 @@
 # PERSIST
 /mnt/vendor/persist/pc(/.*)?                                    u:object_r:simpin_cache_data_file:s0
 /mnt/vendor/persist/credmgr(/.*)?                               u:object_r:credmgrd_vendor_data_file:s0
+/mnt/vendor/persist/credmgr.db                                  u:object_r:credmgrd_vendor_data_file:s0
 
 # SYSFS
 /sys/class/leds/vibrator/activate                               u:object_r:sysfs_leds:s0
+
+/sys/class/graphics/fb([0-3])+/pa                               u:object_r:sysfs_graphics:s0
 
 /sys/devices/soc/[a-z0-9]+.qcom,spmi/spmi-[0-9]/spmi0-0[0-9]/[a-z0-9]+.qcom,spmi:qcom,[a-z0-9]+@[0-9]:qpnp,fg/rated_capacity u:object_r:sysfs_battery_supply:s0
 /sys/devices/soc/[a-z0-9]+.qcom,spmi/spmi-[0-9]/spmi0-0[0-9]/[a-z0-9]+.qcom,spmi:qcom,[a-z0-9]+@[0-9]:qpnp,fg/batt_aging_level u:object_r:sysfs_battery_supply:s0

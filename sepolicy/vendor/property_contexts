@@ -1,7 +1,7 @@
 # property_contexts
 
-persist.keyprovd.suntory.prov        u:object_r:keyprovd_prop:s0
-persist.tareset.notfirstboot         u:object_r:trimarea_prop:s0
+persist.keyprovd.suntory.prov        u:object_r:suntory_prop:s0
+persist.tareset.notfirstboot         u:object_r:tareset_notfirstboot_prop:s0
 
 init.taimport                        u:object_r:taimport_prop:s0
 

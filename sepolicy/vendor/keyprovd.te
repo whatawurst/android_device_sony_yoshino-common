@@ -5,7 +5,8 @@ type keyprovd_exec, exec_type, vendor_file_type, file_type;
 
 init_daemon_domain(keyprovd)
 vndbinder_use(keyprovd)
-get_prop(keyprovd, keyprovd_prop)
+
+get_prop(keyprovd, suntory_prop)
 
 unix_socket_connect(keyprovd, tad, tad)
 

@@ -9,6 +9,7 @@ add_hwservice(hal_secd_default, hal_secd_hwservice);
 binder_call(hal_secd_default, hal_idd_default)
 
 unix_socket_connect(hal_secd_default, secd_devsec, secd)
+unix_socket_connect(hal_secd_default, tad, tad)
 
 get_prop(hal_secd_default, vendor_tee_listener_prop)
 
@@ -28,4 +29,8 @@ allow hal_secd_default simpin_cache_data_file:file create_file_perms;
 allow hal_secd_default persist_file:dir r_dir_perms;
 
 # /data/vendor
-allow hal_secd_default mnt_vendor_file:dir r_dir_perms;
+allow hal_secd_default mnt_vendor_file:dir rw_dir_perms;
+allow hal_secd_default mnt_vendor_file:file create_file_perms;
+
+# /mnt/vendor/persist/credmgr.db
+allow hal_secd_default credmgrd_vendor_data_file:file create_file_perms;

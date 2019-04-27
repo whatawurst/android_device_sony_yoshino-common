@@ -5,3 +5,4 @@ binder_call(rild, hal_secd_default)
 allow rild hal_secd_hwservice:hwservice_manager { find };
 
 get_prop(rild, vendor_semc_version_cust_active_prop)
+set_prop(rild, vendor_radio_prop)

@@ -1,8 +1,8 @@
 # property.te
 
-type keyprovd_prop, property_type;
-type trimarea_prop, property_type;
 type oem_prop, property_type;
+type suntory_prop, property_type;
 type taimport_prop, property_type;
+type tareset_notfirstboot_prop, property_type;
 type vendor_backlighton_prop, property_type;
 type vendor_pcc_mdp_prop, property_type;
