@@ -225,7 +225,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.custom_ecc=1 \
     persist.vendor.radio.rat_on=combine \
-    persist.vendor.radio.sib16_support=1
+    persist.vendor.radio.sib16_support=1 \
+    persist.vendor.radio.ims_call_transfer=true \
+    persist.vendor.radio.mt_sms_ack=19 \
+    persist.vendor.radio.report_codec=1 \
+    persist.vendor.data.iwlan.enable=true \
+    persist.vendor.service.bdroid.ssrlvl=3 \
+    persist.vendor.radio.block_allow_data=1 \
+    persist.vendor.ims.vcel_rtcp_report=5
 
 # Radio IMS
 PRODUCT_PROPERTY_OVERRIDES += \
