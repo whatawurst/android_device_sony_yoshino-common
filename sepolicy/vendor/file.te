@@ -11,6 +11,9 @@ type fpc_vendor_data_file, file_type, data_file_type;
 type ta_vendor_data_file, file_type, data_file_type;
 type crash_vendor_data_file, file_type, data_file_type;
 
+# PERIST
+type persist_wlan_file, file_type;
+
 # SYSFS
 type sysfs_dsi_panel, fs_type, sysfs_type;
 type sysfs_fpc, fs_type, sysfs_type;

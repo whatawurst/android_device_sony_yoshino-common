@@ -1,12 +1,32 @@
 # vendor_init.te
+typeattribute vendor_init data_between_core_and_vendor_violators;
+
+# dpmd_data_file
+# qvrd_data_file
+allow vendor_init {
+    bluetooth_data_file
+    dhcp_data_file
+    media_rw_data_file
+    system_data_file
+    time_data_file
+    tombstone_data_file
+    wifi_data_file
+}:dir { create search getattr open read setattr ioctl write add_name remove_name rmdir relabelfrom };
 
 allow vendor_init rootfs:dir { create rw_dir_perms };
+allow vendor_init tmpfs:dir { create rw_dir_perms };
 
 allow vendor_init ta_block_device:blk_file { setattr };
 
-# neverallow
-#allow vendor_init bluetooth_data_file:dir { setattr };
-#allow vendor_init dhcp_data_file:dir { setattr };
+# /proc/dirty
+allow vendor_init proc_dirty:file { rw_file_perms };
+allow vendor_init proc_dirty_ratio:file { rw_file_perms };
 
-# neverallow:
-#allow vendor_init system_data_file:dir { create_dir_perms };
+# /proc/dmesg_
+allow vendor_init proc_security:file { rw_file_perms };
+
+# /proc/cmdline
+allow vendor_init proc_cmdline:file { getattr };
+
+# /dev/sockets
+allow vendor_init wpa_socket:dir { setattr };

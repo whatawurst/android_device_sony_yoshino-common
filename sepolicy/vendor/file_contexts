@@ -12,6 +12,9 @@
 /data/vendor/fpc(/.*)?                                          u:object_r:fpc_vendor_data_file:s0
 /data/vendor/crashdata(/.*)?                                    u:object_r:crash_vendor_data_file:s0
 
+# PERSIST
+/mnt/vendor/persist/wlan(/.*)?                                  u:object_r:persist_wlan_file:s0
+
 # SYSTEM
 /system/bin/mssconfig                                           u:object_r:mss_config_exec:s0
 

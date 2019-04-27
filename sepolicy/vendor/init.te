@@ -16,3 +16,5 @@ allow init debugfs:dir { mounton };
 allow init sysfs:file { setattr };
 
 allow init sysfs_graphics:lnk_file { r_file_perms };
+
+allow init vendor_toolbox_exec:file { r_file_perms };
