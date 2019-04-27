@@ -245,6 +245,10 @@ on early-boot
 
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.qcom.early_boot.sh
 
+    # This is normally set by init.qcom.sh but the script does nothing,
+    # so there is no need to execute it.
+    setprop ro.vendor.ril.mbn_copy_completed 1
+
     # Debug config for clearpad
     chown system system /sys/devices/virtual/input/clearpad/fwrevision
     chmod 0600 /sys/devices/virtual/input/clearpad/fwrevision
