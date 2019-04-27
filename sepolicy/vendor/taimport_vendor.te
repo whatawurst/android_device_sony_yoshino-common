@@ -11,4 +11,4 @@ allow taimport_vendor self:capability {
     setgid
 };
 
-set_prop(taimport_vendor, semc_version_prop);
+set_prop(taimport_vendor, vendor_semc_version_cust_active_prop);

@@ -18,7 +18,7 @@ allow idd idd_exec:file { execute_no_trans };
 
 hwbinder_use(idd)
 get_prop(idd, hwservicemanager_prop)
-get_prop(idd, semc_version_prop)
+get_prop(idd, vendor_semc_version_cust_active_prop)
 
 # /proc/sys/kernel/random/uuid
 allow idd proc:file r_file_perms;

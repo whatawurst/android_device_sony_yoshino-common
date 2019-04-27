@@ -11,7 +11,7 @@ init_daemon_domain(modem_switcher)
 
 unix_socket_connect(modem_switcher, tad, tad)
 
-get_prop(modem_switcher, semc_version_prop)
+get_prop(modem_switcher, vendor_semc_version_cust_active_prop)
 
 # /dev/block
 allow modem_switcher block_device:dir r_dir_perms;

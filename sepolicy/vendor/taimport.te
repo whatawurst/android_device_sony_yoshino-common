@@ -11,8 +11,8 @@ allow taimport self:capability {
     setgid
 };
 
-set_prop(taimport, semc_version_prop)
 set_prop(taimport, secureadb_prop)
+set_prop(taimport, semc_version_prop)
 set_prop(taimport, sony_prop)
 set_prop(taimport, taimport_prop)
 
