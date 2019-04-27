@@ -1,11 +1,15 @@
 # startup-logger.te
 
-type startup-logger, domain;
-type startup-logger_exec, exec_type, vendor_file_type, file_type;
+type startup-logger, domain, coredomain;
+type startup-logger_exec, exec_type, file_type;
 
 init_daemon_domain(startup-logger)
 
-unix_socket_connect(startup-logger, tad, tad)
+get_prop(startup-logger, hwservicemanager_prop)
+
+hwbinder_use(startup-logger)
+
+binder_call(startup-logger, hal_allocator)
 
 #allow startup-logger self:capability {
 #    dac_override
@@ -17,3 +21,5 @@ allow startup-logger hal_miscta_hwservice:hwservice_manager { find };
 rw_dir_file(startup-logger, idd_rca_dir)
 allow startup-logger idd_rca_file:dir rw_dir_perms;
 allow startup-logger idd_rca_file:file create_file_perms;
+
+allow startup-logger system_file:dir r_dir_perms;

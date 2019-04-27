@@ -1,15 +1,19 @@
 # taimport.te
 
-type taimport, domain;
-type taimport_exec, exec_type, vendor_file_type, file_type;
+type taimport, domain, coredomain;
+type taimport_exec, exec_type, file_type;
 
 init_daemon_domain(taimport)
-
-unix_socket_connect(taimport, tad, tad)
 
 allow taimport self:capability {
     setgid
 };
+
+get_prop(taimport, hwservicemanager_prop)
+hwbinder_use(taimport)
+
+binder_call(taimport, hal_miscta_default)
+binder_call(taimport, hal_allocator)
 
 set_prop(taimport, secureadb_prop)
 set_prop(taimport, semc_version_prop)
@@ -19,3 +23,5 @@ set_prop(taimport, taimport_prop)
 allow taimport hidl_allocator_hwservice:hwservice_manager { find };
 allow taimport hidl_memory_hwservice:hwservice_manager { find };
 allow taimport hal_miscta_hwservice:hwservice_manager { find };
+
+allow taimport system_file:dir { r_dir_perms };

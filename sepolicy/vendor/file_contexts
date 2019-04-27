@@ -88,6 +88,9 @@
 /system/bin/cacaoserver                                         u:object_r:cacaoserver_exec:s0
 /system/bin/ssr_dumper                                          u:object_r:ssr_dumper_exec:s0
 /system/bin/bt_ssr_dumper                                       u:object_r:ssr_dumper_exec:s0
+/system/bin/updatemiscta                                        u:object_r:updatemiscta_exec:s0
+/system/bin/startup-logger                                      u:object_r:startup-logger_exec:s0
+/system/bin/taimport                                            u:object_r:taimport_exec:s0
 
 # vendor services
 /(vendor|system/vendor)/bin/hw/display_cb                       u:object_r:display_cb_exec:s0
@@ -114,10 +117,7 @@
 /(vendor|system/vendor)/bin/secd                                u:object_r:secd_exec:s0
 /(vendor|system/vendor)/bin/sony-modem-switcher                 u:object_r:modem_switcher_exec:s0
 /(vendor|system/vendor)/bin/startup-prober                      u:object_r:startupprober_exec:s0
-/(vendor|system/vendor)/bin/startup-logger                      u:object_r:startup-logger_exec:s0
 /(vendor|system/vendor)/bin/ta_qmi_service                      u:object_r:ta_qmi_service_exec:s0
-/(vendor|system/vendor)/bin/taimport                            u:object_r:taimport_exec:s0
 /(vendor|system/vendor)/bin/taimport_vendor                     u:object_r:taimport_vendor_exec:s0
-/(vendor|system/vendor)/bin/updatemiscta                        u:object_r:updatemiscta_exec:s0
 
 /(vendor|system/vendor)/etc/firmware/01AD-483238553632333031414D5220202020-D003.bin u:object_r:ffu_firmware_file:s0
