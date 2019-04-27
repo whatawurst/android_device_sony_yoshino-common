@@ -133,6 +133,10 @@ on post-fs-data
 
     # Create directory for tftp
     mkdir /data/vendor/tombstones 0771 system system
+    mkdir /data/vendor/tombstones/modem 0771 system system
+    mkdir /data/vendor/tombstones/lpass 0771 system system
+    mkdir /data/vendor/tombstones/wcnss 0771 system system
+    mkdir /data/vendor/tombstones/dsps 0771 system system
 
     # Create bluetooth subsystem directories
     mkdir /data/vendor/ramdump 0771 root system
@@ -302,12 +306,8 @@ on post-fs-data
     # Create directory to backup kernel panic logs
     mkdir /data/misc/pstore 0770 system system
 
-    # Create directories for tombstones
-    mkdir /data/tombstones 0771 system system
-    mkdir /tombstones/modem 0771 system system
-    mkdir /tombstones/lpass 0771 system system
-    mkdir /tombstones/wcnss 0771 system system
-    mkdir /tombstones/dsps 0771 system system
+    # Create symlink for tombstones
+    symlink /data/vendor/tombstones /tombstones
 
     # Create directory for hbtp
     mkdir /data/vendor/hbtp 0750 system system
