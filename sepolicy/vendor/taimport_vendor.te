@@ -12,3 +12,16 @@ allow taimport_vendor self:capability {
 };
 
 set_prop(taimport_vendor, vendor_semc_version_cust_active_prop);
+
+file_type_auto_trans(taimport_vendor, mnt_vendor_file, persist_wlan_file)
+
+# /data/vendor/etc
+allow taimport_vendor ta_vendor_data_file:dir { rw_dir_perms };
+allow taimport_vendor ta_vendor_data_file:file { create_file_perms };
+
+allow taimport_vendor wifi_vendor_data_file:file { create_file_perms };
+allow taimport_vendor bluetooth_vendor_data_file:file { create_file_perms };
+
+# /persist/wlan
+allow taimport_vendor persist_wlan_file:dir { rw_dir_perms };
+allow taimport_vendor persist_wlan_file:file { create_file_perms };
