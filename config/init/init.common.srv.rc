@@ -22,12 +22,6 @@ service vendor.tad /vendor/bin/tad /dev/block/bootdevice/by-name/TA 0,16
     writepid /dev/cpuset/system-background/tasks
     shutdown critical
 
-# SONY prop
-service mlog_qmi_service /vendor/bin/mlog_qmi_service
-    class core
-    user root
-    writepid /dev/cpuset/system-background/tasks
-
 # QCOM prop
 service vendor.cnd /vendor/bin/cnd
     class main
