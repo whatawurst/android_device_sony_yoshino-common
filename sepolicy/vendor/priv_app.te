@@ -1,0 +1,3 @@
+# priv_app.te
+
+get_prop(priv_app, vendor_semc_version_cust_active_prop)
