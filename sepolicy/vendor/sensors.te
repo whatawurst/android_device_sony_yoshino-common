@@ -1,9 +1,6 @@
 # sensors.te
 
-# neverallow
-#allow sensors self:capability {
-#    dac_override
-#};
+dontaudit sensors self:capability { dac_override dac_read_search };
 
 unix_socket_connect(sensors, tad, tad)
 
