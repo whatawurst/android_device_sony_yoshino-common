@@ -68,10 +68,10 @@ service vendor.netmgrd /vendor/bin/netmgrd
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
-    stop netmgrd
+    stop vendor.netmgrd
 
 # QCOM prop radio
-service ipacm-diag /vendor/bin/ipacm-diag
+service vendor.ipacm-diag /vendor/bin/ipacm-diag
     class main
     user radio
     socket ipacm_log_file dgram 660 radio radio
@@ -80,7 +80,7 @@ service ipacm-diag /vendor/bin/ipacm-diag
     writepid /dev/cpuset/system-background/tasks
 
 # QCOM radio tethering
-service ipacm /system/vendor/bin/ipacm
+service vendor.ipacm /system/vendor/bin/ipacm
     class main
     user radio
     group radio inet
@@ -88,17 +88,25 @@ service ipacm /system/vendor/bin/ipacm
     writepid /dev/cpuset/system-background/tasks
 
 # QCOM prop radio
-service qti /vendor/bin/qti
+service vendor.qti /vendor/bin/qti
     class main
     user radio
     group radio net_raw diag usb net_admin
     disabled
     writepid /dev/cpuset/system-background/tasks
 
+service vendor.dataadpl /vendor/bin/adpl
+    class main
+    user radio
+    group radio oem_2901 diag usb net_admin
+    disabled
+    writepid /dev/cpuset/system-background/tasks
+
 on property:ro.boot.baseband=msm
-    enable ipacm-diag
-    enable ipacm
-    enable qti
+    enable vendor.ipacm-diag
+    enable vendor.ipacm
+    enable vendor.qti
+    enable vendor.dataadpl
     enable vendor.netmgrd
     enable vendor.port-bridge
 
