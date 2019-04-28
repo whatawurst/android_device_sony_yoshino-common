@@ -1,3 +1,5 @@
 # qti_init_shell.te
 
 set_prop(qti_init_shell, oem_prop)
+
+allow qti_init_shell rootfs:dir r_dir_perms;
