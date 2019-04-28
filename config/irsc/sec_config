@@ -1,6 +1,6 @@
 /* IPC Security Config */
 /* <GPS QMI Service ID - 16>:<GPS QMI Instance ID - all instances>:<Client Group ID> */
-16:4294967295:1000:1021
+16:4294967295:1000:1021:1026
 /* <LOWI QMI Service ID - 38>:<LOWI QMI Instance ID - all instances>:<Client Group ID> */
 56:4294967295:1021
 /* Allow SS CTL service to be used by system and net_raw processes */
@@ -267,11 +267,17 @@
 508:4294967295:1000:1006:1013:1021:1047
 509:4294967295:1000:1006:1013:1021:1047
 510:4294967295:1000:1006:1013:1021:1047
-511:4294967295:1000:1006:1013:1021:1047
+511:4294967295:1000:1006:1013:1021:1047:3011
 /* Allow RCS service to aquire net_raw permission */
 18:4294967295:1001:3004
+/* Allow RCS service to communicate to IMS QMI Priv Svc*/
+77:4294967295:1001:3003
+/* Allow SSGQMIGD to communicate to SSGCCS service*/
+76:4294967295:1001
+/* Allow cnd to accquire netbind */
+18:4294967295:1000:3003
 /* Allow QMID service to aquire net_raw permission */
-3:4294967295:1001:3004
+3:4294967295:1001:1021:3004
 2:4294967295:1000:1001:3004
 42:4294967295:1001:3004
 18:4294967295:1001:3004
@@ -315,7 +321,7 @@
 /* Allow Data dpmd to access QMI DFS */
 48:4294967295:1000:3004
 /* DIAG */
-4097:4294967295:2002:2950:3009
+4097:4294967295:2002:2950:3009:2901
 /* <WLFW QMI Service ID - 0x45>:<WLFW QMI Instance ID - all instances>:<Client Group ID> */
 69:4294967295:1000
 /* <WLPS QMI Service ID - 0x39>:<WLFW QMI Instance ID - all instances>:<Client Group ID> */
@@ -324,3 +330,4 @@
 /* COEX */
 34:4294967295:1001
 /* SONY_END (RID002161: Add interface for AS Div status) */
+
