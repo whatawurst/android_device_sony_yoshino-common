@@ -109,8 +109,8 @@ on fs
     insmod /vendor/lib/modules/kscl.ko
 
     # configure the modem
-#    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
-#    start modem_switcher
+    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
+    start modem_switcher
 
 on post-fs
 
