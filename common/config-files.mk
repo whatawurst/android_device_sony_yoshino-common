@@ -18,10 +18,6 @@
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/config/sensors/sensors_settings:system/etc/sensors/sensors_settings
 
-# NFC
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/config/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
-
 # GPS
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/config/gps/gps.conf:system/etc/gps.conf \
