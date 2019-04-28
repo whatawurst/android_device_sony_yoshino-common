@@ -22,7 +22,8 @@ PRODUCT_PACKAGES += \
 
 # DISPLAY
 PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@1.0-service-sdm
+    vendor.lineage.livedisplay@2.0-service-sdm \
+    vendor.lineage.livedisplay@2.0-service-sysfs
 
 # MODEM
 PRODUCT_PACKAGES += \
