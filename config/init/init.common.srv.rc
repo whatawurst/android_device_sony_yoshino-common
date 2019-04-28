@@ -194,8 +194,8 @@ service msm_irqbalance /vendor/bin/msm_irqbalance -f /system/etc/msm_irqbalance.
 ### SENSORS
 service vendor.sensors /vendor/bin/sensors.qti
     class core
-    user root
-    group root
+    user system
+    group system
     writepid /dev/cpuset/system-background/tasks
 
 service ssgqmigd /vendor/bin/ssgqmigd
