@@ -153,11 +153,6 @@ on post-fs-data
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/vendor/wifi/hostapd/ctrl 0770 wifi wifi
-    mkdir /data/misc/wifi 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
-    mkdir /data/misc/dhcp 0770 dhcp dhcp
-    chown dhcp system /data/misc/dhcp
 
     # Create port-bridge log dir
     mkdir /data/vendor/port_bridge 0770 radio radio
@@ -194,9 +189,6 @@ on post-fs-data
     mkdir /data/vendor/misc/audio 0770 audio audio
     mkdir /data/vendor/misc/audio/acdbdata 0770 media audio
     mkdir /data/vendor/misc/audio/acdbdata/delta 0770 media audio
-
-    # Create directory used by the DASH client
-    mkdir /data/misc/dash 0770 media audio
 
     # Create directory for radio
     mkdir /data/vendor/radio 0770 system radio
@@ -244,10 +236,6 @@ on post-fs-data
 
     # Create /data/vendor/time folder for time-services
     mkdir /data/vendor/time/ 0700 system system
-
-    # Create FM dir for patchdownloader
-    mkdir /data/misc/fm 0770 system system
-    chmod 0770 /data/misc/fm
 
     # Create PERFD deamon related dirs
     mkdir /data/vendor/perfd 0770 root system
@@ -303,17 +291,11 @@ on post-fs-data
     #Create dir for TUI
     mkdir /data/vendor/tui 0600 system drmrpc
 
-    # Create directory to backup kernel panic logs
-    mkdir /data/misc/pstore 0770 system system
-
     # Create symlink for tombstones
     symlink /data/vendor/tombstones /tombstones
 
     # Create directory for hbtp
     mkdir /data/vendor/hbtp 0750 system system
-
-    # Create directory for qvr
-    mkdir /data/misc/qvr 0770 system system
 
     # create directory for wfd
     mkdir /data/vendor/wfd 0770 system system
