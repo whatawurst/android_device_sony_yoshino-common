@@ -10,7 +10,6 @@ binder_call(hal_camera_somc, hal_configstore_default)
 binder_call(hal_camera_somc, cacaoserver)
 
 unix_socket_connect(hal_camera_somc, tad, tad)
-unix_socket_connect(hal_camera_somc, secd_credmgr, secd)
 
 allow hal_camera_somc hal_graphics_mapper_hwservice:hwservice_manager find;
 allow hal_camera_somc hal_idd_hwservice:hwservice_manager find;
