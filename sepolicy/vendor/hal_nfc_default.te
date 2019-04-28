@@ -1,0 +1,3 @@
+# hal_nfc_default.te
+
+allow hal_nfc_default hal_secure_element_hwservice:hwservice_manager { find };
