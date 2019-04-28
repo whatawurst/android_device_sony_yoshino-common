@@ -1,38 +1,26 @@
-[firmware/]
-mode: 0771
-user: AID_SYSTEM
-group: AID_SYSTEM
-caps: 0
+[vendor/bin/wcnss_filter]
+mode: 0755
+user: AID_BLUETOOTH
+group: AID_BLUETOOTH
+caps: BLOCK_SUSPEND
 
-[bt_firmware/]
-mode: 0771
-user: AID_SYSTEM
-group: AID_SYSTEM
-caps: 0
+[vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti]
+mode: 0755
+user: AID_BLUETOOTH
+group: AID_BLUETOOTH
+caps: BLOCK_SUSPEND NET_ADMIN
 
-[dsp/]
-mode: 0771
-user: AID_MEDIA
-group: AID_MEDIA
-caps: 0
-
-[persist/]
-mode: 0771
-user: AID_SYSTEM
-group: AID_SYSTEM
-caps: 0
-
-[vendor/bin/cnd]
+[vendor/bin/pm-service]
 mode: 0755
 user: AID_SYSTEM
 group: AID_SYSTEM
-caps: NET_BIND_SERVICE BLOCK_SUSPEND NET_ADMIN
+caps: NET_BIND_SERVICE
 
-[vendor/bin/cnss-daemon]
+[vendor/bin/pd-mapper]
 mode: 0755
 user: AID_SYSTEM
 group: AID_SYSTEM
-caps: NET_BIND_SERVICE NET_ADMIN
+caps: NET_BIND_SERVICE
 
 [vendor/bin/imsdatadaemon]
 mode: 0755
@@ -50,19 +38,13 @@ caps: NET_BIND_SERVICE
 mode: 0755
 user: AID_SYSTEM
 group: AID_RADIO
-caps: WAKE_ALARM
+caps: NET_BIND_SERVICE BLOCK_SUSPEND WAKE_ALARM
 
-[vendor/bin/pm-service]
+[vendor/bin/cnd]
 mode: 0755
 user: AID_SYSTEM
 group: AID_SYSTEM
-caps: NET_BIND_SERVICE
-
-[vendor/bin/pm-proxy]
-mode: 0755
-user: AID_SYSTEM
-group: AID_SYSTEM
-caps: NET_BIND_SERVICE
+caps: NET_BIND_SERVICE BLOCK_SUSPEND NET_ADMIN
 
 [vendor/bin/slim_daemon]
 mode: 0755
@@ -70,32 +52,52 @@ user:  AID_GPS
 group: AID_GPS
 caps: NET_BIND_SERVICE
 
-[vendor/bin/wcnss_filter]
+[vendor/bin/loc_launcher]
 mode: 0755
-user: AID_BLUETOOTH
-group: AID_BLUETOOTH
-caps: BLOCK_SUSPEND SYS_NICE
+user:  AID_GPS
+group: AID_GPS
+caps: SETUID SETGID
 
 [vendor/bin/xtwifi-client]
 mode: 0755
 user:  AID_GPS
 group: AID_GPS
-caps: NET_BIND_SERVICE BLOCK_SUSPEND
+caps: NET_BIND_SERVICE BLOCK_SUSPEND WAKE_ALARM
 
-[system/bin/hw/android.hardware.wifi@1.0-service]
+[vendor/bin/sensors.qti]
 mode: 0755
-user: AID_WIFI
-group: AID_WIFI
-caps: NET_ADMIN NET_RAW SYS_MODULE
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: NET_BIND_SERVICE
 
-[system/vendor/bin/hw/android.hardware.wifi@1.0-service]
-mode: 0755
-user: AID_WIFI
-group: AID_WIFI
-caps: NET_ADMIN NET_RAW SYS_MODULE
 
-[vendor/bin/hw/android.hardware.wifi@1.0-service]
-mode: 0755
-user: AID_WIFI
-group: AID_WIFI
-caps: NET_ADMIN NET_RAW SYS_MODULE
+
+[vendor/firmware_mnt/]
+mode: 0771
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: 0
+
+[vendor/firmware_mnt/image/*]
+mode: 0771
+user: AID_ROOT
+group: AID_SYSTEM
+caps: 0
+
+[vendor/bt_firmware/]
+mode: 0771
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: 0
+
+[mnt/vendor/persist/]
+mode: 0771
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: 0
+
+[vendor/dsp/]
+mode: 0771
+user: AID_MEDIA
+group: AID_MEDIA
+caps: 0
