@@ -113,9 +113,6 @@ on fs
     start modem_switcher
 
 on post-fs
-
-    start logcat_charger
-
     # Start qseecomd for vold
     start vendor.qseecomd
 
