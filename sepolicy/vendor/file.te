@@ -32,6 +32,7 @@ type secd_devsec_socket, file_type;
 type qns_socket, file_type;
 
 # sysfs
+type sysfs_smb_device, fs_type, sysfs_type;
 type sysfs_mdss_dsi_panel, fs_type, sysfs_type;
 type sysfs_nfc_i2c, fs_type, sysfs_type;
 type sysfs_qns, fs_type, sysfs_type;

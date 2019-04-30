@@ -1,0 +1,22 @@
+# chargemon.te
+
+type chargemon, domain;
+type chargemon_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(chargemon)
+
+unix_socket_connect(chargemon, tad, tad)
+
+# battery
+allow chargemon sysfs_battery_supply:dir { r_dir_perms };
+allow chargemon sysfs_battery_supply:file { rw_file_perms };
+allow chargemon sysfs_battery_supply:lnk_file { r_file_perms };
+
+# wake_lock
+allow chargemon sysfs_wake_lock:file { rw_file_perms };
+
+# enable_shutdown_at_low_battery
+allow chargemon sysfs_smb_device:file { rw_file_perms };
+
+# /dev/kmsg
+allow chargemon kmsg_device:chr_file { rw_file_perms };

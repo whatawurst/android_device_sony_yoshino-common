@@ -110,6 +110,8 @@
 /(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.miscta@1\.0-service  u:object_r:hal_miscta_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.wifi@2\.0-service    u:object_r:hal_wifi_hostapd_default_exec:s0
 /(vendor|system/vendor)/bin/charge_service                      u:object_r:charge_service_exec:s0
+/(vendor|system/vendor)/bin/chargemon                           u:object_r:chargemon_exec:s0
+/(vendor|system/vendor)/bin/chargemon_shutdown                  u:object_r:chargemon_exec:s0
 /(vendor|system/vendor)/bin/ffu                                 u:object_r:ffu_exec:s0
 /(vendor|system/vendor)/bin/idd-logreader                       u:object_r:idd_exec:s0
 /(vendor|system/vendor)/bin/iddd                                u:object_r:idd_exec:s0
