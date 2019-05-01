@@ -286,11 +286,11 @@ on property:persist.vendor.ssr.enable_ramdumps=0
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
 
 ### Offline charger
-service charger /charger
+service charger /system/bin/charger
     class charger
-    critical
+    user system
     group system graphics input log
-    seclabel u:r:healthd:s0
+    seclabel u:r:charger:s0
     writepid /dev/cpuset/system-background/tasks
 
 service qbcharger /charger -m 1
