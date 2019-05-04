@@ -52,6 +52,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable netmgr
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.use_data_netmgrd=true \
+    persist.radio.aosp_usr_pref_sel=true \
     persist.data.netmgrd.qos.enable=true \
     persist.vendor.data.mode=concurrent
 
