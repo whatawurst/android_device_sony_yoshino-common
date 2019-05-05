@@ -125,6 +125,7 @@
         <item>"1,1"</item>
         <item>"0,1"</item>
         <item>"7,1"</item>
+        <item>"9,1"</item>
     </string-array>
 
     <!-- Setting this true forces the headset jack switches to use the/dev/input/event subsystem
