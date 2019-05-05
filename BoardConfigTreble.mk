@@ -71,6 +71,9 @@ USE_XML_AUDIO_POLICY_CONF := 1
 ### DRM
 TARGET_ENABLE_MEDIADRM_64 := true
 
+### NFC
+TARGET_USES_NQ_NFC := true
+
 ### SEPOLICY
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += device/sony/common-treble/sepolicy/vendor

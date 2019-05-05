@@ -27,7 +27,9 @@ PRODUCT_PACKAGES += \
     libnqnfc-nci \
     libnqp61-jcop-kit \
     com.android.nfc_extras \
-    NfcNci \
+    NQNfcNci \
+    nqnfcee_access.xml \
+    nqnfcse_access.xml \
     Tag \
     vendor.nxp.hardware.nfc@1.1-service
 
