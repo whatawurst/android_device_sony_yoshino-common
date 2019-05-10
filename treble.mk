@@ -84,7 +84,7 @@ PRODUCT_PACKAGES += \
 
 # CONFIGSTORE
 PRODUCT_PACKAGES += \
-    android.hardware.configstore@1.0-service
+    android.hardware.configstore@1.1-service
 
 # AUDIO
 PRODUCT_PACKAGES += \
