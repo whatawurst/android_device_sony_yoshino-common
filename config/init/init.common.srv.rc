@@ -177,7 +177,8 @@ on shutdown
 # loc_launcher will start as root and set its uid to gps
 service loc_launcher /vendor/bin/loc_launcher
     class late_start
-    group gps inet diag wifi
+    user gps
+    group gps
 
 service xtra-daemon /vendor/bin/xtra-daemon
     class late_start
