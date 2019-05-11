@@ -48,6 +48,29 @@ on charger
     # Enable thermal
     write /sys/module/msm_thermal/core_control/enabled 1
 
+on boot
+    # For cpusets initialize for Silver Only first and then Silver + Gold
+    # Silver Only configuration cannot work with 0-7
+    write /dev/cpuset/top-app/cpus "0-3"
+    write /dev/cpuset/foreground/cpus "0-3"
+    write /dev/cpuset/foreground/boost/cpus "0-3"
+    write /dev/cpuset/background/cpus "0-3"
+    write /dev/cpuset/system-background/cpus "0-3"
+    write /dev/cpuset/top-app/cpus "0-7"
+    write /dev/cpuset/foreground/cpus "0-7"
+    write /dev/cpuset/foreground/boost/cpus "0-7"
+    write /dev/cpuset/background/cpus "0-7"
+    write /dev/cpuset/system-background/cpus "0-7"
+
+    # Add a cpuset for the camera daemon
+    # We want all cores for camera
+    mkdir /dev/cpuset/camera-daemon
+    write /dev/cpuset/camera-daemon/cpus "0-3"
+    write /dev/cpuset/camera-daemon/mems 0
+    chown cameraserver cameraserver /dev/cpuset/camera-daemon
+    chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
+    chmod 0660 /dev/cpuset/camera-daemon/tasks
+
 on property:sys.boot_completed=1
     # Setup big cluster
     write /sys/devices/system/cpu/cpu4/core_ctl/min_cpus 2
@@ -65,12 +88,10 @@ on property:sys.boot_completed=1
     write /proc/sys/kernel/sched_group_upmigrate 100
     write /proc/sys/kernel/sched_group_downmigrate 95
     write /proc/sys/kernel/sched_select_prev_cpu_us 0
-    write /proc/sys/kernel/sched_freq_inc_notify 77000
-    write /proc/sys/kernel/sched_freq_dec_notify 77000
+    write /proc/sys/kernel/sched_freq_inc_notify 400000
+    write /proc/sys/kernel/sched_freq_dec_notify 400000
     write /proc/sys/kernel/sched_spill_nr_run 5
     write /proc/sys/kernel/sched_restrict_cluster_spill 1
-    # From SODP
-    write /proc/sys/kernel/sched_enable_thread_grouping 1
 
     # Disable thermal to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
@@ -88,7 +109,7 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "83 1804800:95"
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 19000
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis 79000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 518400
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif 1
 
     # Configure governor for big cluster
@@ -104,7 +125,7 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "83 1939200:90 2016000:95"
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 19000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis 79000
-    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 806400
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/ignore_hispeed_on_notif 1
 
     # Re-enable thermal
