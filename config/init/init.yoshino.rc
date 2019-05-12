@@ -428,7 +428,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
 service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
     class main
     user system
-    group system
+    group radio system
 
 service modem_switcher /system/bin/sony-modem-switcher
     class main
