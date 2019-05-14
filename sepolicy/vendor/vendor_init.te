@@ -30,3 +30,6 @@ allow vendor_init proc_cmdline:file { getattr };
 
 # /dev/sockets
 allow vendor_init wpa_socket:dir { setattr };
+
+# /data/scd
+allow vendor_init scd_data_file:dir { setattr r_dir_perms };

@@ -3,9 +3,14 @@
 # DEV
 /dev/socket/fpc_oem                                             u:object_r:fpc_socket:s0
 /dev/socket/tad                                                 u:object_r:tad_socket:s0
+
+/dev/socket/scd(/.*)?                                           u:object_r:scd_sock_socket:s0
+
 /dev/pn553                                                      u:object_r:nfc_device:s0
 
 # DATA
+/data/scd(/.*)?                                                 u:object_r:scd_data_file:s0
+
 /data/vendor/etc(/.*)?                                          u:object_r:ta_vendor_data_file:s0
 /data/vendor/etc/wlan.*                                         u:object_r:wifi_vendor_data_file:s0
 /data/vendor/etc/bluetooth.*                                    u:object_r:bluetooth_vendor_data_file:s0
@@ -17,6 +22,7 @@
 
 # SYSTEM
 /system/bin/mssconfig                                           u:object_r:mss_config_exec:s0
+/system/bin/scd                                                 u:object_r:scd_exec:s0
 
 # VENDOR
 /(vendor|system/vendor)/bin/mlog_qmi_service                    u:object_r:mlog_qmi_service_exec:s0

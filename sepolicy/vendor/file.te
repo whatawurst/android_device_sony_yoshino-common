@@ -10,6 +10,7 @@ type bluetooth_vendor_data_file, file_type, data_file_type;
 type fpc_vendor_data_file, file_type, data_file_type;
 type ta_vendor_data_file, file_type, data_file_type;
 type crash_vendor_data_file, file_type, data_file_type;
+type scd_data_file, file_type, data_file_type, core_data_file_type;
 
 # PERIST
 type persist_wlan_file, file_type;
@@ -23,8 +24,10 @@ type sysfs_fpc_wakeup, fs_type, sysfs_type;
 type sysfs_pm_wakeup, fs_type, sysfs_type;
 type sysfs_rmtfs, sysfs_type, fs_type;
 type sysfs_switch_lid, fs_type, sysfs_type;
+type sysfs_scd_rtc, fs_type, sysfs_type;
 
 # SOCKETS
+type scd_sock_socket, file_type, coredomain_socket;
 type fpc_socket, file_type;
 type tad_socket, file_type;
 

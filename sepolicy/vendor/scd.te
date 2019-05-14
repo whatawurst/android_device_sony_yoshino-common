@@ -1,0 +1,18 @@
+# scd.te
+type scd, domain, coredomain;
+type scd_exec, exec_type, file_type;
+
+init_daemon_domain(scd)
+
+allow scd scd_sock_socket:dir rw_dir_perms;
+allow scd scd_sock_socket:sock_file create_file_perms;
+
+# /data/scd
+allow scd scd_data_file:dir rw_dir_perms;
+allow scd scd_data_file:file create_file_perms;
+
+# rtc
+allow scd sysfs_rtc:dir r_dir_perms;
+allow scd sysfs_rtc:file r_file_perms;
+
+allow scd sysfs_scd_rtc:file r_file_perms;
