@@ -62,6 +62,11 @@ on init
     chown root system /sys/fs/cgroup/memory/bg/tasks
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
 
+
+    # Setup subsystem restart_level
+    # This will be configured with the ssr_setup service
+    setprop persist.vendor.ssr.restart_level "venus adsp slpi modem cdsp"
+
 on fs
     wait /dev/block/platform/soc/1da4000.ufshc
     symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
