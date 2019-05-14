@@ -17,7 +17,8 @@ allow charge_service hal_idd_hwservice:hwservice_manager { find };
 allow charge_service self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
 
 allow charge_service sysfs_battery_supply:dir r_dir_perms;
-allow charge_service sysfs_battery_supply:{ file lnk_file } r_file_perms;
+allow charge_service sysfs_battery_supply:file rw_file_perms;
+allow charge_service sysfs_battery_supply:lnk_file r_file_perms;
 
 allow charge_service sysfs_usb_supply:dir r_dir_perms;
 allow charge_service sysfs_usb_supply:file r_file_perms;
