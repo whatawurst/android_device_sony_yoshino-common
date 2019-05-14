@@ -199,18 +199,6 @@ service vendor.sensors /vendor/bin/sensors.qti
     group system
     writepid /dev/cpuset/system-background/tasks
 
-service ssgqmigd /vendor/bin/ssgqmigd
-    class late_start
-    user radio
-    group radio gps system
-    socket ssgqmig seqpacket 0660 radio inet
-
-service ssgtzd /vendor/bin/ssgtzd
-    class late_start
-    user system
-    group system
-    socket ssgtzd stream 0660 system inet
-
 ### TEE
 service vendor.qseecomd /vendor/bin/qseecomd
     class core
