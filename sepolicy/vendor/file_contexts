@@ -70,6 +70,10 @@
 /sys/devices/soc/soc:fpc1145/spi_prepare                        u:object_r:sysfs_fpc_spi_prepare:s0
 /sys/devices/soc/soc:fpc1145/wakeup_enable                      u:object_r:sysfs_fpc_wakeup:s0
 
+/sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/model  u:object_r:sysfs_ufs:s0
+/sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/rev    u:object_r:sysfs_ufs:s0
+/sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/vendor u:object_r:sysfs_ufs:s0
+
 /sys/devices/virtual/input/input2/tof_power_ctl                 u:object_r:sysfs_tof_rgbcir:s0
 
 /sys/devices/virtual/input/input3/als_Itime                     u:object_r:sysfs_tof_rgbcir:s0
@@ -112,7 +116,7 @@
 /(vendor|system/vendor)/bin/charge_service                      u:object_r:charge_service_exec:s0
 /(vendor|system/vendor)/bin/chargemon                           u:object_r:chargemon_exec:s0
 /(vendor|system/vendor)/bin/chargemon_shutdown                  u:object_r:chargemon_exec:s0
-/(vendor|system/vendor)/bin/ffu                                 u:object_r:ffu_exec:s0
+/(vendor|system/vendor)/bin/ffu                                 u:object_r:vendor_ffu_exec:s0
 /(vendor|system/vendor)/bin/idd-logreader                       u:object_r:idd_exec:s0
 /(vendor|system/vendor)/bin/iddd                                u:object_r:idd_exec:s0
 /(vendor|system/vendor)/bin/init\.sony\.modem\.sh               u:object_r:qti_init_shell_exec:s0
@@ -123,5 +127,3 @@
 /(vendor|system/vendor)/bin/startup-prober                      u:object_r:startupprober_exec:s0
 /(vendor|system/vendor)/bin/ta_qmi_service                      u:object_r:ta_qmi_service_exec:s0
 /(vendor|system/vendor)/bin/taimport_vendor                     u:object_r:taimport_vendor_exec:s0
-
-/(vendor|system/vendor)/etc/firmware/01AD-483238553632333031414D5220202020-D003.bin u:object_r:ffu_firmware_file:s0

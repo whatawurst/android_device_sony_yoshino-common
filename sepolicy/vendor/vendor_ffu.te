@@ -1,0 +1,11 @@
+# vendor_ffu
+type vendor_ffu, domain;
+type vendor_ffu_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(vendor_ffu)
+
+# /dev/kmsg
+allow vendor_ffu kmsg_device:chr_file rw_file_perms;
+
+# /sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/*
+allow vendor_ffu sysfs_ufs:file r_file_perms;

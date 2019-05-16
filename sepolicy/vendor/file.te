@@ -39,6 +39,7 @@ type sysfs_qns, fs_type, sysfs_type;
 type sysfs_sony_camera, fs_type, sysfs_type;
 type sysfs_tof_rgbcir, fs_type, sysfs_type;
 type sysfs_wlan, fs_type, sysfs_type;
+type sysfs_ufs, fs_type, sysfs_type;
 
 # vendor
 type ffu_firmware_file, file_type, vendor_file_type;
