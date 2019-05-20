@@ -240,13 +240,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.ims.vcel_rtcp_report=5
 
 # Power save functionality for modem
-# FIXME This completely breaks SIM unlock
-#
-#    persist.vendor.radio.apm_sim_not_pwdn=1 \
-# -> don't power down sim in airplane mode
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.add_power_save=1 \
     persist.vendor.radio.oem_socket=true
+
+# Don't power down sim in airplane mode
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.radio.apm_sim_not_pwdn=1
 
 # Radio IMS
 PRODUCT_PROPERTY_OVERRIDES += \
