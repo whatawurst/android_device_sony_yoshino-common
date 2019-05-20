@@ -195,25 +195,27 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.offload.pstimeout.secs=3
 
-### SDM
-# Disable QC HDR and cabl
+### DISPLAY
+# CABL
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.display.disable_hdr_lut_gen=1 \
-    ro.vendor.display.cabl=2
+    ro.vendor.display.cabl=0 \
+    ro.qualcomm.cabl=0
 
 # Assertive display
 PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.display.ad=1 \
     ro.qcom.ad=1 \
     ro.qcom.ad.calib.data=/vendor/etc/ad_calib.cfg \
     ro.qcom.ad.sensortype=2
 
 # Enable display default color mode
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.display.enable_default_color_mode=true
+    vendor.display.enable_default_color_mode=1
 
 # Disable HDR
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.hwc_disable_hdr=1 \
+    vendor.display.disable_hdr_lut_gen=1 \
     vendor.vidc.enc.disable.pq=true
 
 # Touch
