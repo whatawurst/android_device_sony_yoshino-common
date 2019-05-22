@@ -103,8 +103,11 @@ on post-fs-data
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
-    chown system system /mnt/vendor/persist
+    chown root system /mnt/vendor/persist
     chmod 0771 /mnt/vendor/persist
+
+    restorecon_recursive /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/data 0700 system system
 
     mkdir /data/system 0775 system system
 
