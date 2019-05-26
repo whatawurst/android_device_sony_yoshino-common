@@ -163,12 +163,6 @@ service wvkbd_installer /vendor/bin/wvkbd
     group system
     oneshot
 
-# Secure Clock service
-service scd /system/bin/scd
-    class late_start
-    user system
-    group system
-
 on shutdown
     stop cnss-daemon
 
