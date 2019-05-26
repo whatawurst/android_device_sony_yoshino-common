@@ -147,10 +147,6 @@ on post-fs-data
     chmod 0770 /sys/devices/sony_camera_1/info
     mkdir /data/vendor/somc_camera 0770 cameraserver camera
 
-    # create directory for scd
-    mkdir /dev/socket/scd 0755 system system
-    mkdir /data/scd 0700 system system
-
     # create directory for widevine
     mkdir /data/wv 0700 media media
 
