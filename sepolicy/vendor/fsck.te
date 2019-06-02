@@ -7,3 +7,4 @@ allow fsck idd_rca_dir:dir { getattr };
 allow fsck idd_root_dir:dir { getattr };
 allow fsck idd_rca_file:dir { getattr };
 allow fsck media_rw_data_file:dir { getattr };
+allow fsck mnt_media_rw_file:dir { search };
