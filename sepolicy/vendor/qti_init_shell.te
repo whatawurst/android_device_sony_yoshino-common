@@ -3,3 +3,6 @@
 set_prop(qti_init_shell, oem_prop)
 
 allow qti_init_shell rootfs:dir r_dir_perms;
+
+# init.qcom.early_boot.sh video_mode
+allow qti_init_shell sysfs:file setattr;
