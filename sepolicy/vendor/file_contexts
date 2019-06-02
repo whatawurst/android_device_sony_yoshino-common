@@ -98,6 +98,7 @@
 /system/bin/updatemiscta                                        u:object_r:updatemiscta_exec:s0
 /system/bin/startup-logger                                      u:object_r:startup-logger_exec:s0
 /system/bin/taimport                                            u:object_r:taimport_exec:s0
+/system/bin/sony-modem-switcher                                 u:object_r:modem_switcher_exec:s0
 
 # vendor services
 /(vendor|system/vendor)/bin/hw/display_cb                       u:object_r:display_cb_exec:s0
@@ -123,7 +124,6 @@
 /(vendor|system/vendor)/bin/keyprovd                            u:object_r:keyprovd_exec:s0
 /(vendor|system/vendor)/bin/qns                                 u:object_r:qns_exec:s0
 /(vendor|system/vendor)/bin/sct_service                         u:object_r:sct_service_exec:s0
-/(vendor|system/vendor)/bin/sony-modem-switcher                 u:object_r:modem_switcher_exec:s0
 /(vendor|system/vendor)/bin/startup-prober                      u:object_r:startupprober_exec:s0
 /(vendor|system/vendor)/bin/ta_qmi_service                      u:object_r:ta_qmi_service_exec:s0
 /(vendor|system/vendor)/bin/taimport_vendor                     u:object_r:taimport_vendor_exec:s0

@@ -1,7 +1,7 @@
 # modem_switcher.te
 
-type modem_switcher, domain;
-type modem_switcher_exec, exec_type, vendor_file_type, file_type;
+type modem_switcher, domain, coredomain;
+type modem_switcher_exec, exec_type, file_type;
 
 allow modem_switcher self:capability {
     chown
@@ -9,8 +9,10 @@ allow modem_switcher self:capability {
 
 init_daemon_domain(modem_switcher)
 
-unix_socket_connect(modem_switcher, tad, tad)
+binder_call(modem_switcher, hal_allocator)
+binder_call(modem_switcher, hal_miscta_default)
 
+get_prop(modem_switcher, hwservicemanager_prop)
 get_prop(modem_switcher, vendor_semc_version_cust_active_prop)
 
 # /dev/block
@@ -28,3 +30,13 @@ allow modem_switcher oemfs:file r_file_perms;
 
 # /system/etc/customization/modem
 r_dir_file(modem_switcher, system_file)
+
+# /cache/modem/*
+allow modem_switcher cache_file:dir { add_name create getattr search setattr write } ;
+allow modem_switcher cache_file:file { create open getattr setattr write } ;
+
+allow modem_switcher hidl_allocator_hwservice:hwservice_manager { find };
+allow modem_switcher hidl_memory_hwservice:hwservice_manager { find };
+allow modem_switcher hal_miscta_hwservice:hwservice_manager { find };
+
+allow modem_switcher hwservicemanager:binder { call transfer };
