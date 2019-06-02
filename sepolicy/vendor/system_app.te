@@ -7,3 +7,6 @@ allow system_app hal_miscta_hwservice:hwservice_manager find;
 
 allow system_app modemsw_cache_file:dir rw_dir_perms;
 allow system_app modemsw_cache_file:file create_file_perms;
+
+# Alllow CustomizationSelector to read Sony prop
+allow system_app semc_version_prop:file { getattr open read };
