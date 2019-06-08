@@ -3,7 +3,7 @@ ifeq ($(BOARD_IMS_CAMERA),true)
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-IMS_CAMERA_SYMLINK := $(TARGET_OUT)/app/ims/lib/arm64/libimscamera_jni.so
+IMS_CAMERA_SYMLINK := $(TARGET_OUT)/priv-app/ims/lib/arm64/libimscamera_jni.so
 $(IMS_CAMERA_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 	@echo "Create ims camera jni link: $@"
 	@mkdir -p $(dir $@)
@@ -11,7 +11,7 @@ $(IMS_CAMERA_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /system/lib64/libimscamera_jni.so $@
 
 include $(CLEAR_VARS)
-IMS_MEDIA_SYMLINK := $(TARGET_OUT)/app/ims/lib/arm64/libimsmedia_jni.so
+IMS_MEDIA_SYMLINK := $(TARGET_OUT)/priv-app/ims/lib/arm64/libimsmedia_jni.so
 $(IMS_MEDIA_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 	@echo "Create ims media jni link: $@"
 	@mkdir -p $(dir $@)
