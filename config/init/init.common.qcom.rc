@@ -170,13 +170,6 @@ on post-fs-data
     mkdir /data/connectivity 0771 system system
     chown system system /data/connectivity
 
-    # Create the directories used by DPM subsystem
-    mkdir /data/dpm 0771 system system
-    chown system system /data/dpm
-
-    mkdir /data/dpm/nsrm 0771 system system
-    chown system system /data/dpm/nsrm
-
     # Create the directories used by IMS profile override
     mkdir /data/vendor/connectivity 0750 system system
     mkdir /data/vendor/connectivity/wqeclient 0750 system system
