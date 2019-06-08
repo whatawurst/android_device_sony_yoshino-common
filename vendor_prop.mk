@@ -73,8 +73,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Enable dpm module
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.dpm.feature=1 \
-    persist.dpm.feature=3 \
+    persist.vendor.dpm.feature=1
 
 # Enable rmnet data
 PRODUCT_PROPERTY_OVERRIDES += \
