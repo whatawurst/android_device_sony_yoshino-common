@@ -9,7 +9,7 @@ PRODUCT_COPY_FILES += \
 ### IRCBALANCE
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/config/irqbalance/msm_irqbalance.conf:system/etc/msm_irqbalance.conf
+    $(PLATFORM_PATH)/config/irqbalance/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
 
 ### POWER
 PRODUCT_COPY_FILES += \
