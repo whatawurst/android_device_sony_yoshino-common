@@ -179,7 +179,7 @@ service xtra-daemon /vendor/bin/xtra-daemon
     user gps
     group gps system
 
-service msm_irqbalance /vendor/bin/msm_irqbalance -f /system/etc/msm_irqbalance.conf
+service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.conf
     class core
     user root
     group root
