@@ -16,6 +16,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter lilac poplar maple, $(TARGET_DEVICE)),)
+ifneq ($(filter lilac poplar poplar_dsds maple, $(TARGET_DEVICE)),)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif
