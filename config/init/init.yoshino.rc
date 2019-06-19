@@ -41,7 +41,14 @@ on early-init
     chmod 0620 /dev/kmsg
     write /sys/module/msm_rtb/parameters/enable 0
 
-    # Fingerprint sensor
+    # Kernel modules for SIM, vibrator, bus and NFC
+    insmod /vendor/lib/modules/bu520x1nvx.ko
+    insmod /vendor/lib/modules/sim_detect.ko
+    insmod /vendor/lib/modules/ldo_vibrator.ko
+    insmod /vendor/lib/modules/pn553.ko
+
+    # Kernel module for fingerprint sensor
+    insmod /vendor/lib/modules/fpc1145_platform.ko
     write /sys/devices/soc/soc:fpc1145/uevent add
 
 on init
@@ -102,6 +109,9 @@ on fs
 
     # UFS firmware update
     exec u:r:vendor_ffu:s0 -- /vendor/bin/ffu
+
+    # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
+    insmod /vendor/lib/modules/kscl.ko
 
     # configure the modem
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
@@ -348,6 +358,9 @@ on boot
 
     write /proc/sys/vm/dirty_ratio 5
     write /proc/sys/vm/dirty_background_ratio 1
+
+    # Kernel module for wifi
+    insmod /vendor/lib/modules/wlan.ko
 
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
