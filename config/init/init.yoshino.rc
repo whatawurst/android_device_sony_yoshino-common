@@ -115,7 +115,6 @@ on fs
 
     # configure the modem
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
-    start modem_switcher
 
 on post-fs
     # Start qseecomd for vold
@@ -145,6 +144,9 @@ on post-fs
 
     # Update dm-verity state and set partition.*.verified properties
     verity_update_state
+
+    # SONY: Switch the modem if needed
+    start modem_switcher
 
 on post-fs-data
     # create directory for wfd
