@@ -32,8 +32,13 @@ allow modem_switcher oemfs:file r_file_perms;
 r_dir_file(modem_switcher, system_file)
 
 # /cache/modem/*
-allow modem_switcher cache_file:dir { add_name create getattr search setattr write } ;
-allow modem_switcher cache_file:file { create open getattr setattr write } ;
+allow modem_switcher cache_file:dir { create rw_dir_perms } ;
+allow modem_switcher cache_file:file create_file_perms;
+type_transition modem_switcher cache_file:dir modemsw_cache_file "modem";
+type_transition modem_switcher cache_file:file modemsw_cache_file "modem_switcher_report";
+type_transition modem_switcher cache_file:file modemsw_cache_file "modem_switcher_status";
+allow modem_switcher modemsw_cache_file:dir { create rw_dir_perms setattr } ;
+allow modem_switcher modemsw_cache_file:file create_file_perms;
 
 allow modem_switcher hidl_allocator_hwservice:hwservice_manager { find };
 allow modem_switcher hidl_memory_hwservice:hwservice_manager { find };
