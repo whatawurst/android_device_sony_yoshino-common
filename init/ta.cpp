@@ -38,8 +38,6 @@
 
 using std::string;
 
-static int tad_sock = -1;
-
 static uint32_t get_u32(const void *vp)
 {
   const uint8_t *p = (const uint8_t *)vp;
