@@ -19,7 +19,12 @@ file_type_auto_trans(taimport_vendor, mnt_vendor_file, persist_wlan_file)
 allow taimport_vendor ta_vendor_data_file:dir { rw_dir_perms };
 allow taimport_vendor ta_vendor_data_file:file { create_file_perms };
 
+# /data/vendor/etc/wlan_macaddr0
+type_transition taimport_vendor ta_vendor_data_file:file wifi_vendor_data_file "wlan_macaddr0";
 allow taimport_vendor wifi_vendor_data_file:file { create_file_perms };
+
+# /data/vendor/etc/bluetooth_bdaddr
+type_transition taimport_vendor ta_vendor_data_file:file bluetooth_vendor_data_file "bluetooth_bdaddr";
 allow taimport_vendor bluetooth_vendor_data_file:file { create_file_perms };
 
 # /persist/wlan
