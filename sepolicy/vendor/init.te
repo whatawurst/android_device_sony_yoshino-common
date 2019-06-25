@@ -25,3 +25,6 @@ allow init system_file:system { module_load };
 
 # Allow our init extension to read from TA
 unix_socket_connect(init, tad, tad)
+
+# /proc/filesystems
+allow init proc_filesystems:file getattr;
