@@ -3,6 +3,7 @@ type adsprpc_block_device, dev_type;
 type appslog_block_device, dev_type;
 type diag_block_device, dev_type;
 type idd_block_device, dev_type;
+type oem_block_device, dev_type;
 type qnovo_block_device, dev_type;
 type ramdump_block_device, dev_type;
 type ta_block_device, dev_type;
