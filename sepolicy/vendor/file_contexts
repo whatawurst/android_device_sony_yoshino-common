@@ -6,7 +6,6 @@
 /dev/pn553                                                      u:object_r:nfc_device:s0
 
 # DATA
-/data/vendor/etc(/.*)?                                          u:object_r:ta_vendor_data_file:s0
 /data/vendor/etc/wlan.*                                         u:object_r:wifi_vendor_data_file:s0
 /data/vendor/etc/bluetooth.*                                    u:object_r:bluetooth_vendor_data_file:s0
 /data/vendor/fpc(/.*)?                                          u:object_r:fpc_vendor_data_file:s0

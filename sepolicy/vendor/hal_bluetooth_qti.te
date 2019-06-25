@@ -1,4 +1,4 @@
 # hal_bluetooth_qti.te
 
-allow hal_bluetooth_qti ta_vendor_data_file:dir r_dir_perms;
-allow hal_bluetooth_qti ta_vendor_data_file:file r_file_perms;
+# /data/vendor/etc/bluetooth_bdaddr
+allow hal_bluetooth_qti bluetooth_vendor_data_file:file r_file_perms;
