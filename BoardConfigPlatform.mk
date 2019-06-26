@@ -187,11 +187,9 @@ WIFI_DRIVER_OPERSTATE_PATH := "/sys/class/net/wlan0/operstate"
 ### BLUETOOTH
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
 BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_QCOM := true
 # Build libbthost_if
 TARGET_USE_QTI_BT_STACK := true
 # We have a rome soc (libbt-vendor)
-BOARD_HAS_QCA_BT_ROME := true
 # Support libbtnv.so
 QCOM_BT_USE_BTNV := true
 
