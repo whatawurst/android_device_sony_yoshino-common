@@ -1,3 +1,4 @@
 # platform_app.te
 
+get_prop(platform_app, semc_version_prop)
 get_prop(platform_app, vendor_semc_version_cust_active_prop)
