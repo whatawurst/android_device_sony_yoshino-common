@@ -1,5 +1,7 @@
 # thermal-engine.te
 
+allow thermal-engine hwservicemanager:binder { call };
+
 get_prop(thermal-engine, hwservicemanager_prop)
 
 # /tmp/test_sensor.in
