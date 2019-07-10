@@ -75,15 +75,15 @@
 /sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/rev    u:object_r:sysfs_ufs:s0
 /sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/vendor u:object_r:sysfs_ufs:s0
 
-/sys/devices/virtual/input/input2/tof_power_ctl                 u:object_r:sysfs_tof_rgbcir:s0
-
-/sys/devices/virtual/input/input3/als_Itime                     u:object_r:sysfs_tof_rgbcir:s0
-/sys/devices/virtual/input/input3/als_gain                      u:object_r:sysfs_tof_rgbcir:s0
-/sys/devices/virtual/input/input3/als_power_state               u:object_r:sysfs_tof_rgbcir:s0
-/sys/devices/virtual/input/input3/als_thres                     u:object_r:sysfs_tof_rgbcir:s0
-/sys/devices/virtual/input/input3/als_all                       u:object_r:sysfs_tof_rgbcir:s0
-/sys/devices/virtual/input/input3/chip_pow                      u:object_r:sysfs_tof_rgbcir:s0
-/sys/devices/virtual/input/input3/notify                        u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input[0-9]+/als_Itime                u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input[0-9]+/als_gain                 u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input[0-9]+/als_power_state          u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input[0-9]+/als_thres                u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input[0-9]+/als_all                  u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input[0-9]+/chip_pow                 u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input[0-9]+/notify                   u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input[0-9]+/tof_get_info             u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input[0-9]+/tof_power_ctl            u:object_r:sysfs_tof_rgbcir:s0
 
 /sys/devices/sony_camera_1/info                                 u:object_r:sysfs_sony_camera:s0
 /sys/devices/sony_camera_0/info                                 u:object_r:sysfs_sony_camera:s0
