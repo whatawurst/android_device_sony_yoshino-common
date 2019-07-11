@@ -17,6 +17,9 @@ allow vendor_init tmpfs:dir { create rw_dir_perms };
 
 allow vendor_init tad_block_device:blk_file { setattr };
 
+# Allow vendor_init to write to sysfs_ssr_toggle
+allow vendor_init sysfs_ssr_toggle:file w_file_perms;
+
 # Power
 set_prop(vendor_init, vendor_power_prop)
 
