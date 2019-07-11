@@ -30,10 +30,6 @@ on init
     chmod 0664 /proc/rdtag
     chown root system /proc/rdtag
 
-    # Setup subsystem restart_level
-    # This will be configured with the ssr_setup service
-    setprop persist.vendor.ssr.restart_level "venus adsp slpi modem cdsp"
-
     wait /dev/block/platform/soc/1da4000.ufshc
     symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
     wait /dev/block/sda1
@@ -252,6 +248,15 @@ on post-fs-data
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
 
 on early-boot
+    # SSR Setup
+    write /sys/bus/msm_subsys/devices/subsys0/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys1/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys2/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys3/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys4/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys5/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys6/restart_level RELATED
+
     chown system system /mnt/vendor/persist/sensors
     chown system system /mnt/vendor/persist/sensors/registry
     chown system system /mnt/vendor/persist/sensors/registry/registry
