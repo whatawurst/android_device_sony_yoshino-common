@@ -136,6 +136,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     camera.disable_zsl_mode=1
 
+### CHARGER
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.charger.enable_suspend=true
+
 ### DISPLAY
 # CABL
 PRODUCT_PROPERTY_OVERRIDES += \
