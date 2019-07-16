@@ -244,6 +244,16 @@ void IPACM_ConntrackListener::HandleNonNatIPAddr(
 		ret = CheckNatIface(data, &NatIface);
 		if (!NatIface && ret == IPACM_SUCCESS)
 		{
+			/* Search the non nat iface ip address */
+			for (cnt = 0; cnt < MAX_IFACE_ADDRESS; cnt++)
+			{
+				if (data->ipv4_addr == nonnat_iface_ipv4_addr[cnt])
+				{
+					IPACMDBG("Already in nonna_iface_ipv4_addr_list (%d) ", cnt);
+					iptodot("with ipv4 address", nonnat_iface_ipv4_addr[cnt]);
+					return;
+				}
+			}
 			/* Cache the non nat iface ip address */
 			for (cnt = 0; cnt < MAX_IFACE_ADDRESS; cnt++)
 			{
