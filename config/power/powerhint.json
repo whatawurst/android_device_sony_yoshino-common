@@ -368,7 +368,7 @@
     {
       "PowerHint": "INTERACTION",
       "Node": "UfsClkGateEnable",
-      "Duration": 0,
+      "Duration": 200,
       "Value": "0"
     },
     {
