@@ -16,8 +16,7 @@ set_prop(taimport_vendor, vendor_semc_version_cust_active_prop);
 file_type_auto_trans(taimport_vendor, mnt_vendor_file, persist_wlan_file)
 
 # /data/vendor/etc
-allow taimport_vendor ta_vendor_data_file:dir { rw_dir_perms };
-allow taimport_vendor ta_vendor_data_file:file { create_file_perms };
+allow taimport_vendor vendor_data_file:dir { rw_dir_perms };
 
 # /data/vendor/etc/wlan_*
 type_transition taimport_vendor vendor_data_file:file wifi_vendor_data_file "wlan_macaddr0";
