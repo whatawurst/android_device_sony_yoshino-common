@@ -523,3 +523,9 @@ on property:vendor.backlight_on=0
     write /sys/devices/virtual/input/clearpad/force_sleep 2
 on property:vendor.backlight_on=1
     write /sys/devices/virtual/input/clearpad/force_sleep 0
+
+on property:sys.boot_completed=1
+    # This is the only thing which init.qcom.post_boot.sh does
+    # This initializes vendor.qti.hardware.perf@1.0-service
+    setprop vendor.post_boot.parsed 1
+    setprop persist.vendor.mmi.misc_dev_path /dev/block/bootdevice/by-name/misc
