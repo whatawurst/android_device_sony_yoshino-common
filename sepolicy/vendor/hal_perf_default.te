@@ -1,4 +1,4 @@
 # hal_perf_default
 
 # neverallow rule ...
-dontaudit hal_perf_default self:capability { dac_override };
+dontaudit hal_perf_default self:capability { dac_override dac_read_search };
