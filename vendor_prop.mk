@@ -236,7 +236,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.report_codec=1 \
     persist.vendor.data.iwlan.enable=true \
     persist.vendor.service.bdroid.ssrlvl=3 \
-    persist.vendor.radio.block_allow_data=1 \
     persist.vendor.ims.vcel_rtcp_report=5
 
 # Power save functionality for modem
