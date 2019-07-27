@@ -265,3 +265,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Thermal
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.thermal=somc
+
+# Media Profiles
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.settings.xml=/vendor/etc/media_profiles_vendor.xml
