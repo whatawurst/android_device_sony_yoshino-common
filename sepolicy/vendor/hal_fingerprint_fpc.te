@@ -43,3 +43,6 @@ allow hal_fingerprint_fpc fpc_vendor_data_file:file { create_file_perms };
 # /data/system/users/[0-9]+/fpdata(/.*)?
 allow hal_fingerprint_fpc fingerprintd_data_file:dir rw_dir_perms;
 allow hal_fingerprint_fpc fingerprintd_data_file:file create_file_perms;
+
+# /dev/socket/fpc_oem
+allow hal_fingerprint_fpc fpc_socket:sock_file write;
