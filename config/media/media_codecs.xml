@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012-2018 The Linux Foundation. All rights reserved.
+<!-- Copyright (C) 2012-2019 The Linux Foundation. All rights reserved.
      Copyright (C) 2017 Sony Mobile Communications Inc.
      Not a contribution.
 
@@ -421,6 +421,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="concurrent-instances" max="6" />
             <Limit name="performance-point-3840x2160" value="60" />
         </MediaCodec>
+        <MediaCodec name="OMX.google.opus.decoder" type="audio/opus" update="true" rank="100"/>
     </Decoders>
     <Include href="media_codecs_google_video.xml" />
 </MediaCodecs>
