@@ -40,6 +40,7 @@ ENABLE_CPUSETS := true
 ### KERNEL
 TARGET_KERNEL_VERSION := 4.4
 TARGET_KERNEL_SOURCE  := kernel/sony/msm8998
+TARGET_COMPILE_WITH_MSM_KERNEL := true
 
 # Taken from unpacked stock boot.img / README_Xperia in Kernel source
 BOARD_KERNEL_CMDLINE += user_debug=31
