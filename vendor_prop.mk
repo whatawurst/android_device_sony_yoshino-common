@@ -198,15 +198,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ### DISPLAY
 # CABL
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.display.cabl=0 \
+    ro.vendor.display.cabl=2 \
     ro.qualcomm.cabl=0
 
 # Assertive display
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.display.ad=1 \
     ro.qcom.ad=1 \
-    ro.qcom.ad.calib.data=/vendor/etc/ad_calib.cfg \
-    ro.qcom.ad.sensortype=2
+    ro.vendor.display.ad=1 \
+    ro.vendor.display.sensortype=2 \
+    ro.vendor.display.ad.sdr_calib_data=/vendor/etc/ad_calib.cfg
 
 # Enable display default color mode
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -260,10 +260,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # CAMERA
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.HAL3.enabled=1
-
-# DISPLAY_HDR
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qcom.hdr.config=/vendor/etc/hdr_tm_config.xml
 
 # Thermal
 PRODUCT_PROPERTY_OVERRIDES += \
