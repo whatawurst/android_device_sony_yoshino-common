@@ -160,6 +160,9 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 # frameworks/av/camera/Android.mk
 TARGET_USES_QTI_CAMERA_DEVICE := true
 
+### DT2W
+TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/clearpad/wakeup_gesture"
+
 ### WIFI
 BOARD_HAS_QCOM_WLAN := true
 BOARD_HOSTAPD_DRIVER := NL80211
