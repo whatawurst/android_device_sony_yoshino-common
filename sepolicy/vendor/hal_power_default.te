@@ -1,4 +1,7 @@
 # hal_power_default.te
 
+#/sys/devices/virtual/input/clearpad( -> input6)/wakeup_gesture
+allow hal_power_default sysfs_touchpad:file w_file_perms;
+
 # /sys/kernel/debug/wlan0/power_stats
 allow hal_power_default debugfs_wlan_power:file r_file_perms;

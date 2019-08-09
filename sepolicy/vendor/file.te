@@ -23,6 +23,7 @@ type sysfs_fpc_wakeup, fs_type, sysfs_type;
 type sysfs_pm_wakeup, fs_type, sysfs_type;
 type sysfs_rmtfs, sysfs_type, fs_type;
 type sysfs_switch_lid, fs_type, sysfs_type;
+type sysfs_touchpad, fs_type, sysfs_type;
 
 # SOCKETS
 type fpc_socket, file_type;
