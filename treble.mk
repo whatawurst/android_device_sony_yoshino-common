@@ -116,7 +116,7 @@ PRODUCT_PACKAGES += \
 
 # GNSS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.1-impl-qti
+    android.hardware.gnss@1.1
 
 # LIGHT
 PRODUCT_PACKAGES += \

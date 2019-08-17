@@ -53,21 +53,6 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     libstagefrighthw
 
-### GPS
-PRODUCT_PACKAGES += \
-    libloc_api_v02 \
-    libloc_core \
-    libloc_ds_api \
-    libloc_eng \
-    libloc_pla \
-    libloc_stub \
-    libgps.utils
-
-### GNS
-PRODUCT_PACKAGES += \
-    libgnss \
-    libgnsspps
-
 ### BLUETOOTH
 PRODUCT_PACKAGES += \
     libbt-vendor
