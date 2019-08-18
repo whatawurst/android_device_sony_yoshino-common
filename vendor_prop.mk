@@ -126,3 +126,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # IMS
 PRODUCT_PROPERTY_OVERRIDES += \
     service.qti.ims.enabled=1
+
+# GPS
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.overlay.izat.optin=rro
