@@ -1,5 +1,7 @@
 # hwservicemanager.te
 
+allow hwservicemanager thermal-engine:dir search;
+
 allow hwservicemanager updatemiscta:dir r_dir_perms;
 
 allow hwservicemanager modem_switcher:binder { call transfer };
