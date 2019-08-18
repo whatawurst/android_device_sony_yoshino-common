@@ -84,6 +84,7 @@
 /sys/devices/virtual/input/input[0-9]+/notify                   u:object_r:sysfs_tof_rgbcir:s0
 /sys/devices/virtual/input/input[0-9]+/tof_get_info             u:object_r:sysfs_tof_rgbcir:s0
 /sys/devices/virtual/input/input[0-9]+/tof_power_ctl            u:object_r:sysfs_tof_rgbcir:s0
+/sys/devices/virtual/input/input[0-9]+/tof_ranging_notify       u:object_r:sysfs_tof_rgbcir:s0
 
 /sys/devices/sony_camera_1/info                                 u:object_r:sysfs_sony_camera:s0
 /sys/devices/sony_camera_0/info                                 u:object_r:sysfs_sony_camera:s0
