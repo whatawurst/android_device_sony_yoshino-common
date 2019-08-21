@@ -20,8 +20,8 @@ PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
 # Split build properties
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
-# Split selinux policy
-PRODUCT_FULL_TREBLE_OVERRIDE := true
+# Enable treble
+PRODUCT_FULL_TREBLE_OVERRIDE ?= true
 
 # The Messaging app:
 #   Needed for android.telecom.cts.ExtendedInCallServiceTest#testOnCannedTextResponsesLoaded
