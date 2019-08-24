@@ -207,7 +207,7 @@ service thermal-engine /system/vendor/bin/thermal-engine
     socket thermal-recv-client stream 0660 system system
     socket thermal-recv-passive-client stream 0666 system system
     socket thermal-send-rule stream 0660 system system
-    group root
+    group root oem_2993 oem_2929
 
 ### ADSP FastRPC
 service adsprpcd /vendor/bin/adsprpcd
