@@ -4,6 +4,10 @@ allow thermal-engine hwservicemanager:binder { call };
 
 get_prop(thermal-engine, hwservicemanager_prop)
 
+#/dev/socket/illumination
+unix_socket_connect(thermal-engine, illumination, illumination_service)
+allow thermal-engine illumination_socket:sock_file write;
+
 # /tmp/test_sensor.in
 rw_dir_file(thermal-engine, tmpfs)
 allow thermal-engine thermal-engine_tmpfs:file create_file_perms;
