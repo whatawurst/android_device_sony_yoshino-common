@@ -92,3 +92,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     ebtables \
     ethertypes
+
+# WiFi Display
+PRODUCT_PACKAGES += \
+    libaacwrapper \
+    libnl \
+    vendor.display.config@1.3
+
+PRODUCT_BOOT_JARS += \
+    WfdCommon
