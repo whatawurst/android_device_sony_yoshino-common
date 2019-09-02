@@ -268,3 +268,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Media Profiles
 PRODUCT_PROPERTY_OVERRIDES += \
     media.settings.xml=/vendor/etc/media_profiles_vendor.xml
+
+# Set misc path
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.mmi.misc_dev_path=/dev/block/sda54
+
+# Enable virtual keys
+PRODUCT_PROPERTY_OVERRIDES += \
+    qemu.hw.mainkeys=0
