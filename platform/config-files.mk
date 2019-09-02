@@ -6,6 +6,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/system/idc/clearpad.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/clearpad.idc
 
+# MSM IRQ Balancer configuration file
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/config/irqbalance/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
+
 ### POWER
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/power/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
