@@ -14,6 +14,7 @@
 
 ### SENSORS
 PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.gyro.disable=0 \
     persist.vendor.debug.sensors.hal=0 \
     debug.vendor.sns.daemon=0 \
     debug.vendor.sns.hal=0 \
@@ -88,6 +89,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.df.iwlan_mux=9 \
     persist.data.df.dev_name=rmnet_usb0
 
+# Buffer sizes
+PRODUCT_PROPERTY_OVERRIDES += \
+    net.tcp.buffersize.default=4096,87380,524288,4096,16384,110208 \
+    net.tcp.buffersize.lte=2097152,4194304,8388608,262144,524288,1048576 \
+    net.tcp.buffersize.umts=4094,87380,110208,4096,16384,110208 \
+    net.tcp.buffersize.hspa=4094,87380,1220608,4096,16384,1220608 \
+    net.tcp.buffersize.hsupa=4094,87380,1220608,4096,16384,1220608 \
+    net.tcp.buffersize.hsdpa=4094,87380,1220608,4096,16384,1220608 \
+    net.tcp.buffersize.hspap=4094,87380,1220608,4096,16384,1220608 \
+    net.tcp.buffersize.edge=4093,26280,35040,4096,16384,35040 \
+    net.tcp.buffersize.gprs=4092,8760,11680,4096,8760,11680 \
+    net.tcp.buffersize.evdo=4094,87380,524288,4096,16384,262144 \
+    net.tcp.2g_init_rwnd=10
+
 ### NFC
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.nfc.port=I2C
@@ -125,8 +140,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # IMS
 PRODUCT_PROPERTY_OVERRIDES += \
-    service.qti.ims.enabled=1
+    vendor.service.qti.ims.enabled=1
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.overlay.izat.optin=rro
+
+# Telephony
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.call_ring.multiple=false
