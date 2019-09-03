@@ -19,26 +19,8 @@ import /vendor/etc/init/hw/init.common.qcom.rc
 
 import /vendor/etc/init/hw/init.yoshino.usb.rc
 import /vendor/etc/init/hw/init.yoshino.pwr.rc
-import /vendor/etc/init/hw/init.yoshino.idd.rc
-import /vendor/etc/init/hw/init.yoshino.qns.rc
 
 on early-init
-    mount debugfs debugfs /sys/kernel/debug
-    chmod 0755 /sys/kernel/debug
-
-    # create symlink for vendor mount points
-    symlink /vendor/firmware_mnt /firmware
-    symlink /vendor/bt_firmware /bt_firmware
-    symlink /vendor/dsp /dsp
-
-    # Change ownership of hw_recovery related nodes
-    chown system graphics /sys/kernel/debug/dri/0/debug/dump
-    chown system graphics /sys/kernel/debug/dri/0/debug/recovery_reg
-    chown system graphics /sys/kernel/debug/dri/0/debug/recovery_dbgbus
-    chown system graphics /sys/kernel/debug/dri/0/debug/recovery_vbif_dbgbus
-
-    chown root system /dev/kmsg
-    chmod 0620 /dev/kmsg
     write /sys/module/msm_rtb/parameters/enable 0
 
     # Kernel modules for SIM, vibrator, bus and NFC
@@ -55,24 +37,12 @@ on init
     # Load persistent dm-verity state
     verity_load_state
 
-    # Setup platform zram options
-    write /sys/block/zram0/max_comp_streams 8
-
-    chmod 0664 /proc/rdtag
-    chown root system /proc/rdtag
-    write /proc/sys/vm/swappiness 100
-
-    # Create cgroup mount point for memory
-    mkdir /sys/fs/cgroup/memory/bg 0750 root system
-    write /sys/fs/cgroup/memory/bg/memory.swappiness 140
-    write /sys/fs/cgroup/memory/bg/memory.move_charge_at_immigrate 1
-    chown root system /sys/fs/cgroup/memory/bg/tasks
-    chmod 0660 /sys/fs/cgroup/memory/bg/tasks
-
-
     # Setup subsystem restart_level
     # This will be configured with the ssr_setup service
     setprop persist.vendor.ssr.restart_level "venus adsp slpi modem cdsp"
+
+    # UFS firmware update
+    exec u:r:vendor_ffu:s0 -- /vendor/bin/ffu
 
 on fs
     wait /dev/block/platform/soc/1da4000.ufshc
@@ -80,41 +50,50 @@ on fs
 
     mount_all /vendor/etc/fstab.${ro.hardware}
 
-    chown root system /mnt/vendor/persist
-    chmod 0771 /mnt/vendor/persist
-
-    # change the compression algorithm for zRAM
-    write /sys/block/zram0/comp_algorithm lz4
     swapon_all /vendor/etc/fstab.${ro.hardware}
-
-    # Keeping following partitions outside fstab file. As user may not have
-    # these partition flashed on the device. Failure to mount any partition in fstab file
-    # results in failure to launch late-start class.
-
-    restorecon_recursive /mnt/vendor/persist
-
-    mkdir /mnt/vendor/persist/data 0700 system system
 
     write /sys/devices/soc/c0a4900.sdhci/mmc_host/mmc0/clkgate_delay 1
 
-    # Start vendor.tad early as other core services depend on it
+    # Start tad early as other core services depend on it
     wait /dev/block/sda1
     chown oem_2997 oem_2997 /dev/block/sda1
     chmod 0770 /dev/block/sda1
-    start vendor.tad
+    start tad
 
     # These are needed for MiscTA HIDL service
     start hwservicemanager
     start hidl_memory
-
-    # UFS firmware update
-    exec u:r:vendor_ffu:s0 -- /vendor/bin/ffu
 
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
     insmod /vendor/lib/modules/kscl.ko
 
     # configure the modem
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
+
+    # SONY: creat mount point for qns
+    mkdir /mnt/qns 0750 oem_2985 oem_2985
+    wait /dev/block/bootdevice/by-name/Qnovo
+    mount_all /vendor/etc/qns.fstab --early
+
+    # SONY: setup qns partition
+    chown oem_2985 oem_2985 /mnt/qns
+    chmod 0750 /mnt/qns
+    restorecon_recursive /mnt/qns
+
+    # qns
+    chown oem_2985 oem_2985 /sys/class/qns
+    chown oem_2985 oem_2985 /sys/class/qns/alarm
+    chown oem_2985 oem_2985 /sys/class/qns/charge_current
+    chown oem_2985 oem_2985 /sys/class/qns/charge_voltage
+    chown oem_2985 oem_2985 /sys/class/qns/charging_state
+    chown oem_2985 oem_2985 /sys/class/qns/current_now
+    chown oem_2985 oem_2985 /sys/class/qns/design
+    chown oem_2985 oem_2985 /sys/class/qns/fcc
+    chown oem_2985 oem_2985 /sys/class/qns/options
+    chown oem_2985 oem_2985 /sys/class/qns/soc
+    chown oem_2985 oem_2985 /sys/class/qns/temp
+    chown oem_2985 oem_2985 /sys/class/qns/voltage
+    chown oem_2985 oem_2985 /sys/class/qns/battery_type
 
 on post-fs
     # Start qseecomd for vold
@@ -149,36 +128,47 @@ on post-fs
     start modem_switcher
 
 on post-fs-data
-    # create directory for wfd
-    mkdir /data/wfd 0770 system system
-
     # SONY: Camera
     chown cameraserver camera /sys/devices/sony_camera_0/info
     chmod 0770 /sys/devices/sony_camera_0/info
     chown cameraserver camera /sys/devices/sony_camera_1/info
     chmod 0770 /sys/devices/sony_camera_1/info
-    mkdir /data/vendor/somc_camera 0770 cameraserver camera
-
-    # create directory for widevine
-    mkdir /data/wv 0700 media media
-
-    # Create directory to store logs
-    mkdir /data/system/log 0770 root system
-    chown root system /data/system/log
-    chmod 0770 /data/system/log
-
-    # SONY: Create a dir on data partition not to be deleted during mr and wipedata
-    mkdir /data/persist 0770 persist_rw persist_rw
+    mkdir /data/vendor/camera 0770 cameraserver camera
 
     # Fingerprint data folder
     mkdir /data/vendor/fpc 0770 system system
 
-    # Illumination service data folder
-    mkdir /data/vendor/illumination_service 0770 system system
+    # We expect that vold has already started and would not unmount the partitions again.
+    mkdir /mnt/idd 0751 oem_2987 oem_2987
+    mkdir /mnt/rca 0750 oem_2987 oem_2987
 
-    # ADSP
-    # Audio HAL has to write to boot_adsp sysfs entry to unload image
-    chown root audio /sys/kernel/boot_adsp/boot
+    mount_all /vendor/etc/idd.fstab --early
+
+    chown oem_2987 oem_2987 /mnt/idd
+    chmod 0751 /mnt/idd
+
+    chown oem_2987 oem_2987 /mnt/rca
+    chmod 0750 /mnt/rca
+
+    exec - system system -- /system/bin/rm -r /mnt/idd/lost+found
+    exec - system system -- /system/bin/rm -r /mnt/rca/lost+found
+
+    # Remove lost+found in user and userdebug
+    exec - system system -- /system/bin/rm -r /data/lost+found/.*
+    exec - system system -- /system/bin/rm -r /cache/lost+found/.*
+    exec - system system -- /system/bin/rm -r /idd/lost+found/.*
+
+    # Resoving iddd failed to launch scenario due to
+    # iddd have no permission to access iddd.pid(root:root)
+    chown oem_2987 oem_2987 /mnt/idd/iddd.pid
+    mkdir /mnt/idd/lost+found 0770 root root
+    mkdir /mnt/idd/output 0755 oem_2987 oem_2987
+    mkdir /mnt/idd/socket 0711 oem_2987 oem_2987
+    mkdir /mnt/idd/startup-prober 0700 root root
+
+    restorecon_recursive -F /mnt/idd
+    mkdir /mnt/rca/plugins 0750 oem_2987 oem_2987
+    restorecon_recursive -F /mnt/rca
 
     #### CHARGING
     # power_supply sysfs
@@ -199,10 +189,6 @@ on post-fs-data
     chown radio wakelock /sys/power/wake_unlock
     chmod 0660 /sys/power/wake_lock
     chmod 0660 /sys/power/wake_unlock
-
-    # chargemon use brightness and autosleep before on boot, so add permission here.
-    chown system system /sys/class/backlight/panel0-backlight/brightness
-    chown system system /sys/power/autosleep
 
     # hvdcp_opti
     start vendor.hvdcp_opti
@@ -237,12 +223,73 @@ on post-fs-data
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
 
 on early-boot
-    start mlog_qmi_service
-
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_cdsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
 
+    # This is usually set by init.qcom.early_boot.sh
+    # Let's set these things ourselves, instead of parsing a slow script
+    # Change owner/permissions of fb0
+    chown system graphics /sys/class/graphics/fb0/dyn_pu
+    chmod 0664 /sys/class/graphics/fb0/dyn_pu
+    chown system graphics /sys/class/graphics/fb0/idle_time
+    chmod 0664 /sys/class/graphics/fb0/idle_time
+    chown system graphics /sys/class/graphics/fb0/lineptr_value
+    chmod 0664 /sys/class/graphics/fb0/lineptr_value
+    chown system graphics /sys/class/graphics/fb0/mode
+    chmod 0664 /sys/class/graphics/fb0/mode
+    chown system graphics /sys/class/graphics/fb0/modes
+    chmod 0664 /sys/class/graphics/fb0/modes
+    chown system graphics /sys/class/graphics/fb0/msm_cmd_autorefresh_en
+    chmod 0664 /sys/class/graphics/fb0/msm_cmd_autorefresh_en
+    chown system graphics /sys/class/graphics/fb0/msm_fb_persist_mode
+    chmod 0664 /sys/class/graphics/fb0/msm_fb_persist_mode
+    # Change owner/permissions of fb1
+    chown system graphics /sys/class/graphics/fb1/cec/enable
+    chmod 0664 /sys/class/graphics/fb1/cec/enable
+    chown system graphics /sys/class/graphics/fb1/cec/logical_addr
+    chmod 0664 /sys/class/graphics/fb1/cec/logical_addr
+    chown system graphics /sys/class/graphics/fb1/cec/rd_msg
+    chmod 0664 /sys/class/graphics/fb1/cec/rd_msg
+    chown system graphics /sys/class/graphics/fb1/cec/wr_msg
+    chmod 0600 /sys/class/graphics/fb1/cec/wr_msg
+    chown system graphics /sys/class/graphics/fb1/hdcp/tp
+    chmod 0664 /sys/class/graphics/fb1/hdcp/tp
+    chown system graphics /sys/class/graphics/fb1/hdcp2p2/min_level_change
+    chmod 0660 /sys/class/graphics/fb1/hdcp2p2/min_level_change
+    chown system graphics /sys/class/graphics/fb1/dynamic_fps
+    chmod 0664 /sys/class/graphics/fb1/dynamic_fps
+    chown system graphics /sys/class/graphics/fb1/hdr_stream
+    chmod 0664 /sys/class/graphics/fb1/hdr_stream
+    chown system graphics /sys/class/graphics/fb1/hpd
+    chmod 0664 /sys/class/graphics/fb1/hpd
+    chown system graphics /sys/class/graphics/fb1/lineptr_value
+    chmod 0664 /sys/class/graphics/fb1/lineptr_value
+    chown system graphics /sys/class/graphics/fb1/msm_fb_dfps_mode
+    chmod 0664 /sys/class/graphics/fb1/msm_fb_dfps_mode
+    chown system graphics /sys/class/graphics/fb1/msm_fb_persist_mode
+    chmod 0664 /sys/class/graphics/fb1/msm_fb_persist_mode
+    chown system graphics /sys/class/graphics/fb1/pa
+    chmod 0664 /sys/class/graphics/fb1/pa
+    chown system graphics /sys/class/graphics/fb1/product_description
+    chmod 0664 /sys/class/graphics/fb1/product_description
+    chown system graphics /sys/class/graphics/fb1/res_info
+    chmod 0664 /sys/class/graphics/fb1/res_info
+    chown system graphics /sys/class/graphics/fb1/s3d_mode
+    chmod 0664 /sys/class/graphics/fb1/s3d_mode
+    chown system graphics /sys/class/graphics/fb1/vendor_name
+    chmod 0664 /sys/class/graphics/fb1/vendor_name
+    chown system graphics /sys/class/graphics/fb1/video_mode
+    chmod 0664 /sys/class/graphics/fb1/video_mode
+    # Change owner/permissions of fb2
+    chown system graphics /sys/class/graphics/fb2/lineptr_value
+    chmod 0664 /sys/class/graphics/fb2/lineptr_value
+    chown system graphics /sys/class/graphics/fb2/msm_fb_persist_mode
+    chmod 0664 /sys/class/graphics/fb2/msm_fb_persist_mode
+    # Graphics props
+    setprop vendor.gpu.available_frequencies "710000000 670000000 596000000 515000000 414000000 342000000 257000000"
+    # Start atfwd
+    setprop persist.vendor.radio.atfwd.start true
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.qcom.early_boot.sh
 
     # This is normally set by init.qcom.sh but the script does nothing,
@@ -284,17 +331,6 @@ on boot
     chown system system /persist/speccfg/submask
     chown system system /persist/speccfg/partition
 
-    # Cover mode
-    chown system system /sys/devices/virtual/input/clearpad/cover_mode_enabled
-    chown system system /sys/devices/virtual/input/clearpad/cover_win_bottom
-    chown system system /sys/devices/virtual/input/clearpad/cover_win_left
-    chown system system /sys/devices/virtual/input/clearpad/cover_win_right
-    chown system system /sys/devices/virtual/input/clearpad/cover_win_top
-
-    # Tap to wake
-    chown system system /sys/devices/virtual/input/clearpad/wakeup_gesture
-    chmod 0660 /sys/devices/virtual/input/clearpad/wakeup_gesture
-
     # Glove mode
     chown system system /sys/devices/virtual/input/clearpad/glove
     chmod 0600 /sys/devices/virtual/input/clearpad/glove
@@ -302,19 +338,6 @@ on boot
 
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
-
-    # Socket location for RIDL
-    mkdir /dev/socket/RIDL 2770 system system
-
-    # Required for fingerprint
-    chown system system /sys/bus/spi/devices/spi0.1/clk_enable
-    chmod 0660 /sys/bus/spi/devices/spi0.1/clk_enable
-    chown system system /sys/devices/soc/fpc1145_device/spi_prepare
-    chmod 0660 /sys/devices/soc/fpc1145_device/spi_prepare
-    chown system system /sys/devices/soc/fpc1145_device/wakeup_enable
-    chmod 0660 /sys/devices/soc/fpc1145_device/wakeup_enable
-    chown system system /sys/devices/soc/fpc1145_device/irq
-    chmod 0660 /sys/devices/soc/fpc1145_device/irq
 
     # Add a cpuset for the camera daemon
     # we want all the little cores for camera
@@ -358,6 +381,9 @@ on boot
     chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_thresh_deltaP
     chmod 666 /sys/devices/virtual/input/rgbcir_sensor/chip_pow
 
+    chown system audio /sys/class/leds/vibrator/activate
+    chmod 0660 /sys/class/leds/vibrator/activate
+
     write /proc/sys/vm/dirty_ratio 5
     write /proc/sys/vm/dirty_background_ratio 1
 
@@ -368,31 +394,8 @@ on boot
     chown wifi wifi /sys/module/wlan/parameters/fwpath
     chown wifi wifi /sys/kernel/boot_wlan/boot_wlan
 
-    # create directory for wfd
-    mkdir /data/vendor/wfd 0770 system system
-
 on shutdown
     write /sys/class/power_supply/battery/int_cld 1
-
-on property:persist.service.battery.smt_chg=activate
-    write /sys/class/power_supply/battery/smart_charging_activation 1
-
-on property:persist.service.battery.smt_chg=charging_suspend
-    write /sys/class/power_supply/battery/smart_charging_interruption 1
-
-on property:persist.service.battery.smt_chg=charging_resume
-    write /sys/class/power_supply/battery/smart_charging_interruption 0
-
-# charger
-on property:persist.service.battery.charge=0
-    write /sys/class/power_supply/battery/lrc_enable 0
-    write /sys/class/power_supply/battery/lrc_socmax 0
-    write /sys/class/power_supply/battery/lrc_socmin 0
-
-on property:persist.service.battery.charge=1
-    write /sys/class/power_supply/battery/lrc_socmax 60
-    write /sys/class/power_supply/battery/lrc_socmin 40
-    write /sys/class/power_supply/battery/lrc_enable 1
 
 on property:wlan.driver.status=ok
     # WLAN firmware config
@@ -402,9 +405,9 @@ on property:wlan.driver.status=ok
     chown wifi wifi /sys/module/wlan/parameters/fwpath
     restorecon /sys/module/wlan/parameters/fwpath
 
-service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
+service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -O/data/vendor/wifi/wpa/sockets -puse_p2p_group_interface=1 -dd \
-    -g@android:wpa_wlan0
+    -g@android:vendor_wpa_wlan0
     # We will start as root and wpa_supplicant will switch to user wifi
     # after setting up the capabilities required for WEXT
     # user wifi
@@ -412,12 +415,12 @@ service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
     interface android.hardware.wifi.supplicant@1.0::ISupplicant default
     interface android.hardware.wifi.supplicant@1.1::ISupplicant default
     class main
-    socket wpa_wlan0 dgram 660 wifi wifi
+    socket vendor_wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
 
 # QMI DPM
-service dpmQmiMgr /vendor/bin/dpmQmiMgr
+service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
     class main
     user system
     group system
@@ -430,8 +433,7 @@ service modem_switcher /system/bin/sony-modem-switcher
     oneshot
 
 # QCOM Quick Charge
-service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
-    class main
+service vendor.hvdcp_opti /system/vendor/bin/hvdcp_opti
     user root
     group system wakelock
     disabled
@@ -446,14 +448,32 @@ service charge_service /vendor/bin/charge_service
     writepid /dev/cpuset/system-background/tasks
     disabled
 
-service vendor.qns /vendor/bin/qns -d /mnt/qns -l /mnt/qns
+# Qns
+service qns /vendor/bin/qns -d /mnt/qns -l /mnt/qns
     user oem_2985
     group oem_2985
     socket qnsbsd stream 660 oem_2985 system
     disabled
 
+on property:sys.user.0.ce_available=true
+    # Remounting partitions here just in case vold restarts
+    mount_all /vendor/etc/qns.fstab --early
+
+# Iddd
+service iddd /vendor/bin/iddd
+    class core
+    user oem_2987
+    group oem_2987 log inet oem_2993
+    writepid /dev/cpuset/system-background/tasks
+
+on property:sys.user.0.ce_available=true
+    # Remounting partitions here just in case vold restarts
+    mount_all /vendor/etc/idd.fstab --early
+    # Setting property to inform that partitions are mounted
+    setprop vendor.idd.partitions_ready 1
+
 on charger
-    setprop sys.usb.config mass_storage
+    setprop persist.sys.usb.config mass_storage
     load_system_props
 
     # power_supply sysfs
@@ -468,12 +488,6 @@ on charger
     chmod 0664 /sys/class/power_supply/bms/charge_full
     chmod 0664 /sys/class/power_supply/bms/charge_full_raw
     chmod 0664 /sys/class/power_supply/bms/device/batt_aging_level
-
-    # The charge_service/chargemon/hvdcp_opti use wakelock before on boot, so add permission here.
-    chown radio wakelock /sys/power/wake_lock
-    chown radio wakelock /sys/power/wake_unlock
-    chmod 0660 /sys/power/wake_lock
-    chmod 0660 /sys/power/wake_unlock
 
     # chargemon use brightness and autosleep before on boot, so add permission here.
     chown system system /sys/class/backlight/panel0-backlight/brightness
@@ -507,6 +521,9 @@ on charger
 
     setprop sys.usb.configfs 1
 
+on property:vendor.battery.charge.osv.init=1
+    setprop persist.vendor.battery.charge ${persist.service.battery.charge}
+
 # Set value in property to sysfs for LRC mode
 on property:persist.vendor.battery.charge=0
     write /sys/class/power_supply/battery/lrc_enable 0
@@ -525,7 +542,31 @@ on property:vendor.backlight_on=1
     write /sys/devices/virtual/input/clearpad/force_sleep 0
 
 on property:sys.boot_completed=1
-    # This is the only thing which init.qcom.post_boot.sh does
+    # Partly from init.qcom.post_boot.sh
+
     # This initializes vendor.qti.hardware.perf@1.0-service
     setprop vendor.post_boot.parsed 1
-    setprop persist.vendor.mmi.misc_dev_path /dev/block/bootdevice/by-name/misc
+
+    # Configure memory parameters
+    write /sys/module/lowmemorykiller/parameters/adj_max_shift 606
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 105984
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 0
+    write /sys/module/vmpressure/parameters/allocstall_threshold 0
+    write /proc/sys/vm/swappiness 100
+
+    # Reset read ahead for sda and set it for mmcblk0
+    write /sys/block/sda/queue/read_ahead_kb 512
+    write /sys/block/mmcblk0/bdi/read_ahead_kb 512
+    write /sys/block/mmcblk0/queue/read_ahead_kb 512
+
+    write /sys/class/block/mmcblk0/bdi/max_ratio 1
+
+    # SONY: Enable wakeup irq module
+    write /sys/devices/platform/wakeup_debug.0/enable 1
+
+# Touch
+on property:dev.bootcomplete=1 && property:persist.sys.touch.glove_mode=*
+    write /sys/devices/virtual/input/clearpad/glove ${persist.sys.touch.glove_mode}
+
+on property:dev.bootcomplete=1 && property:persist.sys.touch.cover_mode_enabled=*
+    write /sys/devices/virtual/input/clearpad/cover_mode_enabled ${persist.sys.touch.cover_mode_enabled}

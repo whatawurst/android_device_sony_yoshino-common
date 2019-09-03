@@ -92,6 +92,7 @@ on property:sys.boot_completed=1
     write /proc/sys/kernel/sched_freq_dec_notify 400000
     write /proc/sys/kernel/sched_spill_nr_run 5
     write /proc/sys/kernel/sched_restrict_cluster_spill 1
+    write /proc/sys/kernel/sched_prefer_sync_wakee_to_waker 1
 
     # Disable thermal to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
@@ -133,7 +134,7 @@ on property:sys.boot_completed=1
 
     # Enable input boost configuration
     write /sys/module/cpu_boost/parameters/input_boost_freq "0:1324800"
-    write /sys/module/cpu_boost/parameters/input_boost_ms 80
+    write /sys/module/cpu_boost/parameters/input_boost_ms 40
 
     # Enable bus-dcvs
     write /sys/class/devfreq/soc:qcom,cpubw/governor "bw_hwmon"
@@ -161,17 +162,6 @@ on property:sys.boot_completed=1
 
     write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
 
-    # SOMC tuning parameters for scheduler and others
-    # For task packing criteria
-    write /proc/sys/kernel/sched_short_burst_ns 500000
-    # Binder performance
-    # Wakeup on same core as caller for sync wakeups
-    write /proc/sys/kernel/sched_prefer_sync_wakee_to_waker 1
-    # avoid using the same cluster/same core shortcut for really big tasks
-    write /proc/sys/kernel/sched_small_wakee_task_load 95
-    # But the load of the caller should not influence this
-    write /proc/sys/kernel/sched_big_waker_task_load 0
-
     # Enable Low power modes
     write /sys/module/lpm_levels/system/pwr/cpu0/ret/idle_enabled N
     write /sys/module/lpm_levels/system/pwr/cpu1/ret/idle_enabled N
@@ -190,4 +180,3 @@ on property:sys.boot_completed=1
     write /dev/cpuset/background/cpus "0-3"
     write /dev/cpuset/system-background/cpus "0-3"
     write /proc/sys/kernel/sched_boost 0
-
