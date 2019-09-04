@@ -2,6 +2,9 @@
 #    dac_override
 #};
 
+# rm -r /cache/lost+found
+allow toolbox cache_file:dir { read write getattr search rmdir open };
+
 # rm -r /idd/lost+found
 allow toolbox idd_data_file:dir { read write getattr search rmdir open };
 allow toolbox idd_root_dir:dir { read write getattr search rmdir open };
