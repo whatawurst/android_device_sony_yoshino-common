@@ -2,7 +2,18 @@
 
 set_prop(qti_init_shell, oem_prop)
 
-allow qti_init_shell rootfs:dir r_dir_perms;
+allow qti_init_shell rootfs:dir { create rw_dir_perms setattr };
 
 # init.qcom.early_boot.sh video_mode
 allow qti_init_shell sysfs:file setattr;
+
+allow qti_init_shell proc_filesystems:file { getattr open read };
+
+# just silence those damn logs
+# (happens during mount/umount in modem script)
+allow qti_init_shell {
+    bt_firmware_file
+    firmware_file
+    system_data_file
+}:filesystem { getattr };
+allow qti_init_shell system_data_file:dir getattr;
