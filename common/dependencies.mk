@@ -14,8 +14,11 @@
 
 ### SYSTEM LIBS
 PRODUCT_PACKAGES += \
+    libavservices_minijail \
     libjson \
     libion \
+    libminijail \
+    libstdc++.vendor \
     libtinyxml \
     libxml2
 
@@ -23,6 +26,8 @@ PRODUCT_PACKAGES += \
 # For audio.primary
 PRODUCT_PACKAGES += \
     libaudio-resampler \
+    libaudioroute \
+    libaudioutils \
     libtinyalsa \
     libtinycompress_vendor \
     tinymix
@@ -35,46 +40,40 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libvolumelistener
 
+### BLUETOOTH
+PRODUCT_PACKAGES += \
+    libbt-vendor
+
+# IMS
+PRODUCT_PACKAGES += \
+    ims-ext-common
+
+### IPV6
+PRODUCT_PACKAGES += \
+    ebtables \
+    ethertypes
+
 ### MEDIA
 PRODUCT_PACKAGES += \
     libqdMetaData.system
+
+### NETMGR
+PRODUCT_PACKAGES += \
+    librmnetctl
 
 ### OMX
 PRODUCT_PACKAGES += \
     libOmxAacEnc \
     libOmxAmrEnc \
+    libOmxCore \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
-    libOmxCore \
     libOmxVdec \
     libOmxVdecHevc \
     libOmxVenc \
     libc2dcolorconvert \
     libmm-omxcore \
     libstagefrighthw
-
-### BLUETOOTH
-PRODUCT_PACKAGES += \
-    libbt-vendor
-
-### RIL
-PRODUCT_PACKAGES += \
-    libprotobuf-cpp-full
-
-### NETMGR
-PRODUCT_PACKAGES += \
-    librmnetctl
-
-# IMS
-PRODUCT_PACKAGES += \
-    ims-ext-common
-
-### TELEPHONY
-PRODUCT_PACKAGES += \
-    telephony-ext
-
-PRODUCT_BOOT_JARS += \
-    telephony-ext
 
 ### RCS
 PRODUCT_PACKAGES += \
@@ -83,21 +82,26 @@ PRODUCT_PACKAGES += \
     rcs_service_api \
     rcs_service_api.xml
 
+### RIL
+PRODUCT_PACKAGES += \
+    libprotobuf-cpp-full
+
+### TELEPHONY
+PRODUCT_PACKAGES += \
+    telephony-ext
+
+PRODUCT_BOOT_JARS += \
+    telephony-ext
+
 ### VNDK
 PRODUCT_PACKAGES += \
     vndk_package \
     vndk-sp
 
-### IPV6
-PRODUCT_PACKAGES += \
-    ebtables \
-    ethertypes
-
-# WiFi Display
+# WIFI DISPLAY
 PRODUCT_PACKAGES += \
     libaacwrapper \
-    libnl \
-    vendor.display.config@1.3
+    libnl
 
 PRODUCT_BOOT_JARS += \
     WfdCommon

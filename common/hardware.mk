@@ -16,34 +16,32 @@
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.r_submix.default \
-    audio.usb.default \
-    libaudio-resampler \
-    tinymix
+    audio.usb.default
+
+### CAMERA
+PRODUCT_PACKAGES += \
+    Snap
+
+### CHARGER
+PRODUCT_PACKAGES += \
+    charger_res_images
 
 ### NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     com.gsma.services.nfc \
     com.nxp.nfc.nq \
-    nfc_nci.nqx.default \
     NQNfcNci \
+    nfc_nci.nqx.default \
     nqnfcee_access.xml \
     nqnfcse_access.xml \
     Tag
 
 ### WIFI
 PRODUCT_PACKAGES += \
-    p2p_supplicant.conf \
     hostapd \
     libwpa_client \
+    p2p_supplicant.conf \
     wificond \
     wpa_supplicant \
     wpa_supplicant.conf
-
-### CHARGER
-PRODUCT_PACKAGES += \
-    charger_res_images
-
-### CAMERA
-PRODUCT_PACKAGES += \
-    Snap
