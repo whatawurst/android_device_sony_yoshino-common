@@ -105,7 +105,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ### NFC
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.nfc.port=I2C
+    ro.hardware.nfc_nci=nqx.default \
+    ro.nfc.port=I2C \
+    ro.nfc.se.sim.enable=true \
+    ro.nfc.se.smx.enable=false \
+    ro.nfc.on.default=false \
+    ro.vendor.nfc.ko=pn553
 
 ### WIFI
 PRODUCT_PROPERTY_OVERRIDES += \
