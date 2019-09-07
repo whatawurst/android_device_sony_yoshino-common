@@ -1,0 +1,10 @@
+# wfdservice.te
+
+typeattribute wfdservice data_between_core_and_vendor_violators;
+
+unix_socket_connect(wfdservice, property, init)
+allow wfdservice wfd_prop:property_service set;
+allow wfdservice property_socket:sock_file write;
+
+allow wfdservice wfd_vendor_data_file:dir { rw_dir_perms };
+allow wfdservice wfd_vendor_data_file:file { rw_file_perms };
