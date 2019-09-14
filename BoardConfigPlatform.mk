@@ -73,6 +73,15 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 # Build ext4 tools - system/vold
 TARGET_USERIMAGES_USE_EXT4 := true
 
+### DEXPREOPT
+# Enable dexpreopt for everything to speed boot time
+ifeq ($(HOST_OS),linux)
+  ifneq ($(TARGET_BUILD_VARIANT),eng)
+      WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := false
+      WITH_DEXPREOPT := true
+  endif
+endif
+
 ### DISPLAY
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
