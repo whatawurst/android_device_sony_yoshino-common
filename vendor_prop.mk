@@ -41,6 +41,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.wfd.enable=1
 
+# Property for WfdService.apk to fix WFD for some apps when 
+# hdcp is not provisioned (e.g. unlocked bootloader)
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.debug.wfd.appmonitoring=1
+
 # Property to choose between virtual/external wfd display
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.wfd.virtual=0
