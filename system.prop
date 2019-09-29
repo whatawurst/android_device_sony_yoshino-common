@@ -42,7 +42,3 @@ persist.keyprovd.fido.version=0
 # System props for telephony
 ro.com.android.dataroaming=false
 persist.ims.disableUserAgent=1
-
-### SENSORS
-#Device Position Classifier
-ro.vendor.sensors.dpc=true
