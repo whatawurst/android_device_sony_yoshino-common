@@ -233,6 +233,10 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino/sepolicy/private
 ### RECOVERY
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab.recovery
 
+### SYSTEM PROPS
+# This is a reset, add more in device if needed
+TARGET_SYSTEM_PROP := $(PLATFORM_PATH)/system.prop
+
 ### VENDOR SECURITY PATCH LEVEL
 VENDOR_SECURITY_PATCH := 2019-07-01
 
