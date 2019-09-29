@@ -217,6 +217,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.disable_hdr_lut_gen=1 \
     vendor.vidc.enc.disable.pq=true
 
+# Enable xfrm support
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.service.xrfm.supported=true \
+    persist.service.xrfm.mode=1
+
 # Touch
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.backlight_on=1
@@ -258,6 +263,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # CAMERA
 PRODUCT_PROPERTY_OVERRIDES += \
+    camera.disable_zsl_mode=1 \
     persist.camera.HAL3.enabled=1
 
 # Thermal
@@ -275,3 +281,25 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable virtual keys
 PRODUCT_PROPERTY_OVERRIDES += \
     qemu.hw.mainkeys=0
+
+# Path to frp partition
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.frp.pst=/dev/block/bootdevice/by-name/frp
+
+# OEM Unlock reporting
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.oem_unlock_supported=1
+
+### PERFORMANCE
+# Library for power balancing
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=libqti-perfd-client.so
+
+# Enable sched colocation
+PRODUCT_PROPERTY_OVERRIDES += \
+    sched.colocate.enable=1
+
+# Min/max cpu in core control
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.qti.core_ctl_min_cpu=2 \
+    ro.vendor.qti.core_ctl_max_cpu=4
