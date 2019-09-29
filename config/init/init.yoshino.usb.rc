@@ -86,7 +86,7 @@ on charger
     rm /config/usb_gadget/g1/configs/b.1/f5
 
     write /config/usb_gadget/g1/idVendor 0x0fce
-    write /config/usb_gadget/g1/idProduct 0xe${ro.usb.pid_suffix}
+    write /config/usb_gadget/g1/idProduct 0xe${ro.vendor.usb.pid_suffix}
     symlink /config/usb_gadget/g1/functions/mass_storage.0 /config/usb_gadget/g1/configs/b.1/f1
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
 
@@ -162,7 +162,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=adb && property:sys.u
     rm /config/usb_gadget/g1/configs/b.1/f4
     rm /config/usb_gadget/g1/configs/b.1/f5
     write /config/usb_gadget/g1/idVendor 0x0fce
-    write /config/usb_gadget/g1/idProduct 0x0${ro.usb.pid_suffix}
+    write /config/usb_gadget/g1/idProduct 0x0${ro.vendor.usb.pid_suffix}
     symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f1
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
@@ -177,7 +177,7 @@ on property:sys.usb.config=mtp && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/functions/mtp.gs0/os_desc/interface.MTP/compatible_id "MTP"
     write /config/usb_gadget/g1/os_desc/use 1
     write /config/usb_gadget/g1/idVendor 0x0fce
-    write /config/usb_gadget/g1/idProduct 0x0${ro.usb.pid_suffix}
+    write /config/usb_gadget/g1/idProduct 0x0${ro.vendor.usb.pid_suffix}
     symlink /config/usb_gadget/g1/functions/mtp.gs0 /config/usb_gadget/g1/configs/b.1/f1
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
@@ -195,7 +195,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=mtp,adb && property:s
     write /config/usb_gadget/g1/functions/mtp.gs0/os_desc/interface.MTP/compatible_id "MTP"
     write /config/usb_gadget/g1/os_desc/use 1
     write /config/usb_gadget/g1/idVendor 0x0fce
-    write /config/usb_gadget/g1/idProduct 0x5${ro.usb.pid_suffix}
+    write /config/usb_gadget/g1/idProduct 0x5${ro.vendor.usb.pid_suffix}
     symlink /config/usb_gadget/g1/functions/mtp.gs0 /config/usb_gadget/g1/configs/b.1/f1
     symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f2
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
@@ -211,7 +211,7 @@ on property:sys.usb.config=ptp && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/functions/ptp.gs1/os_desc/interface.MTP/compatible_id "PTP"
     write /config/usb_gadget/g1/os_desc/use 1
     write /config/usb_gadget/g1/idVendor 0x0fce
-    write /config/usb_gadget/g1/idProduct 0x9${ro.usb.pid_suffix}
+    write /config/usb_gadget/g1/idProduct 0x9${ro.vendor.usb.pid_suffix}
     symlink /config/usb_gadget/g1/functions/ptp.gs1 /config/usb_gadget/g1/configs/b.1/f1
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
@@ -229,7 +229,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=ptp,adb && property:s
     write /config/usb_gadget/g1/functions/ptp.gs1/os_desc/interface.MTP/compatible_id "PTP"
     write /config/usb_gadget/g1/os_desc/use 1
     write /config/usb_gadget/g1/idVendor 0x0fce
-    write /config/usb_gadget/g1/idProduct 0xa${ro.usb.pid_suffix}
+    write /config/usb_gadget/g1/idProduct 0xa${ro.vendor.usb.pid_suffix}
     symlink /config/usb_gadget/g1/functions/ptp.gs1 /config/usb_gadget/g1/configs/b.1/f1
     symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f2
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
@@ -243,7 +243,7 @@ on property:sys.usb.config=midi && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.1/f4
     rm /config/usb_gadget/g1/configs/b.1/f5
     write /config/usb_gadget/g1/idVendor 0x0fce
-    write /config/usb_gadget/g1/idProduct 0xc${ro.usb.pid_suffix}
+    write /config/usb_gadget/g1/idProduct 0xc${ro.vendor.usb.pid_suffix}
     symlink /config/usb_gadget/g1/functions/midi.gs5 /config/usb_gadget/g1/configs/b.1/f1
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
@@ -259,7 +259,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=midi,adb && property:
     rm /config/usb_gadget/g1/configs/b.1/f4
     rm /config/usb_gadget/g1/configs/b.1/f5
     write /config/usb_gadget/g1/idVendor 0x0fce
-    write /config/usb_gadget/g1/idProduct 0xf${ro.usb.pid_suffix}
+    write /config/usb_gadget/g1/idProduct 0xf${ro.vendor.usb.pid_suffix}
     symlink /config/usb_gadget/g1/functions/midi.gs5 /config/usb_gadget/g1/configs/b.1/f1
     symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f2
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
@@ -373,7 +373,7 @@ on property:sys.usb.config=rndis,none && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.1/f4
     rm /config/usb_gadget/g1/configs/b.1/f5
     write /config/usb_gadget/g1/idVendor 0x0fce
-    write /config/usb_gadget/g1/idProduct 0x7${ro.usb.pid_suffix}
+    write /config/usb_gadget/g1/idProduct 0x7${ro.vendor.usb.pid_suffix}
     symlink /config/usb_gadget/g1/functions/${sys.usb.rndis.func.name}.rndis /config/usb_gadget/g1/configs/b.1/f1
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state rndis
@@ -392,7 +392,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=rndis,none,adb && pro
     rm /config/usb_gadget/g1/configs/b.1/f4
     rm /config/usb_gadget/g1/configs/b.1/f5
     write /config/usb_gadget/g1/idVendor 0x0fce
-    write /config/usb_gadget/g1/idProduct 0x8${ro.usb.pid_suffix}
+    write /config/usb_gadget/g1/idProduct 0x8${ro.vendor.usb.pid_suffix}
     symlink /config/usb_gadget/g1/functions/${sys.usb.rndis.func.name}.rndis /config/usb_gadget/g1/configs/b.1/f1
     symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f2
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
