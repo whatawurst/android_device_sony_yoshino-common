@@ -14,8 +14,6 @@
 
 ### AUDIO
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.deep_buffer.media=true \
-    media.aac_51_output_enabled=true \
     ro.config.media_vol_steps=30 \
     ro.config.vc_call_vol_steps=8
 
@@ -33,56 +31,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ### NFC
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.nfc_nci=nqx.default \
-    ro.nfc.on.default=false \
-    ro.nfc.port=I2C \
-    ro.nfc.se.sim.enable=true \
-    ro.nfc.se.smx.enable=false
+    ro.hardware.nfc_nci=nqx.default
 
 ### RADIO
-# CNE
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.cne.feature=1
-
 # DPM module
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.dpm.feature=1
 
 # Netmgr
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.data.netmgrd.qos.enable=true \
-    persist.vendor.data.mode=concurrent \
-    persist.vendor.radio.aosp_usr_pref_sel=true \
-    ro.vendor.use_data_netmgrd=true
+    persist.vendor.radio.aosp_usr_pref_sel=true
 
 # Rild
 PRODUCT_PROPERTY_OVERRIDES += \
-    ril.subscription.types=NV,RUIM \
     rild.libpath=/system/vendor/lib64/libril-qc-qmi-1.so
-
-# Rild - NITZ
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.rild.nitz_long_ons_0="" \
-    persist.rild.nitz_long_ons_1="" \
-    persist.rild.nitz_long_ons_2="" \
-    persist.rild.nitz_long_ons_3="" \
-    persist.rild.nitz_plmn="" \
-    persist.rild.nitz_short_ons_0="" \
-    persist.rild.nitz_short_ons_1="" \
-    persist.rild.nitz_short_ons_2="" \
-    persist.rild.nitz_short_ons_3=""
-
-# Rmnet data
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.data.df.agg.dl_pkt=10 \
-    persist.data.df.agg.dl_size=4096 \
-    persist.data.df.dl_mode=5 \
-    persist.data.df.dev_name=rmnet_usb0 \
-    persist.data.df.iwlan_mux=9 \
-    persist.data.df.mux_count=8 \
-    persist.data.df.ul_mode=5 \
-    persist.data.wda.enable=true \
-    persist.rmnet.data.enable=true
 
 # TCP Buffer sizes
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -100,8 +62,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Telephony
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.call_ring.multiple=false \
-    telephony.lteOnCdmaDevice=1
+    ro.telephony.call_ring.multiple=false
 
 ### SENSORS
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -115,14 +76,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # hdcp is not provisioned (e.g. unlocked bootloader)
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.wfd.appmonitoring=1
-
-# Property to enable user to access Google WFD settings.
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.debug.wfd.enable=1
-
-# Property to choose between virtual/external wfd display
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.wfd.virtual=0
 
 ### WIFI
 PRODUCT_PROPERTY_OVERRIDES += \
