@@ -17,20 +17,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.gyro.disable=0 \
     persist.vendor.debug.sensors.hal=0 \
     debug.vendor.sns.daemon=0 \
-    debug.vendor.sns.hal=0 \
     debug.vendor.sns.libsensor1=0
 
 ### AUDIO
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.audio.fluence.voicecall=true \
-    persist.audio.fluence.voicecomm=true \
-    persist.audio.fluence.voicerec=false \
-    persist.audio.fluence.speaker=true \
     media.aac_51_output_enabled=true \
-    audio.deep_buffer.media=1 \
-    ro.config.vc_call_vol_steps=7 \
-    ro.config.media_vol_steps=25 \
-    ro.config.vc_call_vol_steps=11
+    audio.deep_buffer.media=true \
+    ro.config.vc_call_vol_steps=8 \
+    ro.config.media_vol_steps=30
 
 ### DRM SERVICE
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -52,14 +46,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ### RILD
 PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
+    rild.libpath=/system/vendor/lib64/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM \
     telephony.lteOnCdmaDevice=1
 
 # Enable netmgr
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.use_data_netmgrd=true \
-    persist.radio.aosp_usr_pref_sel=true \
+    persist.vendor.radio.aosp_usr_pref_sel=true \
     persist.data.netmgrd.qos.enable=true \
     persist.vendor.data.mode=concurrent
 
@@ -114,39 +108,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.nfc.port=I2C \
     ro.nfc.se.sim.enable=true \
     ro.nfc.se.smx.enable=false \
-    ro.nfc.on.default=false \
-    ro.vendor.nfc.ko=pn553
+    ro.nfc.on.default=false
 
 ### WIFI
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     net.tcp.buffersize.wifi=524288,2097152,4194304,262144,524288,1048576
-
-### DEX2OAT
-# Limit dex2oat threads to improve thermals
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dex2oat-threads=2 \
-    dalvik.vm.image-dex2oat-threads=4
-
-### DATA
-# Platform specific default properties
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.data.qmi.adb_logmask=0
-
-### HW COMPOSER AND UI
-# Hardware User Interface parameters
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hwui.texture_cache_size=48 \
-    ro.hwui.layer_cache_size=32 \
-    ro.hwui.r_buffer_cache_size=4 \
-    ro.hwui.path_cache_size=24 \
-    ro.hwui.gradient_cache_size=1 \
-    ro.hwui.drop_shadow_cache_size=5 \
-    ro.hwui.texture_cache_flushrate=0.5 \
-    ro.hwui.text_small_cache_width=1024 \
-    ro.hwui.text_small_cache_height=1024 \
-    ro.hwui.text_large_cache_width=2048 \
-    ro.hwui.text_large_cache_height=1024
 
 # IMS
 PRODUCT_PROPERTY_OVERRIDES += \
