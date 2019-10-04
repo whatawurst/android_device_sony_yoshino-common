@@ -1,48 +1,133 @@
 # system prop for yoshino
 
+### AUDIO
+# Deep buffer enable
+audio.deep_buffer.media=true
+
+# Fast audio output client buffer size reduction
+af.fast_track_multiplier=1
+
+# Offload video playback disable
+audio.offload.video=false
+
 ### BLUETOOTH
-#system prop for A4WP profile support
+bt.max.hfpclient.connections=1
+persist.vendor.btstack.a2dp_offload_cap=false
+
+# A4WP profile support
 ro.bluetooth.a4wp=false
 
-#system prop for wipower support
+# Wipower support
 ro.bluetooth.emb_wp_mode=true
 ro.bluetooth.wipower=true
 
-## CAMERA
+### CAMERA
 vendor.camera.aux.packagelist=org.codeaurora.snapcam,org.cyanogenmod.snap
 
 ### DISPLAY
+# Assertive display
+ro.qcom.ad=1
+ro.vendor.display.ad=1
+ro.vendor.display.ad.sdr_calib_data=/vendor/etc/ad_calib.cfg
+ro.vendor.display.sensortype=2
+
+# CABL
+ro.qualcomm.cabl=0
+
+# Display default color mode enable
+vendor.display.enable_default_color_mode=1
+
 # HWComposer
 debug.sf.enable_hwc_vds=1
 debug.sf.hw=1
 debug.gralloc.enable_fb_ubwc=1
 debug.sf.latch_unsignaled=1
-
-# Enable VDS WFD solution
-persist.hwc.enable_vds=1
-
-# Display Properties as per treble compliance
-vendor.gralloc.disable_ubwc=0
-vendor.gralloc.enable_fb_ubwc=1
 vendor.display.perf_hint_window=50
 
-#Property to enable display default color mode
+# Display default color mode enable
 vendor.display.enable_default_color_mode=1
 
 # Gamut
 ro.sys.colorgamut.supported=true
 persist.sys.colorgamut.mode=1
 
+# HDR
+vendor.vidc.enc.disable.pq=true
+
+# VDS WFD solution
+persist.hwc.enable_vds=1
+
+# Xfrm support
+persist.service.xrfm.mode=1
+ro.service.xrfm.supported=true
+
 ### KEYPROVD
 # FIDO key provision state and version
 persist.keyprovd.fido.prov=false
 persist.keyprovd.fido.version=0
+
+### MEDIA PROFILES
+media.settings.xml=/vendor/etc/media_profiles_vendor.xml
+
+### PERFORMANCE
+# Core control max/min CPU's
+ro.vendor.qti.core_ctl_max_cpu=4
+ro.vendor.qti.core_ctl_min_cpu=2
+
+# Sched colocation
+sched.colocate.enable=1
 
 ### RADIO
 # System props for telephony
 ro.com.android.dataroaming=false
 persist.ims.disableUserAgent=1
 
+### SD
+# Encryption supported
+ro.sdcrypt.supported=true
+
 ### SENSORS
-#support sensor directchannel reporting
 persist.vendor.sensors.direct_channel=true
+ro.vendor.sdk.sensors.gestures=false
+ro.vendor.sensors.amd=false
+ro.vendor.sensors.bte=false
+ro.vendor.sensors.cmc=false
+ro.vendor.sensors.dev_ori=true
+ro.vendor.sensors.dpc=true
+ro.vendor.sensors.facing=false
+ro.vendor.sensors.fast_amd=false
+ro.vendor.sensors.fns=false
+ro.vendor.sensors.game_rv=true
+ro.vendor.sensors.georv=true
+ro.vendor.sensors.gravity=true
+ro.vendor.sensors.gtap=false
+ro.vendor.sensors.iod=false
+ro.vendor.sensors.laccel=true
+ro.vendor.sensors.mot_detect=true
+ro.vendor.sensors.multishake=true
+ro.vendor.sensors.orientation=true
+ro.vendor.sensors.pam=false
+ro.vendor.sensors.pedometer=false
+ro.vendor.sensors.pmd=true
+ro.vendor.sensors.proximity=true
+ro.vendor.sensors.pug=false
+ro.vendor.sensors.qheart=false
+ro.vendor.sensors.qmd=false
+ro.vendor.sensors.rawdata_mode=false
+ro.vendor.sensors.rmd=false
+ro.vendor.sensors.rotvec=true
+ro.vendor.sensors.scrn_ortn=false
+ro.vendor.sensors.smd=true
+ro.vendor.sensors.sta_detect=true
+ro.vendor.sensors.step_counter=true
+ro.vendor.sensors.step_detector=true
+ro.vendor.sensors.tap=false
+ro.vendor.sensors.tilt=false
+ro.vendor.sensors.tilt_detector=true
+ro.vendor.sensors.vmd=false
+ro.vendor.sensors.wrist_tilt=false
+ro.vendor.sensors.wu=true
+ro.vendor.qf_use_report_period=false
+
+### USB
+sys.usb.controller=a800000.dwc3
