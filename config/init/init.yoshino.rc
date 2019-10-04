@@ -479,7 +479,6 @@ on property:sys.user.0.ce_available=true
 
 on charger
     setprop persist.sys.usb.config mass_storage
-    load_system_props
 
     # power_supply sysfs
     chmod 0664 /sys/class/power_supply/battery/charging_enabled
