@@ -96,6 +96,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.audio.ras.enabled=false
 
+# Sony effect props
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.audio.sony.effect.custom.caplus_hs=0x298 \
+    vendor.audio.sony.effect.custom.caplus_sp=0x2B8 \
+    vendor.audio.sony.effect.custom.sp_bundle=0x122
+
+# Speaker protection enable
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.audio.speaker.prot.enable=true
+
 # Surround sound recording disable
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.audio.sdk.ssr=false
@@ -103,6 +113,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Tunnel encoding disable
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.tunnel.encode=false
+
+# VPP omx component for decoder enable
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.media.vpp.enable=true
 
 ### BLUETOOTH
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -168,7 +182,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.oem_socket=true \
     persist.vendor.radio.rat_on=combine \
     persist.vendor.radio.report_codec=1 \
-    persist.vendor.radio.sib16_support=1
+    persist.vendor.radio.sib16_support=1 \
+    persist.vendor.radio.wait_for_pbm
 
 # IMS
 PRODUCT_PROPERTY_OVERRIDES += \

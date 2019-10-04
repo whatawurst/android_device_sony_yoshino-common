@@ -1,14 +1,33 @@
 # system prop for yoshino
 
 ### AUDIO
+# Audioflinger heap size
+ro.af.client_heap_size_kbyte=7168
+
 # Deep buffer enable
 audio.deep_buffer.media=true
 
 # Fast audio output client buffer size reduction
 af.fast_track_multiplier=1
 
+# Offload minimum duration
+audio.offload.min.duration.secs=30
+
 # Offload video playback disable
 audio.offload.video=false
+
+# QC multimedia parser
+vendor.mm.enable.qcom_parser=13342781
+
+# Safe media force enable
+audio.safemedia.force=true
+
+# Sony effect min CPU freq
+sony.effect.cpu_min_freq_big=600
+sony.effect.cpu_min_freq_little=600
+
+# Stagefright deep audio
+media.stagefright.audio.deep=true
 
 ### BLUETOOTH
 bt.max.hfpclient.connections=1
@@ -52,6 +71,7 @@ ro.sys.colorgamut.supported=true
 persist.sys.colorgamut.mode=1
 
 # HDR
+sdm.disable_hdr_lut_gen=1
 vendor.vidc.enc.disable.pq=true
 
 # VDS WFD solution
@@ -78,6 +98,9 @@ ro.vendor.qti.core_ctl_min_cpu=2
 sched.colocate.enable=1
 
 ### RADIO
+# Mobile data disable on first boot after clean flash
+ro.com.android.prov_mobiledata=false
+
 # System props for telephony
 ro.com.android.dataroaming=false
 persist.ims.disableUserAgent=1
@@ -127,6 +150,7 @@ ro.vendor.sensors.tilt_detector=true
 ro.vendor.sensors.vmd=false
 ro.vendor.sensors.wrist_tilt=false
 ro.vendor.sensors.wu=true
+ro.sony.qf_use_report_period=false
 ro.vendor.qf_use_report_period=false
 
 ### USB
