@@ -17,20 +17,14 @@
 ### USB
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.usb.controller=a800000.dwc3 \
-    sys.usb.rndis.func.name=gsi \
-    persist.sys.usb.config.extra=none
+    vendor.usb.rndis.func.name=gsi \
+    persist.vendor.usb.config.extra=none
 
 # OpenGLES version
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610
 
 ### SENSORS configuration
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.sensors.max_accel_rate=false \
-    ro.vendor.sensors.max_gyro_rate=false \
-    ro.vendor.sensors.max_mag_rate=false \
-    ro.vendor.sensors.max_geomag_rotv=50
-
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.sdk.sensors.gestures=false \
     ro.vendor.sensors.amd=false \
@@ -73,10 +67,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.sensors.wu=true \
     ro.vendor.qf_use_report_period=false
 
-### AANC mixer tuning
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.aanc.enable=true
-
 ### BLUETOOTH
 PRODUCT_PROPERTY_OVERRIDES += \
     bt.max.hfpclient.connections=1 \
@@ -117,11 +107,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Disable offload audio video playback by default
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.video=true
+    audio.offload.video=false
 
 # Enable audio track offload by default
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.audio.offload.track.enable=true
+    vendor.audio.offload.track.enable=false
 
 # Enable music through deep buffer
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -137,7 +127,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #Enable DS2, Hardbypass feature for Dolby
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.audio.dolby.ds2.enabled=false\
+    vendor.audio.dolby.ds2.enabled=false \
     vendor.audio.dolby.ds2.hardbypass=false
 
 # Enable Multiple offload session
@@ -168,10 +158,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.flac.sw.decoder.24bit=true
 
-# Split a2dp DSP supported encoder list
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.bt.a2dp_offload_cap=sbc-aptx-aptxhd-aac
-
 # Enable software decoders for ALAC and APE
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.use.sw.alac.decoder=true
@@ -182,10 +168,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable hw aac encoder by default
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.hw.aac.encoder=true
-
-#Disable FM a2dp concurrency
-PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.fm.a2dp.conc.disabled=true
 
 # Audio becoming noisy intent broadcast delay
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -253,18 +235,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Radio IMS
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.dbg.ims_volte_enable=1 \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1 \
-    persist.dbg.wfc_avail_ovr=1 \
-    persist.radio.VT_CAM_INTERFACE=2 \
-    persist.radio.VT_ENABLE=1 \
-    persist.radio.VT_HYBRID_ENABLE=1
+    persist.dbg.wfc_avail_ovr=1
 
 # CAMERA
 PRODUCT_PROPERTY_OVERRIDES += \
-    camera.disable_zsl_mode=1 \
-    persist.camera.HAL3.enabled=1
+    camera.disable_zsl_mode=1
 
 # Thermal
 PRODUCT_PROPERTY_OVERRIDES += \
