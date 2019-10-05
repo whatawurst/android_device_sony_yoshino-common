@@ -9,7 +9,6 @@ PRODUCT_PACKAGES += \
 
 ### AUDIO
 PRODUCT_PACKAGES += \
-    audio.primary.msm8998 \
     libvolumelistener \
     bthost_if
 
