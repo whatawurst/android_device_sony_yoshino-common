@@ -114,9 +114,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.tunnel.encode=false
 
-# VPP omx component for decoder enable
+# VPP omx component for decoder disable
+# (enabled on stock, causes issues with e.g. 4k and 60fps playback)
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.media.vpp.enable=true
+    vendor.media.vpp.enable=false
 
 ### BLUETOOTH
 PRODUCT_PROPERTY_OVERRIDES += \
