@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# COMPONENT OVERRIDES
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/config/component-overrides/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml
+
 ### KEYLAYOUT
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/system/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
