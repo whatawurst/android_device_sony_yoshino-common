@@ -34,6 +34,10 @@ static inline const char* getBTDefaultName()
         return "Xperia XZ1";
     }
 
+    if (!strcmp("poplar_canada", device)) {
+        return "Xperia XZ1";
+    }
+
     if (!strcmp("poplar_dsds", device)) {
         return "Xperia XZ1 Dual";
     }
