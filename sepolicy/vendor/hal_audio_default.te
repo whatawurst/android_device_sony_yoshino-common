@@ -1,0 +1,7 @@
+# hal_audio_default.te
+
+# /sys/devices/virtual
+allow hal_audio_default sysfs:dir { r_dir_perms };
+
+# /dev/sony_hweffect_params
+allow hal_audio_default audio_hweffect_device:chr_file { rw_file_perms };

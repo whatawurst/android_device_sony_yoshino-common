@@ -20,6 +20,8 @@
 /data/vendor/wfd(/.*)?                                          u:object_r:wfd_vendor_data_file:s0
 
 ### DEVICES
+/dev/sony_hweffect_params                                       u:object_r:audio_hweffect_device:s0
+
 /dev/block/mmcblk0                                              u:object_r:root_block_device:s0
 
 /dev/block/platform/soc/1da4000\.ufshc/by-name/FOTAKernel       u:object_r:recovery_block_device:s0
