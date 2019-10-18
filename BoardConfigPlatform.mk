@@ -150,6 +150,7 @@ TARGET_INIT_VENDOR_LIB := //$(PLATFORM_PATH):libinit_yoshino
 TARGET_RECOVERY_DEVICE_MODULES := libinit_yoshino
 
 ### PROPS
+TARGET_ODM_PROP += $(PLATFORM_PATH)/odm.prop
 # This is a reset, add more in devices if needed
 TARGET_SYSTEM_PROP := $(PLATFORM_PATH)/system.prop
 TARGET_VENDOR_PROP := $(PLATFORM_PATH)/vendor.prop
