@@ -196,6 +196,9 @@ ro.vendor.qf_use_report_period=false
 ### USB
 sys.usb.controller=a800000.dwc3
 
+### VALUE-ADD
+ro.vendor.qti.va_aosp.support=1
+
 ### WFD
 # Property to enable user to access Google WFD settings.
 persist.debug.wfd.enable=1
