@@ -31,8 +31,8 @@
 # The following properties have to be set in the device trees:
 #
 # Example:
-#   ro.usb.pid_suffix=1f4
-#   sys.usb.rndis.func.name=gsi
+#   ro.vendor.usb.pid_suffix=1f4
+#   vendor.usb.rndis.func.name=gsi
 #
 
 on post-fs
