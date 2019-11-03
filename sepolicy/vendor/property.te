@@ -6,3 +6,4 @@ type taimport_prop, property_type;
 type tareset_notfirstboot_prop, property_type;
 type vendor_backlighton_prop, property_type;
 type vendor_pcc_mdp_prop, property_type;
+type vendor_cover_state_prop, property_type;

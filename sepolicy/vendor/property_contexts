@@ -9,3 +9,5 @@ ro.boot.oem                          u:object_r:oem_prop:s0
 
 vendor.backlight_on                  u:object_r:vendor_backlighton_prop:s0
 vendor.pcc.mdp.rgb                   u:object_r:vendor_pcc_mdp_prop:s0
+
+vendor.cover_state                   u:object_r:vendor_cover_state_prop:s0
