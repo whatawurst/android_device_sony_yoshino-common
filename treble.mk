@@ -80,7 +80,7 @@ PRODUCT_PACKAGES += \
 
 # NFC
 PRODUCT_PACKAGES += \
-    vendor.nxp.hardware.nfc@1.1-service
+    android.hardware.nfc@1.1-service
 
 # NFC - SECURE ELEMENT
 PRODUCT_PACKAGES += \

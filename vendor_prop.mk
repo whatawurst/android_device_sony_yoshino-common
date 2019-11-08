@@ -25,10 +25,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.service.qti.ims.enabled=1
 
-### NFC
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.nfc_nci=nqx.default
-
 ### RADIO
 # DPM module
 PRODUCT_PROPERTY_OVERRIDES += \

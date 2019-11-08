@@ -29,12 +29,7 @@ PRODUCT_PACKAGES += \
 ### NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
-    com.gsma.services.nfc \
-    com.nxp.nfc.nq \
-    NQNfcNci \
-    nfc_nci.nqx.default \
-    nqnfcee_access.xml \
-    nqnfcse_access.xml \
+    NfcNci \
     Tag
 
 ### WIFI
