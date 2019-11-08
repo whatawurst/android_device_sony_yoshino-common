@@ -21,10 +21,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
 
-### GPS
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.overlay.izat.optin=rro
-
 ### IMS
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.service.qti.ims.enabled=1
