@@ -131,3 +131,6 @@
 /(vendor|system/vendor)/bin/startup-prober                      u:object_r:startupprober_exec:s0
 /(vendor|system/vendor)/bin/ta_qmi_service                      u:object_r:ta_qmi_service_exec:s0
 /(vendor|system/vendor)/bin/taimport_vendor                     u:object_r:taimport_vendor_exec:s0
+
+### OEM WORKAROUND
+/oem-modem                                                      u:object_r:oem_block_device:s0
