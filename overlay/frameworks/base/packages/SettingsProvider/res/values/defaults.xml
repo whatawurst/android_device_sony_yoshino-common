@@ -18,5 +18,4 @@
 -->
 <resources>
     <bool name="def_screen_brightness_automatic_mode">true</bool>
-    <string name="def_location_providers_allowed">gps,network</string>
 </resources>
