@@ -1,3 +1,6 @@
 # hal_wifi_default.te
 
 allow hal_wifi_default sysfs_wlan:file { w_file_perms };
+
+# wifi.active.interface
+set_prop(hal_wifi_default, wifi_active_prop)

@@ -1,3 +1,6 @@
 # radio.te
 
 allow radio system_app_data_file:dir { getattr search };
+
+# m.android.phone
+allow radio gpuservice:binder { call };

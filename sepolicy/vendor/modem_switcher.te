@@ -1,7 +1,7 @@
 # modem_switcher.te
 
 type modem_switcher, domain, coredomain;
-type modem_switcher_exec, exec_type, file_type;
+type modem_switcher_exec, exec_type, file_type, system_file_type;
 
 allow modem_switcher self:capability {
     chown
@@ -40,7 +40,6 @@ type_transition modem_switcher cache_file:file modemsw_cache_file "modem_switche
 allow modem_switcher modemsw_cache_file:dir { create rw_dir_perms setattr } ;
 allow modem_switcher modemsw_cache_file:file create_file_perms;
 
-allow modem_switcher hidl_allocator_hwservice:hwservice_manager { find };
 allow modem_switcher hidl_memory_hwservice:hwservice_manager { find };
 allow modem_switcher hal_miscta_hwservice:hwservice_manager { find };
 

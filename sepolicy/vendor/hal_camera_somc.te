@@ -3,6 +3,7 @@ type hal_camera_somc, domain;
 type hal_camera_somc_exec, exec_type, vendor_file_type, file_type;
 
 hal_server_domain(hal_camera_somc, hal_camera)
+hal_client_domain(hal_camera_somc, hal_configstore)
 init_daemon_domain(hal_camera_somc)
 
 binder_call(hal_camera_somc, hal_idd_default)
@@ -42,5 +43,5 @@ allow hal_camera_somc sysfs_battery_supply:file r_file_perms;
 allow hal_camera_somc sysfs_leds:dir r_dir_perms;
 allow hal_camera_somc sysfs_leds:file rw_file_perms;
 
-# /dev/i2c-8
-allow hal_camera_somc i2c_device:chr_file rw_file_perms;
+# vendor.somc.hardware.camera.provider@1.0-service
+allow hal_camera_somc lensctrl_device:chr_file rw_file_perms;

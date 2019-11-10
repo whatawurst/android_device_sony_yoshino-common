@@ -11,6 +11,9 @@ allow init idd_rca_file:dir { mounton };
 allow init idd_root_dir:dir { mounton };
 allow init idd_data_file:dir { mounton };
 
+# /oem
+allow init oem_block_device:dir { mounton };
+
 # /mnt/qns
 allow init qns_file:dir { mounton };
 
@@ -28,3 +31,6 @@ unix_socket_connect(init, tad, tad)
 
 # /proc/filesystems
 allow init proc_filesystems:file getattr;
+
+# /dev/diag
+allow init diag_device:chr_file rw_file_perms;

@@ -1,3 +1,6 @@
 # hal_nfc_default.te
 
-allow hal_nfc_default hal_secure_element_hwservice:hwservice_manager { find };
+hal_client_domain(hal_nfc_default, hal_secure_element)
+
+allow hal_nfc_default nfc_vendor_data_file:dir rw_dir_perms;
+allow hal_nfc_default nfc_vendor_data_file:file { create rw_file_perms };

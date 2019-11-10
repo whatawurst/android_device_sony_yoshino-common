@@ -1,7 +1,7 @@
 # updatemiscta.te
 
 type updatemiscta, domain, coredomain;
-type updatemiscta_exec, exec_type, file_type;
+type updatemiscta_exec, exec_type, file_type, system_file_type;
 
 init_daemon_domain(updatemiscta)
 
@@ -12,7 +12,6 @@ binder_call(updatemiscta, hal_miscta_default)
 binder_call(updatemiscta, hal_allocator)
 
 allow updatemiscta hal_miscta_hwservice:hwservice_manager { find };
-allow updatemiscta hidl_allocator_hwservice:hwservice_manager { find };
 allow updatemiscta hidl_memory_hwservice:hwservice_manager { find };
 
 set_prop(updatemiscta, semc_version_prop)

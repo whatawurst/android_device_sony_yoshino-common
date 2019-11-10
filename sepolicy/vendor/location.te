@@ -1,4 +1,0 @@
-# location.te
-
-# /system/etc/hosts
-allow location system_file:file { lock };

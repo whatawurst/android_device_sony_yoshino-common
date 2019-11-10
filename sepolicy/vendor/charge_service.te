@@ -20,6 +20,8 @@ allow charge_service sysfs_battery_supply:dir r_dir_perms;
 allow charge_service sysfs_battery_supply:file rw_file_perms;
 allow charge_service sysfs_battery_supply:lnk_file r_file_perms;
 
+allow charge_service sysfs_batteryinfo:file r_file_perms;
+
 allow charge_service sysfs_usb_supply:dir r_dir_perms;
 allow charge_service sysfs_usb_supply:file r_file_perms;
 

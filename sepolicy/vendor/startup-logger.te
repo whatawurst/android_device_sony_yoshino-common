@@ -1,7 +1,7 @@
 # startup-logger.te
 
 type startup-logger, domain, coredomain;
-type startup-logger_exec, exec_type, file_type;
+type startup-logger_exec, exec_type, file_type, system_file_type;
 
 init_daemon_domain(startup-logger)
 
@@ -15,7 +15,7 @@ binder_call(startup-logger, hal_miscta_default)
 #allow startup-logger self:capability {
 #    dac_override
 #};
-allow startup-logger hidl_allocator_hwservice:hwservice_manager { find };
+
 allow startup-logger hidl_memory_hwservice:hwservice_manager { find };
 allow startup-logger hal_miscta_hwservice:hwservice_manager { find };
 

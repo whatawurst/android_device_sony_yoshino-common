@@ -1,7 +1,7 @@
 # taimport.te
 
 type taimport, domain, coredomain;
-type taimport_exec, exec_type, file_type;
+type taimport_exec, exec_type, file_type, system_file_type;
 
 init_daemon_domain(taimport)
 
@@ -20,7 +20,6 @@ set_prop(taimport, semc_version_prop)
 set_prop(taimport, sony_prop)
 set_prop(taimport, taimport_prop)
 
-allow taimport hidl_allocator_hwservice:hwservice_manager { find };
 allow taimport hidl_memory_hwservice:hwservice_manager { find };
 allow taimport hal_miscta_hwservice:hwservice_manager { find };
 

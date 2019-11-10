@@ -41,6 +41,9 @@
 /dev/socket/secd_credmgr_sock                                   u:object_r:secd_credmgr_socket:s0
 /dev/socket/secd_devsec_sock                                    u:object_r:secd_devsec_socket:s0
 
+# LENSCTRL
+/dev/i2c-8                                                      u:object_r:lensctrl_device:s0
+
 # PERSIST
 /mnt/vendor/persist/pc(/.*)?                                    u:object_r:simpin_cache_data_file:s0
 /mnt/vendor/persist/credmgr(/.*)?                               u:object_r:credmgrd_vendor_data_file:s0
@@ -55,6 +58,8 @@
 /sys/devices/soc/[a-z0-9]+.qcom,spmi/spmi-[0-9]/spmi0-0[0-9]/[a-z0-9]+.qcom,spmi:qcom,[a-z0-9]+@[0-9]:qpnp,fg/batt_aging_level u:object_r:sysfs_battery_supply:s0
 
 /sys/devices/soc/[a-z0-9]+.qcom,spmi/spmi-[0-9]/spmi0-0[0-9]/[a-z0-9]+.qcom,spmi:qcom,[a-z0-9]+@[0-9]:qcom,qpnp-smb2/power_supply/usb(/.*)? u:object_r:sysfs_usb_supply:s0
+
+/sys/devices/soc/[a-z0-9]+.qcom,spmi/spmi-[0-9]/spmi0-0[0-9]/[a-z0-9]+.qcom,spmi:qcom,[a-z0-9]+@[0-9]:rradc@4500/iio:device0/in_temp_skin_temp_input u:object_r:sysfs_batteryinfo:s0
 
 /sys/devices/soc/[a-z0-9]+.qcom,mdss_mdp/[a-z0-9]+.qcom,mdss_mdp:qcom,mdss_fb_primary/leds/lcd-backlight(/.*)? u:object_r:sysfs_graphics:s0
 /sys/devices/soc/soc:qcom,ipa_fws@[a-f0-9]+/subsys0/restart_level   u:object_r:sysfs_ssr_toggle:s0
@@ -76,6 +81,8 @@
 /sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/model  u:object_r:sysfs_ufs:s0
 /sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/rev    u:object_r:sysfs_ufs:s0
 /sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/vendor u:object_r:sysfs_ufs:s0
+
+/sys/devices/soc/780000.qcom,msm-core/uio/uio1/name             u:object_r:sysfs_uio:s0
 
 /sys/devices/virtual/input/input[0-9]+/als_Itime                u:object_r:sysfs_tof_rgbcir:s0
 /sys/devices/virtual/input/input[0-9]+/als_gain                 u:object_r:sysfs_tof_rgbcir:s0
