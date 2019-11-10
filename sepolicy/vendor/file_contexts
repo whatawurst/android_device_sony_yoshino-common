@@ -24,3 +24,7 @@
 /(vendor|system/vendor)/usr/idc(/.*)?                           u:object_r:vendor_idc_file:s0
 
 /sbin/tad_static                                                u:object_r:rootfs:s0
+
+# BACKWARD COMPATIBILITY
+/bt_firmware                                                    u:object_r:bt_firmware_file:s0
+/firmware                                                       u:object_r:firmware_file:s0

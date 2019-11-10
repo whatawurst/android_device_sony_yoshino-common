@@ -28,6 +28,3 @@ type sysfs_touchpad, fs_type, sysfs_type;
 # SOCKETS
 type fpc_socket, file_type;
 type tad_socket, file_type;
-
-# VENDOR
-type vendor_idc_file, file_type, vendor_file_type;

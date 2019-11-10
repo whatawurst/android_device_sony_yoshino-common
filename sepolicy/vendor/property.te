@@ -7,3 +7,5 @@ type semc_version_prop, property_type;
 type semc_product_prop, property_type;
 type vendor_semc_version_cust_active_prop, property_type;
 type vendor_somc_hdcp_prop, property_type;
+type wifi_active_prop, property_type;
+type wigig_prop, property_type;
