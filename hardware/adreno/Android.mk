@@ -2,15 +2,15 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LIBEGL_SYMLINK := $(TARGET_OUT_VENDOR)/lib/libEGL_adreno.so
+LIBEGL_SYMLINK := $(TARGET_OUT_VENDOR)/lib/libGLESv2_adreno.so
 $(LIBEGL_SYMLINK): $(LOCAL_INSTALLED_MODULE)
-	@echo "Creating lib/libEGL_adreno.so symlink: $@"
+	@echo "Creating lib/libGLESv2_adreno.so symlink: $@"
 	@mkdir -p $(dir $@)
 	$(hide) ln -sf egl/$(notdir $@) $@
 
-LIBEGL64_SYMLINK := $(TARGET_OUT_VENDOR)/lib64/libEGL_adreno.so
+LIBEGL64_SYMLINK := $(TARGET_OUT_VENDOR)/lib64/libGLESv2_adreno.so
 $(LIBEGL64_SYMLINK): $(LOCAL_INSTALLED_MODULE)
-	@echo "Creating lib64/libEGL_adreno.so symlink: $@"
+	@echo "Creating lib64/libGLESv2_adreno.so symlink: $@"
 	@mkdir -p $(dir $@)
 	$(hide) ln -sf egl/$(notdir $@) $@
 
