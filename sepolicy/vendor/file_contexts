@@ -41,6 +41,9 @@
 /dev/socket/secd_credmgr_sock                                   u:object_r:secd_credmgr_socket:s0
 /dev/socket/secd_devsec_sock                                    u:object_r:secd_devsec_socket:s0
 
+# DRM
+/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.1-service\.widevine u:object_r:hal_drm_widevine_exec:s0
+
 # LENSCTRL
 /dev/i2c-8                                                      u:object_r:lensctrl_device:s0
 
