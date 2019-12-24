@@ -101,7 +101,8 @@ PRODUCT_PACKAGES += \
 # WIFI DISPLAY
 PRODUCT_PACKAGES += \
     libaacwrapper \
-    libnl
+    libnl \
+    libmediaextractorservice
 
 PRODUCT_BOOT_JARS += \
     WfdCommon
