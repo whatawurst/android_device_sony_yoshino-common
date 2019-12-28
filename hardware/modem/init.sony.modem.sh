@@ -18,14 +18,12 @@ chmod 0755 "${TMP_OEM_DIR}"
 mount --bind "${TMP_OEM_DIR}" "${OEM_DIR}"
 
 ### MOUNT MODEM-CONFIG
-mkdir "${OEM_DIR}/modem-config"
 chmod 0755 "${OEM_DIR}/modem-config"
 
 mount --bind /oem-modem/modem-config ${OEM_DIR}/modem-config
 mount -o remount,bind,ro /oem-modem/modem-config ${OEM_DIR}/modem-config
 
 ### MOUNT SYSTEM-PROPERTIES
-mkdir "${OEM_DIR}/system-properties"
 chmod 0755 "${OEM_DIR}/system-properties"
 
 mount --bind /oem-modem/system-properties ${OEM_DIR}/system-properties
