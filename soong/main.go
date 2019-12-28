@@ -1,5 +1,4 @@
 //
-// Copyright (C) 2019 The LineageOS Project
 // Copyright (C) 2019 CarbonROM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,13 +14,12 @@
 // limitations under the License.
 //
 
-sony_yoshino_init_library {
-    name: "libinit_yoshino",
-    recovery_available: true,
-    srcs: ["init_yoshino.cpp", "ta.cpp"],
-    include_dirs: [
-        "system/core/base/include",
-        "system/core/init",
-        "external/selinux/libselinux/include"
-    ]
+package yoshino
+
+import (
+    "android/soong/android"
+)
+
+func init() {
+    android.RegisterModuleType("sony_yoshino_init_library", initLibraryFactory)
 }
