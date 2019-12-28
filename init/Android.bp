@@ -18,7 +18,7 @@
 sony_yoshino_init_library {
     name: "libinit_yoshino",
     recovery_available: true,
-    srcs: ["init_yoshino.cpp", "ta.cpp"],
+    srcs: ["init_yoshino.cpp", "ta.cpp", "target_init.cpp"],
     include_dirs: [
         "system/core/base/include",
         "system/core/init",
