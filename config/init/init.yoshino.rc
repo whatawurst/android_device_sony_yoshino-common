@@ -67,8 +67,8 @@ on fs
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
     insmod /vendor/lib/modules/kscl.ko
 
-#    # configure the modem
-#    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
+    # configure the modem
+    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
 
     # SONY: creat mount point for qns
     mkdir /mnt/qns 0750 oem_2985 oem_2985
@@ -124,8 +124,8 @@ on post-fs
     # Update dm-verity state and set partition.*.verified properties
     verity_update_state
 
-#    # SONY: Switch the modem if needed
-#    start modem_switcher
+    # SONY: Switch the modem if needed
+    start modem_switcher
 
 on post-fs-data
     # SONY: Camera
@@ -426,12 +426,12 @@ service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
     user system
     group system
 
-#service modem_switcher /system/bin/sony-modem-switcher
-#    class main
-#    user root
-#    group root system oem_2993 cache
-#    disabled
-#    oneshot
+service modem_switcher /system/bin/sony-modem-switcher
+    class main
+    user root
+    group root system oem_2993 cache
+    disabled
+    oneshot
 
 # QCOM Quick Charge
 service vendor.hvdcp_opti /system/vendor/bin/hvdcp_opti
