@@ -107,7 +107,7 @@ static void load_properties_from_file(const char* filename, const char* filter) 
     return;
 }
 
-void vendor_load_properties() {
+void vendor_load_persist_properties() {
 
     // Wait for up to 2 seconds for /oem to be ready before we proceed (it should take much less...)
     WaitForProperty("ro.boot.oem.ready", "true", 2s);
