@@ -1,0 +1,3 @@
+# cnd.te
+
+allow cnd system_app:binder { transfer };

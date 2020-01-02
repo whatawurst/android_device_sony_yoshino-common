@@ -1,7 +1,9 @@
 # system_app.te
 
 binder_call(system_app, cacaoserver)
+binder_call(system_app, cnd)
 binder_call(system_app, hal_miscta_default)
+binder_call(system_app, hal_rcsservice)
 
 allow system_app hal_miscta_hwservice:hwservice_manager find;
 
@@ -11,3 +13,7 @@ allow system_app modemsw_cache_file:file create_file_perms;
 
 # Alllow CustomizationSelector to read Sony prop
 allow system_app semc_version_prop:file { getattr open read };
+
+# Allow com.android.settings to read zram info via sysfs
+allow system_app sysfs_zram:dir { search };
+allow system_app sysfs_zram:file { r_file_perms };
