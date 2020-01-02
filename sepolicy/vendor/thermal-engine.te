@@ -16,3 +16,6 @@ r_dir_file(thermal-engine, sysfs_rmtfs)
 
 # in_temp_skin_temp_input
 allow thermal-engine sysfs_batteryinfo:file r_file_perms;
+
+# /sys/devices/virtual
+dontaudit thermal-engine sysfs:dir { open read };
