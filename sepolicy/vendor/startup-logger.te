@@ -1,7 +1,9 @@
 # startup-logger.te
 
 type startup-logger, domain, coredomain;
-type startup-logger_exec, exec_type, file_type, system_file_type;
+type startup-logger_exec, system_file_type, exec_type, file_type;
+
+hal_client_domain(startup-logger, hal_allocator)
 
 init_daemon_domain(startup-logger)
 

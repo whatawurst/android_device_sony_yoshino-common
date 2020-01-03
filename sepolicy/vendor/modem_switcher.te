@@ -1,7 +1,9 @@
 # modem_switcher.te
 
 type modem_switcher, domain, coredomain;
-type modem_switcher_exec, exec_type, file_type, system_file_type;
+type modem_switcher_exec, system_file_type, exec_type, file_type;
+
+hal_client_domain(modem_switcher, hal_allocator)
 
 allow modem_switcher self:capability {
     chown

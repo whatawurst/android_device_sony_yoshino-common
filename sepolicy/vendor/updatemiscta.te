@@ -1,7 +1,9 @@
 # updatemiscta.te
 
 type updatemiscta, domain, coredomain;
-type updatemiscta_exec, exec_type, file_type, system_file_type;
+type updatemiscta_exec, system_file_type, exec_type, file_type;
+
+hal_client_domain(updatemiscta, hal_allocator)
 
 init_daemon_domain(updatemiscta)
 
