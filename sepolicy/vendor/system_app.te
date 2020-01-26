@@ -6,6 +6,7 @@ binder_call(system_app, hal_miscta_default)
 binder_call(system_app, hal_rcsservice)
 
 allow system_app hal_miscta_hwservice:hwservice_manager find;
+allow system_app hal_datafactory_hwservice:hwservice_manager find;
 
 # Alllow CustomizationSelector access to /cache/modem/*
 allow system_app modemsw_cache_file:dir rw_dir_perms;
