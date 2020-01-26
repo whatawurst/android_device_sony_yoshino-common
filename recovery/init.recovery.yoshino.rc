@@ -19,7 +19,7 @@ on fs
 
     # IMPORTANT!
     # This needs to be supported by the init binary!
-    install_keyring
+    #install_keyring
 
 on post-fs
     # start clearpad_post_probe when filesystem is available for fwflash
