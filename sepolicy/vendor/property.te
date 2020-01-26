@@ -1,6 +1,5 @@
 # property.te
 
-type oem_prop, property_type;
 type suntory_prop, property_type;
 type taimport_prop, property_type;
 type tareset_notfirstboot_prop, property_type;

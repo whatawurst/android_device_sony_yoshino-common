@@ -12,7 +12,7 @@ allow init idd_root_dir:dir { mounton };
 allow init idd_data_file:dir { mounton };
 
 # /oem
-allow init oem_block_device:dir { mounton };
+allow init oem_block_device:lnk_file relabelto;
 
 # /mnt/qns
 allow init qns_file:dir { mounton };

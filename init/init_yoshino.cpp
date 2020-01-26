@@ -109,16 +109,13 @@ static void load_properties_from_file(const char* filename, const char* filter) 
     return;
 }
 
-void vendor_load_persist_properties() {
+void vendor_load_properties() {
 
-    // Wait for up to 2 seconds for /oem to be ready before we proceed (it should take much less...)
-    WaitForProperty("ro.boot.oem.ready", "true", 2s);
-
-    LOG(INFO) << "Loading region- and carrier-specific properties from /oem.";
+    LOG(INFO) << "Loading region- and carrier-specific properties from /ocm.";
 
     // Load the carrier-independent props
-    LOG(INFO) << "Loading properties from /oem/system-properties/cust.prop";
-    load_properties_from_file("/oem/system-properties/cust.prop", NULL);
+    LOG(INFO) << "Loading properties from /ocm/system-properties/cust.prop";
+    load_properties_from_file("/ocm/system-properties/cust.prop", NULL);
 /*
     // Get the active customization id from miscTA
     std::string cust_id = ta_get_cust_active();
@@ -126,21 +123,21 @@ void vendor_load_persist_properties() {
     // If no customization is set, load the basic set of config props.
     if (cust_id.empty()) {
         LOG(INFO) << "No active customization detected.";
-        LOG(INFO) << "Loading properties from /oem/system-properties/config.prop";
-        load_properties_from_file("/oem/system-properties/config.prop", NULL);
+        LOG(INFO) << "Loading properties from /ocm/system-properties/config.prop";
+        load_properties_from_file("/ocm/system-properties/config.prop", NULL);
     } else {
     // Otherwise, load the carrier-specific ones (these also contain the basic ones).
         LOG(INFO) << "Active customization detected: " << cust_id;
 
         std::stringstream ss;
-        ss << "/oem/system-properties/" << cust_id << "/config.prop";    
+        ss << "/ocm/system-properties/" << cust_id << "/config.prop";    
         std::string cust_path = ss.str();
         LOG(INFO) << "Loading properties from " << cust_path;
         load_properties_from_file(cust_path.c_str(), NULL);
     }
  */
 
-    LOG(INFO) << "Loading properties from /oem/system-properties/config.prop";
-    load_properties_from_file("/oem/system-properties/config.prop", NULL);
+    LOG(INFO) << "Loading properties from /ocm/system-properties/config.prop";
+    load_properties_from_file("/ocm/system-properties/config.prop", NULL);
 
 }

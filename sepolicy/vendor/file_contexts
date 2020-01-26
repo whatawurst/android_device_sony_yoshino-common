@@ -143,4 +143,4 @@
 /(vendor|system/vendor)/bin/taimport_vendor                     u:object_r:taimport_vendor_exec:s0
 
 ### OEM WORKAROUND
-/oem-modem                                                      u:object_r:oem_block_device:s0
+/ocm                                                            u:object_r:oem_block_device:s0

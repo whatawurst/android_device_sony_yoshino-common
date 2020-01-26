@@ -67,9 +67,6 @@ on fs
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
     insmod /vendor/lib/modules/kscl.ko
 
-    # configure the modem
-    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.sony.modem.sh
-
     # SONY: creat mount point for qns
     mkdir /mnt/qns 0750 oem_2985 oem_2985
     wait /dev/block/bootdevice/by-name/Qnovo
