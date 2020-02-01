@@ -41,7 +41,7 @@ ro.bluetooth.emb_wp_mode=true
 ro.bluetooth.wipower=true
 
 ### CAMERA
-vendor.camera.aux.packagelist=org.codeaurora.snapcam,org.cyanogenmod.snap
+vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.sonyericsson.android.camera,org.lineageos.snap
 
 ### DISPLAY
 # Assertive display
