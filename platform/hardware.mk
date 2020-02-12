@@ -23,10 +23,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay@2.0-service-sdm
 
-# MODEM
-PRODUCT_PACKAGES += \
-    init.sony.modem.sh
-
 # SENSORS
 PRODUCT_PACKAGES += \
     libsensorndkbridge

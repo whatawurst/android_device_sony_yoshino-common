@@ -134,7 +134,6 @@
 /(vendor|system/vendor)/bin/ffu                                 u:object_r:vendor_ffu_exec:s0
 /(vendor|system/vendor)/bin/idd-logreader                       u:object_r:idd_exec:s0
 /(vendor|system/vendor)/bin/iddd                                u:object_r:idd_exec:s0
-/(vendor|system/vendor)/bin/init\.sony\.modem\.sh               u:object_r:qti_init_shell_exec:s0
 /(vendor|system/vendor)/bin/keyprovd                            u:object_r:keyprovd_exec:s0
 /(vendor|system/vendor)/bin/qns                                 u:object_r:qns_exec:s0
 /(vendor|system/vendor)/bin/sct_service                         u:object_r:sct_service_exec:s0
