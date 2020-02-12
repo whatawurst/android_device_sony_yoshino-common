@@ -70,3 +70,8 @@ BOARD_SEPOLICY_DIRS += device/sony/common-treble/sepolicy/vendor
 ### SYSTEM PROPS
 # This is a reset, add more in platform and device if needed
 TARGET_SYSTEM_PROP := $(COMMON_PATH)/system.prop
+
+# DEX PREOPT
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    SystemUI \
+    TrebuchetQuickStep
