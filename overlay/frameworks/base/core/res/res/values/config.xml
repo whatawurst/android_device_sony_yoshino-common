@@ -259,14 +259,4 @@
 
     <!-- Flag specifying whether or not IMS will use the ImsResolver dynamically -->
     <bool name="config_dynamic_bind_ims">true</bool>
-
-    <!-- Values for GPS configuration -->
-    <string-array translatable="false" name="config_gpsParameters">
-        <item>NTP_SERVER=1.android.pool.ntp.org</item>
-        <item>SUPL_HOST=supl.sonyericsson.com</item>
-        <item>SUPL_PORT=7275</item>
-        <item>SUPL_VER=0x20000</item>
-        <item>SUPL_ES=1</item>
-        <item>LPP_PROFILE=2</item>
-    </string-array>
 </resources>
