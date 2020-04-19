@@ -124,8 +124,6 @@ on boot
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
-    chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
-
     # Cameralight
     chown cameraserver system /sys/class/leds/led:flash_0/brightness
     chown cameraserver system /sys/class/leds/led:flash_1/brightness
