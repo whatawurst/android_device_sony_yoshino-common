@@ -237,18 +237,6 @@ on boot
     chown system system /sys/class/sensors/apds9930-proximity/enable
     chown system system /sys/class/sensors/apds9930-proximity/poll_delay
 
-on property:ro.vendor.iocgrp.config=1
-    mkdir /dev/blkio
-    mount cgroup none /dev/blkio blkio
-    chown system system /dev/blkio
-    chown system system /dev/blkio/tasks
-    chmod 0664 /dev/blkio/tasks
-    mkdir /dev/blkio/bg 0755 system system
-    chown system system /dev/blkio/bg/tasks
-    chmod 0664 /dev/blkio/bg/tasks
-    write /dev/blkio/blkio.weight 1000
-    write /dev/blkio/bg/blkio.weight 100
-
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
 

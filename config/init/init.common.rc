@@ -26,13 +26,6 @@ on init
     chmod 0664 /proc/rdtag
     chown root system /proc/rdtag
 
-    # Create cgroup mount point for memory
-    mkdir /sys/fs/cgroup/memory/bg 0750 root system
-    write /sys/fs/cgroup/memory/bg/memory.swappiness 140
-    write /sys/fs/cgroup/memory/bg/memory.move_charge_at_immigrate 1
-    chown root system /sys/fs/cgroup/memory/bg/tasks
-    chmod 0660 /sys/fs/cgroup/memory/bg/tasks
-
 on late-init
     mkdir /mnt/tmp 0775
     mount tmpfs tmpfs /mnt/tmp nosuid mode=0775,uid=0,gid=0
