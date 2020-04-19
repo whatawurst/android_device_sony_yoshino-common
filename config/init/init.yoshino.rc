@@ -295,9 +295,6 @@ on boot
     chmod 0600 /sys/devices/virtual/input/clearpad/glove
     restorecon /sys/devices/virtual/input/clearpad/glove
 
-    # Allow access for CCID command/response timeout configuration
-    chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
-
     # Tof sensor
     chown cameraserver camera /dev/i2c-8
     chmod 666 /dev/i2c-8
