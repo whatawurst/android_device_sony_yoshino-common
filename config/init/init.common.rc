@@ -38,8 +38,6 @@ on fs
     mkdir /mnt/vendor/persist/data 0700 system system
 
 on post-fs
-    chmod 0755 /sys/kernel/debug/tracing
-
     # led RGB
     chown system system /sys/class/leds/rgb/sync_state
     chown system system /sys/class/leds/rgb/start_blink
