@@ -44,6 +44,9 @@ ro.bluetooth.wipower=true
 ro.charger.disable_init_blank=true
 ro.charger.enable_suspend=true
 
+### DEX2OAT
+dalvik.vm.dex2oat64.enabled=true
+
 ### DISPLAY
 # Assertive display
 ro.qcom.ad=1
