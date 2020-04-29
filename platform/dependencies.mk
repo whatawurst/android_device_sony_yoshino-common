@@ -85,6 +85,11 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     libstagefrighthw
 
+# PROTOBUF
+PRODUCT_PACKAGES += \
+    libprotobuf-cpp-full-vendorcompat \
+    libprotobuf-cpp-lite-vendorcompat
+
 ### RCS
 PRODUCT_PACKAGES += \
     rcs_service_aidl \
