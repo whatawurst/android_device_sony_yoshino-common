@@ -66,9 +66,6 @@ static inline const char* getBTDefaultName()
 #define BTM_WBS_INCLUDED TRUE
 #define BTIF_HF_WBS_PREFERRED TRUE
 
-// QCOM power management workaround
-#define BT_CLEAN_TURN_ON_DISABLED TRUE
-
 // Vendor extensions
 #define BLE_VND_INCLUDED TRUE
 
