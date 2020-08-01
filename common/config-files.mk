@@ -24,6 +24,10 @@ PRODUCT_COPY_FILES += \
 
 #################### VENDOR ######################
 
+# IMS
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.telephony.ims.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.ims.xml
+
 # ISRC
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/config/irsc/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
