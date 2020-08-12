@@ -66,6 +66,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CustomizationSelector
 
+# PERFD (DUMMY)
+PRODUCT_PACKAGES += \
+    libqti-perfd-client
+
 ### SENSORS
 PRODUCT_PACKAGES += \
     libsensorndkbridge
