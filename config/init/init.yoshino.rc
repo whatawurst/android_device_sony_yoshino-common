@@ -41,6 +41,12 @@ on init
     # This will be configured with the ssr_setup service
     setprop persist.vendor.ssr.restart_level "venus adsp slpi modem cdsp"
 
+    class_start trimarea
+
+    # These are needed for MiscTA HIDL service
+    start hwservicemanager
+    start hidl_memory
+
     # UFS firmware update
     exec u:r:vendor_ffu:s0 -- /vendor/bin/ffu
 
