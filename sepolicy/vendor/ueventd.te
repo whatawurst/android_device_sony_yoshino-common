@@ -1,5 +1,7 @@
 # ueventd.te
 
+allow ueventd self:capability sys_nice;
+
 allow ueventd sysfs_qns:dir { relabelto };
 
 # /persist/wlan
