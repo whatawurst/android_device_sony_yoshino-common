@@ -34,3 +34,9 @@ allow init proc_filesystems:file getattr;
 
 # /dev/diag
 allow init diag_device:chr_file rw_file_perms;
+
+# /vendor/bt_firmware
+allow init bt_firmware_file:filesystem getattr;
+
+# /vendor/firmware_mnt
+allow init firmware_file:filesystem getattr;
