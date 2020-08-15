@@ -1,0 +1,9 @@
+# hal_drm_widevine.te
+
+allow hal_drm_widevine hal_perf_hwservice:hwservice_manager { find };
+allow hal_drm_widevine hal_secd_hwservice:hwservice_manager { find };
+
+allow hal_drm_widevine vendor_somc_hdcp_prop:file { getattr open read };
+
+binder_call(hal_drm_widevine, hal_perf_default)
+binder_call(hal_drm_widevine, hal_secd_default)
