@@ -28,7 +28,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ### RADIO
 # DPM module
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.dpm.feature=0
+    persist.vendor.dpm.feature=1
 
 # Netmgr
 PRODUCT_PROPERTY_OVERRIDES += \
