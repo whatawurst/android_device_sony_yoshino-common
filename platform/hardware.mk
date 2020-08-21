@@ -191,6 +191,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.display.config@1.3
 
+### TETHERING
+PRODUCT_PACKAGES += \
+    TetheringConfigOverlay
+
 ### THERMAL
 PRODUCT_PACKAGES += \
     thermal.msm8998
