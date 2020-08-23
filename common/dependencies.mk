@@ -101,6 +101,11 @@ PRODUCT_PACKAGES += \
     vndk_package \
     vndk-sp
 
+# VNDFWK_DETECT
+PRODUCT_PACKAGES += \
+    libqti_vndfwk_detect \
+    libqti_vndfwk_detect.vendor
+
 # WIFI DISPLAY
 PRODUCT_PACKAGES += \
     libaacwrapper \
