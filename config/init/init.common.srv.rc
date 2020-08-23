@@ -155,6 +155,12 @@ service wvkbd_installer /vendor/bin/wvkbd
 
 ### GNSS
 
+service mlid /vendor/bin/mlid
+    class late_start
+    user gps
+    group gps
+    socket mlid stream 0666 gps gps
+
 # loc_launcher will start as root and set its uid to gps
 service loc_launcher /system/vendor/bin/loc_launcher
     class late_start
