@@ -20,7 +20,6 @@ PRODUCT_COPY_FILES += \
 
 # GPS
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/config/gps/gps.conf:system/etc/gps.conf \
     $(COMMON_PATH)/config/gps/gps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf
 
 #################### VENDOR ######################
