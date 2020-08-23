@@ -53,7 +53,7 @@ PRODUCT_PACKAGES += \
 
 # GNSS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.1
+    android.hardware.gnss@2.0
 
 # GRAPHICS
 PRODUCT_PACKAGES += \
