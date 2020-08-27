@@ -98,6 +98,7 @@
         </interface>
         <fqname>@1.0::IGnss/gnss_vendor</fqname>
         <fqname>@1.1::IGnss/default</fqname>
+        <fqname>@2.0::IGnss/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.graphics.allocator</name>
@@ -518,6 +519,9 @@
             <instance>gnss_vendor</instance>
         </interface>
         <fqname>@1.0::ILocHidlGnss/gnss_vendor</fqname>
+        <fqname>@1.2::ILocHidlGnss/gnss_vendor</fqname>
+        <fqname>@2.1::ILocHidlGnss/gnss_vendor</fqname>
+        <fqname>@3.0::ILocHidlGnss/gnss_vendor</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.hardware.alarm</name>
