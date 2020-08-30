@@ -1,5 +1,10 @@
 # hal_wifi_default.te
 
+# /proc/sys/net/ipv4/tcp_adv_win_scale
+# /proc/sys/net/ipv4/tcp_limit_output_bytes
+# /proc/sys/net/ipv4/tcp_use_userconfig
+allow hal_wifi_default proc_net:file { w_file_perms };
+
 allow hal_wifi_default sysfs_wlan:file { w_file_perms };
 
 # wifi.active.interface
