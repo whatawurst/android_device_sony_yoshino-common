@@ -20,3 +20,6 @@ allow radio modemsw_cache_file:file create_file_perms;
 # Alllow CustomizationSelector to read Sony props
 allow radio semc_version_prop:file { getattr open read };
 allow radio vendor_semc_version_cust_active_prop:file { getattr open read };
+
+# persist.sys.sim_config_ids 
+set_prop(radio, semc_sim_prop)

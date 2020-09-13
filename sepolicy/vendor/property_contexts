@@ -1,6 +1,7 @@
 # property_contexts
 
 persist.keyprovd.suntory.prov        u:object_r:suntory_prop:s0
+persist.sys.sim_config_ids           u:object_r:semc_sim_prop:s0
 persist.tareset.notfirstboot         u:object_r:tareset_notfirstboot_prop:s0
 
 init.taimport                        u:object_r:taimport_prop:s0
