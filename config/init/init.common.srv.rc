@@ -15,12 +15,10 @@
 # Trim Area Daemon
 # Last 2 args: start block(blk size 128k), number of blocks(partitionsize(kb)/128(kb))
 service tad /vendor/bin/tad /dev/block/bootdevice/by-name/TA 0,16
-    class core
     user oem_2997
     group oem_2997 root
     socket tad stream 0660 system oem_2993
-    seclabel u:r:tad:s0
-    shutdown critical
+    class trimarea
 
 # QCOM prop
 service vendor.cnd /system/vendor/bin/cnd
