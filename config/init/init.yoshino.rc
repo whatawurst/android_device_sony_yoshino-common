@@ -41,6 +41,13 @@ on init
     # This will be configured with the ssr_setup service
     setprop persist.vendor.ssr.restart_level "venus adsp slpi modem cdsp"
 
+    wait /dev/block/platform/soc/1da4000.ufshc
+    symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
+    wait /dev/block/sda1
+    chown oem_2997 oem_2997 /dev/block/sda1
+    chmod 0770 /dev/block/sda1
+
+    # Start tad and miscta hidl service
     class_start trimarea
 
     # These are needed for MiscTA HIDL service
@@ -51,20 +58,11 @@ on init
     exec u:r:vendor_ffu:s0 -- /vendor/bin/ffu
 
 on fs
-    wait /dev/block/platform/soc/1da4000.ufshc
-    symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
-
     mount_all /vendor/etc/fstab.${ro.hardware}
 
     swapon_all /vendor/etc/fstab.${ro.hardware}
 
     write /sys/devices/soc/c0a4900.sdhci/mmc_host/mmc0/clkgate_delay 1
-
-    # Start tad early as other core services depend on it
-    wait /dev/block/sda1
-    chown oem_2997 oem_2997 /dev/block/sda1
-    chmod 0770 /dev/block/sda1
-    start tad
 
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
     insmod /vendor/lib/modules/kscl.ko
