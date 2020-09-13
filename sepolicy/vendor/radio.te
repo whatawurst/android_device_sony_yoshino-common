@@ -4,3 +4,19 @@ allow radio system_app_data_file:dir { getattr search };
 
 # m.android.phone
 allow radio gpuservice:binder { call };
+
+# CustomizationSelector
+binder_call(radio, hal_miscta_default)
+
+hwbinder_use(radio)
+
+allow radio hal_miscta_default:binder { call transfer };
+allow radio hal_miscta_hwservice:hwservice_manager find;
+
+# Allow CustomizationSelector access to /cache/modem/*
+allow radio modemsw_cache_file:dir rw_dir_perms;
+allow radio modemsw_cache_file:file create_file_perms;
+
+# Alllow CustomizationSelector to read Sony props
+allow radio semc_version_prop:file { getattr open read };
+allow radio vendor_semc_version_cust_active_prop:file { getattr open read };
