@@ -206,7 +206,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # IMS
 PRODUCT_PROPERTY_OVERRIDES += \
+    persist.radio.calls.on.ims=1 \
     persist.vendor.ims.vcel_rtcp_report=5 \
+    persist.vendor.radio.calls.on.ims=1 \
     persist.vendor.radio.ims_call_transfer=true
 
 # Power down sim in airplane mode disable
