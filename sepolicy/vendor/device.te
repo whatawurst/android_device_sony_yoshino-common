@@ -6,6 +6,6 @@ type idd_block_device, dev_type;
 type oem_block_device, dev_type;
 type qnovo_block_device, dev_type;
 type ramdump_block_device, dev_type;
-type ta_block_device, dev_type;
+type tad_block_device, dev_type;
 type audio_hweffect_device, dev_type;
 type lensctrl_device, dev_type;

@@ -7,7 +7,7 @@ allow init proc_cmdline:file r_file_perms;
 allow init proc_dirty_ratio:file rw_file_perms;
 
 # TA
-allow init ta_block_device:blk_file { setattr };
+allow init tad_block_device:blk_file { setattr };
 
 # debugfs
 allow init debugfs:dir { mounton };
