@@ -208,12 +208,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.ims.vcel_rtcp_report=5 \
     persist.vendor.radio.ims_call_transfer=true
 
-# IMS availability overrides
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.dbg.volte_avail_ovr=1 \
-    persist.dbg.vt_avail_ovr=1 \
-    persist.dbg.wfc_avail_ovr=1
-
 # Power down sim in airplane mode disable
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.apm_sim_not_pwdn=1
