@@ -201,7 +201,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.rat_on=combine \
     persist.vendor.radio.report_codec=1 \
     persist.vendor.radio.sib16_support=1 \
-    persist.vendor.radio.wait_for_pbm=1
+    persist.vendor.radio.wait_for_pbm=1 \
+    ro.telephony.iwlan_operation_mode=legacy
 
 # IMS
 PRODUCT_PROPERTY_OVERRIDES += \
