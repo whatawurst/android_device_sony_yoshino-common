@@ -47,6 +47,12 @@ on init
     chown oem_2997 oem_2997 /dev/block/sda1
     chmod 0770 /dev/block/sda1
 
+    # Required for tad and modem-switcher
+    restorecon /dev/block/bootdevice/by-name/fsg
+    restorecon /dev/block/bootdevice/by-name/modemst1
+    restorecon /dev/block/bootdevice/by-name/modemst2
+    restorecon /dev/block/bootdevice/by-name/TA
+
     # Start tad and miscta hidl service
     class_start trimarea
 
