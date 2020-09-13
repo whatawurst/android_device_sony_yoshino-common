@@ -1,6 +1,5 @@
 # system_app.te
 
 get_prop(system_app, wfd_prop)
-get_prop(system_app, vendor_semc_version_cust_active_prop)
 # dataservice_app
 get_prop(system_app, cnd_vendor_prop)
