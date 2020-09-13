@@ -66,10 +66,6 @@ on fs
     chmod 0770 /dev/block/sda1
     start tad
 
-    # These are needed for MiscTA HIDL service
-    start hwservicemanager
-    start hidl_memory
-
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
     insmod /vendor/lib/modules/kscl.ko
 
