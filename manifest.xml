@@ -574,6 +574,15 @@
         <fqname>@1.0::IFactory/default</fqname>
     </hal>
     <hal format="hidl">
+        <name>vendor.qti.hardware.data.iwlan</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IIWlan</name>
+            <instance>slot1</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>vendor.qti.hardware.perf</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
