@@ -203,7 +203,7 @@ DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
 TARGET_HW_DISK_ENCRYPTION := true
 
 ### SEPOLICY
-include device/qcom/sepolicy-legacy-um/sepolicy.mk
+include device/qcom/sepolicy-legacy-um/SEPolicy.mk
 BOARD_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
 
