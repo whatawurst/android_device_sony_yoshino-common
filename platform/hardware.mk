@@ -147,12 +147,6 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
     android.hardware.sensors@1.0-service
 
-# THERMAL
-PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-impl \
-    android.hardware.thermal@1.1-impl \
-    android.hardware.thermal@1.0-service
-
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0 \
@@ -191,10 +185,6 @@ PRODUCT_PACKAGES += \
 ### TETHERING
 PRODUCT_PACKAGES += \
     TetheringConfigOverlay
-
-### THERMAL
-PRODUCT_PACKAGES += \
-    thermal.msm8998
 
 ### VR
 PRODUCT_PACKAGES += \
