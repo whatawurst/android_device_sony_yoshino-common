@@ -48,6 +48,7 @@ on init
     chmod 0770 /dev/block/sda1
 
     # Required for tad and modem-switcher
+    restorecon /dev/block/bootdevice/by-name/fsc
     restorecon /dev/block/bootdevice/by-name/fsg
     restorecon /dev/block/bootdevice/by-name/modemst1
     restorecon /dev/block/bootdevice/by-name/modemst2
