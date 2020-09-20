@@ -826,16 +826,6 @@
         <fqname>@1.0::IPip/default</fqname>
     </hal>
     <hal format="hidl">
-        <name>vendor.somc.hardware.radio</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ISomcHook</name>
-            <instance>somchook</instance>
-        </interface>
-        <fqname>@1.0::ISomcHook/somchook</fqname>
-    </hal>
-    <hal format="hidl">
         <name>vendor.somc.hardware.security.secd</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
