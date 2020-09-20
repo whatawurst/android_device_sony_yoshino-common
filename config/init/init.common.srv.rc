@@ -99,6 +99,15 @@ on property:ro.boot.baseband=msm
     enable vendor.netmgrd
     enable vendor.port-bridge
 
+on property:vold.decrypt=trigger_restart_framework
+    start ril-daemon
+    start vendor.ipacm-diag
+    start vendor.ipacm
+    start vendor.dataqti
+    start vendor.dataadpl
+    start vendor.netmgrd
+    start vendor.port-bridge
+
 # QCOM prop radio
 service vendor.atfwd /vendor/bin/ATFWD-daemon
     class late_start
