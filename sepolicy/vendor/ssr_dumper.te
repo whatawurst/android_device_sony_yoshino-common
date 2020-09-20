@@ -7,6 +7,9 @@ init_daemon_domain(ssr_dumper)
 
 allow ssr_dumper kernel:system { syslog_read };
 
+allow ssr_dumper shell_exec:file { execute execute_no_trans getattr open read };
+allow ssr_dumper toolbox_exec:file { execute execute_no_trans getattr open read };
+
 # /dev/kmsg
 allow ssr_dumper kmsg_device:chr_file r_file_perms;
 
