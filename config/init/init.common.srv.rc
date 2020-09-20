@@ -64,21 +64,6 @@ on property:ro.vendor.use_data_netmgrd=false
     stop vendor.netmgrd
 
 # QCOM prop radio
-service vendor.ipacm-diag /system/vendor/bin/ipacm-diag
-    class main
-    user radio
-    socket ipacm_log_file dgram 660 radio radio
-    group radio diag oem_2901
-    disabled
-
-# QCOM radio tethering
-service vendor.ipacm /system/vendor/bin/ipacm
-    class main
-    user radio
-    group radio inet
-    disabled
-
-# QCOM prop radio
 service vendor.dataqti /system/vendor/bin/qti
     class main
     user radio
@@ -92,8 +77,6 @@ service vendor.dataadpl /system/vendor/bin/adpl
     disabled
 
 on property:ro.boot.baseband=msm
-    enable vendor.ipacm-diag
-    enable vendor.ipacm
     enable vendor.dataqti
     enable vendor.dataadpl
     enable vendor.netmgrd
@@ -101,7 +84,6 @@ on property:ro.boot.baseband=msm
 
 on property:vold.decrypt=trigger_restart_framework
     start ril-daemon
-    start vendor.ipacm-diag
     start vendor.ipacm
     start vendor.dataqti
     start vendor.dataadpl
