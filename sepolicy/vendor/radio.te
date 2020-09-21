@@ -13,6 +13,9 @@ hwbinder_use(radio)
 allow radio hal_miscta_default:binder { call transfer };
 allow radio hal_miscta_hwservice:hwservice_manager find;
 
+# Allow CustomizationSelector look for /cache/modem/ on /cache
+allow radio cache_file:dir { search };
+
 # Allow CustomizationSelector access to /cache/modem/*
 allow radio modemsw_cache_file:dir rw_dir_perms;
 allow radio modemsw_cache_file:file create_file_perms;
