@@ -45,7 +45,7 @@ persist.data.wda.enable=true
 persist.rmnet.data.enable=true
 
 # Telephony
-telephony.lteOnCdmaDevice=1
+telephony.lteOnCdmaDevice=0
 
 ### WFD
 # Property to enable user to access Google WFD settings.
