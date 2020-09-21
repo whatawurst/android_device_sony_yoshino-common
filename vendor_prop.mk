@@ -194,6 +194,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ### RADIO
 PRODUCT_PROPERTY_OVERRIDES += \
+    DEVICE_PROVISIONED=1 \
     persist.vendor.data.iwlan.enable=true \
     persist.vendor.radio.custom_ecc=1 \
     persist.vendor.radio.mt_sms_ack=19 \
