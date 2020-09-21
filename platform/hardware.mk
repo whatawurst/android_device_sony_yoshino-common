@@ -42,3 +42,7 @@ PRODUCT_PACKAGES += \
 # COVER
 PRODUCT_PACKAGES += \
     FlipFlap
+
+# Custom NetworkSwitcher APK
+PRODUCT_PACKAGES += \
+    NetworkSwitcher
