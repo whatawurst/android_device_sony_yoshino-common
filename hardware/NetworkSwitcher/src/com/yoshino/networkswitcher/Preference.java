@@ -25,8 +25,6 @@ import android.content.SharedPreferences;
 public class Preference {
 
     public static final String WAS_NETWORK_3G = "network_pref_3g";
-    public static final String PREFERRED_3G = "pref_3g";
-    public static final String DEFAULT_3G = "is_def_3g_stored";
 
     private static SharedPreferences getPreferences(Context context) {
         return context.getApplicationContext().getSharedPreferences("NetworkCycler", Context.MODE_PRIVATE);
@@ -42,30 +40,5 @@ public class Preference {
     }
     public static boolean getWasNetwork3G(Context context, boolean def) {
         return getPreferences(context).getBoolean(WAS_NETWORK_3G, def);
-    }
-
-    /**
-     * This preference is to store the auto-set 3G network mode preference
-     */
-    public static void putPreferred3G(int network, Context context) {
-        SharedPreferences.Editor editor = getPreferences(context).edit();
-        editor.putInt(PREFERRED_3G, network);
-        editor.apply();
-    }
-    public static int getPreferred3G(Context context, int def) {
-        return getPreferences(context).getInt(PREFERRED_3G, def);
-    }
-
-    /**
-     * This preference is a flag to indicate that the {@link #putPreferred3G(int, Context)}
-     * was already done.
-     */
-    public static void put3GTaken(boolean taken, Context context) {
-        SharedPreferences.Editor editor = getPreferences(context).edit();
-        editor.putBoolean(DEFAULT_3G, taken);
-        editor.apply();
-    }
-    public static boolean get3GTaken(Context context) {
-        return getPreferences(context).getBoolean(DEFAULT_3G, false);
     }
 }

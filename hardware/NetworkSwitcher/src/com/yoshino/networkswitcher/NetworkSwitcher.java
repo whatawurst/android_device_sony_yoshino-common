@@ -31,9 +31,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
-import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
-import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.RILConstants;
 
 import java.util.List;
@@ -137,26 +135,12 @@ public class NetworkSwitcher extends Service {
         int currentNetwork = getPreferredNetwork(subID, isLteOnCdma);
         Log.d(TAG, "performIntendedTask: Current network = " + logPrefNetwork(currentNetwork, isLteOnCdma));
 
-        // Store the preferred default 3G network (set when clean flashed/installed)
-        if (!Preference.get3GTaken(getApplicationContext())) {
-            if (isLTE(currentNetwork)) {
-                int toggled = getToggledNetwork(currentNetwork, isLteOnCdma);
-                Log.d(TAG, "performIntendedTask: (Toggled) Default 3G stored = " + logPrefNetwork(toggled, isLteOnCdma));
-                Preference.putPreferred3G(toggled, getApplicationContext());
-            } else {
-                Log.d(TAG, "performIntendedTask: Default 3G stored = " + logPrefNetwork(currentNetwork, isLteOnCdma));
-                Preference.putPreferred3G(currentNetwork, getApplicationContext());
-            }
-            Preference.put3GTaken(true, getApplicationContext());
-        }
-
         // Continue the toggle task
         if (isBoot) {
             Log.d(TAG, "performIntendedTask: Boot task");
 
             if (Preference.getWasNetwork3G(getApplicationContext(), !isLTE(currentNetwork))) {
                 Log.d(TAG, "performIntendedTask: User pref was 3G Not toggling");
-                Preference.putPreferred3G(currentNetwork, getApplicationContext());
             } else {
                 Log.d(TAG, "performIntendedTask: User pref was LTE; Toggling ...");
                 toggle(tm, subID, currentNetwork, isLteOnCdma);
@@ -243,7 +227,7 @@ public class NetworkSwitcher extends Service {
             case RILConstants.NETWORK_MODE_LTE_ONLY:
             case RILConstants.NETWORK_MODE_LTE_WCDMA:
                 // return 3G
-                network = Preference.getPreferred3G(getApplicationContext(), RILConstants.NETWORK_MODE_WCDMA_PREF);
+                network = RILConstants.NETWORK_MODE_WCDMA_PREF;
                 break;
             // GSM and CDMA devices
             case RILConstants.NETWORK_MODE_GLOBAL:
