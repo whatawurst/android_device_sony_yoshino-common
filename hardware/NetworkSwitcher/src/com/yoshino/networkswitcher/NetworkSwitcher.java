@@ -130,10 +130,8 @@ public class NetworkSwitcher extends Service {
     private void performIntendedTask(int subID, boolean isBoot) {
         TelephonyManager tm = getSystemService(TelephonyManager.class).createForSubscriptionId(subID);
 
-        boolean isLteOnCdma = tm.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE;
-
-        int currentNetwork = getPreferredNetwork(subID, isLteOnCdma);
-        Log.d(TAG, "performIntendedTask: Current network = " + logPrefNetwork(currentNetwork, isLteOnCdma));
+        int currentNetwork = getPreferredNetwork(subID);
+        Log.d(TAG, "performIntendedTask: Current network = " + logPrefNetwork(currentNetwork));
 
         // Continue the toggle task
         if (isBoot) {
@@ -143,7 +141,7 @@ public class NetworkSwitcher extends Service {
                 Log.d(TAG, "performIntendedTask: User pref was 3G Not toggling");
             } else {
                 Log.d(TAG, "performIntendedTask: User pref was LTE; Toggling ...");
-                toggle(tm, subID, currentNetwork, isLteOnCdma);
+                toggle(tm, subID, currentNetwork);
             }
         } else {
             Log.d(TAG, "performIntendedTask: Shutdown/reboot task");
@@ -151,7 +149,7 @@ public class NetworkSwitcher extends Service {
             boolean lte = isLTE(currentNetwork);
             if (lte) {
                 Log.d(TAG, "performIntendedTask: Current network is LTE; Toggling ...");
-                toggle(tm, subID, currentNetwork, isLteOnCdma);
+                toggle(tm, subID, currentNetwork);
             } else {
                 Log.d(TAG, "performIntendedTask: Current network was NOT LTE");
             }
@@ -159,9 +157,9 @@ public class NetworkSwitcher extends Service {
         }
     }
 
-    private void toggle(TelephonyManager tm, int subID, int currentNetwork, boolean isLteOnCdma) {
-        int networkToChange = getToggledNetwork(currentNetwork, isLteOnCdma);
-        Log.d(TAG, "toggle: To be changed to = " + logPrefNetwork(networkToChange, isLteOnCdma));
+    private void toggle(TelephonyManager tm, int subID, int currentNetwork) {
+        int networkToChange = getToggledNetwork(currentNetwork);
+        Log.d(TAG, "toggle: To be changed to = " + logPrefNetwork(networkToChange));
 
         if (networkToChange == -99) {
             Log.d(TAG, "toggle: Couldn't get proper network to change");
@@ -171,20 +169,18 @@ public class NetworkSwitcher extends Service {
         if (tm.setPreferredNetworkType(subID, networkToChange)) {
             Settings.Global.putInt(getApplicationContext().getContentResolver(),
                     Settings.Global.PREFERRED_NETWORK_MODE + subID, networkToChange);
-            Log.d(TAG, "toggle: Successfully changed to " + logPrefNetwork(networkToChange, isLteOnCdma));
+            Log.d(TAG, "toggle: Successfully changed to " + logPrefNetwork(networkToChange));
         }
     }
 
-    /*
+    /**
      * Get the current in-use network mode preference
+     *
+     * @return default 3G {@link RILConstants#NETWORK_MODE_WCDMA_PREF} if no pref stored
      */
-    private int getPreferredNetwork(int subID, boolean isCDMA) {
-        int preferredNetworkMode = RILConstants.PREFERRED_NETWORK_MODE;
-        if (isCDMA) {
-            preferredNetworkMode = RILConstants.NETWORK_MODE_GLOBAL;
-        }
+    private int getPreferredNetwork(int subID) {
         return Settings.Global.getInt(getApplicationContext().getContentResolver(),
-                Settings.Global.PREFERRED_NETWORK_MODE + subID, preferredNetworkMode);
+                Settings.Global.PREFERRED_NETWORK_MODE + subID, RILConstants.NETWORK_MODE_WCDMA_PREF);
     }
 
     /**
@@ -209,7 +205,7 @@ public class NetworkSwitcher extends Service {
     /**
      * This method returns the toggled network between 3G and LTE
      */
-    private int getToggledNetwork(int currentNetwork, boolean isCDMA) {
+    private int getToggledNetwork(int currentNetwork) {
         int network = -99;
 
         switch (currentNetwork) {
@@ -235,19 +231,7 @@ public class NetworkSwitcher extends Service {
                 network = RILConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA;
                 break;
             case RILConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
-                // Determine the correct network type
-                if (isCDMA) {
-                    network = RILConstants.NETWORK_MODE_CDMA;
-                } else {
-                    network = RILConstants.NETWORK_MODE_WCDMA_PREF;
-                }
-                break;
-            // CDMA Devices
-            case RILConstants.NETWORK_MODE_CDMA:
-                network = RILConstants.NETWORK_MODE_LTE_CDMA_EVDO;
-                break;
-            case RILConstants.NETWORK_MODE_LTE_CDMA_EVDO:
-                network = RILConstants.NETWORK_MODE_CDMA;
+                network = RILConstants.NETWORK_MODE_WCDMA_PREF;
                 break;
         }
 
@@ -259,7 +243,7 @@ public class NetworkSwitcher extends Service {
      * <p>
      * Too lazy to refer the {@link RILConstants}
      */
-    private String logPrefNetwork(int network, boolean isCDMADevice) {
+    private String logPrefNetwork(int network) {
         switch (network) {
             // GSM Devices
             case RILConstants.NETWORK_MODE_WCDMA_PREF:
@@ -280,16 +264,7 @@ public class NetworkSwitcher extends Service {
             case RILConstants.NETWORK_MODE_GLOBAL:
                 return "NETWORK_MODE_GLOBAL";
             case RILConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
-                if (isCDMADevice) {
-                    return "NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA --> NETWORK_MODE_CDMA";
-                } else {
-                    return "NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA --> NETWORK_MODE_WCDMA_PREF";
-                }
-                // CDMA Devices
-            case RILConstants.NETWORK_MODE_CDMA:
-                return "NETWORK_MODE_CDMA";
-            case RILConstants.NETWORK_MODE_LTE_CDMA_EVDO:
-                return "NETWORK_MODE_LTE_CDMA_EVDO";
+                return "NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA --> NETWORK_MODE_WCDMA_PREF";
             default:
                 return "N/A";
         }
