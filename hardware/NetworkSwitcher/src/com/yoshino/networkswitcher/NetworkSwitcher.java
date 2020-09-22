@@ -31,9 +31,9 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
-import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.RILConstants;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -66,6 +66,15 @@ public class NetworkSwitcher extends Service {
      * This boolean will make sure that the network toggle takes place only once.
      */
     boolean changedOnBoot = false;
+
+    /**
+     * The {@link #wasModemCSWorkCompleted()} checks on boot if the modem task was completed.
+     * If it wasn't completed, flag this boolean false.
+     * <p>
+     * Now this flagged boolean will make sure that it doesn't toggle network on
+     * shutdown/reboot because modem work was incomplete at boot.
+     */
+    boolean wasModemDone = true;
 
     private BroadcastReceiver shutDownReceiver = new BroadcastReceiver() {
         @Override
@@ -128,6 +137,12 @@ public class NetworkSwitcher extends Service {
     }
 
     private void performIntendedTask(int subID, boolean isBoot) {
+        if (!wasModemCSWorkCompleted()) {
+            Log.d(TAG, "performIntendedTask: Modem Work was not completed. Skipping Toggle task");
+            wasModemDone = false;
+            return;
+        }
+
         TelephonyManager tm = getSystemService(TelephonyManager.class).createForSubscriptionId(subID);
 
         int currentNetwork = getPreferredNetwork(subID);
@@ -146,14 +161,18 @@ public class NetworkSwitcher extends Service {
         } else {
             Log.d(TAG, "performIntendedTask: Shutdown/reboot task");
 
-            boolean lte = isLTE(currentNetwork);
-            if (lte) {
-                Log.d(TAG, "performIntendedTask: Current network is LTE; Toggling ...");
-                toggle(tm, subID, currentNetwork);
+            if (wasModemDone) {
+                boolean lte = isLTE(currentNetwork);
+                if (lte) {
+                    Log.d(TAG, "performIntendedTask: Current network is LTE; Toggling ...");
+                    toggle(tm, subID, currentNetwork);
+                } else {
+                    Log.d(TAG, "performIntendedTask: Current network was NOT LTE");
+                }
+                Preference.putWasNetwork3G(!lte, getApplicationContext());
             } else {
-                Log.d(TAG, "performIntendedTask: Current network was NOT LTE");
+                Log.d(TAG, "performIntendedTask: Modem task was incomplete when checked on boot, skipping ...");
             }
-            Preference.putWasNetwork3G(!lte, getApplicationContext());
         }
     }
 
@@ -268,5 +287,13 @@ public class NetworkSwitcher extends Service {
             default:
                 return "N/A";
         }
+    }
+
+    /**
+     * This method is to check if work of modem and CS was completed by
+     * reading the cache file.
+     */
+    public boolean wasModemCSWorkCompleted() {
+        return new File("/cache/modem/modem_switcher_status").exists();
     }
 }
