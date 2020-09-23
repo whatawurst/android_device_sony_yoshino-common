@@ -100,10 +100,15 @@ public class NetworkSwitcher extends Service {
         sm.addOnSubscriptionsChangedListener(new SubscriptionManager.OnSubscriptionsChangedListener() {
             @Override
             public void onSubscriptionsChanged() {
-                Log.d(TAG, "onSubscriptionsChanged: Called: ");
+                Log.d(TAG, "onSubscriptionsChanged: Called");
                 super.onSubscriptionsChanged();
                 if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
                     Log.d(TAG, Manifest.permission.READ_PHONE_STATE + " was denied.");
+                    return;
+                }
+
+                if (isAirplaneModeOn()) {
+                    Log.d(TAG, "onSubscriptionsChanged: Airplane mode was ON. Waiting for it to be turned off");
                     return;
                 }
 
@@ -295,5 +300,15 @@ public class NetworkSwitcher extends Service {
      */
     public boolean wasModemCSWorkCompleted() {
         return new File("/cache/modem/modem_switcher_status").exists();
+    }
+
+    /**
+     * Gets the state of Airplane Mode.
+     *
+     * @return true if enabled.
+     */
+    private boolean isAirplaneModeOn() {
+        return Settings.System.getInt(getApplicationContext().getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
     }
 }
