@@ -56,12 +56,14 @@ public class NetworkSwitcher extends Service {
         return null;
     }
 
+    SubscriptionManager sm;
+
     // Global variable to be accessed on shutdown
     int mSubID = -99;
 
     /**
-     * The {@link SubscriptionManager#addOnSubscriptionsChangedListener(SubscriptionManager.OnSubscriptionsChangedListener)}
-     * maybe called many times and every time network mode changes.
+     * The {@link #subscriptionsChangedListener} is called every time something changes
+     * in SIM connectivity.
      * <p>
      * This boolean will make sure that the network toggle takes place only once.
      */
@@ -76,6 +78,9 @@ public class NetworkSwitcher extends Service {
      */
     boolean wasModemDone = true;
 
+    /**
+     * Broadcast receiver to perform network toggle on shutdown/reboot
+     */
     private BroadcastReceiver shutDownReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -93,46 +98,46 @@ public class NetworkSwitcher extends Service {
         }
     };
 
+    private SubscriptionManager.OnSubscriptionsChangedListener subscriptionsChangedListener = new SubscriptionManager.OnSubscriptionsChangedListener() {
+        @Override
+        public void onSubscriptionsChanged() {
+            Log.d(TAG, "onSubscriptionsChanged: Called");
+            super.onSubscriptionsChanged();
+            if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                Log.d(TAG, Manifest.permission.READ_PHONE_STATE + " was denied.");
+                return;
+            }
+
+            if (!changedOnBoot) {
+                if (isAirplaneModeOn()) {
+                    Log.d(TAG, "onSubscriptionsChanged: Airplane mode was ON. Waiting ...");
+                    return;
+                }
+
+                List<SubscriptionInfo> list = sm.getActiveSubscriptionInfoList();
+                Log.d(TAG, "onSubscriptionsChanged: list size " + list.size());
+
+                if (list.size() >= 1) {
+                    // TODO: dual sim
+                    mSubID = list.get(0).getSubscriptionId();
+                    performIntendedTask(mSubID, true);
+                }
+            }
+        }
+    };
+
     @Override
     public void onCreate() {
         Log.d(TAG, "Service started");
-        final SubscriptionManager sm = getSystemService(SubscriptionManager.class);
-        sm.addOnSubscriptionsChangedListener(new SubscriptionManager.OnSubscriptionsChangedListener() {
-            @Override
-            public void onSubscriptionsChanged() {
-                Log.d(TAG, "onSubscriptionsChanged: Called");
-                super.onSubscriptionsChanged();
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                    Log.d(TAG, Manifest.permission.READ_PHONE_STATE + " was denied.");
-                    return;
-                }
-
-                if (isAirplaneModeOn()) {
-                    Log.d(TAG, "onSubscriptionsChanged: Airplane mode was ON. Waiting for it to be turned off");
-                    return;
-                }
-
-                if (!changedOnBoot) {
-                    List<SubscriptionInfo> list = sm.getActiveSubscriptionInfoList();
-                    Log.d(TAG, "onSubscriptionsChanged: list size " + list.size());
-
-                    if (list.size() >= 1) {
-                        // TODO: dual sim
-                        int subID = list.get(0).getSubscriptionId();
-                        mSubID = subID;     // Storing it to be accessible on shutdown
-                        performIntendedTask(subID, true);
-
-                        changedOnBoot = true;
-                    }
-                }
-            }
-        });
+        sm = getSystemService(SubscriptionManager.class);
+        sm.addOnSubscriptionsChangedListener(subscriptionsChangedListener);
 
         // Register shutdown/reboot receiver
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SHUTDOWN);
         filter.addAction(Intent.ACTION_REBOOT);
         registerReceiver(shutDownReceiver, filter);
+
         super.onCreate();
     }
 
@@ -141,6 +146,9 @@ public class NetworkSwitcher extends Service {
         return START_STICKY;
     }
 
+    /**
+     * This method prepares and performs some important checks before {@link #toggle(TelephonyManager, int, int)}
+     */
     private void performIntendedTask(int subID, boolean isBoot) {
         if (!wasModemCSWorkCompleted()) {
             Log.d(TAG, "performIntendedTask: Modem Work was not completed. Skipping Toggle task");
@@ -149,6 +157,12 @@ public class NetworkSwitcher extends Service {
         }
 
         TelephonyManager tm = getSystemService(TelephonyManager.class).createForSubscriptionId(subID);
+
+        // Because data connectivity is only possible if SIM is in service
+        if (!tm.isDataConnectivityPossible()) {
+            Log.d(TAG, "performIntendedTask: SIM not connected. Waiting ...");
+            return;
+        }
 
         int currentNetwork = getPreferredNetwork(subID);
         Log.d(TAG, "performIntendedTask: Current network = " + logPrefNetwork(currentNetwork));
@@ -163,6 +177,7 @@ public class NetworkSwitcher extends Service {
                 Log.d(TAG, "performIntendedTask: User pref was LTE; Toggling ...");
                 toggle(tm, subID, currentNetwork);
             }
+            changedOnBoot = true;
         } else {
             Log.d(TAG, "performIntendedTask: Shutdown/reboot task");
 
@@ -181,6 +196,13 @@ public class NetworkSwitcher extends Service {
         }
     }
 
+    /**
+     * The method to toggle the network
+     *
+     * @param tm             {@link TelephonyManager} specific to subID
+     * @param subID          the subscription ID from {@link #subscriptionsChangedListener}
+     * @param currentNetwork current preferred network mode from {@link #performIntendedTask(int, boolean)}
+     */
     private void toggle(TelephonyManager tm, int subID, int currentNetwork) {
         int networkToChange = getToggledNetwork(currentNetwork);
         Log.d(TAG, "toggle: To be changed to = " + logPrefNetwork(networkToChange));
