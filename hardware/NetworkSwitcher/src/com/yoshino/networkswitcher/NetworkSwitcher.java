@@ -21,8 +21,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.telephony.CellSignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -120,7 +122,14 @@ public class NetworkSwitcher extends Service {
                 if (list.size() >= 1) {
                     // TODO: dual sim
                     mSubID = list.get(0).getSubscriptionId();
-                    performIntendedTask(mSubID, true);
+
+                    // Delay 1 sec, not to immediately react
+                    new Handler(getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            performIntendedTask(mSubID, true);
+                        }
+                    }, 1000);
                 }
             }
         }
@@ -158,18 +167,18 @@ public class NetworkSwitcher extends Service {
 
         TelephonyManager tm = getSystemService(TelephonyManager.class).createForSubscriptionId(subID);
 
-        // Because data connectivity is only possible if SIM is in service
-        if (!tm.isDataConnectivityPossible()) {
-            Log.d(TAG, "performIntendedTask: SIM not connected. Waiting ...");
-            return;
-        }
-
         int currentNetwork = getPreferredNetwork(subID);
         Log.d(TAG, "performIntendedTask: Current network = " + logPrefNetwork(currentNetwork));
 
         // Continue the toggle task
         if (isBoot) {
             Log.d(TAG, "performIntendedTask: Boot task");
+
+            if (tm.getSignalStrength() == null ||
+                    tm.getSignalStrength().getLevel() == CellSignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN) {
+                Log.d(TAG, "performIntendedTask: SIM not in service. Waiting ...");
+                return;
+            }
 
             if (Preference.getWasNetwork3G(getApplicationContext(), !isLTE(currentNetwork))) {
                 Log.d(TAG, "performIntendedTask: User pref was 3G Not toggling");
