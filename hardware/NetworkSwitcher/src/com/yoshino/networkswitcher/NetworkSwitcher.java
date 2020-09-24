@@ -84,6 +84,13 @@ public class NetworkSwitcher extends Service {
     boolean wasModemDone = true;
 
     /**
+     * The {@link #subscriptionsChangedListener} triggers very quickly (in special cases).
+     * <p>
+     * This boolean make sure that {@link #task(int, boolean)} isn't interrupted when in process.
+     */
+    boolean delayedTaskCompleted = true;
+
+    /**
      * Broadcast receiver to perform network toggle on shutdown/reboot
      */
     private BroadcastReceiver shutDownReceiver = new BroadcastReceiver() {
@@ -98,6 +105,7 @@ public class NetworkSwitcher extends Service {
                         return;
                     }
                     task(mSubID, false);
+                    d("-------------------------------------");
                 }
             }
         }
@@ -113,7 +121,7 @@ public class NetworkSwitcher extends Service {
                 return;
             }
 
-            if (!changedOnBoot) {
+            if (!changedOnBoot && delayedTaskCompleted) {
                 if (isAirplaneModeOn()) {
                     d("onSubscriptionsChanged: Airplane mode was ON. Waiting ...");
                     return;
@@ -126,13 +134,14 @@ public class NetworkSwitcher extends Service {
                     // TODO: dual sim
                     mSubID = list.get(0).getSubscriptionId();
 
-                    // Delay 1 sec, not to immediately react
+                    // Delay 2 sec, not to immediately react
+                    delayedTaskCompleted = false;
                     new Handler(getMainLooper()).postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             task(mSubID, true);
                         }
-                    }, 1000);
+                    }, 2000);
                 }
             }
         }
@@ -140,6 +149,7 @@ public class NetworkSwitcher extends Service {
 
     @Override
     public void onCreate() {
+        d("-------------------------------------");
         d("Service started");
         sm = getSystemService(SubscriptionManager.class);
         sm.addOnSubscriptionsChangedListener(subscriptionsChangedListener);
@@ -165,6 +175,7 @@ public class NetworkSwitcher extends Service {
         if (!wasModemCSWorkCompleted()) {
             d("task: Modem Work was not completed. Skipping Toggle task");
             wasModemDone = false;
+            delayedTaskCompleted = true;
             return;
         }
 
@@ -180,6 +191,7 @@ public class NetworkSwitcher extends Service {
             if (tm.getSignalStrength() == null ||
                     tm.getSignalStrength().getLevel() == CellSignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN) {
                 d("task: SIM not in service. Waiting ...");
+                delayedTaskCompleted = true;
                 return;
             }
 
@@ -206,6 +218,7 @@ public class NetworkSwitcher extends Service {
                 d("task: Modem task was incomplete when checked on boot, skipping ...");
             }
         }
+        delayedTaskCompleted = true;
     }
 
     /**
@@ -357,7 +370,7 @@ public class NetworkSwitcher extends Service {
         File logFile = new File(getFilesDir(), "ns.log");
         try {
             String log = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS", Locale.getDefault())
-                    .format(System.currentTimeMillis()) + TAG + ": " + msg + " \r\n";
+                    .format(System.currentTimeMillis()) + ": " + msg + " \r\n";
 
             FileOutputStream fos = getApplicationContext().openFileOutput("ns.log",
                     logFile.exists() ? Context.MODE_APPEND : Context.MODE_PRIVATE);
