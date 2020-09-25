@@ -182,7 +182,7 @@ public class NetworkSwitcher extends Service {
         TelephonyManager tm = getSystemService(TelephonyManager.class).createForSubscriptionId(subID);
 
         int currentNetwork = getPreferredNetwork(subID);
-        d("task: Current network = " + logPrefNetwork(currentNetwork));
+        d("task: Current network = " + logPrefNetwork(currentNetwork) + "; " + currentNetwork);
 
         // Continue the toggle task
         if (isBoot) {
