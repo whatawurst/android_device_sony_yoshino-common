@@ -1,12 +1,12 @@
 Device configuration for yoshino platform
 =========================================
 
-This is the Lineage 15.1 device configuration for the Yoshino platform.
+This is the Lineage 17.1 device configuration for the Yoshino platform.
 
 Devices based on Yoshino platform:
 
-* Xperia XZ Premium and Dual (maple)
-* XPeria XZ1 (poplar)
+* Xperia XZ Premium (maple) and XZ Premium Dual (maple_dsds)
+* Xperia XZ1 (poplar), XZ1 Canadian Variant (poplar_canada) and XZ1 Dual (poplar_dsds)
 * Xperia XZ1 Compact (lilac)
 
 Dependent repositories
