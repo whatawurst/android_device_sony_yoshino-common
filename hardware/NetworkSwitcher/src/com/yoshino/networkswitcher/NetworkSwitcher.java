@@ -24,7 +24,9 @@ import android.content.pm.PackageManager;
 import android.icu.text.SimpleDateFormat;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.PersistableBundle;
 import android.provider.Settings;
+import android.telephony.CarrierConfigManager;
 import android.telephony.CellSignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -34,6 +36,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
+import com.android.ims.ImsManager;
 import com.android.internal.telephony.RILConstants;
 
 import java.io.File;
@@ -172,6 +175,11 @@ public class NetworkSwitcher extends Service {
      * This method prepares and performs some important checks before {@link #toggle(TelephonyManager, int, int)}
      */
     private void task(int subID, boolean isBoot) {
+        if (subID == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            d("task: Cannot continue. Subscription ID is invalid; " + subID);
+            delayedTaskCompleted = true;
+            return;
+        }
         if (!wasModemCSWorkCompleted()) {
             d("task: Modem Work was not completed. Skipping Toggle task");
             wasModemDone = false;
@@ -180,6 +188,8 @@ public class NetworkSwitcher extends Service {
         }
 
         TelephonyManager tm = getSystemService(TelephonyManager.class).createForSubscriptionId(subID);
+        PersistableBundle carrierConfig = getSystemService(CarrierConfigManager.class).getConfigForSubId(subID);
+        ImsManager imsManager = ImsManager.getInstance(getApplicationContext(), SubscriptionManager.getPhoneId(subID));
 
         int currentNetwork = getPreferredNetwork(subID);
         d("task: Current network = " + logPrefNetwork(currentNetwork) + "; " + currentNetwork);
@@ -200,12 +210,15 @@ public class NetworkSwitcher extends Service {
             } else {
                 d("task: User pref was LTE; Toggling ...");
                 toggle(tm, subID, currentNetwork);
+                handle4GVoLteToggle(tm, imsManager, carrierConfig, subID, true);
             }
             changedOnBoot = true;
         } else {
             d("task: Shutdown/reboot task");
 
             if (wasModemDone) {
+                handle4GVoLteToggle(tm, imsManager, carrierConfig, subID, false);
+
                 boolean lte = isLTE(currentNetwork);
                 if (lte) {
                     d("task: Current network is LTE; Toggling ...");
@@ -245,6 +258,54 @@ public class NetworkSwitcher extends Service {
     }
 
     /**
+     * The method to toggle 4G Calling or VoLTE preference
+     *
+     * @param tm            {@link TelephonyManager} specific to subID
+     * @param imsManager    {@link ImsManager} specific to subID
+     * @param carrierConfig {@link PersistableBundle} info about the carrier.
+     *                      Doesn't have proper use, but is required for
+     *                      null check.
+     * @param subID         the subscription ID from {@link #subscriptionsChangedListener}
+     * @param isBoot        whether is boot task
+     */
+    private void handle4GVoLteToggle(TelephonyManager tm, @Nullable ImsManager imsManager, PersistableBundle carrierConfig, int subID, boolean isBoot) {
+        if (imsManager == null) {
+            d("4gLteToggle: ims manager is null :/");
+            return;
+        }
+        if (carrierConfig == null) {
+            d("4gLteToggle: carrier config is null :/");
+            return;
+        }
+        if (!isEnhanced4GPrefEnabled(tm, imsManager, carrierConfig, subID)) {
+            d("4gLteToggle: Enhanced 4G pref is NOT available");
+            return;
+        }
+
+        if (isBoot) {
+            d("4gLteToggle: Boot task");
+
+            if (Preference.getEnhanced4GEnabled(getApplicationContext(), getPreferredEnhanced4GPref(imsManager))) {
+                d("4gLteToggle: Enhanced 4G was enabled. Enabling ...");
+                imsManager.setEnhanced4gLteModeSetting(true);
+            } else {
+                d("4gLteToggle: Enhanced 4G was disabled. Not enabling.");
+            }
+        } else {
+            d("4gLteToggle: Shutdown/reboot task");
+
+            boolean isEnabled = getPreferredEnhanced4GPref(imsManager);
+            if (isEnabled) {
+                d("4gLteToggle: Enhanced 4G is enabled. Disabling ...");
+                imsManager.setEnhanced4gLteModeSetting(false);
+            } else {
+                d("4gLteToggle: Enhanced 4G was disabled. Not toggling ...");
+            }
+            Preference.putEnhanced4GEnabled(isEnabled, getApplicationContext());
+        }
+    }
+
+    /**
      * Get the current in-use network mode preference
      *
      * @return default 3G {@link RILConstants#NETWORK_MODE_WCDMA_PREF} if no pref stored
@@ -252,6 +313,25 @@ public class NetworkSwitcher extends Service {
     private int getPreferredNetwork(int subID) {
         return Settings.Global.getInt(getApplicationContext().getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + subID, RILConstants.NETWORK_MODE_WCDMA_PREF);
+    }
+
+    /**
+     * @return the current preference if 4G Calling or VoLTE is enabled
+     */
+    private boolean getPreferredEnhanced4GPref(ImsManager imsManager) {
+        return imsManager.isEnhanced4gLteModeSettingEnabledByUser()
+                && imsManager.isNonTtyOrTtyOnVolteEnabled();
+    }
+
+    /**
+     * @return if 4G Calling or VoLTE preference is accessible
+     */
+    private boolean isEnhanced4GPrefEnabled(TelephonyManager tm, @Nullable ImsManager imsManager, PersistableBundle carrierConfig, int subID) {
+        return subID != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                && tm.getCallState(subID) == TelephonyManager.CALL_STATE_IDLE
+                && imsManager != null
+                && imsManager.isNonTtyOrTtyOnVolteEnabled()
+                && carrierConfig.getBoolean(CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL);
     }
 
     /**

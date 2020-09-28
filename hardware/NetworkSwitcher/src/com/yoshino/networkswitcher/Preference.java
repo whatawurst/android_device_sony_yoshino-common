@@ -24,7 +24,8 @@ import android.content.SharedPreferences;
  */
 public class Preference {
 
-    public static final String WAS_NETWORK_3G = "network_pref_3g";
+    private static final String WAS_NETWORK_3G = "network_pref_3g";
+    private static final String ENHANCED_4G_VOLTE_ENABLED = "enhanced_4g_volte_enable";
 
     private static SharedPreferences getPreferences(Context context) {
         return context.getApplicationContext().getSharedPreferences("NetworkCycler", Context.MODE_PRIVATE);
@@ -40,5 +41,17 @@ public class Preference {
     }
     public static boolean getWasNetwork3G(Context context, boolean def) {
         return getPreferences(context).getBoolean(WAS_NETWORK_3G, def);
+    }
+
+    /**
+     * This preference stores if VoLTE or 4G Calling preference was enabled
+     */
+    public static void putEnhanced4GEnabled(boolean was, Context context) {
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putBoolean(ENHANCED_4G_VOLTE_ENABLED, was);
+        editor.apply();
+    }
+    public static boolean getEnhanced4GEnabled(Context context, boolean def) {
+        return getPreferences(context).getBoolean(ENHANCED_4G_VOLTE_ENABLED, def);
     }
 }
