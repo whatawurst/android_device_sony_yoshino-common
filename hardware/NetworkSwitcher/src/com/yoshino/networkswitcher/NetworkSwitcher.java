@@ -268,7 +268,7 @@ public class NetworkSwitcher extends Service {
      * @param subID         the subscription ID from {@link #subscriptionsChangedListener}
      * @param isBoot        whether is boot task
      */
-    private void handle4GVoLteToggle(TelephonyManager tm, @Nullable ImsManager imsManager, PersistableBundle carrierConfig, int subID, boolean isBoot) {
+    private void handle4GVoLteToggle(TelephonyManager tm, final ImsManager imsManager, PersistableBundle carrierConfig, int subID, boolean isBoot) {
         if (imsManager == null) {
             d("4gLteToggle: ims manager is null :/");
             return;
@@ -285,11 +285,25 @@ public class NetworkSwitcher extends Service {
         if (isBoot) {
             d("4gLteToggle: Boot task");
 
-            if (Preference.getEnhanced4GEnabled(getApplicationContext(), getPreferredEnhanced4GPref(imsManager))) {
-                d("4gLteToggle: Enhanced 4G was enabled. Enabling ...");
-                imsManager.setEnhanced4gLteModeSetting(true);
+            if (getPreferredEnhanced4GPref(imsManager)) {
+                d("4gLteToggle: Enhanced 4G was ALREADY enabled, toggling Off and On ...");
+                // OFF ...
+                imsManager.setEnhanced4gLteModeSetting(false);
+                new Handler(getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Turn ON after 2 sec ...
+                        imsManager.setEnhanced4gLteModeSetting(true);
+                    }
+                }, 2000);
             } else {
-                d("4gLteToggle: Enhanced 4G was disabled. Not enabling.");
+                d("4gLteToggle: Enhanced 4G was expectedly OFF.");
+                if (Preference.getEnhanced4GEnabled(getApplicationContext(), getPreferredEnhanced4GPref(imsManager))) {
+                    d("4gLteToggle: Enhanced 4G was enabled. Enabling ...");
+                    imsManager.setEnhanced4gLteModeSetting(true);
+                } else {
+                    d("4gLteToggle: Enhanced 4G was disabled. Not enabling.");
+                }
             }
         } else {
             d("4gLteToggle: Shutdown/reboot task");
