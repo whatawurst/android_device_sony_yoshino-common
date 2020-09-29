@@ -28,7 +28,7 @@ public class Preference {
     private static final String ENHANCED_4G_VOLTE_ENABLED = "enhanced_4g_volte_enable";
 
     private static SharedPreferences getPreferences(Context context) {
-        return context.getApplicationContext().getSharedPreferences("NetworkCycler", Context.MODE_PRIVATE);
+        return context.getApplicationContext().getSharedPreferences("NetworkSwitcher", Context.MODE_PRIVATE);
     }
 
     /**
