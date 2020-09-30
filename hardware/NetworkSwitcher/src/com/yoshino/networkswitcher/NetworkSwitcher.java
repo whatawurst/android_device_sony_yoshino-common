@@ -117,7 +117,6 @@ public class NetworkSwitcher extends Service {
     private SubscriptionManager.OnSubscriptionsChangedListener subscriptionsChangedListener = new SubscriptionManager.OnSubscriptionsChangedListener() {
         @Override
         public void onSubscriptionsChanged() {
-            d("onSubscriptionsChanged: Called");
             super.onSubscriptionsChanged();
             if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
                 d(Manifest.permission.READ_PHONE_STATE + " was denied.");
