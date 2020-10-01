@@ -12,5 +12,8 @@
   ~ copies or substantial portions of the Software.
   -->
 <resources>
-    <string name="app_name">NetworkSwitcher</string>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 </resources>

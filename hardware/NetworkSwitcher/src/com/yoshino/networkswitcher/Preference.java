@@ -26,6 +26,7 @@ public class Preference {
 
     private static final String WAS_NETWORK_3G = "network_pref_3g";
     private static final String ENHANCED_4G_VOLTE_ENABLED = "enhanced_4g_volte_enable";
+    private static final String PREFERENCE_STORED = "preference_stored";
 
     private static SharedPreferences getPreferences(Context context) {
         return context.getApplicationContext().getSharedPreferences("NetworkSwitcher", Context.MODE_PRIVATE);
@@ -38,6 +39,8 @@ public class Preference {
         SharedPreferences.Editor editor = getPreferences(context).edit();
         editor.putBoolean(WAS_NETWORK_3G, was);
         editor.apply();
+
+        putPreferenceStored(context);
     }
     public static boolean getWasNetwork3G(Context context, boolean def) {
         return getPreferences(context).getBoolean(WAS_NETWORK_3G, def);
@@ -50,8 +53,22 @@ public class Preference {
         SharedPreferences.Editor editor = getPreferences(context).edit();
         editor.putBoolean(ENHANCED_4G_VOLTE_ENABLED, was);
         editor.apply();
+
+        putPreferenceStored(context);
     }
     public static boolean getEnhanced4GEnabled(Context context, boolean def) {
         return getPreferences(context).getBoolean(ENHANCED_4G_VOLTE_ENABLED, def);
+    }
+
+    /**
+     * This preference stores if the rest of the preferences are empty or not
+     */
+    private static void putPreferenceStored(Context context) {
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putBoolean(PREFERENCE_STORED, true);
+        editor.apply();
+    }
+    public static boolean getPreferenceStored(Context context) {
+        return getPreferences(context).getBoolean(PREFERENCE_STORED, false);
     }
 }

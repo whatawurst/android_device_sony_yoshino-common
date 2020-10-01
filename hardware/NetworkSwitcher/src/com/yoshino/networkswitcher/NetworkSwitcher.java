@@ -18,6 +18,7 @@ import android.Manifest;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -25,6 +26,7 @@ import android.icu.text.SimpleDateFormat;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PersistableBundle;
+import android.os.PowerManager;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellSignalStrength;
@@ -32,15 +34,19 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
 import com.android.ims.ImsManager;
 import com.android.internal.telephony.RILConstants;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.util.List;
 import java.util.Locale;
 
@@ -58,6 +64,12 @@ public class NetworkSwitcher extends Service {
 
     private static final String TAG = "NetworkSwitcher";
 
+    private static final String[] DEFAULT_MODEMS = {"amss_fsg_lilac_tar.mbn",
+            "amss_fsg_poplar_tar.mbn", "amss_fsg_poplar_dsds_tar.mbn",
+            "amss_fsg_maple_tar.mbn", "amss_fsg_maple_dsds_tar.mbn"};
+
+    private static final String MODEM_SWITCHER_STATUS = "/cache/modem/modem_switcher_status";
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -65,6 +77,7 @@ public class NetworkSwitcher extends Service {
     }
 
     SubscriptionManager sm;
+    PowerManager pm;
 
     // Global variable to be accessed on shutdown
     int mSubID = -99;
@@ -156,6 +169,8 @@ public class NetworkSwitcher extends Service {
         sm = getSystemService(SubscriptionManager.class);
         sm.addOnSubscriptionsChangedListener(subscriptionsChangedListener);
 
+        pm = getSystemService(PowerManager.class);
+
         // Register shutdown/reboot receiver
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SHUTDOWN);
@@ -173,7 +188,7 @@ public class NetworkSwitcher extends Service {
     /**
      * This method prepares and performs some important checks before {@link #toggle(TelephonyManager, int, int)}
      */
-    private void task(int subID, boolean isBoot) {
+    private void task(final int subID, final boolean isBoot) {
         if (subID == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             d("task: Cannot continue. Subscription ID is invalid; " + subID);
             delayedTaskCompleted = true;
@@ -201,6 +216,34 @@ public class NetworkSwitcher extends Service {
                     tm.getSignalStrength().getLevel() == CellSignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN) {
                 d("task: SIM not in service. Waiting ...");
                 delayedTaskCompleted = true;
+                return;
+            }
+
+            if (!Preference.getPreferenceStored(getApplicationContext()) && !isModemDefault()) {
+                d("task: App preferences missing AND modem flashed is NOT default. Prompting reboot");
+                AlertDialog dialog = new AlertDialog.Builder(getApplicationContext(), R.style.AppTheme)
+                        .setTitle("IMS Setup")
+                        .setMessage("Your device requires a reboot for completion of IMS setup.")
+                        .setPositiveButton("Reboot", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                d("task: Rebooting");
+                                changedOnBoot = true;
+
+                                task(subID, false);
+                                pm.reboot("IMS Implementation");
+                                dialog.dismiss();
+                            }
+                        }).create();
+
+                if (dialog.getWindow() != null) {
+                    dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                    dialog.setCancelable(false);
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.show();
+                } else {
+                    d("task: Error: dialog window was NULL");
+                }
                 return;
             }
 
@@ -438,8 +481,35 @@ public class NetworkSwitcher extends Service {
      * This method is to check if work of modem and CS was completed by
      * reading the cache file.
      */
-    public boolean wasModemCSWorkCompleted() {
-        return new File("/cache/modem/modem_switcher_status").exists();
+    private boolean wasModemCSWorkCompleted() {
+        return new File(MODEM_SWITCHER_STATUS).exists();
+    }
+
+    /**
+     * @return if modem flashed is one of the {@link #DEFAULT_MODEMS}
+     */
+    private boolean isModemDefault() {
+        try {
+            File file = new File(MODEM_SWITCHER_STATUS);
+            if (file.exists()) {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line = br.readLine().replace("\n", "").replace("\r", "").trim();
+                br.close();
+                d("Modem cache: " + line);
+
+                for (String m : DEFAULT_MODEMS) {
+                    if (line.split(",")[1].equals(m)) {
+                        return true;
+                    }
+                }
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return true;
+        }
     }
 
     /**

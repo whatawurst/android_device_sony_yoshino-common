@@ -12,5 +12,5 @@
   ~ copies or substantial portions of the Software.
   -->
 <resources>
-    <string name="app_name">NetworkSwitcher</string>
+    <color name="colorAccent">#1A73E8</color>
 </resources>
