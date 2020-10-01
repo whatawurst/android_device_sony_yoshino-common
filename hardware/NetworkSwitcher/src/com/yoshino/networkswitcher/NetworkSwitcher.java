@@ -212,13 +212,6 @@ public class NetworkSwitcher extends Service {
         if (isBoot) {
             d("task: Boot task");
 
-            if (tm.getSignalStrength() == null ||
-                    tm.getSignalStrength().getLevel() == CellSignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN) {
-                d("task: SIM not in service. Waiting ...");
-                delayedTaskCompleted = true;
-                return;
-            }
-
             if (!Preference.getPreferenceStored(getApplicationContext()) && !isModemDefault()) {
                 d("task: App preferences missing AND modem flashed is NOT default. Prompting reboot");
                 AlertDialog dialog = new AlertDialog.Builder(getApplicationContext(), R.style.AppTheme)
@@ -244,6 +237,13 @@ public class NetworkSwitcher extends Service {
                 } else {
                     d("task: Error: dialog window was NULL");
                 }
+                return;
+            }
+
+            if (tm.getSignalStrength() == null ||
+                    tm.getSignalStrength().getLevel() == CellSignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN) {
+                d("task: SIM not in service. Waiting ...");
+                delayedTaskCompleted = true;
                 return;
             }
 
