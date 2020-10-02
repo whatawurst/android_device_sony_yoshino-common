@@ -220,12 +220,15 @@ public class NetworkSwitcher extends Service {
                         .setPositiveButton("Reboot", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                d("task: Rebooting");
                                 changedOnBoot = true;
 
-                                task(subID, false);
-                                pm.reboot("IMS Implementation");
-                                dialog.dismiss();
+                                // One at a time boys... one at a time
+                                synchronized (this) {
+                                    task(subID, false);
+                                    dialog.dismiss();
+                                    d("task: Rebooting");
+                                    pm.reboot("IMS Implementation");
+                                }
                             }
                         }).create();
 
