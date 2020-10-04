@@ -250,12 +250,16 @@ public class NetworkSwitcher extends Service {
                 return;
             }
 
-            if (Preference.getWasNetwork3G(getApplicationContext(), !isLTE(currentNetwork))) {
-                d("task: User pref was 3G; Not toggling");
+            if (isLTE(currentNetwork)) {
+                d("task: Network is LTE. Not toggling");
             } else {
-                d("task: User pref was LTE; Toggling ...");
-                toggle(tm, subID, currentNetwork);
-                handle4GVoLteToggle(tm, imsManager, carrierConfig, subID, true);
+                if (Preference.getWasNetwork3G(getApplicationContext(), false)) {
+                    d("task: User pref was 3G; Not toggling");
+                } else {
+                    d("task: User pref was LTE; Toggling ...");
+                    toggle(tm, subID, currentNetwork);
+                    handle4GVoLteToggle(tm, imsManager, carrierConfig, subID, true);
+                }
             }
             changedOnBoot = true;
         } else {
