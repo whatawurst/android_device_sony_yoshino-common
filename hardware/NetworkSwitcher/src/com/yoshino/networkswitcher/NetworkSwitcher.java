@@ -78,6 +78,7 @@ public class NetworkSwitcher extends Service {
 
     SubscriptionManager sm;
     PowerManager pm;
+    NotificationHelper helper;
 
     // Global variable to be accessed on shutdown
     int mSubID = -99;
@@ -139,6 +140,7 @@ public class NetworkSwitcher extends Service {
             if (!changedOnBoot && delayedTaskCompleted) {
                 if (isAirplaneModeOn()) {
                     d("onSubscriptionsChanged: Airplane mode was ON. Waiting ...");
+                    helper.getManager().notify(1, helper.getToggleNotification("Airplane mode is ON. Waiting ..."));
                     return;
                 }
 
@@ -170,12 +172,15 @@ public class NetworkSwitcher extends Service {
         sm.addOnSubscriptionsChangedListener(subscriptionsChangedListener);
 
         pm = getSystemService(PowerManager.class);
+        helper = new NotificationHelper(getApplicationContext());
 
         // Register shutdown/reboot receiver
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SHUTDOWN);
         filter.addAction(Intent.ACTION_REBOOT);
         registerReceiver(shutDownReceiver, filter);
+
+        helper.getManager().notify(1, helper.getToggleNotification("IMS registration in progress ..."));
 
         super.onCreate();
     }
@@ -198,6 +203,7 @@ public class NetworkSwitcher extends Service {
             d("task: Modem Work was not completed. Skipping Toggle task");
             wasModemDone = false;
             delayedTaskCompleted = true;
+            helper.getManager().cancel(1);
             return;
         }
 
@@ -221,6 +227,7 @@ public class NetworkSwitcher extends Service {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 changedOnBoot = true;
+                                postCompletionNotification("Reboot required for completion");
 
                                 // One at a time boys... one at a time
                                 synchronized (this) {
@@ -246,6 +253,7 @@ public class NetworkSwitcher extends Service {
             if (tm.getSignalStrength() == null ||
                     tm.getSignalStrength().getLevel() == CellSignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN) {
                 d("task: SIM not in service. Waiting ...");
+                helper.getManager().notify(1, helper.getToggleNotification("SIM not in service. Waiting ..."));
                 delayedTaskCompleted = true;
                 return;
             }
@@ -262,6 +270,7 @@ public class NetworkSwitcher extends Service {
                 }
             }
             changedOnBoot = true;
+            postCompletionNotification("Completed");
         } else {
             d("task: Shutdown/reboot task");
 
@@ -493,29 +502,55 @@ public class NetworkSwitcher extends Service {
     }
 
     /**
+     * Post a notification with modem info on completion of {@link #task(int, boolean)}
+     *
+     * @param registration is registration message if needed to be added to notification
+     */
+    private synchronized void postCompletionNotification(String registration) {
+        String[] modemConfig = readModemFile();
+        if (modemConfig != null) {
+            helper.getManager().notify(1, helper.getModemNotification(modemConfig[1], modemConfig[0], registration));
+        }
+    }
+
+    /**
      * @return if modem flashed is one of the {@link #DEFAULT_MODEMS}
      */
     private boolean isModemDefault() {
+        String[] modemConfig = readModemFile();
+        if (modemConfig != null) {
+            for (String m : DEFAULT_MODEMS) {
+                if (modemConfig[1].equals(m)) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Reads {@link #MODEM_SWITCHER_STATUS} file
+     *
+     * @return String array of [0] being status and [1] being modem config flashed
+     */
+    @Nullable
+    private String[] readModemFile() {
         try {
             File file = new File(MODEM_SWITCHER_STATUS);
             if (file.exists()) {
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 String line = br.readLine().replace("\n", "").replace("\r", "").trim();
                 br.close();
-                d("Modem cache: " + line);
 
-                for (String m : DEFAULT_MODEMS) {
-                    if (line.split(",")[1].equals(m)) {
-                        return true;
-                    }
-                }
-                return false;
+                return new String[]{line.split(",")[0], line.split(",")[1]};
             } else {
-                return true;
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return true;
+            return null;
         }
     }
 

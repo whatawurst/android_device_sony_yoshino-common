@@ -13,4 +13,5 @@
   -->
 <resources>
     <color name="colorAccent">#82B1FF</color>
+    <color name="notification">#90A6B2</color>
 </resources>
