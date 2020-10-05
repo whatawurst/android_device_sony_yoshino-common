@@ -72,7 +72,7 @@ public class NotificationHelper {
 
         return new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setContentTitle(CHANNEL_ID)
-                .setContentText("Status: " + finalStatus + "\nConfig: " + modemConfig + "\nRegistration: " + registration)
+                .setContentText("Status: " + finalStatus + "\nConfig: " + modemConfig + "\nIMS: " + registration)
                 .setSmallIcon(R.drawable.ic_baseline_sim_card_24)
                 .setStyle(new NotificationCompat.BigTextStyle())
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

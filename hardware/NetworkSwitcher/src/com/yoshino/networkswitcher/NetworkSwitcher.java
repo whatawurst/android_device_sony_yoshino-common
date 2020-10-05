@@ -290,7 +290,11 @@ public class NetworkSwitcher extends Service {
                 }
             }
             changedOnBoot = true;
-            postCompletionNotification("Completed");
+            if (isModemDefault()) {
+                postCompletionNotification("Not available (modem default)");
+            } else {
+                postCompletionNotification("Registered (Available)");
+            }
 
             observer.register(networkChangeListener, subID);
         } else {
