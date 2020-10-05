@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PersistableBundle;
@@ -79,6 +80,7 @@ public class NetworkSwitcher extends Service {
     SubscriptionManager sm;
     PowerManager pm;
     NotificationHelper helper;
+    NetworkModeObserver observer;
 
     // Global variable to be accessed on shutdown
     int mSubID = -99;
@@ -164,6 +166,23 @@ public class NetworkSwitcher extends Service {
         }
     };
 
+    private NetworkModeObserver.OnNetworkChangeListener networkChangeListener = new NetworkModeObserver.OnNetworkChangeListener() {
+        @Override
+        public void onUpdate(@Nullable Uri uri, int subID) {
+            if (uri != null && uri.equals(Settings.Global.getUriFor(Settings.Global.PREFERRED_NETWORK_MODE + subID))) {
+                if (isLTE(getPreferredNetwork(subID))) {
+                    d("networkChangeListener: Network switched to LTE");
+
+                    TelephonyManager tm = getSystemService(TelephonyManager.class).createForSubscriptionId(subID);
+                    PersistableBundle carrierConfig = getSystemService(CarrierConfigManager.class).getConfigForSubId(subID);
+                    ImsManager imsManager = ImsManager.getInstance(getApplicationContext(), SubscriptionManager.getPhoneId(subID));
+
+                    handle4GVoLteToggle(tm, imsManager, carrierConfig, subID, false, true);
+                }
+            }
+        }
+    };
+
     @Override
     public void onCreate() {
         d("-------------------------------------");
@@ -173,6 +192,7 @@ public class NetworkSwitcher extends Service {
 
         pm = getSystemService(PowerManager.class);
         helper = new NotificationHelper(getApplicationContext());
+        observer = new NetworkModeObserver(new Handler(getMainLooper()), getApplicationContext());
 
         // Register shutdown/reboot receiver
         IntentFilter filter = new IntentFilter();
@@ -266,16 +286,19 @@ public class NetworkSwitcher extends Service {
                 } else {
                     d("task: User pref was LTE; Toggling ...");
                     toggle(tm, subID, currentNetwork);
-                    handle4GVoLteToggle(tm, imsManager, carrierConfig, subID, true);
+                    handle4GVoLteToggle(tm, imsManager, carrierConfig, subID, true, false);
                 }
             }
             changedOnBoot = true;
             postCompletionNotification("Completed");
+
+            observer.register(networkChangeListener, subID);
         } else {
             d("task: Shutdown/reboot task");
+            observer.unregister();
 
             if (wasModemDone) {
-                handle4GVoLteToggle(tm, imsManager, carrierConfig, subID, false);
+                handle4GVoLteToggle(tm, imsManager, carrierConfig, subID, false, false);
 
                 boolean lte = isLTE(currentNetwork);
                 if (lte) {
@@ -325,8 +348,11 @@ public class NetworkSwitcher extends Service {
      *                      null check.
      * @param subID         the subscription ID from {@link #subscriptionsChangedListener}
      * @param isBoot        whether is boot task
+     * @param networkChange whether this method is to be executed for network change from
+     *                      {@link #networkChangeListener}
      */
-    private void handle4GVoLteToggle(TelephonyManager tm, final ImsManager imsManager, PersistableBundle carrierConfig, int subID, boolean isBoot) {
+    private void handle4GVoLteToggle(TelephonyManager tm, final ImsManager imsManager, PersistableBundle carrierConfig,
+                                     int subID, boolean isBoot, boolean networkChange) {
         if (imsManager == null) {
             d("4gLteToggle: ims manager is null :/");
             return;
@@ -337,6 +363,26 @@ public class NetworkSwitcher extends Service {
         }
         if (!isEnhanced4GPrefEnabled(tm, imsManager, carrierConfig, subID)) {
             d("4gLteToggle: Enhanced 4G pref is NOT available");
+            return;
+        }
+
+        if (networkChange) {
+            d("4gLteToggle: Network Delta task");
+            if (getPreferredEnhanced4GPref(imsManager)) {
+                d("4gLteToggle: Enhanced 4G is ON, toggling Off and On ...");
+                // OFF ...
+                imsManager.setEnhanced4gLteModeSetting(false);
+                new Handler(getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Turn ON after 2 sec ...
+                        imsManager.setEnhanced4gLteModeSetting(true);
+                        d("4gLteToggle: Toggle complete");
+                    }
+                }, 2000);
+            } else {
+                d("4gLteToggle: Enhanced 4G was OFF");
+            }
             return;
         }
 
@@ -352,6 +398,7 @@ public class NetworkSwitcher extends Service {
                     public void run() {
                         // Turn ON after 2 sec ...
                         imsManager.setEnhanced4gLteModeSetting(true);
+                        d("4gLteToggle: Toggle complete");
                     }
                 }, 2000);
             } else {
