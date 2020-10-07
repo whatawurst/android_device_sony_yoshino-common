@@ -15,7 +15,7 @@
 android_app {
     name: "NetworkSwitcher",
 
-    srcs: ["src/**/*.java"],
+    srcs: ["src/**/*.kt"],
     resource_dirs: ["res"],
 
     static_libs: ["androidx.core_core", "androidx.appcompat_appcompat", "androidx.annotation_annotation"],
