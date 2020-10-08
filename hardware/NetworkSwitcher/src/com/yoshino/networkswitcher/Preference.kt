@@ -25,8 +25,8 @@ import android.content.SharedPreferences
 object Preference {
 
     private const val WAS_NETWORK_3G = "network_pref_3g"
-    private const val ENHANCED_4G_VOLTE_ENABLED = "enhanced_4g_volte_enable"
     private const val PREFERENCE_STORED = "preference_stored"
+    private const val SERVICE_CRASHED = "service_crashed"
 
     private fun getPreferences(context: Context): SharedPreferences =
             context.applicationContext.getSharedPreferences("NetworkSwitcher", Context.MODE_PRIVATE)
@@ -44,18 +44,6 @@ object Preference {
     fun getWasNetwork3G(context: Context, def: Boolean): Boolean = getPreferences(context).getBoolean(WAS_NETWORK_3G, def)
 
     /**
-     * This preference stores if VoLTE or 4G Calling preference was enabled
-     */
-    fun putEnhanced4GEnabled(was: Boolean, context: Context) {
-        getPreferences(context).edit().apply {
-            putBoolean(ENHANCED_4G_VOLTE_ENABLED, was)
-            apply()
-        }
-        putPreferenceStored(context)
-    }
-    fun getEnhanced4GEnabled(context: Context, def: Boolean): Boolean = getPreferences(context).getBoolean(ENHANCED_4G_VOLTE_ENABLED, def)
-
-    /**
      * This preference stores if the rest of the preferences are empty or not
      */
     private fun putPreferenceStored(context: Context) {
@@ -65,4 +53,18 @@ object Preference {
         }
     }
     fun getPreferenceStored(context: Context): Boolean = getPreferences(context).getBoolean(PREFERENCE_STORED, false)
+
+    /**
+     * Store 'true' if service destroy was not called intentionally
+     *
+     * The need of this is that due to OS memory management, app service is killed
+     * So to prevent conflicts when restarting app, this preference will help
+     */
+    fun putServiceCrashed(changedOnBoot: Boolean, context: Context) {
+        getPreferences(context).edit().apply {
+            putBoolean(SERVICE_CRASHED, changedOnBoot)
+            apply()
+        }
+    }
+    fun getServiceCrashed(context: Context): Boolean = getPreferences(context).getBoolean(SERVICE_CRASHED, false)
 }

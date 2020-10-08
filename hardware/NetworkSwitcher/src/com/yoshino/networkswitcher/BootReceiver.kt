@@ -27,8 +27,9 @@ import android.util.Log
  */
 class BootReceiver : BroadcastReceiver() {
 
-    override fun onReceive(context: Context, intent: Intent) {
-        Log.d("BootReceiver", "onReceive: Boot received")
+    override fun onReceive(context: Context?, intent: Intent?) {
+        context ?: return
+        Log.d("NetworkSwitcher", "Boot received")
         context.startServiceAsUser(Intent(context, NetworkSwitcher::class.java), UserHandle.CURRENT)
     }
 }

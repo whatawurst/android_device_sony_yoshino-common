@@ -20,8 +20,6 @@ import android.database.ContentObserver
 import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Handler
-import android.os.HandlerThread
-import android.os.Process
 import android.os.UserHandle
 import android.provider.Settings
 import android.telephony.CellSignalStrength
@@ -32,54 +30,11 @@ import java.io.File
 import java.util.*
 
 /**
- * An observer class to observe the changes in the network mode
- * preference in Settings
- *
- * @author shank03
- */
-class NetworkModeObserver(handler: Handler?, private val context: Context) : ContentObserver(handler) {
-
-    private var registered = false
-    private var onChange: (uri: Uri?, subID: Int) -> Unit = { _, _ -> }
-    private var subID = SubscriptionManager.INVALID_SUBSCRIPTION_ID
-
-    fun register(subID: Int, onChange: (uri: Uri?, subID: Int) -> Unit) {
-        if (!registered) {
-            this.subID = subID
-            this.onChange = onChange
-            context.contentResolver.registerContentObserver(Settings.Global.getUriFor(Settings.Global.PREFERRED_NETWORK_MODE + subID),
-                    false, this, UserHandle.USER_CURRENT)
-            registered = true
-            d("NetworkModeObserver: Registered")
-        }
-    }
-
-    fun unregister() {
-        if (registered) {
-            context.contentResolver.unregisterContentObserver(this)
-            registered = false
-            d("NetworkModeObserver: Unregistered")
-        }
-    }
-
-    override fun onChange(selfChange: Boolean, uri: Uri?) {
-        if (!selfChange) {
-            onChange(uri, subID)
-        }
-    }
-
-    private fun d(msg: String) {
-        Log.d("NetworkSwitcher", msg)
-        log(msg, context)
-    }
-}
-
-/**
  * An observer class to observe the status of airplane mode
  *
  * @author shank03
  */
-class AirplaneModeObserver(handler: Handler?, private val context: Context) : ContentObserver(handler) {
+class AirplaneModeObserver(private val context: Context) : ContentObserver(Handler(context.mainLooper)) {
 
     private var onChange: (uri: Uri?) -> Unit = {}
     private var registered = false
@@ -124,23 +79,25 @@ class SimServiceObserver(private val context: Context) {
 
     private var registered = false
 
-    private var observerThread: HandlerThread? = null
-    private var handler: Handler? = null
+    private val handler by lazy { Handler(context.mainLooper) }
     private val runnable = object : Runnable {
         override fun run() {
             try {
                 synchronized(Object()) {
-                    val tm: TelephonyManager = context.getSystemService(TelephonyManager::class.java).createForSubscriptionId(subID)
-                    if (tm.signalStrength != null && tm.signalStrength?.level != CellSignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN) {
-                        d("SimServiceObserver: SIM in service, event sent.")
-                        onConnected()
-                        unregister()
+                    if (subID != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                        val tm: TelephonyManager = context.getSystemService(TelephonyManager::class.java).createForSubscriptionId(subID)
+                        if (tm.signalStrength != null && tm.signalStrength?.level != CellSignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN) {
+                            d("SimServiceObserver: SIM in service, event sent.")
+                            onConnected()
+                            unregister()
+                        }
                     }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                d("SimServiceObserver: ERROR ${e.message}\n${e.printStackTrace()}")
             } finally {
-                handler?.postDelayed(this, 2000)
+                handler.postDelayed(this, 2000)
             }
         }
     }
@@ -153,13 +110,9 @@ class SimServiceObserver(private val context: Context) {
             this.subID = subID
             this.onConnected = onConnected
 
-            if (observerThread == null) observerThread = HandlerThread("NetworkSwitcherSimServiceObserver", Process.THREAD_PRIORITY_BACKGROUND)
-            if (!observerThread!!.isAlive) observerThread?.start()
+            handler.post(runnable)
 
-            handler = Handler(observerThread!!.looper)
-            handler?.post(runnable)
             registered = true
-
             d("SimServiceObserver: Registered")
         }
     }
@@ -169,13 +122,75 @@ class SimServiceObserver(private val context: Context) {
             onConnected = {}
             subID = SubscriptionManager.INVALID_SUBSCRIPTION_ID
 
-            handler?.removeCallbacks(runnable)
-            handler = null
+            handler.removeCallbacks(runnable)
 
-            observerThread?.quitSafely()
-            observerThread = null
             registered = false
             d("SimServiceObserver: Unregistered")
+        }
+    }
+
+    private fun d(msg: String) {
+        Log.d("NetworkSwitcher", msg)
+        log(msg, context)
+    }
+}
+
+/**
+ * A class to observe the IMS registration status
+ *
+ * @author shank03
+ */
+class ImsRegistrationObserver(private val context: Context) {
+
+    private var registered = false
+
+    private val handler by lazy { Handler(context.mainLooper) }
+    private val runnable = object : Runnable {
+        override fun run() {
+            try {
+                synchronized(Object()) {
+                    if (subID != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                        val tm = context.getSystemService(TelephonyManager::class.java).createForSubscriptionId(subID)
+                        if (tm.isImsRegistered(subID)) {
+                            d("ImsRegistrationObserver: IMS registered, event sent.")
+                            onRegistered()
+                            unregister()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                d("ImsRegistrationObserver: ERROR ${e.message}\n${e.printStackTrace()}")
+            } finally {
+                handler.postDelayed(this, 2000)
+            }
+        }
+    }
+
+    private var onRegistered: () -> Unit = {}
+    private var subID = SubscriptionManager.INVALID_SUBSCRIPTION_ID
+
+    fun register(subID: Int, onRegistered: () -> Unit) {
+        if (!registered) {
+            this.subID = subID
+            this.onRegistered = onRegistered
+
+            handler.post(runnable)
+
+            registered = true
+            d("ImsRegistrationObserver: Registered")
+        }
+    }
+
+    fun unregister() {
+        if (registered) {
+            onRegistered = {}
+            subID = SubscriptionManager.INVALID_SUBSCRIPTION_ID
+
+            handler.removeCallbacks(runnable)
+
+            registered = false
+            d("ImsRegistrationObserver: Unregistered")
         }
     }
 
