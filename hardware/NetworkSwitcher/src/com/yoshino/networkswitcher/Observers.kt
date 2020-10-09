@@ -29,6 +29,47 @@ import android.util.Log
 import java.io.File
 import java.util.*
 
+class NetworkModeObserver(private val context: Context) : ContentObserver(Handler(context.mainLooper)) {
+
+    private var registered = false
+
+    private var onChange: () -> Unit = {}
+    private var subID = SubscriptionManager.INVALID_SUBSCRIPTION_ID
+
+    fun register(subID: Int, onChange: () -> Unit) {
+        if (!registered && subID != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            this.subID = subID
+            this.onChange = onChange
+
+            context.contentResolver.registerContentObserver(Settings.Global.getUriFor(Settings.Global.PREFERRED_NETWORK_MODE + subID),
+                    false, this, UserHandle.USER_CURRENT)
+            registered = true
+            d("NetworkModeObserver: Registered")
+        }
+    }
+
+    fun unregister() {
+        if (registered) {
+            context.contentResolver.unregisterContentObserver(this)
+            registered = false
+            d("NetworkModeObserver: Unregistered")
+        }
+    }
+
+    override fun onChange(selfChange: Boolean, uri: Uri?) {
+        if (!selfChange) {
+            if (uri != null && uri == Settings.Global.getUriFor(Settings.Global.PREFERRED_NETWORK_MODE + subID)) {
+                onChange()
+            }
+        }
+    }
+
+    private fun d(msg: String) {
+        Log.d("NetworkSwitcher", msg)
+        log(msg, context)
+    }
+}
+
 /**
  * An observer class to observe the status of airplane mode
  *

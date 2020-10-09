@@ -140,6 +140,35 @@ class NetworkSwitcher : Service() {
                             changedOnBoot = true
                             return
                         }
+
+                        if (Preference.getWasNetwork3G(applicationContext, false)) {
+                            changedOnBoot = true
+                            d("onSubscriptionsChanged: User pref was 3G; Registering network observer")
+
+                            val imsObserver = ImsRegistrationObserver(applicationContext)
+                            val networkObserver = NetworkModeObserver(applicationContext)
+
+                            networkObserver.register(mSubID) {
+                                if (isLTE(getPreferredNetwork(mSubID))) {
+                                    helper.notifyToggleNotification("IMS registration in progress ...")
+
+                                    if (isModemDefault()) {
+                                        networkObserver.unregister()
+                                        postCompletionNotification("Not available (default modem)")
+                                    } else {
+                                        imsObserver.register(mSubID) {
+                                            networkObserver.unregister()
+                                            postCompletionNotification("Registered (Available)")
+                                        }
+                                    }
+                                } else {
+                                    helper.cancel()
+                                    imsObserver.unregister()
+                                }
+                            }
+                            return
+                        }
+
                         helper.notifyToggleNotification("IMS registration in progress ...")
 
                         if (isAirplaneModeOn()) {
@@ -254,12 +283,8 @@ class NetworkSwitcher : Service() {
                     if (isLTE(currentNetwork)) {
                         d("task: Network is LTE. Not toggling")
                     } else {
-                        if (Preference.getWasNetwork3G(applicationContext, false)) {
-                            d("task: User pref was 3G; Not toggling")
-                        } else {
-                            d("task: User pref was LTE; Toggling ...")
-                            toggle(tm, subID, currentNetwork)
-                        }
+                        d("task: User pref was LTE; Toggling ...")
+                        toggle(tm, subID, currentNetwork)
                     }
                     changedOnBoot = true
                     if (isModemDefault()) {
