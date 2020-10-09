@@ -18,10 +18,6 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default
 
-### CAMERA
-PRODUCT_PACKAGES += \
-    Snap
-
 ### CHARGER
 PRODUCT_PACKAGES += \
     charger_res_images
