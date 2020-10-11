@@ -1,11 +1,18 @@
 # genfs_contexts.te
 
 # debugfs
-genfscon debugfs /wcd_cpe/err_status                                    u:object_r:ssr_crash_reason_file:s0
 genfscon debugfs /icnss/crash_reason/wlan_pdr_crash_reason              u:object_r:ssr_crash_reason_file:s0
+genfscon debugfs /rmt_storage                                           u:object_r:debugfs_rmt_storage:s0
+genfscon debugfs /wcd_cpe/err_status                                    u:object_r:ssr_crash_reason_file:s0
+genfscon debugfs /wlan0/power_stats                                     u:object_r:debugfs_wlan_power:s0
 
 # sysfs
 genfscon sysfs /class/qns                                               u:object_r:sysfs_qns:s0
+genfscon sysfs /class/uio                                               u:object_r:sysfs_uio:s0
+
+genfscon sysfs /devices/mdss_dsi_panel/                                 u:object_r:sysfs_dsi_panel:s0
+
+genfscon sysfs /devices/soc/0.qcom,rmtfs_sharedmem                      u:object_r:sysfs_rmtfs:s0
 
 genfscon sysfs /devices/soc/ca0c000.qcom,cci                            u:object_r:sysfs_graphics:s0
 genfscon sysfs /devices/soc/caa4000.qcom,fd                             u:object_r:sysfs_graphics:s0
@@ -41,4 +48,7 @@ genfscon sysfs /devices/soc/800f000.qcom,spmi/spmi-0/spmi0-02/800f000.qcom,spmi:
 
 genfscon sysfs /devices/soc/c900000.qcom,mdss_rotator/video4linux/video5/name  u:object_r:sysfs_graphics:s0
 
-genfscon sysfs /devices/soc/780000.qcom,msm-core/uio/uio1/name                 u:object_r:sysfs_uio:s0
+genfscon sysfs /devices/soc/780000.qcom,msm-core/uio/uio1/name          u:object_r:sysfs_uio:s0
+
+genfscon sysfs /devices/virtual/input/input6/wakeup_gesture             u:object_r:sysfs_touchpad:s0
+genfscon sysfs /devices/virtual/switch/lid/state                        u:object_r:sysfs_switch_lid:s0

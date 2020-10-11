@@ -1,0 +1,4 @@
+# vold.te
+
+# /proc/cmdline
+allow vold proc_cmdline:file r_file_perms;

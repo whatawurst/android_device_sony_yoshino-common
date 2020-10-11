@@ -1,0 +1,322 @@
+# Copyright 2014 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Trim Area Daemon
+# Last 2 args: start block(blk size 128k), number of blocks(partitionsize(kb)/128(kb))
+service tad /vendor/bin/tad /dev/block/bootdevice/by-name/TA 0,16
+    user oem_2997
+    group oem_2997 root
+    socket tad stream 0660 system oem_2993
+    class trimarea
+
+# QCOM prop
+service vendor.cnd /system/vendor/bin/cnd
+    class main
+    user system
+    group system wifi inet radio wakelock net_admin
+
+# QCOM prop
+service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
+    class core
+    user root
+    oneshot
+
+### RADIO
+
+# QCOM prop
+service vendor.rmt_storage /vendor/bin/rmt_storage
+    class core
+    user root
+    shutdown critical
+    ioprio rt 0
+
+# QCOM prop
+service vendor.tftp_server /vendor/bin/tftp_server
+    class core
+    user root
+
+# QCOM prop radio
+service vendor.port-bridge /system/vendor/bin/port-bridge
+    class main
+    user radio
+    group radio system inet
+    disabled
+    oneshot
+
+# QCOM prop radio
+service vendor.netmgrd /system/vendor/bin/netmgrd
+    class main
+    disabled
+
+on property:ro.vendor.use_data_netmgrd=false
+    # netmgr not supported on specific target
+    stop vendor.netmgrd
+
+# QCOM prop radio
+service vendor.dataqti /system/vendor/bin/qti
+    class main
+    user radio
+    group radio oem_2901 diag usb net_admin
+    disabled
+
+service vendor.dataadpl /system/vendor/bin/adpl
+    class main
+    user radio
+    group radio oem_2901 diag usb net_admin
+    disabled
+
+on property:ro.boot.baseband=msm
+    enable vendor.dataqti
+    enable vendor.dataadpl
+    enable vendor.netmgrd
+    enable vendor.port-bridge
+
+on property:vold.decrypt=trigger_restart_framework
+    start ril-daemon
+    start vendor.ipacm
+    start vendor.dataqti
+    start vendor.dataadpl
+    start vendor.netmgrd
+    start vendor.port-bridge
+
+# QCOM prop radio
+service vendor.atfwd /vendor/bin/ATFWD-daemon
+    class late_start
+    user system
+    group system radio
+
+on property:persist.vendor.radio.atfwd.start=false
+    stop vendor.atfwd
+
+on property:vendor.radio.atfwd.start=false
+    stop vendor.atfwd
+
+### Peripheral Manager
+service per_mgr /vendor/bin/pm-service
+    class core
+    user system
+    group system
+    ioprio rt 4
+
+service per_proxy /vendor/bin/pm-proxy
+    class core
+    user system
+    group system
+    disabled
+
+on property:init.svc.per_mgr=running
+    start per_proxy
+
+on shutdown
+    stop per_proxy
+
+# QCOM prop
+service pd_mapper /system/vendor/bin/pd-mapper
+     class core
+
+# QCOM prop
+service cnss-daemon /system/vendor/bin/cnss-daemon -n -l
+    class late_start
+    user system
+    group system inet net_admin wifi
+    capabilities NET_ADMIN
+
+on shutdown
+    stop cnss-daemon
+
+# DRM widevine
+service wvkbd_installer /vendor/bin/wvkbd
+    class late_start
+    user system
+    group system
+    oneshot
+
+### GNSS
+
+service mlid /vendor/bin/mlid
+    class late_start
+    user gps
+    group gps
+    socket mlid stream 0666 gps gps
+
+# loc_launcher will start as root and set its uid to gps
+service loc_launcher /system/vendor/bin/loc_launcher
+    class late_start
+    user gps
+    group gps
+
+service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+    class core
+    user root
+    group root
+
+### SENSORS
+service vendor.sensors.qti /vendor/bin/sensors.qti
+    class core
+    user system
+    group system
+
+### TEE
+service vendor.qseecomd /vendor/bin/qseecomd
+    class core
+    user root
+    group root
+
+### Thermal Manager
+service thermal-engine /system/vendor/bin/thermal-engine
+    class main
+    user root
+    socket thermal-send-client stream 0666 system system
+    socket thermal-recv-client stream 0660 system system
+    socket thermal-recv-passive-client stream 0666 system system
+    socket thermal-send-rule stream 0660 system system
+    group root oem_2993 oem_2929
+
+### ADSP FastRPC
+service adsprpcd /system/vendor/bin/adsprpcd
+   class main
+   user media
+   group media
+
+### TimeService
+service time_daemon /system/vendor/bin/time_daemon
+    class main
+    user root
+    group root
+
+### Display
+service ppd /vendor/bin/mm-pp-dpps
+    class late_start
+    user system
+    group system graphics
+    socket pps stream 0660 system system
+    disabled
+
+# QCOM prop
+service ssgqmigd /vendor/bin/ssgqmigd
+    class late_start
+    user radio
+    group radio gps system
+    socket ssgqmig seqpacket 0660 radio inet
+
+on property:init.svc.surfaceflinger=stopped
+    stop ppd
+
+on property:init.svc.surfaceflinger=running
+    start ppd
+
+on property:init.svc.surfaceflinger=restarting
+    stop ppd
+
+on property:init.svc.zygote=stopped
+    stop ppd
+
+on property:init.svc.zygote=running
+    start ppd
+
+on property:init.svc.zygote=restarting
+    stop ppd
+
+### PERF
+service energy-awareness /system/vendor/bin/energy-awareness
+    class main
+    user root
+    group system
+    oneshot
+
+### SSR (subsystem restart)
+service vendor.ssr_setup /system/vendor/bin/ssr_setup
+    oneshot
+    disabled
+
+on property:persist.vendor.ssr.restart_level=*
+    start vendor.ssr_setup
+
+on property:persist.sys.ssr.enable_debug=*
+    write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
+
+on property:persist.sys.mba_boot_timeout=*
+    write /sys/module/pil_msa/parameters/pbl_mba_boot_timeout_ms ${persist.sys.mba_boot_timeout}
+
+on property:persist.sys.modem_auth_timeout=*
+    write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
+
+on property:persist.sys.pil_proxy_timeout=*
+    write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
+
+service ssr_dumper /system/bin/ssr_dumper
+    class main
+    user root
+    group root system
+    seclabel u:r:ssr_dumper:s0
+
+service vendor.ss_ramdump /system/vendor/bin/subsystem_ramdump
+    class main
+    user system
+    group system
+    disabled
+
+on property:persist.vendor.ssr.enable_ramdumps=1
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
+    mkdir /data/vendor/ramdump_ssr 770 system system
+    start vendor.ss_ramdump
+
+on property:persist.vendor.ssr.enable_ramdumps=0
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
+
+### Offline charger
+service charger /system/bin/charger
+    class charger
+    user system
+    group system graphics input log
+    capabilities SYS_BOOT
+    seclabel u:r:charger:s0
+    writepid /dev/cpuset/system-background/tasks
+
+service qbcharger /charger -m 1
+    disabled
+    oneshot
+
+on property:sys.qbcharger.enable=true
+    start qbcharger
+
+on property:sys.qbcharger.enable=false
+    stop qbcharger
+
+# DSDS second ril
+service vendor.ril-daemon2 /vendor/bin/hw/rild -c 2
+    class main
+    user radio
+    disabled
+    group radio cache inet misc audio sdcard_r sdcard_rw diag oem_2901 log oem_2993
+    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
+
+on property:ro.boot.baseband=apq
+    setprop ro.radio.noril yes
+    stop vendor.ril-daemon
+
+on property:persist.radio.multisim.config=dsds
+    enable vendor.ril-daemon2
+
+# adb over network
+on property:adb.network.port.es=*
+    setprop service.adb.tcp.port ${adb.network.port.es}
+
+on property:service.adb.tcp.port=5555
+    stop adbd
+    start adbd
+
+on property:service.adb.tcp.port=-1
+    stop adbd
+    start adbd

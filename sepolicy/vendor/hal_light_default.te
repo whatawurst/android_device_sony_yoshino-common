@@ -1,2 +1,5 @@
 # hal_light_default.te
+
+binder_call(hal_light_default, hal_light_default)
+
 unix_socket_connect(hal_light_default, illumination, illumination_service)

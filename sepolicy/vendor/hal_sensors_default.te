@@ -3,3 +3,5 @@
 unix_socket_connect(hal_sensors_default, fpc, hal_fingerprint_fpc)
 
 allow hal_sensors_default fpc_socket:sock_file { rw_file_perms };
+
+get_prop(hal_sensors_default, sony_prop)

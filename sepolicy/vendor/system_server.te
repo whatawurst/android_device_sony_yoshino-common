@@ -1,0 +1,12 @@
+# system_server.te
+
+# /proc/<audioserver>/timerslack_ns
+allow system_server audioserver:file rw_file_perms;
+allow system_server hal_audio_default:file rw_file_perms;
+
+# /vendor/usr/idc
+allow system_server vendor_idc_file:dir r_dir_perms;
+allow system_server vendor_idc_file:file r_file_perms;
+
+# neverallow /mnt/media_rw/[A-Z0-9]-[A-Z0-9]/Android/data
+# allow system_server vfat:dir r_dir_perms;

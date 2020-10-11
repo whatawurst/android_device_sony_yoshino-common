@@ -1,5 +1,10 @@
 # file.te
 
+# debugfs
+type debugfs_rmt_storage, fs_type, debugfs_type;
+type debugfs_wlan_power, fs_type, debugfs_type;
+type ssr_crash_reason_file, file_type, debugfs_type;
+
 # idd
 type idd_crashdata_file, file_type;
 type idd_data_file, file_type;
@@ -20,24 +25,42 @@ type startupprober_file, file_type;
 type modemsw_cache_file, file_type;
 
 # data
+type bluetooth_vendor_data_file, file_type, data_file_type;
+type crash_vendor_data_file, file_type, data_file_type;
 type credmgrd_vendor_data_file, file_type, data_file_type;
+type fpc_vendor_data_file, file_type, data_file_type;
 type illumination_vendor_data_file, file_type, data_file_type;
+type ta_vendor_data_file, file_type, data_file_type;
 type wfd_vendor_data_file, file_type, data_file_type;
+
+# persist
+type persist_wlan_file, file_type;
 
 # sockets
 type camera_somc_socket, file_type;
+type fpc_socket, file_type;
 type illumination_socket, file_type;
 type secd_credmgr_socket, file_type;
 type secd_devsec_socket, file_type;
+type tad_socket, file_type;
 type qns_socket, file_type;
 
 # sysfs
-type sysfs_smb_device, fs_type, sysfs_type;
+type sysfs_dsi_panel, fs_type, sysfs_type;
+type sysfs_fpc, fs_type, sysfs_type;
+type sysfs_fpc_irq, fs_type, sysfs_type;
+type sysfs_fpc_spi_prepare, fs_type, sysfs_type;
+type sysfs_fpc_wakeup, fs_type, sysfs_type;
 type sysfs_mdss_dsi_panel, fs_type, sysfs_type;
 type sysfs_nfc_i2c, fs_type, sysfs_type;
+type sysfs_pm_wakeup, fs_type, sysfs_type;
 type sysfs_qns, fs_type, sysfs_type;
+type sysfs_rmtfs, sysfs_type, fs_type;
+type sysfs_smb_device, fs_type, sysfs_type;
 type sysfs_sony_camera, fs_type, sysfs_type;
+type sysfs_switch_lid, fs_type, sysfs_type;
 type sysfs_tof_rgbcir, fs_type, sysfs_type;
+type sysfs_touchpad, fs_type, sysfs_type;
 type sysfs_wlan, fs_type, sysfs_type;
 type sysfs_ufs, fs_type, sysfs_type;
 

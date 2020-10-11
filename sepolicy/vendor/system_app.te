@@ -9,3 +9,7 @@ allow system_app hal_datafactory_hwservice:hwservice_manager find;
 # Allow com.android.settings to read zram info via sysfs
 allow system_app sysfs_zram:dir { search };
 allow system_app sysfs_zram:file { r_file_perms };
+
+get_prop(system_app, wfd_prop)
+# dataservice_app
+get_prop(system_app, cnd_vendor_prop)

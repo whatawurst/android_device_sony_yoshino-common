@@ -3,10 +3,23 @@
 persist.keyprovd.suntory.prov        u:object_r:suntory_prop:s0
 persist.sys.sim_config_ids           u:object_r:semc_sim_prop:s0
 persist.tareset.notfirstboot         u:object_r:tareset_notfirstboot_prop:s0
+persist.vendor.wigig.npt.            u:object_r:wigig_prop:s0
+
+hw.wfd.                              u:object_r:wfd_prop:s0
 
 init.taimport                        u:object_r:taimport_prop:s0
 
+ro.semc.version.                     u:object_r:semc_version_prop:s0
+ro.semc.product.                     u:object_r:semc_product_prop:s0
+ro.somc.secureadb                    u:object_r:secureadb_prop:s0
+
+ro.sony                              u:object_r:sony_prop:s0
+
+ro.vendor.semc.version.cust.active   u:object_r:vendor_semc_version_cust_active_prop:s0
+
 vendor.backlight_on                  u:object_r:vendor_backlighton_prop:s0
 vendor.pcc.mdp.rgb                   u:object_r:vendor_pcc_mdp_prop:s0
-
+vendor.somc.hdcp.                    u:object_r:vendor_somc_hdcp_prop:s0
 vendor.cover_state                   u:object_r:vendor_cover_state_prop:s0
+
+wifi.active.interface                u:object_r:wifi_active_prop:s0

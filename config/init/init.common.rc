@@ -1,0 +1,185 @@
+# Copyright 2014 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+on init
+    chmod 0664 /proc/rdtag
+    chown root system /proc/rdtag
+
+on early-init
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
+
+    # Change ownership of hw_recovery related nodes
+    chown system graphics /sys/kernel/debug/dri/0/debug/dump
+    chown system graphics /sys/kernel/debug/dri/0/debug/recovery_reg
+    chown system graphics /sys/kernel/debug/dri/0/debug/recovery_dbgbus
+    chown system graphics /sys/kernel/debug/dri/0/debug/recovery_vbif_dbgbus
+
+    chown root system /dev/kmsg
+    chmod 0620 /dev/kmsg
+
+on init
+    write /dev/stune/foreground/schedtune.sched_boost_no_override 1
+    write /dev/stune/top-app/schedtune.sched_boost_no_override 1
+    write /dev/stune/schedtune.colocate 0
+    write /dev/stune/background/schedtune.colocate 0
+    write /dev/stune/system-background/schedtune.colocate 0
+    write /dev/stune/foreground/schedtune.colocate 0
+    write /dev/stune/top-app/schedtune.colocate 1
+    write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
+
+    # Create cgroup mount point for memory
+    mkdir /sys/fs/cgroup/memory/bg 0750 root system
+    write /sys/fs/cgroup/memory/bg/memory.swappiness 140
+    write /sys/fs/cgroup/memory/bg/memory.move_charge_at_immigrate 1
+    chown root system /sys/fs/cgroup/memory/bg/tasks
+    chmod 0660 /sys/fs/cgroup/memory/bg/tasks
+
+on late-init
+    mkdir /mnt/tmp 0775
+    mount tmpfs tmpfs /mnt/tmp nosuid mode=0775,uid=0,gid=0
+
+on fs
+    chown root system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
+
+    restorecon_recursive /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/data 0700 system system
+
+on post-fs
+    chmod 0755 /sys/kernel/debug/tracing
+
+    # led RGB
+    chown system system /sys/class/leds/rgb/sync_state
+    chown system system /sys/class/leds/rgb/start_blink
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/red/lut_pwm
+    chown system system /sys/class/leds/red/step_duration
+    chown system system /sys/class/leds/red/pause_lo_multi
+    chown system system /sys/class/leds/red/pause_hi_multi
+    chown system system /sys/class/leds/red/max_single_brightness
+    chown system system /sys/class/leds/red/max_mix_brightness
+    chown system system /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/green/lut_pwm
+    chown system system /sys/class/leds/green/step_duration
+    chown system system /sys/class/leds/green/pause_lo_multi
+    chown system system /sys/class/leds/green/pause_hi_multi
+    chown system system /sys/class/leds/green/max_single_brightness
+    chown system system /sys/class/leds/green/max_mix_brightness
+    chown system system /sys/class/leds/blue/brightness
+    chown system system /sys/class/leds/blue/lut_pwm
+    chown system system /sys/class/leds/blue/step_duration
+    chown system system /sys/class/leds/blue/pause_lo_multi
+    chown system system /sys/class/leds/blue/pause_hi_multi
+    chown system system /sys/class/leds/blue/max_single_brightness
+    chown system system /sys/class/leds/blue/max_mix_brightness
+
+    # set aggressive read ahead for sda during boot up
+    write /sys/block/sda/queue/read_ahead_kb 2048
+
+on post-fs-data
+    # To observe dnsmasq.leases file for dhcp information of soft ap.
+    chown dhcp system /data/misc/dhcp
+
+    mkdir /data/system 0775 system system
+
+    # Create directory from IMS services
+    mkdir /data/shared 0755
+    chown system system /data/shared
+
+    setprop vold.post_fs_data_done 1
+
+    # The charge_service/chargemon/hvdcp_opti use wakelock before on boot, so add permission here.
+    chown radio wakelock /sys/power/wake_lock
+    chown radio wakelock /sys/power/wake_unlock
+    chmod 0660 /sys/power/wake_lock
+    chmod 0660 /sys/power/wake_unlock
+
+    # Create directory to dump bt crash reason
+    mkdir /mnt/tmp/bluetooth 0755 bluetooth bluetooth
+
+    # Create directory for partial dump
+    mkdir /data/crashdata 0770 root system
+
+on early-boot
+    # for backward compatibility
+    chown system system /persist/sensors
+    chown system system /persist/sensors/registry
+    chown system system /persist/sensors/registry/registry
+    chown system system /persist/sensors/registry/registry/sensors_registry
+    chown system system /persist/sensors/sensors_settings
+    chown system system /persist/sensors/registry/config
+    chmod 0664 /persist/sensors/sensors_settings
+
+    chown system system /mnt/vendor/persist/sensors
+    chown system system /mnt/vendor/persist/sensors/registry
+    chown system system /mnt/vendor/persist/sensors/registry/registry
+    chown system system /mnt/vendor/persist/sensors/registry/registry/sensors_registry
+    chown system system /mnt/vendor/persist/sensors/sensors_settings
+    chown system system /mnt/vendor/persist/sensors/registry/sns_reg_config
+    chown system system /mnt/vendor/persist/sensors/registry/config
+    chmod 0664 /mnt/vendor/persist/sensors/sensors_settings
+
+on boot
+    #Create QMUX deamon socket area
+    mkdir /dev/socket/qmux_radio 0770 radio radio
+    chmod 2770 /dev/socket/qmux_radio
+    mkdir /dev/socket/qmux_audio 0770 media audio
+    chmod 2770 /dev/socket/qmux_audio
+    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
+    chmod 2770 /dev/socket/qmux_bluetooth
+    mkdir /dev/socket/qmux_gps 0770 gps gps
+    chmod 2770 /dev/socket/qmux_gps
+
+    #Create NETMGR daemon socket area
+    mkdir /dev/socket/netmgr 0750 radio radio
+
+    chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
+
+    # Cameralight
+    chown cameraserver system /sys/class/leds/led:flash_0/brightness
+    chown cameraserver system /sys/class/leds/led:flash_1/brightness
+    chown cameraserver system /sys/class/leds/led:flash_0/max_brightness
+    chown cameraserver system /sys/class/leds/led:flash_1/max_brightness
+    chown cameraserver system /sys/class/leds/led:flash_0/ires_ua
+    chown cameraserver system /sys/class/leds/led:flash_1/ires_ua
+    chown cameraserver system /sys/class/leds/led:flash_0/strobe
+    chown cameraserver system /sys/class/leds/led:flash_1/strobe
+    chown cameraserver system /sys/class/leds/led:flash_0/duration
+    chown cameraserver system /sys/class/leds/led:flash_1/duration
+    chown cameraserver system /sys/class/leds/led:torch_0/brightness
+    chown cameraserver system /sys/class/leds/led:torch_1/brightness
+    chown cameraserver system /sys/class/leds/led:torch_0/max_brightness
+    chown cameraserver system /sys/class/leds/led:torch_1/max_brightness
+    chown cameraserver system /sys/class/leds/led:torch_0/ires_ua
+    chown cameraserver system /sys/class/leds/led:torch_1/ires_ua
+    chown cameraserver system /sys/class/leds/led:switch_0/brightness
+    chown cameraserver system /sys/class/leds/led:switch_0/fault_status
+
+    # Assign TCP buffer thresholds to be ceiling value of technology maximums
+    # Increased technology maximums should be reflected here.
+    write /proc/sys/net/core/rmem_max 16777216
+    write /proc/sys/net/core/wmem_max 8388608
+
+    # To prevent out of order acknowledgements from making
+    # connection tracking to treat them as not belonging to
+    # the connection they belong to.
+    # Otherwise, a weird issue happens in which some long
+    # connections on high-throughput links get dropped when
+    # an ack packet comes out of order
+    write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
+
+    # Set the console loglevel to < KERN_INFO
+    # Set the default message loglevel to KERN_INFO
+    write /proc/sys/kernel/printk "6 6 1 7"

@@ -1,0 +1,5 @@
+# mss_config.te
+type mss_config, domain, coredomain;
+type mss_config_exec, exec_type, file_type, system_file_type;
+
+init_daemon_domain(mss_config)

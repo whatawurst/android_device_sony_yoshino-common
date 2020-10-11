@@ -1,0 +1,8 @@
+# wifidisplayhalservice_qti.te
+
+allow wifidisplayhalservice_qti hal_secd_hwservice:hwservice_manager { find };
+binder_call(wifidisplayhalservice_qti, hal_secd_default)
+
+unix_socket_connect(wifidisplayhalservice_qti, property, init)
+allow wifidisplayhalservice_qti property_socket:sock_file { write };
+allow wifidisplayhalservice_qti vendor_somc_hdcp_prop:property_service { set };

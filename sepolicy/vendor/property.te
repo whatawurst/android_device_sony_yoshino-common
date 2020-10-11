@@ -1,9 +1,18 @@
 # property.te
 
+type secureadb_prop, property_type;
+type semc_product_prop, property_type;
 type semc_sim_prop, property_type;
+type semc_version_prop, property_type;
+type sony_prop, property_type;
 type suntory_prop, property_type;
 type taimport_prop, property_type;
 type tareset_notfirstboot_prop, property_type;
 type vendor_backlighton_prop, property_type;
-type vendor_pcc_mdp_prop, property_type;
 type vendor_cover_state_prop, property_type;
+type vendor_pcc_mdp_prop, property_type;
+type vendor_semc_version_cust_active_prop, property_type;
+type vendor_somc_hdcp_prop, property_type;
+type wfd_prop, property_type;
+type wifi_active_prop, property_type;
+type wigig_prop, property_type;

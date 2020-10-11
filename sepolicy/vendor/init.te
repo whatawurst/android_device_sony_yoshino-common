@@ -29,6 +29,12 @@ allow init system_file:system { module_load };
 # Allow our init extension to read from TA
 unix_socket_connect(init, tad, tad)
 
+# /proc/cmdline
+allow init proc_cmdline:file r_file_perms;
+
+# /proc/dirty_ratio
+allow init proc_dirty_ratio:file rw_file_perms;
+
 # /proc/filesystems
 allow init proc_filesystems:file getattr;
 
@@ -40,3 +46,16 @@ allow init bt_firmware_file:filesystem getattr;
 
 # /vendor/firmware_mnt
 allow init firmware_file:filesystem getattr;
+
+# TA
+allow init tad_block_device:blk_file { setattr };
+
+# debugfs
+allow init debugfs:dir { mounton };
+
+# sysfs
+allow init sysfs:file { setattr };
+allow init sysfs_graphics:lnk_file { r_file_perms };
+
+# toolbox
+allow init vendor_toolbox_exec:file { r_file_perms };

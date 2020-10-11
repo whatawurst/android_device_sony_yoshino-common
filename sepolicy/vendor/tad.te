@@ -1,0 +1,23 @@
+# tad.te
+type tad, domain;
+type tad_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(tad)
+
+allow tad hwservicemanager:binder { call transfer };
+
+allow tad block_device:dir { getattr search };
+allow tad tad_block_device:blk_file rw_file_perms;
+
+allow tad proc_cmdline:file r_file_perms;
+allow tad rootfs:file r_file_perms;
+allow tad tmpfs:file rw_file_perms;
+
+allow tad tad_socket:sock_file rw_file_perms;
+
+# Allow tad to use BLKGETSIZE ioctl on tad_block_device
+# Gets denied despite rw_file_perms
+allowxperm tad tad_block_device:blk_file ioctl BLKGETSIZE;
+
+#/proc/sysrq-trigger
+allow tad proc_sysrq:file r_file_perms;

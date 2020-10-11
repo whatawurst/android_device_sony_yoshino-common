@@ -12,5 +12,4 @@ Devices based on Yoshino platform:
 Dependent repositories
 ----------------------
 
-    android_device_sony_common-treble
     android_kernel_sony_msm8998

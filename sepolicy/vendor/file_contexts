@@ -11,13 +11,23 @@
 /mnt/idd/startup-prober(/.*)?                                   u:object_r:startupprober_file:s0
 /mnt/qns(/.*)?                                                  u:object_r:qns_file:s0
 
+# BACKWARD COMPATIBILITY
+/bt_firmware                                                    u:object_r:bt_firmware_file:s0
+/firmware                                                       u:object_r:firmware_file:s0
+
 ### CACHE
 /cache/modem(/.*)?                                              u:object_r:modemsw_cache_file:s0
 
 ### DATA
+/data/vendor/crashdata(/.*)?                                    u:object_r:crash_vendor_data_file:s0
 /data/vendor/credmgr(/.*)?                                      u:object_r:credmgrd_vendor_data_file:s0
+/data/vendor/etc/wlan.*                                         u:object_r:wifi_vendor_data_file:s0
+/data/vendor/etc/bluetooth.*                                    u:object_r:bluetooth_vendor_data_file:s0
+/data/vendor/fpc(/.*)?                                          u:object_r:fpc_vendor_data_file:s0
 /data/vendor/illumination_service(/.*)?                         u:object_r:illumination_vendor_data_file:s0
 /data/vendor/wfd(/.*)?                                          u:object_r:wfd_vendor_data_file:s0
+
+/(vendor|system/vendor)/usr/idc(/.*)?                           u:object_r:vendor_idc_file:s0
 
 ### DEVICES
 /dev/sony_hweffect_params                                       u:object_r:audio_hweffect_device:s0
@@ -47,10 +57,14 @@
 /dev/block/platform/soc/1da4000\.ufshc/by-name/rdimage          u:object_r:ramdump_block_device:s0
 
 /dev/socket/cammw_tintless                                      u:object_r:camera_somc_socket:s0
+/dev/socket/fpc_oem                                             u:object_r:fpc_socket:s0
 /dev/socket/illumination                                        u:object_r:illumination_socket:s0
 /dev/socket/qnsbsd                                              u:object_r:qns_socket:s0
 /dev/socket/secd_credmgr_sock                                   u:object_r:secd_credmgr_socket:s0
 /dev/socket/secd_devsec_sock                                    u:object_r:secd_devsec_socket:s0
+/dev/socket/tad                                                 u:object_r:tad_socket:s0
+
+/dev/pn553                                                      u:object_r:nfc_device:s0
 
 # DRM
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.1-service\.widevine u:object_r:hal_drm_widevine_exec:s0
@@ -58,10 +72,14 @@
 # LENSCTRL
 /dev/i2c-8                                                      u:object_r:lensctrl_device:s0
 
+### OEM WORKAROUND
+/ocm                                                            u:object_r:oem_block_device:s0
+
 # PERSIST
 /mnt/vendor/persist/pc(/.*)?                                    u:object_r:simpin_cache_data_file:s0
 /mnt/vendor/persist/credmgr(/.*)?                               u:object_r:credmgrd_vendor_data_file:s0
 /mnt/vendor/persist/credmgr.db                                  u:object_r:credmgrd_vendor_data_file:s0
+/mnt/vendor/persist/wlan(/.*)?                                  u:object_r:persist_wlan_file:s0
 
 # SYSFS
 /sys/class/leds/vibrator/activate                               u:object_r:sysfs_leds:s0
@@ -116,14 +134,18 @@
 /sys/kernel/debug/msm_subsys/crash_reason(/.*)?                 u:object_r:ssr_crash_reason_file:s0
 
 ### SERVICES
+# ramdisk services
+/sbin/tad_static                                                u:object_r:rootfs:s0
+
 # system services
-/system/bin/cacaoserver                                         u:object_r:cacaoserver_exec:s0
-/system/bin/ssr_dumper                                          u:object_r:ssr_dumper_exec:s0
 /system/bin/bt_ssr_dumper                                       u:object_r:ssr_dumper_exec:s0
-/system/bin/updatemiscta                                        u:object_r:updatemiscta_exec:s0
+/system/bin/cacaoserver                                         u:object_r:cacaoserver_exec:s0
+/system/bin/mssconfig                                           u:object_r:mss_config_exec:s0
+/system/bin/sony-modem-switcher                                 u:object_r:modem_switcher_exec:s0
+/system/bin/ssr_dumper                                          u:object_r:ssr_dumper_exec:s0
 /system/bin/startup-logger                                      u:object_r:startup-logger_exec:s0
 /system/bin/taimport                                            u:object_r:taimport_exec:s0
-/system/bin/sony-modem-switcher                                 u:object_r:modem_switcher_exec:s0
+/system/bin/updatemiscta                                        u:object_r:updatemiscta_exec:s0
 
 # vendor services
 /(vendor|system/vendor)/bin/hw/display_cb                       u:object_r:display_cb_exec:s0
@@ -146,11 +168,11 @@
 /(vendor|system/vendor)/bin/idd-logreader                       u:object_r:idd_exec:s0
 /(vendor|system/vendor)/bin/iddd                                u:object_r:idd_exec:s0
 /(vendor|system/vendor)/bin/keyprovd                            u:object_r:keyprovd_exec:s0
+/(vendor|system/vendor)/bin/mlog_qmi_service                    u:object_r:mlog_qmi_service_exec:s0
 /(vendor|system/vendor)/bin/qns                                 u:object_r:qns_exec:s0
 /(vendor|system/vendor)/bin/sct_service                         u:object_r:sct_service_exec:s0
 /(vendor|system/vendor)/bin/startup-prober                      u:object_r:startupprober_exec:s0
 /(vendor|system/vendor)/bin/ta_qmi_service                      u:object_r:ta_qmi_service_exec:s0
+/(vendor|system/vendor)/bin/tad                                 u:object_r:tad_exec:s0
 /(vendor|system/vendor)/bin/taimport_vendor                     u:object_r:taimport_vendor_exec:s0
-
-### OEM WORKAROUND
-/ocm                                                            u:object_r:oem_block_device:s0
+/(vendor|system/vendor)/bin/wvkbd                               u:object_r:vendor_wvkbd_exec:s0

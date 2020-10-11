@@ -1,0 +1,3 @@
+# bluetooth.te
+
+get_prop(bluetooth, semc_product_prop)

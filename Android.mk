@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2017 The LineAgeOS Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 LOCAL_PATH := $(call my-dir)
 
+ifneq ($(filter yoshino,$(PRODUCT_PLATFORM)),)
 ifneq ($(filter lilac poplar poplar_canada poplar_dsds maple, $(TARGET_DEVICE)),)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
+endif
 endif

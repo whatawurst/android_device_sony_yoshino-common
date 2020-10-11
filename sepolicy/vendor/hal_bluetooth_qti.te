@@ -1,0 +1,4 @@
+# hal_bluetooth_qti.te
+
+# /data/vendor/etc/bluetooth_bdaddr
+allow hal_bluetooth_qti bluetooth_vendor_data_file:file r_file_perms;
