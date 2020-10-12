@@ -30,8 +30,17 @@ PRODUCT_PACKAGES += \
     idd.fstab \
     qns.fstab
 
+# For android_filesystem_config.h permissions
+PRODUCT_PACKAGES += \
+    fs_config_files \
+    fs_config_dirs
+
 DEVICE_PACKAGE_OVERLAYS += \
     $(PLATFORM_PATH)/overlay
+
+### Additional native libraries
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/config/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
 
 ### RECOVERY
 ifeq ($(WITH_TWRP),true)
