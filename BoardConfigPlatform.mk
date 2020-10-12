@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PLATFORM_PATH := device/sony/yoshino
+PLATFORM_PATH := device/sony/yoshino-common
 
 ### BOARD
 BOARD_USES_QCOM_HARDWARE := true
@@ -208,8 +208,8 @@ TARGET_HW_DISK_ENCRYPTION := true
 
 ### SEPOLICY
 include device/qcom/sepolicy-legacy-um/sepolicy.mk
-BOARD_SEPOLICY_DIRS += device/sony/yoshino/sepolicy/vendor
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino/sepolicy/private
+BOARD_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
 
 ### RECOVERY
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab.recovery
