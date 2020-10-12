@@ -33,6 +33,9 @@ PRODUCT_PACKAGES += \
     fs_config_files \
     fs_config_dirs
 
+# Enable dynamic partition size
+PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
+
 DEVICE_PACKAGE_OVERLAYS += \
     $(PLATFORM_PATH)/overlay
 
