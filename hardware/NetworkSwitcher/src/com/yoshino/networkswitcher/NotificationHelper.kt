@@ -68,7 +68,7 @@ class NotificationHelper(private val context: Context) {
             .setColorized(true).build()
 
     private fun getModemNotification(modemConfig: String, status: String, registration: String): Notification {
-        val finalStatus = if (status == "0") "Success ($status)" else "Failed ($status)"
+        val finalStatus = if (status.contains("0")) "Success (0)" else "Failed ($status)"
         return NotificationCompat.Builder(context, CHANNEL_ID)
                 .setContentTitle(CHANNEL_ID)
                 .setContentText("Status: $finalStatus\nConfig: $modemConfig\nIMS: $registration")

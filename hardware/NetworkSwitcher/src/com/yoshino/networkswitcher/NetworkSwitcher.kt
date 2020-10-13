@@ -439,6 +439,7 @@ class NetworkSwitcher : Service() {
 
     /**
      * @return if modem flashed is one of the [DEFAULT_MODEMS]
+     * or whether modem name contains one of `ims`, `volte`, `vilte` or `vowifi`
      */
     private fun isModemDefault(): Boolean {
         val modemConfig = readModemFile()
@@ -446,7 +447,8 @@ class NetworkSwitcher : Service() {
             for (m in DEFAULT_MODEMS) {
                 if (modemConfig[1] == m) return true
             }
-            false
+            !modemConfig[1].contains("ims") && !modemConfig[1].contains("volte")
+                    && !modemConfig[1].contains("vilte") && !modemConfig[1].contains("vowifi")
         } else true
     }
 
@@ -459,10 +461,12 @@ class NetworkSwitcher : Service() {
         return try {
             val file = File(MODEM_SWITCHER_STATUS)
             if (file.exists()) {
-                val br = BufferedReader(FileReader(file))
-                val line = br.readLine().replace("\n", "").replace("\r", "").trim()
-                br.close()
-                arrayOf(line.split(",".toRegex())[0], line.split(",".toRegex())[1])
+                var line = ""
+                BufferedReader(FileReader(file)).use { br -> br.forEachLine { line += it } }
+                line = line.replace("\n", "").replace("\r", "")
+                        .replace("{", "").replace("}", "").replace("\"", "").trim()
+
+                if (line == "") null else arrayOf(line.split(",".toRegex())[0], line.split(",".toRegex())[1])
             } else {
                 null
             }
