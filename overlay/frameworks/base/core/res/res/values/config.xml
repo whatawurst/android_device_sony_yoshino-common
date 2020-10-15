@@ -208,6 +208,8 @@
         <item>"/product/priv-app/SystemUI/SystemUI.apk"</item>
         <item>"/product/priv-app/SystemUI/oat/arm64/SystemUI.odex"</item>
         <item>"/system/lib64/libsurfaceflinger.so"</item>
+        <item>"/system/priv-app/NetworkSwitcher/NetworkSwitcher.apk"</item>
+        <item>"/system/priv-app/NetworkSwitcher/oat/arm64/NetworkSwitcher.odex"</item>
     </string-array>
 
     <!-- Keep chosen default camera app pinned in memory for faster launching -->
