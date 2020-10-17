@@ -135,12 +135,6 @@ class NetworkSwitcher : Service() {
                             return
                         }
 
-                        if (Preference.getServiceCrashed(applicationContext)) {
-                            d("onSubscriptionsChanged: Service was previously crashed. Halt")
-                            changedOnBoot = true
-                            return
-                        }
-
                         if (Preference.getWasNetwork3G(applicationContext, false)) {
                             changedOnBoot = true
                             d("onSubscriptionsChanged: User pref was 3G; Registering network observer")
@@ -226,15 +220,6 @@ class NetworkSwitcher : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int = START_STICKY
-
-    override fun onDestroy() = destroy(false)
-
-    private fun destroy(intended: Boolean) {
-        // If intended is true, it will store false and vice-versa
-        Preference.putServiceCrashed(!intended, applicationContext)
-        d("destroy: Called; intended = $intended -> crash = ${!intended}")
-        super.onDestroy()
-    }
 
     /**
      * This method prepares and performs some important checks before [toggle]
@@ -327,7 +312,6 @@ class NetworkSwitcher : Service() {
                 } else {
                     d("task: Modem task was incomplete when checked on boot, skipping ...")
                 }
-                destroy(true)
                 d("-------------------------------------")
             }
         } catch (e: Exception) {
