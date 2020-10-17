@@ -206,13 +206,20 @@ class NetworkSwitcher : Service() {
     override fun onCreate() {
         d("-------------------------------------")
         d("Service started")
-        sm.addOnSubscriptionsChangedListener(subscriptionsChangedListener)
 
-        // Register shutdown/reboot receiver
-        registerReceiver(shutDownReceiver, IntentFilter().apply {
-            addAction(Intent.ACTION_SHUTDOWN)
-            addAction(Intent.ACTION_REBOOT)
-        })
+        // Start process once user unlocks the device
+        registerReceiver(object : BroadcastReceiver() {
+            override fun onReceive(p0: Context?, p1: Intent?) {
+                unregisterReceiver(this)
+                sm.addOnSubscriptionsChangedListener(subscriptionsChangedListener)
+
+                // Register shutdown/reboot receiver
+                registerReceiver(shutDownReceiver, IntentFilter().apply {
+                    addAction(Intent.ACTION_SHUTDOWN)
+                    addAction(Intent.ACTION_REBOOT)
+                })
+            }
+        }, IntentFilter(Intent.ACTION_USER_UNLOCKED))
 
         super.onCreate()
     }

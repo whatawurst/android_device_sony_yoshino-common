@@ -29,7 +29,7 @@ object Preference {
     private const val SERVICE_CRASHED = "service_crashed"
 
     private fun getPreferences(context: Context): SharedPreferences =
-            context.applicationContext.getSharedPreferences("NetworkSwitcher", Context.MODE_PRIVATE)
+            context.applicationContext.createDeviceProtectedStorageContext().getSharedPreferences("NetworkSwitcher", Context.MODE_PRIVATE)
 
     /**
      * This preference stores if the user-set network mode preference was 3G or not

@@ -246,7 +246,8 @@ class ImsRegistrationObserver(private val context: Context) {
  *
  * Dir: /data/data/com.yoshino.networkswitcher/files/ns.log
  */
-fun log(msg: String, context: Context) {
+fun log(msg: String, ctx: Context) {
+    val context = ctx.createDeviceProtectedStorageContext()
     val logFile = File(context.filesDir, "ns.log")
     try {
         val log = SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS", Locale.getDefault()).format(System.currentTimeMillis()) + ": $msg\r\n"
