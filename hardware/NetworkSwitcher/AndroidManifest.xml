@@ -36,7 +36,7 @@
 
         <receiver android:name="com.yoshino.networkswitcher.BootReceiver">
             <intent-filter android:priority="999">
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
