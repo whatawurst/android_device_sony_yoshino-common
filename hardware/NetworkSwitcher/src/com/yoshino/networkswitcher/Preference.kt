@@ -26,7 +26,6 @@ object Preference {
 
     private const val WAS_NETWORK_3G = "network_pref_3g"
     private const val PREFERENCE_STORED = "preference_stored"
-    private const val SERVICE_CRASHED = "service_crashed"
 
     private fun getPreferences(context: Context): SharedPreferences =
             context.applicationContext.createDeviceProtectedStorageContext().getSharedPreferences("NetworkSwitcher", Context.MODE_PRIVATE)
@@ -53,18 +52,4 @@ object Preference {
         }
     }
     fun getPreferenceStored(context: Context): Boolean = getPreferences(context).getBoolean(PREFERENCE_STORED, false)
-
-    /**
-     * Store 'true' if service destroy was not called intentionally
-     *
-     * The need of this is that due to OS memory management, app service is killed
-     * So to prevent conflicts when restarting app, this preference will help
-     */
-    fun putServiceCrashed(changedOnBoot: Boolean, context: Context) {
-        getPreferences(context).edit().apply {
-            putBoolean(SERVICE_CRASHED, changedOnBoot)
-            apply()
-        }
-    }
-    fun getServiceCrashed(context: Context): Boolean = getPreferences(context).getBoolean(SERVICE_CRASHED, false)
 }
