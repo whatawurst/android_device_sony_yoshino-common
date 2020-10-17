@@ -150,12 +150,13 @@ class NetworkSwitcher : Service() {
 
                             networkObserver.register(mSubID) {
                                 if (isLTE(getPreferredNetwork(mSubID))) {
-                                    helper.notifyToggleNotification("IMS registration in progress ...")
+                                    helper.notifyToggleNotification("Modem setup in progress ...")
 
                                     if (isModemDefault()) {
                                         networkObserver.unregister()
                                         postCompletionNotification("Not available (default modem)")
                                     } else {
+                                        postCompletionNotification("Registration in progress ...")
                                         imsObserver.register(mSubID) {
                                             networkObserver.unregister()
                                             postCompletionNotification("Registered (Available)")
@@ -169,7 +170,7 @@ class NetworkSwitcher : Service() {
                             return
                         }
 
-                        helper.notifyToggleNotification("IMS registration in progress ...")
+                        helper.notifyToggleNotification("Modem setup in progress ...")
 
                         if (isAirplaneModeOn()) {
                             changedOnBoot = true
@@ -297,6 +298,7 @@ class NetworkSwitcher : Service() {
                     if (isModemDefault()) {
                         postCompletionNotification("Not available (default modem)")
                     } else {
+                        postCompletionNotification("Registration in progress ...")
                         ImsRegistrationObserver(applicationContext).register(subID) {
                             postCompletionNotification("Registered (Available)")
                         }
