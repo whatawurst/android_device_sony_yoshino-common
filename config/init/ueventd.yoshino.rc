@@ -345,14 +345,6 @@ firmware_directories /vendor/firmware_mnt/image/
 /sys/module/msm_performance/parameters cpu_min_freq   0664 system system
 /sys/module/msm_performance/parameters max_cpus       0664 system system
 
-# CPU Quiet
-/sys/devices/system/cpu/cpuquiet nr_min_cpus                         0660 system system
-/sys/devices/system/cpu/cpuquiet nr_power_max_cpus                   0660 system system
-/sys/devices/system/cpu/cpuquiet nr_thermal_max_cpus                 0660 system system
-/sys/devices/system/cpu/cpuquiet/rqbalance balance_level             0660 system system
-/sys/devices/system/cpu/cpuquiet/rqbalance nr_run_thresholds         0660 system system
-/sys/devices/system/cpu/cpuquiet/rqbalance nr_down_run_thresholds    0660 system system
-
 # Audio Sony Effect tuning parameter setting device
 /dev/sony_hweffect_params 0660  system      audio
 
