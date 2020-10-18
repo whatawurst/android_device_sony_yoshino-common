@@ -207,14 +207,14 @@ class NetworkSwitcher : Service() {
             override fun onReceive(p0: Context?, p1: Intent?) {
                 unregisterReceiver(this)
                 sm.addOnSubscriptionsChangedListener(subscriptionsChangedListener)
-
-                // Register shutdown/reboot receiver
-                registerReceiver(shutDownReceiver, IntentFilter().apply {
-                    addAction(Intent.ACTION_SHUTDOWN)
-                    addAction(Intent.ACTION_REBOOT)
-                })
             }
         }, IntentFilter(Intent.ACTION_USER_UNLOCKED))
+
+        // Register shutdown/reboot receiver
+        registerReceiver(shutDownReceiver, IntentFilter().apply {
+            addAction(Intent.ACTION_SHUTDOWN)
+            addAction(Intent.ACTION_REBOOT)
+        })
 
         super.onCreate()
     }
