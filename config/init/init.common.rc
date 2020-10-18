@@ -74,6 +74,7 @@ on post-fs
 
     # set aggressive read ahead for sda during boot up
     write /sys/block/sda/queue/read_ahead_kb 2048
+    write /sys/block/sda/queue/nr_requests 256
 
 on post-fs-data
     # To observe dnsmasq.leases file for dhcp information of soft ap.
