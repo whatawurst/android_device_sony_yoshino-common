@@ -12,10 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-on init
-    chmod 0664 /proc/rdtag
-    chown root system /proc/rdtag
-
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
@@ -30,6 +26,9 @@ on early-init
     chmod 0620 /dev/kmsg
 
 on init
+    chmod 0664 /proc/rdtag
+    chown root system /proc/rdtag
+
     write /dev/stune/foreground/schedtune.sched_boost_no_override 1
     write /dev/stune/top-app/schedtune.sched_boost_no_override 1
     write /dev/stune/schedtune.colocate 0
