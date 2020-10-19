@@ -34,9 +34,6 @@ on early-init
     write /sys/devices/soc/soc:fpc1145/uevent add
 
 on init
-    # Load persistent dm-verity state
-    verity_load_state
-
     # Setup subsystem restart_level
     # This will be configured with the ssr_setup service
     setprop persist.vendor.ssr.restart_level "venus adsp slpi modem cdsp"
