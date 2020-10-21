@@ -27,36 +27,6 @@ cc_library {
 }
 
 cc_binary {
-    name: "android.hardware.power@1.3-service.yoshino",
-    relative_install_path: "hw",
-    vintf_fragments: ["hidl/android.hardware.power@1.3-service.yoshino.xml"],
-    init_rc: ["hidl/android.hardware.power@1.3-service.yoshino.rc"],
-    srcs: [
-        "hidl/service.cpp",
-        "hidl/Power.cpp",
-        "hidl/power-helper.c",
-    ],
-    cflags: [
-        "-Wall",
-        "-Werror",
-    ],
-    shared_libs: [
-        "libbase",
-        "libhidlbase",
-        "liblog",
-        "libutils",
-        "libcutils",
-        "android.hardware.power@1.0",
-        "android.hardware.power@1.1",
-        "android.hardware.power@1.2",
-        "android.hardware.power@1.3",
-        "libdisppower-msm8998",
-        "libperfmgr",
-    ],
-    proprietary: true,
-}
-
-cc_binary {
     name: "android.hardware.power-service.yoshino-libperfmgr",
     relative_install_path: "hw",
     init_rc: ["aidl/android.hardware.power-service.yoshino-libperfmgr.rc"],
