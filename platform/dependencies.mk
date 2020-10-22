@@ -50,13 +50,13 @@ PRODUCT_PACKAGES += \
     android.hidl.manager-V1.0-java
 
 ### IMS
-PRODUCT_PACKAGES += \
-    ims-ext-common \
-    ims-ext-common_system \
-    ims_ext_common.xml
-
-PRODUCT_BOOT_JARS += \
-    ims-ext-common_system
+#PRODUCT_PACKAGES += \
+#    ims-ext-common \
+#    ims-ext-common_system \
+#    ims_ext_common.xml
+#
+#PRODUCT_BOOT_JARS += \
+#    ims-ext-common_system
 
 ### IPV6
 PRODUCT_PACKAGES += \
@@ -107,15 +107,15 @@ PRODUCT_PACKAGES += \
     libxml2
 
 ### TELEPHONY
-PRODUCT_PACKAGES += \
-    telephony-ext \
-    qti-telephony-hidl-wrapper \
-    qti_telephony_hidl_wrapper.xml \
-    qti-telephony-utils \
-    qti_telephony_utils.xml
-
-PRODUCT_BOOT_JARS += \
-    telephony-ext
+#PRODUCT_PACKAGES += \
+#    telephony-ext \
+#    qti-telephony-hidl-wrapper \
+#    qti_telephony_hidl_wrapper.xml \
+#    qti-telephony-utils \
+#    qti_telephony_utils.xml
+#
+#PRODUCT_BOOT_JARS += \
+#    telephony-ext
 
 ### VNDK
 PRODUCT_PACKAGES += \
@@ -128,10 +128,10 @@ PRODUCT_PACKAGES += \
     libqti_vndfwk_detect.vendor
 
 ### WIFI DISPLAY
-PRODUCT_PACKAGES += \
-    libaacwrapper \
-    libnl \
-    libmediaextractorservice
-
-PRODUCT_BOOT_JARS += \
-    WfdCommon
+#PRODUCT_PACKAGES += \
+#    libaacwrapper \
+#    libnl \
+#    libmediaextractorservice
+#
+#PRODUCT_BOOT_JARS += \
+#    WfdCommon

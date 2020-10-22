@@ -50,6 +50,8 @@ TW_DEFAULT_BRIGHTNESS := 1600
 
 TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone4/temp
 
+TW_SCREEN_BLANK_ON_BOOT := true
+
 # Add logcat support
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
@@ -98,3 +100,5 @@ TW_THEME := portrait_hdpi
 # Use a future date for the security patchlevel.  As TWRP doesn't do key
 # upgrades it should just be fine using it for decryption.
 PLATFORM_SECURITY_PATCH := 2025-12-31
+
+TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw

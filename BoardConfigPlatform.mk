@@ -38,6 +38,7 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a73
 
 ### KERNEL
 TARGET_KERNEL_CLANG_COMPILE := true
+TARGET_KERNEL_CLANG_VERSION := r353983c
 TARGET_KERNEL_VERSION := 4.4
 TARGET_KERNEL_SOURCE  := kernel/sony/msm8998
 TARGET_COMPILE_WITH_MSM_KERNEL := true
@@ -78,12 +79,12 @@ TARGET_FS_CONFIG_GEN := \
 
 ### DEXPREOPT
 # Enable dexpreopt for everything to speed boot time
-ifeq ($(HOST_OS),linux)
-  ifneq ($(TARGET_BUILD_VARIANT),eng)
-      WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := false
-      WITH_DEXPREOPT := true
-  endif
-endif
+#ifeq ($(HOST_OS),linux)
+#  ifneq ($(TARGET_BUILD_VARIANT),eng)
+#      WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := false
+#      WITH_DEXPREOPT := true
+#  endif
+#endif
 
 ### GRAPHICS
 USE_OPENGL_RENDERER := true
@@ -183,11 +184,11 @@ TARGET_USE_QTI_BT_STACK := true
 QCOM_BT_USE_BTNV := true
 
 ### RIL
-TARGET_RIL_VARIANT := caf
-TARGET_PER_MGR_ENABLED := true
-TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
-TARGET_USES_OLD_MNC_FORMAT := true
-PROTOBUF_SUPPORTED := true
+#TARGET_RIL_VARIANT := caf
+#TARGET_PER_MGR_ENABLED := true
+#TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
+#TARGET_USES_OLD_MNC_FORMAT := true
+#PROTOBUF_SUPPORTED := true
 
 ### TIMESERVICE
 BOARD_USES_QC_TIME_SERVICES := true
@@ -203,9 +204,9 @@ DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
 TARGET_HW_DISK_ENCRYPTION := true
 
 ### SEPOLICY
-include device/qcom/sepolicy-legacy-um/sepolicy.mk
-BOARD_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
+#include device/qcom/caf-sepolicy/sepolicy.mk
+#BOARD_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
+#BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
 
 ### RECOVERY
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab.recovery
@@ -224,11 +225,9 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 VENDOR_SECURITY_PATCH := 2019-09-01
 
 # APEX IMAGE
-DEXPREOPT_GENERATE_APEX_IMAGE := true
+#DEXPREOPT_GENERATE_APEX_IMAGE := true
 
 ### ALLOW VENDOR FILE OVERRIDE
 BUILD_BROKEN_DUP_RULES := true
 
-ifeq ($(WITH_TWRP),true)
--include $(PLATFORM_PATH)/twrp.mk
-endif
+include $(PLATFORM_PATH)/twrp.mk
