@@ -56,6 +56,7 @@
 /dev/block/platform/soc/1da4000\.ufshc/by-name/rdimage          u:object_r:ramdump_block_device:s0
 
 /dev/socket/cammw_tintless                                      u:object_r:camera_somc_socket:s0
+/dev/socket/dpmwrapper                                          u:object_r:dpmwrapper_socket:s0
 /dev/socket/fpc_oem                                             u:object_r:fpc_socket:s0
 /dev/socket/illumination                                        u:object_r:illumination_socket:s0
 /dev/socket/qnsbsd                                              u:object_r:qns_socket:s0
