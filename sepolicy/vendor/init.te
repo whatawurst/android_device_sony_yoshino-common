@@ -20,6 +20,9 @@ allow init qns_file:dir { mounton };
 # /dev/socket/cammw_tintless
 allow init camera_somc_socket:sock_file create_file_perms;
 
+# /dev/socket/dpmwrapper
+allow init dpmwrapper_socket:sock_file create_file_perms;
+
 # /dev/socket/secd_devsec_sock
 allow init secd_devsec_socket:sock_file create_file_perms;
 

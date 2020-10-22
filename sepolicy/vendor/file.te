@@ -38,6 +38,7 @@ type persist_wlan_file, file_type;
 
 # sockets
 type camera_somc_socket, file_type;
+type dpmwrapper_socket, file_type;
 type fpc_socket, file_type;
 type illumination_socket, file_type;
 type secd_credmgr_socket, file_type;
