@@ -48,6 +48,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     NfcNci \
+    SecureElement \
     Tag
 
 ### OPENCUSTOMIZATIONSELECTOR
@@ -126,11 +127,6 @@ PRODUCT_PACKAGES += \
 # NFC
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.1-service
-
-# NFC - SECURE ELEMENT
-PRODUCT_PACKAGES += \
-    android.hardware.secure_element@1.0-service \
-    SecureElement
 
 # POWER
 PRODUCT_PACKAGES += \
