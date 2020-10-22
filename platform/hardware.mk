@@ -199,10 +199,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     thermal.msm8998
 
-### VR
-PRODUCT_PACKAGES += \
-    vr.msm8998
-
 ### WIFI
 PRODUCT_PACKAGES += \
     hostapd \
