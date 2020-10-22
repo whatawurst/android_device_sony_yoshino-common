@@ -18,7 +18,7 @@ allow init oem_block_device:lnk_file relabelto;
 allow init qns_file:dir { mounton };
 
 # /dev/socket/cammw_tintless
-#allow init camera_socket:sock_file create_file_perms;
+allow init camera_somc_socket:sock_file create_file_perms;
 
 # /dev/socket/secd_devsec_sock
 allow init secd_devsec_socket:sock_file create_file_perms;
