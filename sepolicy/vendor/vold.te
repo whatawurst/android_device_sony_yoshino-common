@@ -2,3 +2,6 @@
 
 # /proc/cmdline
 allow vold proc_cmdline:file r_file_perms;
+
+# /sys/block/mmcblk0/bdi/read_ahead_kb
+allow vold sysfs_mmc_host:file write;
