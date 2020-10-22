@@ -20,8 +20,8 @@ sony_yoshino_init_library {
     recovery_available: true,
     srcs: ["init_yoshino.cpp", "ta.cpp", "target_init.cpp"],
     include_dirs: [
-        "system/core/base/include",
         "system/core/init",
         "external/selinux/libselinux/include"
-    ]
+    ],
+    shared_libs: ["libbase"],
 }

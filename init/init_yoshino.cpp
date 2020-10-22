@@ -37,7 +37,6 @@
 #include <sys/_system_properties.h>
 
 #include "vendor_init.h"
-#include "property_service.h"
 
 #include "ta.h"
 
@@ -46,11 +45,15 @@
 using android::base::GetProperty;
 using android::base::WaitForProperty;
 using android::base::ReadFileToString;
-using android::init::property_set;
 
 using namespace std::chrono_literals;
 
 static void load_properties_from_file(const char *, const char *);
+
+static void property_set(char const prop[], char const value[])
+{
+    __system_property_add(prop, strlen(prop), value, strlen(value));
+}
 
 static void load_properties(char *data, const char *filter)
 {
