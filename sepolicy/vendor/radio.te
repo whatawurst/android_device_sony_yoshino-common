@@ -13,6 +13,9 @@ hwbinder_use(radio)
 allow radio hal_miscta_default:binder { call transfer };
 allow radio hal_miscta_hwservice:hwservice_manager find;
 
+# Allow android.phone to read ims prop
+get_prop(radio, qcom_ims_prop)
+
 # Allow CustomizationSelector look for /cache/modem/ on /cache
 allow radio cache_file:dir { search };
 
@@ -20,9 +23,9 @@ allow radio cache_file:dir { search };
 allow radio modemsw_cache_file:dir rw_dir_perms;
 allow radio modemsw_cache_file:file create_file_perms;
 
-# Alllow CustomizationSelector to read Sony props
+# Allow CustomizationSelector to read Sony props
 allow radio semc_version_prop:file { getattr open read };
 allow radio vendor_semc_version_cust_active_prop:file { getattr open read };
 
-# persist.sys.sim_config_ids 
+# persist.sys.sim_config_ids
 set_prop(radio, semc_sim_prop)
