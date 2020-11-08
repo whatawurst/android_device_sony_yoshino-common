@@ -144,7 +144,7 @@
 /(vendor|system/vendor)/bin/hw/kobjeventd                       u:object_r:kobjeventd_exec:s0
 /(vendor|system/vendor)/bin/hw/touchbacklightd                  u:object_r:touchbacklightd_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.semc\.hardware\.light@1\.0-service   u:object_r:hal_light_default_exec:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.power@1\.3-service\.yoshino      u:object_r:hal_power_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.power-service\.yoshino-libperfmgr      u:object_r:hal_power_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.semc\.hardware\.secd@1\.0-service    u:object_r:hal_secd_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.semc\.hardware\.thermal@(.*)?    u:object_r:hal_somc_thermal_daemon_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.camera\.provider@1\.0-service    u:object_r:hal_camera_somc_exec:s0
