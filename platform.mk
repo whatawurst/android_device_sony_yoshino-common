@@ -18,6 +18,7 @@ PLATFORM_PATH := device/sony/yoshino-common
 
 PRODUCT_SOONG_NAMESPACES += \
     $(PLATFORM_PATH) \
+    hardware/google/interfaces \
     hardware/google/pixel
 
 QCOM_SOONG_NAMESPACE := $(PLATFORM_PATH)/hardware/qcom-caf

@@ -173,7 +173,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.power@1.2 \
     android.hardware.power@1.2.vendor \
-    android.hardware.power@1.3-service.yoshino
+    android.hardware.power-service.yoshino-libperfmgr
 
 # RADIO
 PRODUCT_PACKAGES += \
