@@ -150,7 +150,7 @@ PRODUCT_PACKAGES += \
 
 # POWER
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.3-service.yoshino
+    android.hardware.power-service.yoshino-libperfmgr
 
 # RADIO
 PRODUCT_PACKAGES += \
