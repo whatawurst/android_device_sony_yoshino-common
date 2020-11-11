@@ -18,7 +18,7 @@ android_app {
     srcs: ["src/**/*.kt"],
     resource_dirs: ["res"],
 
-    static_libs: ["androidx.core_core", "androidx.appcompat_appcompat", "androidx.annotation_annotation"],
+    static_libs: ["androidx.core_core", "androidx.appcompat_appcompat", "androidx.annotation_annotation", "com.google.android.material_material"],
     libs: ["telephony-common", "voip-common", "ims-common", "services"],
 
     certificate: "platform",

@@ -41,6 +41,10 @@
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name="com.yoshino.networkswitcher.LogActivity"
+            android:theme="@style/LogTheme"/>
+
         <service
             android:name="com.yoshino.networkswitcher.NetworkSwitcher"
             android:enabled="true" />
