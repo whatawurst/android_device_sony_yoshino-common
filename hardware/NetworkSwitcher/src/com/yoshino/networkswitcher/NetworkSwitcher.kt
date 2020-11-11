@@ -148,12 +148,12 @@ class NetworkSwitcher : Service() {
 
                                     if (isModemDefault()) {
                                         networkObserver.unregister()
-                                        postCompletionNotification("Not available (default modem)")
+                                        postCompletionNotification(mSubID, "Not available (default modem)")
                                     } else {
-                                        postCompletionNotification("Registration in progress ...")
+                                        postCompletionNotification(mSubID, "Registration in progress ...")
                                         imsObserver.register(mSubID) {
                                             networkObserver.unregister()
-                                            postCompletionNotification("Registered (Available)")
+                                            postCompletionNotification(mSubID, "Registered (Available)")
                                         }
                                     }
                                 } else {
@@ -201,6 +201,7 @@ class NetworkSwitcher : Service() {
     override fun onCreate() {
         d("-------------------------------------")
         d("Service started")
+        Settings.System.putString(contentResolver, "ns_status", "App didn't run")
 
         // Start process once user unlocks the device
         registerReceiver(object : BroadcastReceiver() {
@@ -250,7 +251,7 @@ class NetworkSwitcher : Service() {
                             .setMessage("Your device requires a reboot for completion of IMS setup.")
                             .setPositiveButton("Reboot") { dialog, _ ->
                                 changedOnBoot = true
-                                postCompletionNotification("Reboot required for completion")
+                                postCompletionNotification(subID, "Reboot required for completion")
 
                                 // One at a time boys... one at a time
                                 synchronized(Object()) {
@@ -281,11 +282,11 @@ class NetworkSwitcher : Service() {
                     }
                     changedOnBoot = true
                     if (isModemDefault()) {
-                        postCompletionNotification("Not available (default modem)")
+                        postCompletionNotification(subID, "Not available (default modem)")
                     } else {
-                        postCompletionNotification("Registration in progress ...")
+                        postCompletionNotification(subID, "Registration in progress ...")
                         ImsRegistrationObserver(applicationContext).register(subID) {
-                            postCompletionNotification("Registered (Available)")
+                            postCompletionNotification(subID, "Registered (Available)")
                         }
                     }
                 } else {
@@ -423,11 +424,12 @@ class NetworkSwitcher : Service() {
     /**
      * Post a notification with modem info on completion of [task]
      *
+     * @param subID is the subscription ID either from [subscriptionsChangedListener] or [task]
      * @param registration is registration message if needed to be added to notification
      */
-    private fun postCompletionNotification(registration: String) {
+    private fun postCompletionNotification(subID: Int, registration: String) {
         val modemConfig = readModemFile()
-        if (modemConfig != null) helper.notifyModemNotification(modemConfig[1], modemConfig[0], registration)
+        if (modemConfig != null) helper.notifyModemNotification(subID, modemConfig[1], modemConfig[0], registration)
     }
 
     /**

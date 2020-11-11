@@ -19,6 +19,8 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
+import android.os.SystemProperties
+import android.provider.Settings
 import androidx.core.app.NotificationCompat
 
 class NotificationHelper(private val context: Context) {
@@ -49,11 +51,18 @@ class NotificationHelper(private val context: Context) {
     }
 
     fun notifyToggleNotification(msg: String) {
-        getManager().notify(1, getToggleNotification(msg))
+        if (Settings.System.getInt(context.contentResolver, "ns_notification", 1) == 1) {
+            getManager().notify(1, getToggleNotification(msg))
+        }
     }
 
-    fun notifyModemNotification(modemConfig: String, status: String, registration: String) {
-        getManager().notify(1, getModemNotification(modemConfig, status, registration))
+    fun notifyModemNotification(subID: Int, modemConfig: String, status: String, registration: String) {
+        Settings.System.putString(context.contentResolver, "ns_status", "Sub ID: $subID\nStatus: $status\n" +
+                "Config: $modemConfig\nIMS: $registration\nCust ID: ${SystemProperties.get("ro.somc.customerid", "N/A")}")
+
+        if (Settings.System.getInt(context.contentResolver, "ns_notification", 1) == 1) {
+            getManager().notify(1, getModemNotification(modemConfig, status, registration))
+        }
     }
 
     fun cancel() = getManager().cancel(1)
