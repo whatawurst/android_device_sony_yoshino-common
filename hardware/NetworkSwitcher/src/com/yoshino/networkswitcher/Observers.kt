@@ -244,7 +244,7 @@ class ImsRegistrationObserver(private val context: Context) {
 /**
  * Write logs
  *
- * Dir: /data/data/com.yoshino.networkswitcher/files/ns.log
+ * Dir: /data/user_de/0/com.yoshino.networkswitcher/files/ns.log
  */
 fun log(msg: String, ctx: Context) {
     val context = ctx.createDeviceProtectedStorageContext()
