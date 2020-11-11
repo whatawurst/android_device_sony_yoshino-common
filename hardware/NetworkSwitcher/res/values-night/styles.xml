@@ -16,4 +16,10 @@
     <style name="AppTheme" parent="Theme.AppCompat.Dialog.Alert">
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="LogTheme" parent="Theme.MaterialComponents">
+        <item name="colorPrimary">#121212</item>
+        <item name="colorPrimaryDark">#121212</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 </resources>
