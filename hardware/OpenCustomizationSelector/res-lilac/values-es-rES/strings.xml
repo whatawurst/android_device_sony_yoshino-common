@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">El dispositivo se reiniciará para ser optimizado por el operador de red.</string>
+</resources>

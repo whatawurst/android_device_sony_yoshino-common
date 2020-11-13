@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">Jūsu ierīce tiks restartēta, lai optimāli pielāgotu to tīkla operatoram.</string>
+    <string name="suw_back_button_label">Atpakaļ</string>
+    <string name="suw_more_button_label">Vairāk</string>
+    <string name="suw_next_button_label">Tālāk</string>
+</resources>

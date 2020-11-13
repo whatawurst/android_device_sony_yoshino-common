@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">Cihazınız, ağ operatörünüz için optimize edilmek üzere şimdi yeniden başlatılacak.</string>
+    <string name="suw_back_button_label">Geri</string>
+    <string name="suw_more_button_label">Diğer</string>
+    <string name="suw_next_button_label">İleri</string>
+</resources>

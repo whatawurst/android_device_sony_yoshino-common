@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">ستتم إعادة تشغيل جهازك الآن ليكون مناسبًا لمشغل الشبكة.</string>
+    <string name="suw_back_button_label">رجوع</string>
+    <string name="suw_more_button_label">المزيد</string>
+    <string name="suw_next_button_label">التالي</string>
+</resources>

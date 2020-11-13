@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="23"
+          android:compileSdkVersionCodename="6.0-2438415" android:sharedUserId="android.uid.phone" coreApp="true"
+          package="com.sonymobile.customizationselector" platformBuildVersionCode="8519680"
+          platformBuildVersionName="4.1.0.A.0.0">
+
+    <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM"/>
+    <uses-permission android:name="android.permission.REBOOT"/>
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
+    <uses-permission android:name="com.sonymobile.permission.TRIMAREA"/>
+    <uses-permission android:name="android.permission.STATUS_BAR"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS"/>
+    <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW"/>
+    <uses-permission android:name="android.permission.MASTER_CLEAR"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <application android:allowBackup="false" android:directBootAware="true" android:excludeFromRecents="true"
+                 android:immersive="true" android:label="@string/app_name">
+
+        <uses-library android:name="com.sonymobile.miscta.api"/>
+
+        <activity android:enabled="false" android:label="@string/app_name" android:launchMode="singleTask"
+                  android:name=".CustomizationSelectorActivity" android:theme="@style/ThemeDefault">
+            <intent-filter android:priority="2">
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.HOME"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:label="@string/app_name" android:name=".CustomizationSelectorSUWActivity"
+                  android:theme="@style/ThemeDefault">
+            <intent-filter>
+                <action android:name="com.sonymobile.customizationselector.action.SETUPWIZARD"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:configChanges="orientation" android:icon="@drawable/debug_icon" android:label="Modem Switcher"
+                  android:name=".ModemSwitcherActivity" android:screenOrientation="portrait"
+                  android:theme="@android:style/Theme.DeviceDefault">
+            <intent-filter>
+                <action android:name="com.sonyericsson.debugmenu.ENTRY_INTENT"/>
+                <category android:name="com.sonyericsson.debugmenu.ENTRY_CATEGORY"/>
+            </intent-filter>
+        </activity>
+
+        <service android:exported="false" android:name=".CustomizationSelectorService"/>
+        <service android:exported="false" android:name=".DSDataSubContentJob"
+                 android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+        <receiver android:name=".EventReceiver">
+            <intent-filter>
+                <action android:name="android.telephony.action.CARRIER_CONFIG_CHANGED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.sonymobile.customizationselector.MasterClearReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MASTER_CLEAR_NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

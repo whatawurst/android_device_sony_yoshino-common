@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">Zařízení se nyní restartuje, aby bylo optimalizováno pro operátora sítě.</string>
+    <string name="suw_back_button_label">Zpět</string>
+    <string name="suw_more_button_label">Další</string>
+    <string name="suw_next_button_label">Další</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">Ձեր սարքն այժմ վերագործարկվելու և լավարկվելու է ձեր ցանցի օպերատորի համար:</string>
+    <string name="suw_back_button_label">Հետ</string>
+    <string name="suw_more_button_label">Ավելին</string>
+    <string name="suw_next_button_label">Առաջ</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">Uređaj će se sada ponovno pokrenuti radi optimizacije za mrežnog operatera.</string>
+    <string name="suw_back_button_label">Natrag</string>
+    <string name="suw_more_button_label">Više</string>
+    <string name="suw_next_button_label">Dalje</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">Magre-restart na ngayon ang yong device upang ma-optimize ito para sa iyong network operator.</string>
+    <string name="suw_back_button_label">Bumalik</string>
+    <string name="suw_more_button_label">Higit pa</string>
+    <string name="suw_next_button_label">Susunod</string>
+</resources>

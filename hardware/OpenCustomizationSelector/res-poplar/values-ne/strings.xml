@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="suw_back_button_label">पछाडि जानुहोस्</string>
+    <string name="suw_more_button_label">थप</string>
+    <string name="suw_next_button_label">अर्को</string>
+</resources>
