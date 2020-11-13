@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="current_modem" />
+    <item type="id" name="initial_modem" />
+    <item type="id" name="modem_list" />
+    <item type="id" name="progress_bar" />
+    <item type="id" name="restore_button" />
+    <item type="id" name="setup_wizard_layout" />
+    <item type="id" name="suw_bottom_scroll_view" />
+    <item type="id" name="suw_footer_button_bar" />
+    <item type="id" name="suw_items_icon" />
+    <item type="id" name="suw_items_icon_container" />
+    <item type="id" name="suw_items_summary" />
+    <item type="id" name="suw_items_title" />
+    <item type="id" name="suw_large_progress_bar" />
+    <item type="id" name="suw_layout_content" />
+    <item type="id" name="suw_layout_decor" />
+    <item type="id" name="suw_layout_footer" />
+    <item type="id" name="suw_layout_header" />
+    <item type="id" name="suw_layout_icon" />
+    <item type="id" name="suw_layout_navigation_bar" />
+    <item type="id" name="suw_layout_progress" />
+    <item type="id" name="suw_layout_progress_stub" />
+    <item type="id" name="suw_layout_sticky_header" />
+    <item type="id" name="suw_layout_title" />
+    <item type="id" name="suw_navbar_back" />
+    <item type="id" name="suw_navbar_more" />
+    <item type="id" name="suw_navbar_next" />
+    <item type="id" name="suw_original_weight" />
+    <item type="id" name="suw_pattern_bg" />
+    <item type="id" name="suw_scroll_view" />
+</resources>

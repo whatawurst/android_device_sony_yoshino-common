@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">Уредот сега ќе се рестартира за да се оптимизира за мрежниот оператор.</string>
+    <string name="suw_back_button_label">Назад</string>
+    <string name="suw_more_button_label">Повеќе</string>
+    <string name="suw_next_button_label">Следно</string>
+</resources>

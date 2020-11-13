@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="823.0dip" android:width="823.0dip" android:viewportWidth="823.0" android:viewportHeight="823.0" xmlns:aapt="http://schemas.android.com/aapt"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:name="blue1" android:translateX="411.5" android:translateY="411.5">
+        <path android:name="blue1_path" android:pathData="M0 -395 C218,-395 395,-218 395,0 C395,218 218,395 0,395 C-218,395 -395,218 -395,0 C-395,-218 -218,-395 0,-395c " android:strokeColor="#ff4688f1" android:strokeWidth="27.0" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeAlpha="1.0" />
+    </group>
+    <group android:name="blue2" android:translateX="411.5" android:translateY="411.5">
+        <path android:name="blue2_path" android:pathData=" M0 -395 C218,-395 395,-218 395,0 C395,218 218,395 0,395 C-218,395 -395,218 -395,0 C-395,-218 -218,-395 0,-395c " android:strokeColor="#ff7dacf4" android:strokeWidth="28.0" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeAlpha="1.0" />
+    </group>
+    <group android:name="blue3" android:translateX="411.5" android:translateY="411.5">
+        <path android:name="blue3_path" android:pathData=" M0 -395 C218,-395 395,-218 395,0 C395,218 218,395 0,395 C-218,395 -395,218 -395,0 C-395,-218 -218,-395 0,-395c " android:strokeColor="#ffc7dbfb" android:strokeWidth="29.0" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeAlpha="1.0" />
+    </group>
+    <group android:name="blue4" android:translateX="411.5" android:translateY="411.5">
+        <path android:name="blue4_path" android:pathData=" M0 -395 C218,-395 395,-218 395,0 C395,218 218,395 0,395 C-218,395 -395,218 -395,0 C-395,-218 -218,-395 0,-395c " android:strokeColor="#ffe8f0fd" android:strokeWidth="30.0" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeAlpha="1.0" />
+    </group>
+</vector>

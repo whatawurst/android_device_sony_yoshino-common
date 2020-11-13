@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">ご利用の通信事業者用に最適化するため、機器が再起動します。</string>
+    <string name="suw_back_button_label">戻る</string>
+    <string name="suw_more_button_label">もっと見る</string>
+    <string name="suw_next_button_label">次へ</string>
+</resources>

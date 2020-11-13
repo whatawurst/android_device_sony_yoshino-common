@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">Enheten vil nå starte på nytt for å bli optimalisert for nettoperatøren din.</string>
+    <string name="suw_back_button_label">Tilbake</string>
+    <string name="suw_more_button_label">Mer</string>
+    <string name="suw_next_button_label">Neste</string>
+</resources>

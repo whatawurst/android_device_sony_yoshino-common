@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">"El dispositiu es reiniciarà ara per ser optimitzat per a l'operador de la xarxa."</string>
+    <string name="suw_back_button_label">Enrere</string>
+    <string name="suw_more_button_label">Més</string>
+    <string name="suw_next_button_label">Següent</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customization_restart_desc_txt">Şəbəkə operatoru üçün optimallaşmaq üçün cihaz yenidən işə salınacaq.</string>
+    <string name="suw_back_button_label">Geri</string>
+    <string name="suw_more_button_label">Daha çox</string>
+    <string name="suw_next_button_label">Növbəti</string>
+</resources>
