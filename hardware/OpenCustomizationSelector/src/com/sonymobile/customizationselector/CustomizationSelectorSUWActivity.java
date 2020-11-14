@@ -1,5 +1,8 @@
 package com.sonymobile.customizationselector;
 
+import static android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD;
+import static android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
+
 import android.app.Activity;
 import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
@@ -90,13 +93,13 @@ public class CustomizationSelectorSUWActivity extends Activity {
     }
 
     private void disableUI() {
-        getWindow().addFlags(4194304);
-        ((StatusBarManager) getSystemService("statusbar")).disable(67043328);
+        getWindow().addFlags(FLAG_DISMISS_KEYGUARD);
+        ((StatusBarManager) getSystemService("statusbar")).disable(StatusBarManager.DISABLE_MASK);
     }
 
     private void resetUI() {
-        getWindow().addFlags(524288);
-        ((StatusBarManager) getSystemService("statusbar")).disable(0);
+        getWindow().addFlags(FLAG_SHOW_WHEN_LOCKED);
+        ((StatusBarManager) getSystemService("statusbar")).disable(StatusBarManager.DISABLE_NONE);
     }
 
     private void startTimeout() {

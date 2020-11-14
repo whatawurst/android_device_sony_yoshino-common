@@ -1,5 +1,8 @@
 package com.sonymobile.customizationselector;
 
+import static android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD;
+import static android.view.WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -35,8 +38,7 @@ public class CustomizationSelectorActivity extends Activity implements OnClickLi
             builder.setPositiveButton("OK", this);
             mAlertDialog = builder.create();
             mAlertDialog.setCanceledOnTouchOutside(false);
-            // TODO: Unknown constant(s)
-            mAlertDialog.getWindow().setType(2009);
+            mAlertDialog.getWindow().setType(TYPE_KEYGUARD_DIALOG);
         }
         if (!mAlertDialog.isShowing()) {
             CSLog.d(TAG, "Show dialog");
@@ -44,10 +46,9 @@ public class CustomizationSelectorActivity extends Activity implements OnClickLi
         }
     }
 
-    // TODO: Unknown constants
     public void disableUI() {
-        getWindow().addFlags(4194304);
-        (getSystemService(StatusBarManager.class)).disable(67043328);
+        getWindow().addFlags(FLAG_DISMISS_KEYGUARD);
+        (getSystemService(StatusBarManager.class)).disable(StatusBarManager.DISABLE_MASK);
     }
 
     public void onClick(DialogInterface dialogInterface, int i) {
@@ -77,8 +78,7 @@ public class CustomizationSelectorActivity extends Activity implements OnClickLi
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
-        // TODO: Unknown constant(s)
-        intent.setFlags(268435456);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }
