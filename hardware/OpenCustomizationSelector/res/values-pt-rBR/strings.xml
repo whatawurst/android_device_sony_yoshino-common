@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">O dispositivo agora irá reiniciar para ser otimizado para a operadora de rede.</string>
-    <string name="suw_back_button_label">Voltar</string>
-    <string name="suw_more_button_label">Mais</string>
-    <string name="suw_next_button_label">Próxima</string>
+    <string name="back_button_label">Voltar</string>
+    <string name="more_button_label">Mais</string>
+    <string name="next_button_label">Próxima</string>
 </resources>

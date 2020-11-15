@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">이제 기기가 다시 시작되어 네트워크 사업자에 최적화됩니다.</string>
-    <string name="suw_back_button_label">뒤로</string>
-    <string name="suw_more_button_label">더보기</string>
-    <string name="suw_next_button_label">다음</string>
+    <string name="back_button_label">뒤로</string>
+    <string name="more_button_label">더보기</string>
+    <string name="next_button_label">다음</string>
 </resources>

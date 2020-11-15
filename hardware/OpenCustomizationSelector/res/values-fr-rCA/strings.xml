@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">"Votre appareil doit redémarrer afin d'être optimisé pour votre exploitant de réseau."</string>
-    <string name="suw_back_button_label">Précédent</string>
-    <string name="suw_more_button_label">Plus</string>
-    <string name="suw_next_button_label">Suivant</string>
+    <string name="back_button_label">Précédent</string>
+    <string name="more_button_label">Plus</string>
+    <string name="next_button_label">Suivant</string>
 </resources>

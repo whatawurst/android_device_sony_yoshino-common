@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">ನಿಮ್ಮ ನೆಟ್‌ವರ್ಕ್ ಆಪರೇಟರ್‌ಗೆ ಆಪ್ಟಿಮೈಸ್ ಮಾಡುವುದಕ್ಕಾಗಿ ನಿಮ್ಮ ಸಾಧನ ಇದೀಗ ಮರುಪ್ರಾರಂಭಗೊಳ್ಳುತ್ತದೆ.</string>
-    <string name="suw_back_button_label">ಹಿಂದೆ</string>
-    <string name="suw_more_button_label">ಇನ್ನಷ್ಟು</string>
-    <string name="suw_next_button_label">ಮುಂದೆ</string>
+    <string name="back_button_label">ಹಿಂದೆ</string>
+    <string name="more_button_label">ಇನ್ನಷ್ಟು</string>
+    <string name="next_button_label">ಮುಂದೆ</string>
 </resources>

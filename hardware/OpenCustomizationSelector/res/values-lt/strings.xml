@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">Dabar jūsų prietaisas bus paleistas iš naujo, kad būtų optimizuotas pagal tinklo operatorių.</string>
-    <string name="suw_back_button_label">Atgal</string>
-    <string name="suw_more_button_label">Daugiau</string>
-    <string name="suw_next_button_label">Kitas</string>
+    <string name="back_button_label">Atgal</string>
+    <string name="more_button_label">Daugiau</string>
+    <string name="next_button_label">Kitas</string>
 </resources>

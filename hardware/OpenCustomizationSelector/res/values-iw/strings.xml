@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">ההתקן שלך יופעל עכשיו מחדש כדי להיות מותאם באופן מיטבי למפעיל הרשת שלך.</string>
-    <string name="suw_back_button_label">חזרה</string>
-    <string name="suw_more_button_label">עוד</string>
-    <string name="suw_next_button_label">הבא</string>
+    <string name="back_button_label">חזרה</string>
+    <string name="more_button_label">עוד</string>
+    <string name="next_button_label">הבא</string>
 </resources>

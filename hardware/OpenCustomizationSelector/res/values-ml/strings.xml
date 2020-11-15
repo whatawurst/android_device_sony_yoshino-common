@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">നിങ്ങളുടെ നെറ്റ്‌വർക്ക് ദാതാവിനായി അനുയോജ്യമാക്കുന്നതിന് ഉപകരണം പുനരാരംഭിക്കപ്പെടും.</string>
-    <string name="suw_back_button_label">മടങ്ങുക</string>
-    <string name="suw_more_button_label">കൂടുതൽ</string>
-    <string name="suw_next_button_label">അടുത്തത്</string>
+    <string name="back_button_label">മടങ്ങുക</string>
+    <string name="more_button_label">കൂടുതൽ</string>
+    <string name="next_button_label">അടുത്തത്</string>
 </resources>

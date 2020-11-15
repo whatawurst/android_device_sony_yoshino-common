@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">"Tani pajisja juaj do të rinisë për t'u optimizuar për operatorin e rrjetit."</string>
-    <string name="suw_back_button_label">Prapa</string>
-    <string name="suw_more_button_label">Më shumë</string>
-    <string name="suw_next_button_label">Përpara</string>
+    <string name="back_button_label">Prapa</string>
+    <string name="more_button_label">Më shumë</string>
+    <string name="next_button_label">Përpara</string>
 </resources>
