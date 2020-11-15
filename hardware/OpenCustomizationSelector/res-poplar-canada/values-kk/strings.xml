@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="customization_restart_desc_txt">Желілік оператор үшін оңтайландыру үшін құрылғыңыз қазір қайта іске қосылады.</string>
-    <string name="suw_back_button_label">Артқа</string>
-    <string name="suw_more_button_label">Тағы</string>
-    <string name="suw_next_button_label">Келесі</string>
-</resources>

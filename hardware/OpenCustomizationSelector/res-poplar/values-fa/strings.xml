@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="customization_restart_desc_txt">دستگاه شما اکنون راه اندازی مجدد می شود تا برای اپرانور شبکه تان بهینه شود.</string>
-    <string name="suw_back_button_label">برگشت</string>
-    <string name="suw_more_button_label">بیشتر</string>
-    <string name="suw_next_button_label">بعدی</string>
-</resources>

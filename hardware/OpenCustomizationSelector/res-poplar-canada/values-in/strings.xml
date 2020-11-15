@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="customization_restart_desc_txt">Perangkat Anda sekarang akan menyalakan ulang dan dioptimalkan untuk operator jaringan Anda.</string>
-    <string name="suw_back_button_label">Kembali</string>
-    <string name="suw_more_button_label">Lainnya</string>
-    <string name="suw_next_button_label">Berikutnya</string>
-</resources>
