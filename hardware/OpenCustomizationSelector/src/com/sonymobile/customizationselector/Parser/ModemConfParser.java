@@ -13,12 +13,13 @@ public class ModemConfParser {
 
     private static final String LEGACY_PATH = "/etc/customization/modem";
     private static final String MODEM_CONF = "/modem.conf";
-    private static final String OEM_PATH = "/modem-config";
+    private static final String CONF_PATH = "/modem-config";
+    private static final String OEM_PATH = "/ocm";
 
     public static String parseModemConf(String conf) {
         CSLog.d(TAG, "setupFilePaths - configId: " + conf);
 
-        File oemDir = new File(Environment.getOemDirectory() + OEM_PATH);
+        File oemDir = new File(OEM_PATH + CONF_PATH);
         StringBuilder filePath = new StringBuilder();
 
         if (oemDir.exists() && oemDir.isDirectory()) {
