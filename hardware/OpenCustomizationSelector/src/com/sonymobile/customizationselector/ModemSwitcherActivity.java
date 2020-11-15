@@ -19,10 +19,6 @@ public class ModemSwitcherActivity extends Activity {
 
     private static final String INITIAL_MODEM_PREF = "initialModem";
 
-    // TODO: Usage not found
-    public static final String PREFERENCE_ENABLE_MODEM_SWAP_ON_SIM = "enableModemSwapOnSIM";
-    private static final int COMPONENT_ENABLE_DISABLE_TIME_OFF = 8000;
-
     private String mInitialModem;
     private ListView mModemListView;
     private ModemSwitcher mModemSwitcher;
@@ -51,9 +47,7 @@ public class ModemSwitcherActivity extends Activity {
         Builder builder = new Builder(this);
         builder.setTitle(R.string.debug_verify_title).setMessage(getResources().getString(R.string.debug_verify_text, str));
         builder.setPositiveButton("OK", (dialogInterface, i) -> applyModem(str));
-        // TODO: Why would it decompile empty lambda ? Unless some logic error
-        builder.setNegativeButton("Cancel", (dialogInterface, i) -> {
-        });
+        builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.create().show();
     }
 
@@ -112,7 +106,7 @@ public class ModemSwitcherActivity extends Activity {
                 }
             });
         } catch (Exception e) {
-            CSLog.d(TAG, "Not possible to read the modem files");
+            CSLog.e(TAG, "Not possible to read the modem files", e);
             finish();
         }
     }

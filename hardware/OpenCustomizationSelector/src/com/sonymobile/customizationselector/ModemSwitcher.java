@@ -142,7 +142,6 @@ public class ModemSwitcher {
         }
     }
 
-    // TODO: Update this to put device-default modem on 1st position i.e. index 0
     public String[] getAvailableModemConfigurations() {
         if (mCachedModemConfigurations == null) {
             File file = new File(MODEM_FS_PATH);

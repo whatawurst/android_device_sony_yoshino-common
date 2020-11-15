@@ -25,7 +25,7 @@ public class CustomizationSelectorService extends IntentService {
 
                 if (!CommonUtil.isDirectBootEnabled()) {
                     UserManager userManager = context.getSystemService(UserManager.class);
-                    if (!(userManager == null || userManager.isUserUnlocked())) {
+                    if (userManager != null && !userManager.isUserUnlocked()) {
                         CSLog.d(TAG, "user is locked. private app data storage is not available.");
                         return;
                     }
@@ -46,9 +46,8 @@ public class CustomizationSelectorService extends IntentService {
                     configurator.saveConfigurationKey();
                     CSLog.d(TAG, "isNewConfigurationNeeded - No new configuration.");
                 }
-            } finally {
-                // TODO: Okay... what is this O_o
-                Class cls = CustomizationSelectorService.class;
+            } catch (Exception e) {
+                CSLog.e(TAG, "evaluateCarrierBundle - ERROR: ", e);
             }
         }
     }
