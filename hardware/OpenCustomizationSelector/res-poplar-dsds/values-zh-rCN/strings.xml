@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="customization_restart_desc_txt">现在您的设备将重新启动以对网络运营商进行优化。</string>
-    <string name="suw_back_button_label">返回</string>
-    <string name="suw_more_button_label">更多</string>
-    <string name="suw_next_button_label">下一步</string>
-</resources>

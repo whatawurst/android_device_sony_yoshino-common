@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="customization_restart_desc_txt">तुमच्‍या नेटवर्क चालकाच्‍या अनुकूलनासाठी तुमचे उपकरण पुन्हा सुरू होत आहे.</string>
-    <string name="suw_back_button_label">मागे</string>
-    <string name="suw_more_button_label">अधिक</string>
-    <string name="suw_next_button_label">पुढील</string>
-</resources>

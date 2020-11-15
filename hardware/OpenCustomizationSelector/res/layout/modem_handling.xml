@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/debug_initial_modem_txt"
+        android:textAppearance="@android:style/TextAppearance.Material.Title" />
+
+    <TextView
+        android:id="@+id/initial_modem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:textAppearance="@android:style/TextAppearance.Material.Body1"
+        android:textColor="@color/textColor" />
+
+    <Button
+        android:id="@+id/restore_button"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/debug_button_txt"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/debug_current_modem_txt"
+        android:textAppearance="@android:style/TextAppearance.Material.Title" />
+
+    <TextView
+        android:id="@+id/current_modem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:paddingTop="4dp"
+        android:textAppearance="@android:style/TextAppearance.Material.Body1"
+        android:textColor="@color/textColor" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/debug_swap_modem_txt"
+        android:textAppearance="@android:style/TextAppearance.Material.Title" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/debug_select_modem_restart_txt"
+        android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+    <ListView
+        android:id="@+id/modem_list"
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="0.31" />
+
+</LinearLayout>

@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<objectAnimator android:interpolator="@drawable/$$suw_fourcolor_progress_bar__3__0" android:duration="1983" android:repeatCount="infinite" android:valueFrom="0" android:valueTo="355" android:valueType="floatType" android:propertyName="rotation" xmlns:aapt="http://schemas.android.com/aapt"
-  xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="customization_restart_desc_txt">ਹੁਣ ਤੁਹਾਡੇ ਉਪਕਰਣ ਨੂੰ ਤੁਹਾਡੇ ਨੈਟਵਰਕ ਆਪਰੇਟਰ ਲਈ ਪੂਰਾ ਗੁਣਕਾਰੀ ਬਣਾਉਣ ਵਾਸਤੇ ਮੁੜ ਸ਼ੁਰੂ ਕੀਤਾ ਜਾਵੇਗਾ।</string>
-    <string name="suw_back_button_label">ਪਿੱਛੇ</string>
-    <string name="suw_more_button_label">ਹੋਰ</string>
-    <string name="suw_next_button_label">ਅੱਗੇ</string>
-</resources>

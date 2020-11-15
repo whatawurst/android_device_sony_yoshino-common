@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView android:textAppearance="@android:style/TextAppearance.Material.Title" android:id="@id/initial_modem" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/activity_vertical_margin" android:text="@string/debug_single_modem_fs_txt" android:layout_marginStart="@dimen/activity_horizontal_margin" />
-</LinearLayout>

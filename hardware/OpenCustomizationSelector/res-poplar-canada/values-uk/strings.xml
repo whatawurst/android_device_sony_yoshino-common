@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="customization_restart_desc_txt">Пристрій буде перезапущено для оптимізації роботи оператора мережі.</string>
-    <string name="suw_back_button_label">Назад</string>
-    <string name="suw_more_button_label">Більше</string>
-    <string name="suw_next_button_label">Далі</string>
-</resources>

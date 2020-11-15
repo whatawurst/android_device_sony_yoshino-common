@@ -36,34 +36,37 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.preference_preference \
     androidx.appcompat_appcompat
 
-### Include device specific resources
+LOCAL_RESOURCE_DIR := \
+    $(LOCAL_PATH)/res
+
+### Include device specific config xml file
 ifeq ($(TARGET_DEVICE),lilac)
-    LOCAL_RESOURCE_DIR := \
+    LOCAL_RESOURCE_DIR += \
         $(LOCAL_PATH)/res-lilac
 endif
 
 ifeq ($(TARGET_DEVICE),poplar)
-    LOCAL_RESOURCE_DIR := \
+    LOCAL_RESOURCE_DIR += \
         $(LOCAL_PATH)/res-poplar
 endif
 
 ifeq ($(TARGET_DEVICE),poplar_canada)
-    LOCAL_RESOURCE_DIR := \
+    LOCAL_RESOURCE_DIR += \
         $(LOCAL_PATH)/res-poplar-canada
 endif
 
 ifeq ($(TARGET_DEVICE),poplar_dsds)
-    LOCAL_RESOURCE_DIR := \
+    LOCAL_RESOURCE_DIR += \
         $(LOCAL_PATH)/res-poplar-dsds
 endif
 
 ifeq ($(TARGET_DEVICE),maple)
-    LOCAL_RESOURCE_DIR := \
+    LOCAL_RESOURCE_DIR += \
         $(LOCAL_PATH)/res-poplar
 endif
 
 ifeq ($(TARGET_DEVICE),maple_dsds)
-    LOCAL_RESOURCE_DIR := \
+    LOCAL_RESOURCE_DIR += \
         $(LOCAL_PATH)/res-poplar-dsds
 endif
 
