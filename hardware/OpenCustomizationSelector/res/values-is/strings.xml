@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">Tækið þitt endurræsist svo það sé sem best stillt fyrir símafyrirtækið þitt.</string>
-    <string name="suw_back_button_label">Til baka</string>
-    <string name="suw_more_button_label">Meira</string>
-    <string name="suw_next_button_label">Áfram</string>
+    <string name="back_button_label">Til baka</string>
+    <string name="more_button_label">Meira</string>
+    <string name="next_button_label">Áfram</string>
 </resources>

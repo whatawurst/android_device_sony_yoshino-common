@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">আপনার নেটওয়ার্ক অপারেটরের জন্য সর্বাপেক্ষা অনুকূল করতে এখন আপনার যন্ত্রটির পুনর্সূচনা করা হবে।</string>
-    <string name="suw_back_button_label">ফিরুন</string>
-    <string name="suw_more_button_label">আরও</string>
-    <string name="suw_next_button_label">পরবর্তী</string>
+    <string name="back_button_label">ফিরুন</string>
+    <string name="more_button_label">আরও</string>
+    <string name="next_button_label">পরবর্তী</string>
 </resources>

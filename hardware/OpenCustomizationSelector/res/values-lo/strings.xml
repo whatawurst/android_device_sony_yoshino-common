@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="suw_back_button_label">ກັບຄືນ</string>
-    <string name="suw_more_button_label">ເພີ່ມເຕີມ</string>
-    <string name="suw_next_button_label">ຕໍ່​ໄປ</string>
+    <string name="back_button_label">ກັບຄືນ</string>
+    <string name="more_button_label">ເພີ່ມເຕີມ</string>
+    <string name="next_button_label">ຕໍ່​ໄປ</string>
 </resources>

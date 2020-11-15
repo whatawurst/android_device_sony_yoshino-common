@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">आपके नेटवर्क ऑपरेटर के अनुकूल बनाने के लिए आपका डिवाइस अब दोबारा प्रारंभ होगा।</string>
-    <string name="suw_back_button_label">पीछे</string>
-    <string name="suw_more_button_label">अधिक</string>
-    <string name="suw_next_button_label">आगे बढ़ें</string>
+    <string name="back_button_label">पीछे</string>
+    <string name="more_button_label">अधिक</string>
+    <string name="next_button_label">आगे बढ़ें</string>
 </resources>

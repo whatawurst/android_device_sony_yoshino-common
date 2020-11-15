@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">Seade taaskäivitatakse võrguoperaatoriga optimeerimiseks.</string>
-    <string name="suw_back_button_label">Tagasi</string>
-    <string name="suw_more_button_label">Rohkem</string>
-    <string name="suw_next_button_label">Edasi</string>
+    <string name="back_button_label">Tagasi</string>
+    <string name="more_button_label">Rohkem</string>
+    <string name="next_button_label">Edasi</string>
 </resources>

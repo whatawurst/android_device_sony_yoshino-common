@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">Thiết bị của bạn giờ sẽ khởi động lại để được tối ưu hóa đối với nhà dung cấp mạng.</string>
-    <string name="suw_back_button_label">Quay lại</string>
-    <string name="suw_more_button_label">Khác</string>
-    <string name="suw_next_button_label">Tiếp theo</string>
+    <string name="back_button_label">Quay lại</string>
+    <string name="more_button_label">Khác</string>
+    <string name="next_button_label">Tiếp theo</string>
 </resources>

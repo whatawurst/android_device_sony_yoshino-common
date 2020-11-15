@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customization_restart_desc_txt">Ihr Gerät wird jetzt neu gestartet und für Ihren Netzbetreiber optimiert.</string>
-    <string name="suw_back_button_label">Zurück</string>
-    <string name="suw_more_button_label">Mehr</string>
-    <string name="suw_next_button_label">Weiter</string>
+    <string name="back_button_label">Zurück</string>
+    <string name="more_button_label">Mehr</string>
+    <string name="next_button_label">Weiter</string>
 </resources>

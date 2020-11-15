@@ -12,7 +12,7 @@
     <string name="debug_verify_title">[νéŕîƒý ḿöðéḿ šéļéçţîöñ one two three]</string>
     <string name="reboot_reason">[ÇûšţöḿîžåţîöñŠéļéçţöŕ ŵîļļ ŕéɓööţ ðéVîçé ţö åþþļý ñéŵ çöñƒîĝûŕåţîöñ one two three four five six seven eight]</string>
     <string name="reboot_reason_modem_debug">[Ðéɓûĝḿéñû - ÇûšţöḿîžåţîöñŠéļéçţöŕ ŵîļļ ŕéɓööţ ðéVîçé ţö åþþļý ñéŵ ḿöðéḿ one two three four five six seven eight]</string>
-    <string name="suw_back_button_label">[βåçķ one]</string>
-    <string name="suw_more_button_label">[Ḿöŕé one]</string>
-    <string name="suw_next_button_label">[Ñéхţ one]</string>
+    <string name="back_button_label">[βåçķ one]</string>
+    <string name="more_button_label">[Ḿöŕé one]</string>
+    <string name="next_button_label">[Ñéхţ one]</string>
 </resources>
