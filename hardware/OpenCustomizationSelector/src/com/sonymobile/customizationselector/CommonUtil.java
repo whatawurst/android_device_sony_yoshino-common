@@ -87,7 +87,7 @@ class CommonUtil {
             CSLog.d(TAG, "SimOperator= " + simOperator + ", IMSI= " + subscriberId + ", ICCID = " + simSerialNumber
                     + ", SPN = " + simOperatorName + ", gid1 = " + groupIdLevel1);
 
-            if (!(TextUtils.isEmpty(simOperator) || TextUtils.isEmpty(subscriberId) || TextUtils.isEmpty(simSerialNumber))) {
+            if (!TextUtils.isEmpty(simOperator) && !TextUtils.isEmpty(subscriberId) && !TextUtils.isEmpty(simSerialNumber)) {
                 CSLog.d(TAG, "isMandatorySimParamsAvailable: true");
                 return true;
             }
@@ -102,7 +102,7 @@ class CommonUtil {
         if (telephonyManager != null && subID != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             int slotIndex = SubscriptionManager.getSlotIndex(subID);
             if (slotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
-                boolean isLoaded = telephonyManager.getSimState(slotIndex) == MIN_MCC_MNC_LENGTH
+                boolean isLoaded = telephonyManager.getSimState(slotIndex) == TelephonyManager.SIM_STATE_READY
                         && !TextUtils.isEmpty(telephonyManager.getSubscriberId(subID))
                         && !TextUtils.isEmpty(telephonyManager.getSimOperator(subID))
                         && telephonyManager.getSimOperator(subID).length() >= MIN_MCC_MNC_LENGTH;

@@ -27,7 +27,7 @@ public class CustomizationSelectorSUWActivity extends Activity {
     private static final int MSG_CONTINUE = 0;
     private static final int MSG_REBOOT = 1;
 
-    private BroadcastReceiver mSimReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mSimReceiver = new BroadcastReceiver() {
         private static final String TAG = "CustomizationSelectorSUWActivity - SimReceiver";
 
         @Override
@@ -72,6 +72,7 @@ public class CustomizationSelectorSUWActivity extends Activity {
             return sHandler;
         }
 
+        @Override
         public void handleMessage(Message message) {
             removeCallbacksAndMessages(null);
             CustomizationSelectorSUWActivity customizationSelectorSUWActivity = this.weakActivity.get();
@@ -157,10 +158,7 @@ public class CustomizationSelectorSUWActivity extends Activity {
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        setContentView(R.layout.suw);
         disableUI();
-        // TODO:
-        //SystemBarHelper.hideSystemBars(getWindow());
         mTelephonyManager = getSystemService(TelephonyManager.class);
         if (CommonUtil.isDualSim(this) || !isSimWorking()) {
             continueSetupWizard();

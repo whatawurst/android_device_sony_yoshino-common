@@ -44,7 +44,7 @@ public class DSDataSubContentJob extends JobService {
         JOB_INFO = builder.build();
     }
 
-    static void scheduleJob(Context context) {
+    public static void scheduleJob(Context context) {
         int schedule = context.getSystemService(JobScheduler.class).schedule(JOB_INFO);
         CSLog.d(TAG, "Schedule job (" + JOB_INFO.getId() + ") - result:" + schedule);
     }
