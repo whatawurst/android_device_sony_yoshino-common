@@ -72,7 +72,7 @@ class CommonUtil {
 
     public static boolean isDualSim(Context context) {
         TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
-        return telephonyManager != null && telephonyManager.getActiveModemCount() > 1;
+        return telephonyManager != null && telephonyManager.getPhoneCount() > 1;
     }
 
     public static boolean isMandatorySimParamsAvailable(Context context, int i) {
