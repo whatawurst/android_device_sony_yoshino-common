@@ -45,6 +45,17 @@ public class CustomizationSelectorService extends IntentService {
                 } else {
                     configurator.saveConfigurationKey();
                     CSLog.d(TAG, "isNewConfigurationNeeded - No new configuration.");
+
+                    if (configurator.isFirstApply()) {
+                        context.getPackageManager().setComponentEnabledSetting(new ComponentName(context, CustomizationSelectorActivity.class),
+                                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+
+                        if (isUserSetupComplete(context)) {
+                            context.startActivity(new Intent(Intent.ACTION_MAIN, null).addCategory(Intent.CATEGORY_HOME).addFlags(270565376));
+                        }
+                    } else {
+                        configurator.reApplyModem();
+                    }
                 }
             } catch (Exception e) {
                 CSLog.e(TAG, "evaluateCarrierBundle - ERROR: ", e);

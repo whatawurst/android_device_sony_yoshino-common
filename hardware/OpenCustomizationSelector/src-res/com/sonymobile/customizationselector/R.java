@@ -36,6 +36,7 @@ public final class R {
 
     public static final class style {
         public static final int AppTheme = 2653784;
+        public static final int DialogTheme = 2653782;
     }
 
     public static final class xml {

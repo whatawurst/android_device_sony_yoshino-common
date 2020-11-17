@@ -24,7 +24,7 @@ public class DSDataSubContentJob extends JobService {
     private static final String TAG = DSDataSubContentJob.class.getSimpleName();
     private ConfigurationTask mConfigurationTask;
 
-    private class ConfigurationTask extends AsyncTask<Void, Context, Void> {
+    private static class ConfigurationTask extends AsyncTask<Void, Context, Void> {
         private final Context mContext;
 
         public ConfigurationTask(Context context) {
