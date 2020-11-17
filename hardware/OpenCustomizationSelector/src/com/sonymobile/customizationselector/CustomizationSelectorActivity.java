@@ -1,21 +1,18 @@
 package com.sonymobile.customizationselector;
 
-import static android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD;
-import static android.view.WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.StatusBarManager;
-import android.content.ComponentName;
-import android.content.DialogInterface;
+import android.content.*;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.util.Log;
+
+import static android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD;
+import static android.view.WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG;
 
 public class CustomizationSelectorActivity extends Activity implements OnClickListener {
 
@@ -25,6 +22,8 @@ public class CustomizationSelectorActivity extends Activity implements OnClickLi
     private Configurator mConfigurator;
     private UserPresentReceiver mUserPresentReceiver;
 
+    private boolean isFirstApplyReboot = false;
+
     private void disableActivity() {
         getPackageManager().setComponentEnabledSetting(new ComponentName(this, CustomizationSelectorActivity.class),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
@@ -32,12 +31,13 @@ public class CustomizationSelectorActivity extends Activity implements OnClickLi
 
     private void startDialog() {
         if (mAlertDialog == null) {
-            Builder builder = new Builder(this, R.style.AppTheme);
+            Builder builder = new Builder(this, R.style.DialogTheme);
             builder.setCancelable(false);
             builder.setMessage(R.string.customization_restart_desc_txt);
             builder.setPositiveButton("OK", this);
             mAlertDialog = builder.create();
             mAlertDialog.setCanceledOnTouchOutside(false);
+            mAlertDialog.setCancelable(false);
             mAlertDialog.getWindow().setType(TYPE_KEYGUARD_DIALOG);
         }
         if (!mAlertDialog.isShowing()) {
@@ -51,11 +51,14 @@ public class CustomizationSelectorActivity extends Activity implements OnClickLi
         (getSystemService(StatusBarManager.class)).disable(StatusBarManager.DISABLE_MASK);
     }
 
+    @Override
     public void onClick(DialogInterface dialogInterface, int i) {
         CSLog.d(TAG, "onClick - Reboot");
         disableActivity();
-        mConfigurator.set();
-        mConfigurator.saveConfigurationKey();
+        if (!isFirstApplyReboot) {
+            mConfigurator.set();
+            mConfigurator.saveConfigurationKey();
+        }
         Log.i(getString(R.string.app_name), getString(R.string.customization_restart_desc_txt));
         (getSystemService(PowerManager.class)).reboot(getString(R.string.reboot_reason));
     }
@@ -66,12 +69,32 @@ public class CustomizationSelectorActivity extends Activity implements OnClickLi
         CSLog.d(TAG, "onCreate()");
         mConfigurator = new Configurator(this, CommonUtil.getCarrierBundle(this));
 
-        if (CommonUtil.isSIMLoaded(this, CommonUtil.getDefaultSubId(this)) && mConfigurator.isNewConfigurationNeeded()) {
-            disableUI();
-            setFinishOnTouchOutside(false);
-            setupUserPresent();
-            startDialog();
-            return;
+        if (CommonUtil.isSIMLoaded(this, CommonUtil.getDefaultSubId(this))) {
+            if (mConfigurator.isNewConfigurationNeeded()) {
+                isFirstApplyReboot = false;
+                disableUI();
+                setFinishOnTouchOutside(false);
+                setupUserPresent();
+                startDialog();
+
+                mConfigurator.getTargetContext().getSharedPreferences(Configurator.PREF_PKG, Context.MODE_PRIVATE).edit()
+                        .putBoolean("first_boot_cs", false).apply();
+                return;
+            }
+
+            if (mConfigurator.isFirstApply()) {
+                CSLog.d(TAG, "onCreate(): First apply is true, re-applying");
+                isFirstApplyReboot = true;
+                mConfigurator.reApplyModem();
+                mConfigurator.getTargetContext().getSharedPreferences(Configurator.PREF_PKG, Context.MODE_PRIVATE).edit()
+                        .putBoolean("first_boot_cs", false).apply();
+
+                disableUI();
+                setFinishOnTouchOutside(false);
+                setupUserPresent();
+                startDialog();
+                return;
+            }
         }
 
         disableActivity();

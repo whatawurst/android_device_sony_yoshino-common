@@ -47,7 +47,7 @@ public class ModemConfiguration {
     public String getModemConfigurationNeeded(String variant) {
         CSLog.d(TAG, "updateModem - modemVariant = " + variant);
         try {
-            String currentModemConfig = mModemSwitcher.getCurrentModemConfig();
+            String currentModemConfig = ModemSwitcher.getCurrentModemConfig();
             CSLog.d(TAG, "Current modem: " + currentModemConfig);
             if (ModemSwitcher.SINGLE_MODEM_FS.equalsIgnoreCase(currentModemConfig)) {
                 return "";

@@ -60,7 +60,7 @@ public class ModemSwitcherActivity extends Activity {
         mModemSwitcher = new ModemSwitcher();
         try {
             int i2;
-            String currentModem = mModemSwitcher.getCurrentModemConfig().replace(ModemSwitcher.MODEM_FS_PATH, "");
+            String currentModem = ModemSwitcher.getCurrentModemConfig().replace(ModemSwitcher.MODEM_FS_PATH, "");
             CSLog.d(TAG, "current modem" + currentModem);
 
             String[] availableModemConfigurations = mModemSwitcher.getAvailableModemConfigurations();

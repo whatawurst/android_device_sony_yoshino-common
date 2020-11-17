@@ -169,7 +169,7 @@ public class ModemSwitcher {
         return Arrays.copyOf(mCachedModemConfigurations, mCachedModemConfigurations.length);
     }
 
-    public String getCurrentModemConfig() throws IOException {
+    public static String getCurrentModemConfig() throws IOException {
         ModemStatus readModemAndStatus = readModemAndStatus();
 
         if (readModemAndStatus != null && readModemAndStatus.modemStatusSuccessful) {
@@ -213,7 +213,6 @@ public class ModemSwitcher {
         }
 
         if (hasModemConfig) {
-            String modemFileName;
             try {
                 if (getCurrentModemConfig().equals(modemConfig)) {
                     CSLog.e(TAG, "Selected modem configuration is already active!: " + modemConfig);
@@ -223,7 +222,7 @@ public class ModemSwitcher {
                 CSLog.w(TAG, "Unable to read out current configuration");
             }
 
-            modemFileName = new File(modemConfig).getName();
+            String modemFileName = new File(modemConfig).getName();
             if (writeModemToMiscTA(modemFileName)) {
                 CSLog.d(TAG, "Modem set " + modemFileName);
                 mConfigurationSet = true;
@@ -236,7 +235,7 @@ public class ModemSwitcher {
         return false;
     }
 
-    public boolean writeModemToMiscTA(String str) {
+    public static boolean writeModemToMiscTA(String str) {
         byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
         byte[] bArr = new byte[(bytes.length + MODEM_MAGIC_COMMAND_LENGTH)];
         bArr[0] = MODEM_MISC_TA_MAGIC1;
