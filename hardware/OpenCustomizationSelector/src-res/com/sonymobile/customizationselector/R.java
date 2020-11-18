@@ -7,18 +7,25 @@ public final class R {
         public static final int activity_vertical_margin = 2131099649;
     }
 
+    public static final class drawable {
+        public static final int ic_baseline_sim_card_24 = 2131099650;
+    }
+
     public static final class id {
         public static final int initial_modem = 2131230727;
         public static final int restore_button = 2131230732;
         public static final int current_modem = 2131230723;
         public static final int modem_list = 2131230729;
         public static final int log_text = 2131230730;
+        public static final int m_report_text = 2131230731;
+        public static final int m_status_text = 2131230732;
     }
 
     public static final class layout {
         public static final int modem_handling = 2131361792;
         public static final int modem_handling_single = 2131361793;
         public static final int activity_log = 2131361794;
+        public static final int activity_status = 2131361795;
     }
 
     public static final class string {
@@ -34,6 +41,9 @@ public final class R {
         public static final int debug_verify_title = 2131427337;
         public static final int reboot_reason = 2131427338;
         public static final int reboot_reason_modem_debug = 2131427339;
+        public static final int modem_switcher_report = 2131427340;
+        public static final int modem_switcher_status = 2131427341;
+        public static final int file_not_found = 2131427342;
     }
 
     public static final class xml {
