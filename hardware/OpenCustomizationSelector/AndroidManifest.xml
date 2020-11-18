@@ -85,7 +85,7 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <receiver android:name="com.sonymobile.customizationselector.EventReceiver">
-            <intent-filter>
+            <intent-filter android:priority="999">
                 <action android:name="android.telephony.action.CARRIER_CONFIG_CHANGED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -95,5 +95,7 @@
                 <action android:name="android.intent.action.MASTER_CLEAR_NOTIFICATION" />
             </intent-filter>
         </receiver>
+        <receiver android:name="com.sonymobile.customizationselector.NotificationReceiver" />
+
     </application>
 </manifest>
