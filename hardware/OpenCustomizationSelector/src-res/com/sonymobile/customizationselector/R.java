@@ -36,11 +36,6 @@ public final class R {
         public static final int reboot_reason_modem_debug = 2131427339;
     }
 
-    public static final class style {
-        public static final int AppTheme = 2653784;
-        public static final int DialogTheme = 2653782;
-    }
-
     public static final class xml {
         public static final int configuration_selectors = 2131623936;
         public static final int service_providers = 2131623937;
