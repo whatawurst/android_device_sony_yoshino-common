@@ -90,7 +90,6 @@
         <mcc>208</mcc>
         <mnc>01</mnc>
         <gid1>ffffffff</gid1>
-        <gid2>ffffffff</gid2>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S11.5">
         <mcc>208</mcc>
@@ -1588,7 +1587,6 @@
         <mnc>03</mnc>
         <sp>Pelephone</sp>
         <gid1>25</gid1>
-        <gid2>46</gid2>
         <imsi>42503</imsi>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S4508.2">
@@ -2413,6 +2411,10 @@
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S9154.1">
         <mcc>259</mcc>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9159.1">
+        <mcc>440</mcc>
+        <mnc>11</mnc>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S9161.1">
         <mcc>238</mcc>

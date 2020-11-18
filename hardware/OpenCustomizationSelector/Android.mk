@@ -20,8 +20,6 @@ LOCAL_MODULE_TAGS := optional
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
-### TODO: Whether to add jar dependency from vendor by adding java import module in .bp file
-###       or directly compile with app like below
 LOCAL_SRC_FILES += $(call all-java-files-under, src-misc-ta)
 
 LOCAL_PACKAGE_NAME := CustomizationSelector
@@ -39,36 +37,5 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
 
 LOCAL_RESOURCE_DIR := \
     $(LOCAL_PATH)/res
-
-### Include device specific config xml file
-ifeq ($(TARGET_DEVICE),lilac)
-    LOCAL_RESOURCE_DIR += \
-        $(LOCAL_PATH)/res-lilac
-endif
-
-ifeq ($(TARGET_DEVICE),poplar)
-    LOCAL_RESOURCE_DIR += \
-        $(LOCAL_PATH)/res-poplar
-endif
-
-ifeq ($(TARGET_DEVICE),poplar_canada)
-    LOCAL_RESOURCE_DIR += \
-        $(LOCAL_PATH)/res-poplar-canada
-endif
-
-ifeq ($(TARGET_DEVICE),poplar_dsds)
-    LOCAL_RESOURCE_DIR += \
-        $(LOCAL_PATH)/res-poplar-dsds
-endif
-
-ifeq ($(TARGET_DEVICE),maple)
-    LOCAL_RESOURCE_DIR += \
-        $(LOCAL_PATH)/res-poplar
-endif
-
-ifeq ($(TARGET_DEVICE),maple_dsds)
-    LOCAL_RESOURCE_DIR += \
-        $(LOCAL_PATH)/res-poplar-dsds
-endif
 
 include $(BUILD_PACKAGE)
