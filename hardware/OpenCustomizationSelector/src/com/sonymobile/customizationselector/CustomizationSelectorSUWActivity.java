@@ -1,8 +1,5 @@
 package com.sonymobile.customizationselector;
 
-import static android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD;
-import static android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
-
 import android.app.Activity;
 import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
@@ -15,9 +12,11 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-//import com.android.setupwizardlib.util.SystemBarHelper;
 
 import java.lang.ref.WeakReference;
+
+import static android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD;
+import static android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
 
 public class CustomizationSelectorSUWActivity extends Activity {
 
