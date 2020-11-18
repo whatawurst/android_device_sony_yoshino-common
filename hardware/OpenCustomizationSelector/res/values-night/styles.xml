@@ -6,8 +6,4 @@
         <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:navigationBarDividerColor">@color/colorPrimary</item>
     </style>
-
-    <style name="DialogTheme" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
 </resources>
