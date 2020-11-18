@@ -12,11 +12,13 @@ public final class R {
         public static final int restore_button = 2131230732;
         public static final int current_modem = 2131230723;
         public static final int modem_list = 2131230729;
+        public static final int log_text = 2131230730;
     }
 
     public static final class layout {
         public static final int modem_handling = 2131361792;
         public static final int modem_handling_single = 2131361793;
+        public static final int activity_log = 2131361794;
     }
 
     public static final class string {
