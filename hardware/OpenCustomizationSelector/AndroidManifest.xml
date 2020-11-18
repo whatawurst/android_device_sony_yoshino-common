@@ -26,9 +26,16 @@
         <uses-library android:name="com.sonymobile.miscta.api" />
 
         <activity
+            android:name="com.sonymobile.customizationselector.StatusActivity"
+            android:theme="@style/AppTheme"
+            android:label="Status Activity"
+            android:icon="@drawable/debug_icon"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.sonymobile.customizationselector.LogActivity"
             android:theme="@style/AppTheme"
-            android:label="Log Acitivty"
+            android:label="Log Activity"
             android:icon="@drawable/debug_icon"
             android:screenOrientation="portrait" />
 
