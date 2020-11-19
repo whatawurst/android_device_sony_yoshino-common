@@ -44,10 +44,6 @@ PRODUCT_PACKAGES += \
     libipanat \
     liboffloadhal
 
-### NETWORKSWITCHER APK
-PRODUCT_PACKAGES += \
-    NetworkSwitcher
-
 ### NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
