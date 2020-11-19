@@ -27,7 +27,7 @@ public class Configurator {
     private static final String PROP_SIM_CONFIG_ID = "persist.sys.sim_config_ids";
     private static final String PROP_SW = "ro.semc.version.sw";
     private static final String PROP_SW_REV = "ro.semc.version.sw_revision";
-    private static final String PROP_TA_AC_VERSION = "ro.semc.version.cust.active";
+    public static final String PROP_TA_AC_VERSION = "ro.semc.version.cust.active";
 
     private static final int TA_AC_VERSION = 2212;
     private static final int TA_FOTA_INTERNAL = 2404;

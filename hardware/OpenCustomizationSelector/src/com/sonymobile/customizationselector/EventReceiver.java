@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -73,11 +74,14 @@ public class EventReceiver extends BroadcastReceiver {
         if (Settings.System.getInt(context.getContentResolver(), "cs_notification", 1) == 1) {
             manager.notify(1, new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setContentTitle(CHANNEL_ID)
-                    .setContentText("Status: " + status[0] + "\nConfig: " + status[1] + "\nIMS: " + ims)
+                    .setContentText("Status: ...")
                     .setSmallIcon(R.drawable.ic_baseline_sim_card_24)
                     .setOngoing(false)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setSound(null)
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText("Status: " + status[0] + "\nConfig: " + status[1] +
+                                    "\nCust ID: " + SystemProperties.get(Configurator.PROP_TA_AC_VERSION, "N/A") + "\nIMS: " + ims))
                     .setColorized(true)
                     .addAction(R.drawable.ic_baseline_sim_card_24, "Disable Notification",
                             PendingIntent.getBroadcast(context, 1, new Intent(context, NotificationReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT))
