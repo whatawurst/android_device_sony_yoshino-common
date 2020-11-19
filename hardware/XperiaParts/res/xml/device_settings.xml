@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2020, Shashank Verma (shank03) <shashank.verma2002@gmail.com>
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,38 +27,33 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-            android:key="ns"
-            android:title="@string/network_switcher">
+            android:key="cs"
+            android:title="@string/customization_selector">
 
         <Preference
                 android:icon="@drawable/ic_outline_info"
-                android:key="ns_status"
-                android:title="@string/status" />
+                android:key="cs_status"
+                android:title="@string/status"
+                android:summary="Show modem status" />
 
         <SwitchPreference
                 android:defaultValue="true"
                 android:icon="@drawable/ic_round_notifications"
-                android:key="ns_notification"
+                android:key="cs_notification"
                 android:summary="@string/sony_modem_notification_summary"
                 android:title="@string/sony_modem_notification" />
-
-        <Preference
-                android:icon="@drawable/ic_round_notes"
-                android:key="ns_log"
-                android:summary="@string/logs_summary"
-                android:title="@string/logs"/>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-            android:key="cs"
-            android:title="@string/customization_selector">
 
         <Preference
                 android:icon="@drawable/ic_round_open"
                 android:key="modem_sw"
                 android:summary="@string/modem_switcher_activity_summary"
                 android:title="@string/modem_switcher_activity" />
+
+        <Preference
+                android:icon="@drawable/ic_round_notes"
+                android:key="cs_log"
+                android:summary="@string/logs_summary"
+                android:title="@string/logs" />
 
     </PreferenceCategory>
 

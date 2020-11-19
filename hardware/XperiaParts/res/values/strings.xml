@@ -25,8 +25,8 @@
     <string name="sony_modem_notification">Sony Modem Notification</string>
     <string name="sony_modem_notification_summary">Show notification on boot</string>
     <string name="logs">Logs</string>
-    <string name="logs_summary">/data/user_de/0/com.yoshino.networkswitcher/files/ns.log</string>
+    <string name="logs_summary">/data/user_de/0/com.sonymobile.customizationselector/files/cs.log</string>
     <string name="customization_selector">Customization Selector</string>
     <string name="modem_switcher_activity">Modem Switcher Activity</string>
-    <string name="modem_switcher_activity_summary">Note: Activity may not open if you have default modem or choices aren\'t available</string>
+    <string name="modem_switcher_activity_summary">Select your carrier specific modem if incorrect modem is in use</string>
 </resources>

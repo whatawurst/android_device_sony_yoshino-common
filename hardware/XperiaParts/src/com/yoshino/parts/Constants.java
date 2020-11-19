@@ -21,7 +21,7 @@ public class Constants {
     public static final String GLOVE_MODE = "glove_mode";
     public static final String GLOVE_PROP = "persist.sys.touch.glove_mode";
 
-    public static final String NS_STATUS = "ns_status";
-    public static final String NS_NOTIFICATION = "ns_notification";
-    public static final String NS_LOG = "ns_log";
+    public static final String CS_LOG = "cs_log";
+    public static final String CS_STATUS = "cs_status";
+    public static final String CS_NOTIFICATION = "cs_notification";
 }
