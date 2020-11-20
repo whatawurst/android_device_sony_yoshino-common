@@ -147,7 +147,7 @@ public class Configurator {
                     CSLog.i(TAG, "reApplyModem - 2405 was re-written successfully");
 
                     try {
-                        MiscTA.write(TA_FOTA_INTERNAL, "".getBytes(StandardCharsets.UTF_8));
+                        MiscTA.write(TA_FOTA_INTERNAL, "temporary_modem".getBytes(StandardCharsets.UTF_8));
                         CSLog.i(TAG, "reApplyModem - Modem Switcher 2404 cleared");
                     } catch (MiscTaException e) {
                         CSLog.e(TAG, "reApplyModem - There was an error clearing 2404: ", e);
