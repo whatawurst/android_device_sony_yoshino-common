@@ -17,8 +17,9 @@ public final class R {
         public static final int current_modem = 2131230723;
         public static final int modem_list = 2131230729;
         public static final int log_text = 2131230730;
-        public static final int m_report_text = 2131230731;
-        public static final int m_status_text = 2131230732;
+        public static final int log_pr = 2131230731;
+        public static final int m_report_text = 2131230732;
+        public static final int m_status_text = 2131230733;
     }
 
     public static final class layout {
