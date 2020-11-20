@@ -9,15 +9,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.SystemProperties;
 import android.provider.Settings;
-import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import androidx.core.app.NotificationCompat;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.List;
 
 public class EventReceiver extends BroadcastReceiver {
 
@@ -58,16 +55,6 @@ public class EventReceiver extends BroadcastReceiver {
     private void notifyStatus(Context context) {
         String[] status = readModemFile();
 
-        int subID = SubscriptionManager.getDefaultSubscriptionId();
-        List<SubscriptionInfo> list = SubscriptionManager.from(context).getActiveSubscriptionInfoList();
-        if (list.size() >= 1) {
-            subID = list.get(0).getSubscriptionId();
-        }
-
-        String ims = context.getSystemService(TelephonyManager.class).createForSubscriptionId(subID).isImsRegistered(subID)
-                ? "Registered" : "Not yet registered";
-        ims = isModemDefault(status[1]) ? ims.replace("yet ", "") + " (default modem)" : ims;
-
         NotificationManager manager = context.getSystemService(NotificationManager.class);
         createChannel(manager);
 
@@ -81,7 +68,7 @@ public class EventReceiver extends BroadcastReceiver {
                     .setSound(null)
                     .setStyle(new NotificationCompat.BigTextStyle()
                             .bigText("Status: " + status[0] + "\nConfig: " + status[1] +
-                                    "\nCust ID: " + SystemProperties.get(Configurator.PROP_TA_AC_VERSION, "N/A") + "\nIMS: " + ims))
+                                    "\nCust ID: " + SystemProperties.get(Configurator.PROP_TA_AC_VERSION, "N/A")))
                     .setColorized(true)
                     .addAction(R.drawable.ic_baseline_sim_card_24, "Disable Notification",
                             PendingIntent.getBroadcast(context, 1, new Intent(context, NotificationReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT))
@@ -120,18 +107,5 @@ public class EventReceiver extends BroadcastReceiver {
             e.printStackTrace();
             return stat;
         }
-    }
-
-    public boolean isModemDefault(String modem) {
-        String[] DEFAULT_MODEMS = {"amss_fsg_lilac_tar.mbn",
-                "amss_fsg_poplar_tar.mbn", "amss_fsg_poplar_dsds_tar.mbn",
-                "amss_fsg_maple_tar.mbn", "amss_fsg_maple_dsds_tar.mbn"};
-        for (String m : DEFAULT_MODEMS) {
-            if (m.equals(modem)) {
-                return true;
-            }
-        }
-        return !modem.contains("ims") && !modem.contains("volte")
-                && !modem.contains("vilte") && !modem.contains("vowifi");
     }
 }
