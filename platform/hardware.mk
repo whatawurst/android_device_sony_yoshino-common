@@ -50,6 +50,10 @@ PRODUCT_PACKAGES += \
     NfcNci \
     Tag
 
+### OPENCUSTOMIZATIONSELECTOR
+PRODUCT_PACKAGES += \
+    CustomizationSelector
+
 ### REMOVE UNWANTED PACKAGES
 PRODUCT_PACKAGES += \
     RemovePackages
