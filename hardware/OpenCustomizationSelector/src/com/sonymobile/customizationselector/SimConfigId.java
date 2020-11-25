@@ -69,47 +69,37 @@ public class SimConfigId {
             int count = 0;
             if (simCombo.getMCC() != null) {
                 if (simCombo.getMCC().equals(simParams.get(MCC))) {
-                    CSLog.d(TAG, "getMappingMatch - mcc: " + simCombo.getMCC() + " for: " + simCombo.getSimConfigId());
-                    count++;
-                }
-            }
-            if (simCombo.getMNC() != null) {
-                if (simCombo.getMNC().equals(simParams.get(MNC))) {
-                    CSLog.d(TAG, "getMappingMatch - mnc: " + simCombo.getMNC() + " for: " + simCombo.getSimConfigId());
-                    count++;
-                }
-            }
-            if (simCombo.getServiceProvider() != null) {
-                if (!matchOnSP(simCombo.getServiceProvider(), simParams.get(SP))) {
-                    CSLog.d(TAG, "getMappingMatch - Go to next simCombination since there is no match on Service provider for: "
-                            + simCombo.getSimConfigId());
-                } else {
-                    CSLog.d(TAG, "getMappingMatch - sp: " + simCombo.getServiceProvider() + " for: " + simCombo.getSimConfigId());
-                    count++;
-                }
-            }
-            if (simCombo.getIMSI() != null) {
-                if (!matchOnImsi(simCombo.getIMSI(), simParams.get(IMSI))) {
-                    CSLog.d(TAG, "getMappingMatch - Go to next simCombination since there is no match on IMSI for: " + simCombo.getSimConfigId());
-                } else {
-                    CSLog.d(TAG, "getMappingMatch - imsi: " + simCombo.getIMSI() + " for: " + simCombo.getSimConfigId());
-                    count++;
-                }
-            }
-            if (simCombo.getGid1() != null) {
-                if (simParams.get(GID1) == null || !simParams.get(GID1).toLowerCase().startsWith(simCombo.getGid1().toLowerCase())) {
-                    CSLog.d(TAG, "getMappingMatch - Go to next simCombination since there is no match on GID1 for: " + simCombo.getGid1());
-                } else {
-                    CSLog.d(TAG, "getMappingMatch - gid1: " + simCombo.getGid1() + " for: " + simCombo.getSimConfigId());
-                    count++;
-                }
-            }
-            if (simCombo.getGid2() != null) {
-                if (simParams.get(GID2) == null || !simParams.get(GID2).toLowerCase().startsWith(simCombo.getGid2().toLowerCase())) {
-                    CSLog.d(TAG, "getMappingMatch - Go to next simCombination since there is no match on GID2 for: " + simCombo.getGid2());
-                } else {
-                    CSLog.d(TAG, "getMappingMatch - gid2: " + simCombo.getGid2() + " for: " + simCombo.getSimConfigId());
-                    count++;
+                    if (simCombo.getMNC() != null) {
+                        if (simCombo.getMNC().equals(simParams.get(MNC))) {
+                            CSLog.d(TAG, "getMappingMatch - mcc: " + simCombo.getMCC() + " mnc: " + simCombo.getMNC() + " for: " + simCombo.getSimConfigId());
+                            count++;
+                            if (simCombo.getServiceProvider() != null) {
+                                if (!matchOnSP(simCombo.getServiceProvider(), simParams.get(SP))) {
+                                    CSLog.d(TAG, "getMappingMatch - Go to next simCombination since there is no match on Service provider for: "
+                                            + simCombo.getSimConfigId());
+                                } else {
+                                    CSLog.d(TAG, "getMappingMatch - sp: " + simCombo.getServiceProvider() + " for: " + simCombo.getSimConfigId());
+                                    count++;
+                                }
+                            }
+                            if (simCombo.getIMSI() != null) {
+                                if (!matchOnImsi(simCombo.getIMSI(), simParams.get(IMSI))) {
+                                    CSLog.d(TAG, "getMappingMatch - Go to next simCombination since there is no match on IMSI for: " + simCombo.getSimConfigId());
+                                } else {
+                                    CSLog.d(TAG, "getMappingMatch - imsi: " + simCombo.getIMSI() + " for: " + simCombo.getSimConfigId());
+                                    count++;
+                                }
+                            }
+                            if (simCombo.getGid1() != null) {
+                                if (simParams.get(GID1) == null || !simParams.get(GID1).toLowerCase().startsWith(simCombo.getGid1().toLowerCase())) {
+                                    CSLog.d(TAG, "getMappingMatch - Go to next simCombination since there is no match on GID1 for: " + simCombo.getGid1());
+                                } else {
+                                    CSLog.d(TAG, "getMappingMatch - gid1: " + simCombo.getGid1() + " for: " + simCombo.getSimConfigId());
+                                    count++;
+                                }
+                            }
+                        }
+                    }
                 }
             }
             if (count > numberOfMatches) {
