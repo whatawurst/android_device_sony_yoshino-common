@@ -32,16 +32,12 @@ public class SimConfigId {
         String simOperatorName = telephonyManager.getSimOperatorName(subID);
         String subscriberId = telephonyManager.getSubscriberId(subID);
         String groupIdLevel1 = telephonyManager.getGroupIdLevel1(subID);
-        String groupIdLevel2 = telephonyManager.getGroupIdLevel1(subID);
         String simSerialNumber = telephonyManager.getSimSerialNumber(subID);
 
         if (!TextUtils.isEmpty(simOperator) && !TextUtils.isEmpty(subscriberId)) {
             simOperatorName = simOperatorName != null ? simOperatorName.replaceAll("[\n\r]", "") : "";
             if (groupIdLevel1 == null) {
                 groupIdLevel1 = "";
-            }
-            if (groupIdLevel2 == null) {
-                groupIdLevel2 = "";
             }
             if (simSerialNumber == null) {
                 simSerialNumber = "";
@@ -51,7 +47,6 @@ public class SimConfigId {
             hashMap.put(SP, simOperatorName.trim());
             hashMap.put(IMSI, subscriberId);
             hashMap.put(GID1, groupIdLevel1);
-            hashMap.put(GID2, groupIdLevel2);
             hashMap.put(ICCID, simSerialNumber);
             hashMap.put(SUBSCRIPTION, String.valueOf(subID));
         }
