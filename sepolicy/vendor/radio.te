@@ -3,7 +3,7 @@
 allow radio system_app_data_file:dir { getattr search };
 
 # m.android.phone
-allow radio gpuservice:binder { call };
+binder_call(radio, gpuservice)
 
 # CustomizationSelector
 binder_call(radio, hal_miscta_default)
