@@ -45,7 +45,7 @@
     <string name="config_wifi_tcp_buffers" translatable="false">524288,2097152,8388608,262144,524288,4194304</string>
 
     <!-- Enable ACS (auto channel selection) for Wifi hotspot (SAP) -->
-    <bool translatable="false" name="config_wifi_softap_acs_supported">true</bool>
+    <bool translatable="false" name="config_wifi_softap_acs_supported">false</bool>
 
     <!-- Enable 802.11ac for Wifi hotspot (SAP) -->
     <bool translatable="false" name="config_wifi_softap_ieee80211ac_supported">true</bool>
@@ -54,10 +54,10 @@
     <bool name="config_wifi_connected_mac_randomization_supported">true</bool>
 
     <!-- True if the firmware supports p2p MAC randomization -->
-    <bool name="config_wifi_p2p_mac_randomization_supported">true</bool>
+    <bool name="config_wifi_p2p_mac_randomization_supported">false</bool>
 
     <!-- True if the firmware supports ap MAC randomization -->
-    <bool name="config_wifi_ap_mac_randomization_supported">true</bool>
+    <bool name="config_wifi_ap_mac_randomization_supported">false</bool>
 
     <!-- True if the firmware supports Wi-Fi link probing -->
     <bool name="config_wifi_link_probing_supported">true</bool>
