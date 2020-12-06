@@ -41,7 +41,6 @@ DEVICE_PACKAGE_OVERLAYS += \
 
 PRODUCT_ENFORCE_RRO_TARGETS += *
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
-    $(PLATFORM_PATH)/overlay/lineage-sdk \
     $(PLATFORM_PATH)/overlay/packages/apps/FlipFlap
 
 ### Additional native libraries
