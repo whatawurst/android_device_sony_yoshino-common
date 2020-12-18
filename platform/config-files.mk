@@ -34,6 +34,10 @@ PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/nfc/libnfc-nxp-octopus.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp-octopus.conf \
     $(PLATFORM_PATH)/config/nfc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
 
+### PERF
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/config/perf/perfboostsconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfboostsconfig.xml
+
 ### POWER
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/power/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
