@@ -19,6 +19,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
 PLATFORM_PATH := device/sony/yoshino-common
 
+PRODUCT_SOONG_NAMESPACES += \
+    $(PLATFORM_PATH)
+
 ### PLATFORM INIT
 PRODUCT_PACKAGES += \
     init.yoshino.usb \
