@@ -32,6 +32,10 @@ static inline const char* getBTDefaultName()
         return "Xperia XZ Premium";
     }
 
+    if (!strcmp("maple_dsds", device)) {
+        return "Xperia XZ Premium Dual";
+    }
+
     if (!strcmp("poplar", device)) {
         return "Xperia XZ1";
     }
