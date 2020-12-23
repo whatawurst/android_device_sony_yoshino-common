@@ -146,6 +146,7 @@
 # system services
 /system/bin/bt_ssr_dumper                                       u:object_r:ssr_dumper_exec:s0
 /system/bin/cacaoserver                                         u:object_r:cacaoserver_exec:s0
+/system/bin/clean_scratch_files                                 u:object_r:clean_scratch_files_exec:s0
 /system/bin/mssconfig                                           u:object_r:mss_config_exec:s0
 /system/bin/perfservice                                         u:object_r:vendor_perfservice_exec:s0
 /system/bin/sony-modem-switcher                                 u:object_r:modem_switcher_exec:s0
