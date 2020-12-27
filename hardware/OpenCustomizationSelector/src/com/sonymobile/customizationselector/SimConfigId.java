@@ -72,6 +72,7 @@ public class SimConfigId {
                                 if (!matchOnSP(simCombo.getServiceProvider(), simParams.get(SP))) {
                                     CSLog.d(TAG, "getMappingMatch - Go to next simCombination since there is no match on Service provider for: "
                                             + simCombo.getSimConfigId());
+                                    count--;
                                 } else {
                                     CSLog.d(TAG, "getMappingMatch - sp: " + simCombo.getServiceProvider() + " for: " + simCombo.getSimConfigId());
                                     count++;
@@ -80,6 +81,7 @@ public class SimConfigId {
                             if (simCombo.getIMSI() != null) {
                                 if (!matchOnImsi(simCombo.getIMSI(), simParams.get(IMSI))) {
                                     CSLog.d(TAG, "getMappingMatch - Go to next simCombination since there is no match on IMSI for: " + simCombo.getSimConfigId());
+                                    count--;
                                 } else {
                                     CSLog.d(TAG, "getMappingMatch - imsi: " + simCombo.getIMSI() + " for: " + simCombo.getSimConfigId());
                                     count++;
@@ -88,6 +90,7 @@ public class SimConfigId {
                             if (simCombo.getGid1() != null) {
                                 if (simParams.get(GID1) == null || !simParams.get(GID1).toLowerCase().startsWith(simCombo.getGid1().toLowerCase())) {
                                     CSLog.d(TAG, "getMappingMatch - Go to next simCombination since there is no match on GID1 for: " + simCombo.getGid1());
+                                    count--;
                                 } else {
                                     CSLog.d(TAG, "getMappingMatch - gid1: " + simCombo.getGid1() + " for: " + simCombo.getSimConfigId());
                                     count++;
