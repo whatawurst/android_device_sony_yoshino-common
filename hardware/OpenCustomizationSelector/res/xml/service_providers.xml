@@ -66,6 +66,31 @@
         <mnc>01</mnc>
         <gid1>4E524A31</gid1>
     </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S6.14">
+        <mcc>208</mcc>
+        <mnc>26</mnc>
+        <gid1>4E524A31</gid1>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S6.15">
+        <mcc>208</mcc>
+        <mnc>01</mnc>
+        <gid1>4E524A31</gid1>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S6.16">
+        <mcc>208</mcc>
+        <mnc>10</mnc>
+        <gid1>4E524A31</gid1>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S6.17">
+        <mcc>208</mcc>
+        <mnc>20</mnc>
+        <gid1>4E524A31</gid1>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S6.18">
+        <mcc>206</mcc>
+        <mnc>10</mnc>
+        <gid1>4E524A31</gid1>
+    </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S7.1">
         <mcc>208</mcc>
         <mnc>20</mnc>
@@ -96,6 +121,10 @@
         <mnc>01</mnc>
         <sp>Orange F</sp>
     </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S11.6">
+        <mcc>208</mcc>
+        <mnc>85</mnc>
+    </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S12.1">
         <mcc>208</mcc>
         <mnc>10</mnc>
@@ -107,6 +136,11 @@
     <service_provider_sim_config sim_config_id="S20.1">
         <mcc>234</mcc>
         <mnc>30</mnc>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S20.2">
+        <mcc>234</mcc>
+        <mnc>30</mnc>
+        <gid1>EE</gid1>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S21.1">
         <mcc>234</mcc>
@@ -151,6 +185,11 @@
         <mnc>01</mnc>
         <gid1>28</gid1>
     </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S22.5">
+        <mcc>234</mcc>
+        <mnc>30</mnc>
+        <gid1>2800000000000000</gid1>
+    </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S23.1">
         <mcc>234</mcc>
         <mnc>10</mnc>
@@ -164,6 +203,11 @@
         <mcc>234</mcc>
         <mnc>10</mnc>
         <sp>giffgaff</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S23.4">
+        <mcc>234</mcc>
+        <mnc>10</mnc>
+        <gid1>0AFFFFFFFFFF544553434F202020202020202020</gid1>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S26.1">
         <mcc>272</mcc>
@@ -817,9 +861,17 @@
         <mcc>466</mcc>
         <mnc>92</mnc>
     </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S277.2">
+        <mcc>466</mcc>
+        <mnc>11</mnc>
+    </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S278.1">
         <mcc>466</mcc>
         <mnc>01</mnc>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S278.2">
+        <mcc>466</mcc>
+        <mnc>02</mnc>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S280.1">
         <mcc>466</mcc>
@@ -856,6 +908,10 @@
     <service_provider_sim_config sim_config_id="S285.2">
         <mcc>460</mcc>
         <mnc>09</mnc>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S285.3">
+        <mcc>460</mcc>
+        <mnc>06</mnc>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S286.2">
         <mcc>655</mcc>
@@ -1470,10 +1526,20 @@
         <mnc>03</mnc>
         <sp>EUSKALTEL</sp>
     </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S527.2">
+        <mcc>214</mcc>
+        <mnc>03</mnc>
+        <sp>OpenMovil</sp>
+    </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S537.1">
         <mcc>214</mcc>
         <mnc>04</mnc>
         <sp>Yoigo</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S537.2">
+        <mcc>214</mcc>
+        <mnc>04</mnc>
+        <sp>MASMovil</sp>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S545.1">
         <mcc>454</mcc>
@@ -1527,6 +1593,11 @@
     <service_provider_sim_config sim_config_id="S622.4">
         <mcc>260</mcc>
         <mnc>06</mnc>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S622.5">
+        <mcc>260</mcc>
+        <mnc>98</mnc>
+        <sp>PLAY PL</sp>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S625.1">
         <mcc>220</mcc>
@@ -1728,6 +1799,21 @@
         <mnc>02</mnc>
         <imsi>^20402\s?([0]([2-3]|[8])|[1]([0-1]|[3-8])).*</imsi>
     </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S8626.5">
+        <mcc>204</mcc>
+        <mnc>16</mnc>
+        <gid1>8F</gid1>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S8626.6">
+        <mcc>204</mcc>
+        <mnc>16</mnc>
+        <gid1>4E4C</gid1>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S8626.7">
+        <mcc>204</mcc>
+        <mnc>02</mnc>
+        <gid1>4E4C</gid1>
+    </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S8636.1">
         <mcc>655</mcc>
         <mnc>02</mnc>
@@ -1843,6 +1929,10 @@
         <mnc>03</mnc>
         <sp>RACC</sp>
     </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S8685.1">
+        <mcc>440</mcc>
+        <mnc>07</mnc>
+    </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S8686.1">
         <mcc>214</mcc>
         <mnc>04</mnc>
@@ -1856,6 +1946,15 @@
         <mcc>214</mcc>
         <mnc>05</mnc>
         <sp>telecable</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S8688.1">
+        <mcc>214</mcc>
+        <mnc>05</mnc>
+        <sp>Tuenti</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S8688.2">
+        <mcc>214</mcc>
+        <mnc>32</mnc>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S8704.1">
         <mcc>520</mcc>
@@ -1977,6 +2076,11 @@
     <service_provider_sim_config sim_config_id="S8773.1">
         <mcc>234</mcc>
         <mnc>33</mnc>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S8773.2">
+        <mcc>234</mcc>
+        <mnc>33</mnc>
+        <gid1>EC</gid1>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S8777.2">
         <mcc>302</mcc>
@@ -2275,6 +2379,11 @@
         <mcc>450</mcc>
         <mnc>06</mnc>
     </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9090.1">
+        <mcc>214</mcc>
+        <mnc>06</mnc>
+        <sp>Lowi</sp>
+    </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S9093.1">
         <mcc>242</mcc>
         <mnc>14</mnc>
@@ -2347,6 +2456,16 @@
         <mcc>234</mcc>
         <mnc>30</mnc>
         <gid1>C3</gid1>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9126.3">
+        <mcc>234</mcc>
+        <mnc>30</mnc>
+        <gid1>B3FF</gid1>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9126.4">
+        <mcc>234</mcc>
+        <mnc>30</mnc>
+        <gid1>C3FF</gid1>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S9127.1">
         <mcc>238</mcc>
@@ -2434,5 +2553,93 @@
     <service_provider_sim_config sim_config_id="S9163.1">
         <mcc>502</mcc>
         <mnc>153</mnc>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9165.1">
+        <mcc>440</mcc>
+        <mnc>51</mnc>
+        <gid1>20</gid1>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9170.1">
+        <mcc>214</mcc>
+        <mnc>06</mnc>
+        <sp>Hits</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9171.1">
+        <mcc>214</mcc>
+        <mnc>06</mnc>
+        <sp>Lebara</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.1">
+        <mcc>214</mcc>
+        <mnc>06</mnc>
+        <sp>Eroski Movil</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.2">
+        <mcc>214</mcc>
+        <mnc>03</mnc>
+        <imsi>2140352</imsi>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.3">
+        <mcc>214</mcc>
+        <mnc>03</mnc>
+        <sp>MovilDIA</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.4">
+        <mcc>214</mcc>
+        <mnc>03</mnc>
+        <sp>X</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.5">
+        <mcc>214</mcc>
+        <mnc>03</mnc>
+        <sp>Republica Movil</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.6">
+        <mcc>214</mcc>
+        <mnc>03</mnc>
+        <sp>LCR</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.7">
+        <mcc>214</mcc>
+        <mnc>03</mnc>
+        <sp>YOU Mobile</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.8">
+        <mcc>214</mcc>
+        <mnc>03</mnc>
+        <sp>LlamaYA</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.9">
+        <mcc>214</mcc>
+        <mnc>03</mnc>
+        <sp>Happy</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.10">
+        <mcc>214</mcc>
+        <mnc>03</mnc>
+        <sp>Ibercom</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.11">
+        <mcc>214</mcc>
+        <mnc>03</mnc>
+        <sp>CABLE movil</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.12">
+        <mcc>214</mcc>
+        <mnc>06</mnc>
+        <sp>Neo-Sky</sp>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9172.13">
+        <mcc>214</mcc>
+        <mnc>27</mnc>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9174.1">
+        <mcc>240</mcc>
+        <mnc>680</mnc>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9176.1">
+        <mcc>440</mcc>
+        <mnc>51</mnc>
+        <gid1>10</gid1>
     </service_provider_sim_config>
 </service_provider_sim_configs>
