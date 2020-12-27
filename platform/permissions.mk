@@ -26,9 +26,6 @@ PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/permissions/product-privapp-permissions-qti.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/product-privapp-permissions-qti.xml
 
 PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/config/permissions/sony-default-permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/sony-default-permissions.xml
-
-PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
