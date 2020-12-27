@@ -59,10 +59,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CustomizationSelector
 
-### REMOVE UNWANTED PACKAGES
-PRODUCT_PACKAGES += \
-    RemovePackages
-
 ### SENSORS
 PRODUCT_PACKAGES += \
     libsensorndkbridge
