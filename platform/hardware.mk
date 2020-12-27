@@ -20,6 +20,10 @@ PRODUCT_PACKAGES += \
     libvolumelistener \
     bthost_if
 
+### CAMERA
+PRODUCT_PACKAGES += \
+    Snap
+
 ### CHARGER
 PRODUCT_PACKAGES += \
     charger_res_images
