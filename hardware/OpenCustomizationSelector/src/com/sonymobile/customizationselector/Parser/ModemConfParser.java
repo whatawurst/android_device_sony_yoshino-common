@@ -14,7 +14,7 @@ public class ModemConfParser {
     private static final String LEGACY_PATH = "/etc/customization/modem";
     private static final String MODEM_CONF = "/modem.conf";
     private static final String CONF_PATH = "/modem-config";
-    private static final String OEM_PATH = "/ocm";
+    private static final String OEM_PATH = "/oem";
 
     public static String parseModemConf(String conf) {
         CSLog.d(TAG, "setupFilePaths - configId: " + conf);
