@@ -207,6 +207,8 @@
         <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
         <item>"/product/priv-app/SystemUI/SystemUI.apk"</item>
         <item>"/product/priv-app/SystemUI/oat/arm64/SystemUI.odex"</item>
+        <item>"/system/priv-app/CustomizationSelector/CustomizationSelector.apk"</item>
+        <item>"/system/priv-app/CustomizationSelector/oat/arm64/CustomizationSelector.odex"</item>
         <item>"/system/lib64/libsurfaceflinger.so"</item>
     </string-array>
 
@@ -226,6 +228,7 @@
         <item>"/apex/com.android.runtime/javalib/core-libart.jar"</item>
         <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
         <item>"/system/priv-app/SystemUI/SystemUI.apk"</item>
+        <item>"/system/priv-app/CustomizationSelector/CustomizationSelector.apk"</item>
         <item>"/system/lib64/libsurfaceflinger.so"</item>
     </string-array>
 
