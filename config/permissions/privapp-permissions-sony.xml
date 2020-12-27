@@ -16,10 +16,6 @@
         <permission name="android.permission.WRITE_MEDIA_STORAGE"/>
     </privapp-permissions>
 
-    <privapp-permissions package="com.sonyericsson.customizedsettings">
-        <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
-    </privapp-permissions>
-
     <privapp-permissions package="com.sonymobile.android.addoncamera.soundphoto">
         <permission name="android.permission.WRITE_MEDIA_STORAGE"/>
     </privapp-permissions>
