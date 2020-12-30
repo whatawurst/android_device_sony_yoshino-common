@@ -2642,4 +2642,12 @@
         <mnc>51</mnc>
         <gid1>10</gid1>
     </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9901.1">
+        <mcc>272</mcc>
+        <mnc>05</mnc>
+    </service_provider_sim_config>
+    <service_provider_sim_config sim_config_id="S9902.1">
+        <mcc>219</mcc>
+        <mnc>10</mnc>
+    </service_provider_sim_config>
 </service_provider_sim_configs>
