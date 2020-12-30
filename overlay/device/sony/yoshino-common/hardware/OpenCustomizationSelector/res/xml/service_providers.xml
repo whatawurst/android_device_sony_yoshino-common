@@ -148,7 +148,7 @@
         <gid1>0303</gid1>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S21.2">
-        <mcc>235</mcc>
+        <mcc>234</mcc>
         <mnc>94</mnc>
     </service_provider_sim_config>
     <service_provider_sim_config sim_config_id="S21.3">
