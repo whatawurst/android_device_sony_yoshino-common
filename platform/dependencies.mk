@@ -30,10 +30,6 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libvolumelistener
 
-### BLUETOOTH
-PRODUCT_PACKAGES += \
-    libbt-vendor
-
 ### CAMERA
 PRODUCT_PACKAGES += \
     libmmcamera_interface \
