@@ -15,7 +15,7 @@ import java.util.List;
 
 import static com.sonymobile.customizationselector.Parser.XmlConstants.*;
 
-class CommonUtil {
+public class CommonUtil {
 
     private static final String TAG = CommonUtil.class.getSimpleName();
     private static final int MIN_MCC_MNC_LENGTH = 5;
@@ -46,7 +46,8 @@ class CommonUtil {
         int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
 
         if (!SubscriptionManager.isUsableSubIdValue(defaultDataSubscriptionId)) {
-            List<SubscriptionInfo> activeSubscriptionInfoList = SubscriptionManager.from(context).getActiveSubscriptionInfoList();
+            List<SubscriptionInfo> activeSubscriptionInfoList = context.getSystemService(SubscriptionManager.class)
+                    .getActiveSubscriptionInfoList();
             if (activeSubscriptionInfoList != null) {
                 for (SubscriptionInfo subscriptionInfo : activeSubscriptionInfoList) {
                     if (SubscriptionManager.isUsableSubIdValue(subscriptionInfo.getSubscriptionId())) {

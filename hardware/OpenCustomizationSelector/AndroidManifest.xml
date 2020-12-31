@@ -15,6 +15,10 @@
     <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW" />
     <uses-permission android:name="android.permission.MASTER_CLEAR" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <application
         android:allowBackup="false"
@@ -84,6 +88,9 @@
             android:name="com.sonymobile.customizationselector.DSDataSubContentJob"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.sonymobile.customizationselector.NS.NetworkSwitcher"
+            android:enabled="true" />
 
         <receiver android:name="com.sonymobile.customizationselector.EventReceiver">
             <intent-filter android:priority="999">
@@ -97,6 +104,12 @@
             </intent-filter>
         </receiver>
         <receiver android:name="com.sonymobile.customizationselector.NotificationReceiver" />
+        <receiver android:name="com.sonymobile.customizationselector.NS.NSBootReceiver">
+            <intent-filter android:priority="999">
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
 
     </application>
 </manifest>
