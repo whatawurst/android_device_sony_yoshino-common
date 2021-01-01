@@ -18,42 +18,63 @@
             android:title="@string/gesture">
 
         <SwitchPreference
-                android:defaultValue="false"
-                android:icon="@drawable/ic_round_touch"
-                android:key="glove_mode"
-                android:summary="@string/glove_mode_summary"
-                android:title="@string/glove_mode" />
+            android:defaultValue="false"
+            android:icon="@drawable/ic_outline_touch_app_24"
+            android:key="glove_mode"
+            android:summary="@string/glove_mode_summary"
+            android:title="@string/glove_mode" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-            android:key="cs"
-            android:title="@string/customization_selector">
+        android:key="cs"
+        android:title="@string/customization_selector">
 
         <Preference
-                android:icon="@drawable/ic_outline_info"
-                android:key="cs_status"
-                android:title="@string/status"
-                android:summary="Show modem status" />
+            android:icon="@drawable/ic_outline_info"
+            android:key="cs_status"
+            android:summary="Show modem status"
+            android:title="@string/status" />
 
         <SwitchPreference
-                android:defaultValue="true"
-                android:icon="@drawable/ic_round_notifications"
-                android:key="cs_notification"
-                android:summary="@string/sony_modem_notification_summary"
-                android:title="@string/sony_modem_notification" />
+            android:defaultValue="true"
+            android:icon="@drawable/ic_outline_notifications_active_24"
+            android:key="cs_notification"
+            android:summary="@string/sony_modem_notification_summary"
+            android:title="@string/sony_modem_notification" />
 
         <Preference
-                android:icon="@drawable/ic_round_open"
-                android:key="modem_sw"
-                android:summary="@string/modem_switcher_activity_summary"
-                android:title="@string/modem_switcher_activity" />
+            android:icon="@drawable/ic_round_open"
+            android:key="modem_sw"
+            android:summary="@string/modem_switcher_activity_summary"
+            android:title="@string/modem_switcher_activity" />
 
         <Preference
-                android:icon="@drawable/ic_round_notes"
-                android:key="cs_log"
-                android:summary="@string/logs_summary"
-                android:title="@string/logs" />
+            android:icon="@drawable/ic_round_notes"
+            android:key="cs_log"
+            android:summary="@string/logs_summary"
+            android:title="@string/logs" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="ns"
+        android:title="@string/network_switcher">
+
+        <Preference
+            android:icon="@drawable/ic_outline_sim_card_24"
+            android:key="ns_slot"
+            android:defaultValue="-1"
+            android:summary="@string/sim_slot_summary"
+            android:title="@string/sim_slot" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:enabled="false"
+            android:icon="@drawable/ic_round_import_export_24"
+            android:key="ns_service"
+            android:summary="@string/ns_summary"
+            android:title="@string/network_switcher_service" />
 
     </PreferenceCategory>
 
