@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragment;
@@ -70,6 +71,46 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
                 return true;
             });
         }
+
+        Preference slotPref = findPreference(NS_SLOT);
+        SwitchPreference nsService = findPreference(NS_SERVICE);
+        if (slotPref != null && nsService != null) {
+            if (getContext().getSystemService(TelephonyManager.class).getActiveModemCount() > 1) {
+                slotPref.setVisible(true);
+
+                int slot = Settings.System.getInt(nsService.getContext().getContentResolver(), NS_SLOT, -1);
+                slotPref.setSummary(slotPref.getContext().getString(R.string.sim_slot_summary) + (slot == -1 ? " INVALID" : " " + (slot + 1)));
+
+                slotPref.setOnPreferenceClickListener(preference -> {
+                    int nSlot = Settings.System.getInt(nsService.getContext().getContentResolver(), NS_SLOT, -1);
+                    switch (nSlot) {
+                        case 0:
+                            Settings.System.putInt(nsService.getContext().getContentResolver(), NS_SLOT, 1);
+                            slotPref.setSummary(slotPref.getContext().getString(R.string.sim_slot_summary) + " 2");
+                            nsService.setEnabled(true);
+                            break;
+                        case 1:
+                            Settings.System.putInt(nsService.getContext().getContentResolver(), NS_SLOT, -1);
+                            slotPref.setSummary(slotPref.getContext().getString(R.string.sim_slot_summary) + " INVALID");
+                            nsService.setEnabled(false);
+                            break;
+                        case -1:
+                            Settings.System.putInt(nsService.getContext().getContentResolver(), NS_SLOT, 0);
+                            slotPref.setSummary(slotPref.getContext().getString(R.string.sim_slot_summary) + " 1");
+                            nsService.setEnabled(true);
+                            break;
+                    }
+                    return true;
+                });
+
+                nsService.setEnabled(false);
+            } else {
+                slotPref.setVisible(false);
+                nsService.setEnabled(true);
+            }
+            nsService.setChecked(Settings.System.getInt(nsService.getContext().getContentResolver(), NS_SERVICE, 0) == 1);
+            nsService.setOnPreferenceChangeListener(this);
+        }
     }
 
     @Override
@@ -81,6 +122,9 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
                 return true;
             case CS_NOTIFICATION:
                 Settings.System.putInt(preference.getContext().getContentResolver(), CS_NOTIFICATION, (boolean) o ? 1 : 0);
+                return true;
+            case NS_SERVICE:
+                Settings.System.putInt(preference.getContext().getContentResolver(), NS_SERVICE, (boolean) o ? 1 : 0);
                 return true;
         }
         return false;
