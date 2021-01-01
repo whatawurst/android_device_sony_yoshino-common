@@ -1,7 +1,7 @@
 # taimport.te
 
 type taimport, domain, coredomain;
-type taimport_exec, system_file_type, exec_type, file_type;
+type taimport_exec, exec_type, file_type;
 
 hal_client_domain(taimport, hal_allocator)
 

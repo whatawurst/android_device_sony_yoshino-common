@@ -38,6 +38,7 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a73
 
 ### KERNEL
 TARGET_KERNEL_CLANG_COMPILE := true
+TARGET_KERNEL_CLANG_VERSION := 6.0.2
 TARGET_KERNEL_VERSION := 4.4
 TARGET_KERNEL_SOURCE  := kernel/sony/msm8998
 TARGET_COMPILE_WITH_MSM_KERNEL := true
@@ -101,8 +102,8 @@ TARGET_USES_GRALLOC1 := true
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 ### INIT
-TARGET_INIT_VENDOR_LIB := //$(PLATFORM_PATH):libinit_yoshino
-TARGET_RECOVERY_DEVICE_MODULES := libinit_yoshino
+#TARGET_INIT_VENDOR_LIB := //$(PLATFORM_PATH):libinit_yoshino
+#TARGET_RECOVERY_DEVICE_MODULES := libinit_yoshino
 
 ### AUDIO
 # BOARD_SUPPORTS_QAHW := true
@@ -197,7 +198,7 @@ DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
 TARGET_HW_DISK_ENCRYPTION := true
 
 ### SEPOLICY
-include device/qcom/sepolicy-legacy-um/SEPolicy.mk
+include device/qcom/sepolicy/sepolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
 

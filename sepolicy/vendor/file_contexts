@@ -12,9 +12,9 @@
 /mnt/qns(/.*)?                                                  u:object_r:qns_file:s0
 
 # BACKWARD COMPATIBILITY
-/bt_firmware                                                    u:object_r:bt_firmware_file:s0
-/firmware                                                       u:object_r:firmware_file:s0
-/persist(/.*)?                                                  u:object_r:mnt_vendor_file:s0
+#/bt_firmware                                                    u:object_r:bt_firmware_file:s0
+#/firmware                                                       u:object_r:firmware_file:s0
+#/persist(/.*)?                                                  u:object_r:mnt_vendor_file:s0
 
 ### CACHE
 /cache/modem(/.*)?                                              u:object_r:modemsw_cache_file:s0
@@ -28,17 +28,17 @@
 /data/vendor/illumination_service(/.*)?                         u:object_r:illumination_vendor_data_file:s0
 /data/vendor/wfd(/.*)?                                          u:object_r:wfd_vendor_data_file:s0
 
-/(vendor|system/vendor)/usr/idc(/.*)?                           u:object_r:vendor_idc_file:s0
+#/(vendor|system/vendor)/usr/idc(/.*)?                           u:object_r:vendor_idc_file:s0
 
 ### DEVICES
 /dev/sony_hweffect_params                                       u:object_r:audio_hweffect_device:s0
 
 /dev/block/sda1                                                 u:object_r:tad_block_device:s0
 
-/dev/block/bootdevice/by-name/fsg                               u:object_r:modem_efs_partition_device:s0
-/dev/block/bootdevice/by-name/fsc                               u:object_r:modem_efs_partition_device:s0
-/dev/block/bootdevice/by-name/modemst1                          u:object_r:modem_efs_partition_device:s0
-/dev/block/bootdevice/by-name/modemst2                          u:object_r:modem_efs_partition_device:s0
+#/dev/block/bootdevice/by-name/fsg                               u:object_r:modem_efs_partition_device:s0
+#/dev/block/bootdevice/by-name/fsc                               u:object_r:modem_efs_partition_device:s0
+#/dev/block/bootdevice/by-name/modemst1                          u:object_r:modem_efs_partition_device:s0
+#/dev/block/bootdevice/by-name/modemst2                          u:object_r:modem_efs_partition_device:s0
 
 /dev/block/platform/soc/1da4000\.ufshc/by-name/FOTAKernel       u:object_r:recovery_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/Qnovo            u:object_r:qnovo_block_device:s0
@@ -56,7 +56,7 @@
 /dev/block/platform/soc/1da4000\.ufshc/by-name/rdimage          u:object_r:ramdump_block_device:s0
 
 /dev/socket/cammw_tintless                                      u:object_r:camera_somc_socket:s0
-/dev/socket/dpmwrapper                                          u:object_r:dpmwrapper_socket:s0
+#/dev/socket/dpmwrapper                                          u:object_r:dpmwrapper_socket:s0
 /dev/socket/fpc_oem                                             u:object_r:fpc_socket:s0
 /dev/socket/illumination                                        u:object_r:illumination_socket:s0
 /dev/socket/qnsbsd                                              u:object_r:qns_socket:s0
@@ -141,7 +141,7 @@
 /system/bin/bt_ssr_dumper                                       u:object_r:ssr_dumper_exec:s0
 /system/bin/cacaoserver                                         u:object_r:cacaoserver_exec:s0
 /system/bin/mssconfig                                           u:object_r:mss_config_exec:s0
-/system/bin/perfservice                                         u:object_r:vendor_perfservice_exec:s0
+#/system/bin/perfservice                                         u:object_r:vendor_perfservice_exec:s0
 /system/bin/sony-modem-switcher                                 u:object_r:modem_switcher_exec:s0
 /system/bin/ssr_dumper                                          u:object_r:ssr_dumper_exec:s0
 /system/bin/startup-logger                                      u:object_r:startup-logger_exec:s0

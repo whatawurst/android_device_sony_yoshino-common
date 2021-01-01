@@ -1,7 +1,7 @@
 # modem_switcher.te
 
 type modem_switcher, domain, coredomain;
-type modem_switcher_exec, system_file_type, exec_type, file_type;
+type modem_switcher_exec, exec_type, file_type;
 
 init_daemon_domain(modem_switcher)
 
