@@ -103,7 +103,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
                     return true;
                 });
 
-                nsService.setEnabled(false);
+                nsService.setEnabled(slot != -1);
             } else {
                 slotPref.setVisible(false);
                 nsService.setEnabled(true);
