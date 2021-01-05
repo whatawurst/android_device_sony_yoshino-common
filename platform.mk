@@ -14,9 +14,6 @@
 # limitations under the License.
 #
 
-# Enable updating of APEXes
-$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
-
 PLATFORM_PATH := device/sony/yoshino-common
 
 PRODUCT_SOONG_NAMESPACES += \
