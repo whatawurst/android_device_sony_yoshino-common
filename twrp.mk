@@ -22,10 +22,16 @@
 PRODUCT_FULL_TREBLE_OVERRIDE := false
 
 RECOVERY_VARIANT := twrp
-TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/twrp.fstab
+
+ifneq ($(filter maple maple_dsds, $(TARGET_DEVICE)),)
+    TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/twrp_maple.fstab
+    TARGET_COPY_OUT_VENDOR := system/vendor
+else
+    TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/twrp.fstab
+    TARGET_COPY_OUT_VENDOR := vendor
+endif
 
 BOARD_NEEDS_VENDORIMAGE_SYMLINK := false
-TARGET_COPY_OUT_VENDOR := vendor
 
 ### INIT
 # Use rootdir/init.recovery.usb.rc
@@ -64,8 +70,10 @@ RECOVERY_SDCARD_ON_DATA := true
 
 ### ENCRYPTED FILESYSTEMS
 TW_INCLUDE_CRYPTO := true
-# ext4 file based crypto
-TW_INCLUDE_CRYPTO_FBE := true
+ifneq ($(filter lilac poplar poplar_canada poplar_dsds, $(TARGET_DEVICE)),)
+    # ext4 file based crypto
+    TW_INCLUDE_CRYPTO_FBE := true
+endif
 
 # QSEECOMD DEPENDENCIES
 TARGET_RECOVERY_DEVICE_MODULES      += libxml2.so
