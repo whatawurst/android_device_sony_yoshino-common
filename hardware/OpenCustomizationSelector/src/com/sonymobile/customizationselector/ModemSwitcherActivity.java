@@ -6,12 +6,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ModemSwitcherActivity extends Activity {
 
@@ -64,9 +68,6 @@ public class ModemSwitcherActivity extends Activity {
             CSLog.d(TAG, "current modem" + currentModem);
 
             String[] availableModemConfigurations = mModemSwitcher.getAvailableModemConfigurations();
-            for (String str : availableModemConfigurations) {
-                CSLog.d(TAG, "modems: " + str);
-            }
             if (currentModem.equals(ModemSwitcher.SINGLE_MODEM_FS) || currentModem.equals("")) {
                 CSLog.d(TAG, "Single modem device");
                 i2 = 1;
@@ -82,6 +83,7 @@ public class ModemSwitcherActivity extends Activity {
 
             ((TextView) findViewById(R.id.initial_modem)).setText(mInitialModem);
             ((TextView) findViewById(R.id.current_modem)).setText(currentModem);
+            AppCompatEditText editText = findViewById(R.id.search_modem);
 
             Button button = findViewById(R.id.restore_button);
             button.setClickable(true);
@@ -91,23 +93,50 @@ public class ModemSwitcherActivity extends Activity {
                 modemList.add(m.replace(ModemSwitcher.MODEM_FS_PATH, ""));
             }
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, modemList);
             mModemListView = findViewById(R.id.modem_list);
-            mModemListView.setAdapter(arrayAdapter);
-            mModemListView.setOnItemClickListener((adapterView, view, i, j) -> {
-                Object itemAtPosition = mModemListView.getItemAtPosition(i);
-                if (itemAtPosition != null) {
-                    verifyPick(itemAtPosition.toString());
-                }
-            });
+            setupListAdapter(modemList);
             button.setOnClickListener(view -> {
                 if (mInitialModem != null) {
                     verifyPick(mInitialModem);
+                }
+            });
+
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    ArrayList<String> sModems = new ArrayList<>();
+                    for (String modemName : modemList) {
+                        if (modemName.toLowerCase(Locale.getDefault())
+                                .contains(charSequence.toString().toLowerCase(Locale.getDefault()))) {
+                            sModems.add(modemName);
+                        }
+                    }
+
+                    setupListAdapter(sModems);
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
                 }
             });
         } catch (Exception e) {
             CSLog.e(TAG, "Not possible to read the modem files", e);
             finish();
         }
+    }
+
+    private synchronized void setupListAdapter(ArrayList<String> modemList) {
+        mModemListView.setAdapter(null);
+        mModemListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, modemList));
+        mModemListView.setOnItemClickListener((adapterView, view, i, j) -> {
+            Object itemAtPosition = mModemListView.getItemAtPosition(i);
+            if (itemAtPosition != null) {
+                verifyPick(itemAtPosition.toString());
+            }
+        });
     }
 }

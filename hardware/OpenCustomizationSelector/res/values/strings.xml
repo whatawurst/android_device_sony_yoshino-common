@@ -18,4 +18,5 @@
     <string name="modem_switcher_report">Modem Switcher Report</string>
     <string name="modem_switcher_status">Modem Switcher Status</string>
     <string name="file_not_found">File not found</string>
+    <string name="search_modem">Search modem</string>
 </resources>
