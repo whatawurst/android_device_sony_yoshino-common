@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 import androidx.appcompat.widget.AppCompatTextView;
 
@@ -25,6 +26,7 @@ public class LogActivity extends Activity {
 
         AppCompatTextView logText = findViewById(R.id.log_text);
         ProgressBar progressBar = findViewById(R.id.log_pr);
+        ScrollView scrollView = findViewById(R.id.log_scroll);
 
         File logFile = new File(createDeviceProtectedStorageContext().getFilesDir(), "cs.log");
 
@@ -70,6 +72,11 @@ public class LogActivity extends Activity {
                 lines.clear();
                 outLines.clear();
                 System.gc();
+
+                // Scroll to bottom
+                new Handler(getMainLooper()).postDelayed(() -> scrollView.smoothScrollBy(0,
+                        (scrollView.getChildAt(scrollView.getChildCount() - 1).getBottom() + scrollView.getPaddingBottom())
+                                - (scrollView.getScrollY() - scrollView.getHeight())), 500);
             }, 400);
         } catch (Exception e) {
             e.printStackTrace();

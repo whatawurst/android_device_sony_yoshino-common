@@ -16,6 +16,7 @@ public final class R {
         public static final int m_report_text = 2131230732;
         public static final int m_status_text = 2131230733;
         public static final int search_modem = 2131230734;
+        public static final int log_scroll = 2131230735;
     }
 
     public static final class layout {
