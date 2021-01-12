@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.telephony.CellSignalStrength;
 import android.telephony.SubscriptionManager;
@@ -62,7 +63,12 @@ public class NetworkSwitcher extends Service {
 
         // Start process
         try {
-            initSubID();
+            int subID = getSubID();
+            if (subID == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                new SubIdObserver(getApplicationContext()).register(this::initProcess);
+            } else {
+                initProcess(subID);
+            }
         } catch (Exception e) {
             CSLog.e(TAG, "Error: ", e);
         }
@@ -76,22 +82,26 @@ public class NetworkSwitcher extends Service {
     }
 
     /**
-     * Initialize the subscription IDs based on phone count and sim status.
+     * Get the subscription IDs based on phone count and sim status.
      */
-    private synchronized void initSubID() {
-        int subID;
+    private int getSubID() {
+        int[] subs = null;
         if (CommonUtil.isDualSim(getApplicationContext())) {
             d("initSubID: device is dual sim");
-            subID = SubscriptionManager.getSubId(Settings.System.getInt(getApplicationContext().getContentResolver(), "ns_slot", 0))[0];
+            subs = SubscriptionManager.getSubId(Settings.System.getInt(getApplicationContext().getContentResolver(), "ns_slot", 0));
         } else {
             d("initSubID: single sim device");
-            subID = SubscriptionManager.getSubId(0)[0];
+            subs = SubscriptionManager.getSubId(0);
         }
+        return subs == null ? SubscriptionManager.INVALID_SUBSCRIPTION_ID : subs[0];
+    }
+
+    private void initProcess(int subID) {
         if (CommonUtil.isSIMLoaded(getApplicationContext(), subID)) {
-            new Handler(getMainLooper()).postDelayed(() -> task(subID), 2000);
+            new Handler(getMainLooper()).postDelayed(() -> task(subID), 1400);
         } else {
             new SlotObserver(getApplicationContext()).register(subID,
-                    () -> new Handler(getMainLooper()).postDelayed(() -> task(subID), 2000));
+                    () -> new Handler(getMainLooper()).postDelayed(() -> task(subID), 1400));
         }
     }
 
@@ -108,36 +118,48 @@ public class NetworkSwitcher extends Service {
         if (isLTE(currentNetwork)) {
             toggle(tm, subID, currentNetwork);
 
-            registerReceiver(new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
+            if (StorageManager.isFileEncryptedNativeOrEmulated()) {
+                registerReceiver(new BroadcastReceiver() {
+                    @Override
+                    public void onReceive(Context context, Intent intent) {
+                        unregisterReceiver(this);
+                        handleConnection(tm, subID);
+                    }
+                }, new IntentFilter(Intent.ACTION_USER_UNLOCKED));
+            } else {
+                handleConnection(tm, subID);
+            }
+        } else {
+            d("Network is not LTE, no work.");
+            stopSelf();
+        }
+    }
+
+    private void handleConnection(TelephonyManager tm, int subID) {
+        if (isAirplaneModeOn()) {
+            airplaneModeObserver.register(uri -> {
+                if (uri != null && uri == Settings.System.getUriFor(Settings.Global.AIRPLANE_MODE_ON)) {
                     if (isAirplaneModeOn()) {
-                        airplaneModeObserver.register(uri -> {
-                            if (uri != null && uri == Settings.System.getUriFor(Settings.Global.AIRPLANE_MODE_ON)) {
-                                if (isAirplaneModeOn()) {
-                                    simServiceObserver.unregister();
-                                } else {
-                                    simServiceObserver.register(subID, () -> {
-                                        airplaneModeObserver.unregister();
-                                        toggle(tm, subID, getPreferredNetwork(subID));
-                                        stopSelf();
-                                    });
-                                }
-                            }
-                        });
+                        simServiceObserver.unregister();
                     } else {
-                        if (tm.getSignalStrength() != null && tm.getSignalStrength().getLevel() != CellSignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN) {
+                        simServiceObserver.register(subID, () -> {
+                            airplaneModeObserver.unregister();
                             toggle(tm, subID, getPreferredNetwork(subID));
                             stopSelf();
-                        } else {
-                            new SimServiceObserver(getApplicationContext()).register(subID, () -> {
-                                toggle(tm, subID, getPreferredNetwork(subID));
-                                stopSelf();
-                            });
-                        }
+                        });
                     }
                 }
-            }, new IntentFilter(Intent.ACTION_USER_UNLOCKED));
+            });
+        } else {
+            if (tm.getSignalStrength() != null && tm.getSignalStrength().getLevel() != CellSignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN) {
+                toggle(tm, subID, getPreferredNetwork(subID));
+                stopSelf();
+            } else {
+                new SimServiceObserver(getApplicationContext()).register(subID, () -> {
+                    toggle(tm, subID, getPreferredNetwork(subID));
+                    stopSelf();
+                });
+            }
         }
     }
 
