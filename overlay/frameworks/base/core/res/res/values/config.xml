@@ -153,7 +153,7 @@
         <item>"/system_ext/priv-app/SystemUI/oat/arm64/SystemUI.odex"</item>
         <item>"/system/priv-app/CustomizationSelector/CustomizationSelector.apk"</item>
         <item>"/system/priv-app/CustomizationSelector/oat/arm64/CustomizationSelector.odex"</item>
-        <item>"/system/lib64/libsurfaceflinger.so"</item>
+        <item>"/system/bin/surfaceflinger"</item>
     </string-array>
 
     <!-- Keep chosen default camera app pinned in memory for faster launching -->
@@ -171,7 +171,7 @@
         <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
         <item>"/system_ext/priv-app/SystemUI/SystemUI.apk"</item>
         <item>"/system/priv-app/CustomizationSelector/CustomizationSelector.apk"</item>
-        <item>"/system/lib64/libsurfaceflinger.so"</item>
+        <item>"/system/bin/surfaceflinger"</item>
     </string-array>
 
     <!-- Boolean indicating if current platform supports BLE peripheral mode -->
