@@ -20,6 +20,8 @@ PRODUCT_SOONG_NAMESPACES += \
     $(PLATFORM_PATH) \
     hardware/google/pixel
 
+QCOM_SOONG_NAMESPACE := $(PLATFORM_PATH)/hardware/qcom-caf
+
 ### PLATFORM INIT
 PRODUCT_PACKAGES += \
     init.yoshino.usb \
