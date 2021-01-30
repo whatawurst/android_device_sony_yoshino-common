@@ -14,6 +14,10 @@
 
 package com.yoshino.parts;
 
+import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemProperties;
@@ -33,44 +37,39 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
         addPreferencesFromResource(R.xml.device_settings);
 
         SwitchPreference glovePref = findPreference(GLOVE_MODE);
-        if (glovePref != null) {
-            glovePref.setChecked(Settings.System.getInt(glovePref.getContext().getContentResolver(), GLOVE_MODE, 0) == 1);
-            glovePref.setOnPreferenceChangeListener(this);
-        }
+        assert glovePref != null;
+        glovePref.setChecked(Settings.System.getInt(glovePref.getContext().getContentResolver(), GLOVE_MODE, 0) == 1);
+        glovePref.setOnPreferenceChangeListener(this);
 
         SwitchPreference notificationPref = findPreference(CS_NOTIFICATION);
-        if (notificationPref != null) {
-            notificationPref.setChecked(Settings.System.getInt(notificationPref.getContext().getContentResolver(),
-                    CS_NOTIFICATION, 1) == 1);
-            notificationPref.setOnPreferenceChangeListener(this);
-        }
+        assert notificationPref != null;
+        notificationPref.setChecked(Settings.System.getInt(notificationPref.getContext().getContentResolver(),
+                CS_NOTIFICATION, 1) == 1);
+        notificationPref.setOnPreferenceChangeListener(this);
 
         Preference statusPref = findPreference(CS_STATUS);
-        if (statusPref != null) {
-            statusPref.setOnPreferenceClickListener(preference -> {
-                preference.getContext().startActivity(new Intent()
-                        .setClassName("com.sonymobile.customizationselector", "com.sonymobile.customizationselector.StatusActivity"));
-                return true;
-            });
-        }
+        assert statusPref != null;
+        statusPref.setOnPreferenceClickListener(preference -> {
+            preference.getContext().startActivity(new Intent()
+                    .setClassName("com.sonymobile.customizationselector", "com.sonymobile.customizationselector.StatusActivity"));
+            return true;
+        });
 
         Preference logPref = findPreference(CS_LOG);
-        if (logPref != null) {
-            logPref.setOnPreferenceClickListener(preference -> {
-                preference.getContext().startActivity(new Intent()
-                        .setClassName("com.sonymobile.customizationselector", "com.sonymobile.customizationselector.LogActivity"));
-                return true;
-            });
-        }
+        assert logPref != null;
+        logPref.setOnPreferenceClickListener(preference -> {
+            preference.getContext().startActivity(new Intent()
+                    .setClassName("com.sonymobile.customizationselector", "com.sonymobile.customizationselector.LogActivity"));
+            return true;
+        });
 
         Preference msActPref = findPreference(MODEM_SWITCHER);
-        if (msActPref != null) {
-            msActPref.setOnPreferenceClickListener(preference -> {
-                preference.getContext().startActivity(new Intent()
-                        .setClassName("com.sonymobile.customizationselector", "com.sonymobile.customizationselector.ModemSwitcherActivity"));
-                return true;
-            });
-        }
+        assert msActPref != null;
+        msActPref.setOnPreferenceClickListener(preference -> {
+            preference.getContext().startActivity(new Intent()
+                    .setClassName("com.sonymobile.customizationselector", "com.sonymobile.customizationselector.ModemSwitcherActivity"));
+            return true;
+        });
 
         Preference slotPref = findPreference(NS_SLOT);
         SwitchPreference nsService = findPreference(NS_SERVICE);
@@ -111,6 +110,65 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
             nsService.setChecked(Settings.System.getInt(nsService.getContext().getContentResolver(), NS_SERVICE, 0) == 1);
             nsService.setOnPreferenceChangeListener(this);
         }
+
+        SwitchPreference imsPref = findPreference(CS_IMS);
+        assert imsPref != null;
+        if (Settings.System.getInt(imsPref.getContext().getContentResolver(), CS_IMS, 0) == 0) {
+            imsPref.setChecked(false);
+            notificationPref.setEnabled(false);
+            msActPref.setEnabled(false);
+        } else {
+            imsPref.setChecked(true);
+            notificationPref.setEnabled(true);
+            msActPref.setEnabled(true);
+        }
+        imsPref.setOnPreferenceClickListener(preference -> {
+            int ims = Settings.System.getInt(imsPref.getContext().getContentResolver(), CS_IMS, 0);
+            if (ims == 1) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(imsPref.getContext());
+                builder.setCancelable(false);
+                builder.setTitle("Disable IMS features ?");
+                builder.setMessage("You will lose all the carrier specific features such as VoLTE, VoWiFi and " +
+                        "WiFi Calling; and Your device will switch to default modem config with basic mobile data feature.");
+                builder.setPositiveButton("Disable", (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                    Settings.System.putInt(imsPref.getContext().getContentResolver(), CS_IMS, 0);
+                    imsPref.setChecked(false);
+                    notificationPref.setEnabled(false);
+                    msActPref.setEnabled(false);
+
+                    sendBroadcast(preference.getContext());
+                });
+                builder.setNegativeButton("Cancel", (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                    imsPref.setChecked(true);
+                });
+                builder.create().show();
+            }
+            if (ims == 0) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(imsPref.getContext());
+                builder.setCancelable(false);
+                builder.setTitle("Enable IMS features ?");
+                builder.setMessage("This will allow you to use the provided carrier specific features such as VoLTE, " +
+                        "VoWiFi and WiFi Calling; only if it worked on stock.\n\nYour device will prompt reboot if it " +
+                        "found carrier specific modem.");
+                builder.setPositiveButton("Enable", (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                    Settings.System.putInt(imsPref.getContext().getContentResolver(), CS_IMS, 1);
+                    imsPref.setChecked(true);
+                    notificationPref.setEnabled(true);
+                    msActPref.setEnabled(true);
+
+                    sendBroadcast(preference.getContext());
+                });
+                builder.setNegativeButton("Cancel", (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                    imsPref.setChecked(false);
+                });
+                builder.create().show();
+            }
+            return true;
+        });
     }
 
     @Override
@@ -128,5 +186,14 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
                 return true;
         }
         return false;
+    }
+
+    private void sendBroadcast(Context context) {
+        Intent broadcast = new Intent()
+                .putExtra(CS_IMS, Settings.System.getInt(context.getContentResolver(), CS_IMS, 0))
+                .addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
+                .setComponent(new ComponentName("com.sonymobile.customizationselector",
+                        "com.sonymobile.customizationselector.PreferenceReceiver"));
+        context.sendBroadcast(broadcast);
     }
 }
