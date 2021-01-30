@@ -115,4 +115,20 @@ public class CommonUtil {
         CSLog.d(TAG, "isSIMLoaded: false");
         return false;
     }
+
+    public static String[] getDefaultModems() {
+        return new String[]{"amss_fsg_lilac_tar.mbn",
+                "amss_fsg_poplar_tar.mbn", "amss_fsg_poplar_dsds_tar.mbn",
+                "amss_fsg_maple_tar.mbn", "amss_fsg_maple_dsds_tar.mbn"};
+    }
+
+    public static boolean isModemDefault(String modem) {
+        for (String m : getDefaultModems()) {
+            if (m.equals(modem)) {
+                return true;
+            }
+        }
+        return !modem.contains("ims") && !modem.contains("volte")
+                && !modem.contains("vilte") && !modem.contains("vowifi");
+    }
 }

@@ -37,6 +37,13 @@
             android:title="@string/status" />
 
         <SwitchPreference
+            android:defaultValue="false"
+            android:icon="@drawable/ic_outline_wifi_calling_24"
+            android:key="cs_ims"
+            android:summary="@string/ims_summary"
+            android:title="@string/ims_title" />
+
+        <SwitchPreference
             android:defaultValue="true"
             android:icon="@drawable/ic_outline_notifications_active_24"
             android:key="cs_notification"

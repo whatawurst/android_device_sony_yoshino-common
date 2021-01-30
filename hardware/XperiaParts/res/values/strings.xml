@@ -33,4 +33,6 @@
     <string name="ns_summary">If your sim is not working until you switch to lower network modes (like 3G), enable this service as it will automatically do it for you.\nIt will boot your device with 3G and switch to LTE (based on preference if LTE was enabled) after sim is in service.</string>
     <string name="sim_slot">Sim Slot</string>
     <string name="sim_slot_summary">Select the sim slot you want network switcher to work for.\nSelected Slot:</string>
+    <string name="ims_title">IMS Features</string>
+    <string name="ims_summary">Enables features such as IMS, VoLTE, VoWiFi or WiFi calling <b>if it worked on stock</b>.</string>
 </resources>

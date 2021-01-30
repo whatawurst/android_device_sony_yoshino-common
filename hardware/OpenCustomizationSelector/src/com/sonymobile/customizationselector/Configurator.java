@@ -21,7 +21,7 @@ public class Configurator {
     public static final String KEY_MODEM = "modem";
     public static final String KEY_SIM_ID = "sim_id";
 
-    private static final String OLD_CONFIG_KEY = "config_key";
+    public static final String OLD_CONFIG_KEY = "config_key";
     private static final String PROP_CUST = "ro.semc.version.cust";
     private static final String PROP_CUST_REV = "ro.semc.version.cust_revision";
     private static final String PROP_SIM_CONFIG_ID = "persist.sys.sim_config_ids";
