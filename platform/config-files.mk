@@ -18,7 +18,7 @@ PRODUCT_COPY_FILES += \
 
 ### KEYLAYOUT
 PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/config/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
+    $(PLATFORM_PATH)/config/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/gpio-keys.kl
 
 ### IDC
 PRODUCT_COPY_FILES += \
@@ -42,7 +42,7 @@ PRODUCT_COPY_FILES += \
 
 # QTI low power whitelist
 PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/config/power/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
+    $(PLATFORM_PATH)/config/power/qti_whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/qti_whitelist.xml
 
 ### AUDIO
 PRODUCT_COPY_FILES += \
