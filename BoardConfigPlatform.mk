@@ -146,9 +146,10 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
 ### RECOVERY
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab.recovery
 
-### SYSTEM PROPS
+### PROPS
 # This is a reset, add more in devices if needed
 TARGET_SYSTEM_PROP := $(PLATFORM_PATH)/system.prop
+TARGET_VENDOR_PROP := $(PLATFORM_PATH)/vendor.prop
 
 ### TREBLE
 # Enable treble
