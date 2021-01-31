@@ -1,4 +1,0 @@
-For details see: build/make/tools/fs_config/README
-
-That vendor oem AIDs are accessible from Android you need:
-https://android-review.googlesource.com/c/platform/bionic/+/220570
