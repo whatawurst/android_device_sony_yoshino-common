@@ -70,7 +70,7 @@ RECOVERY_SDCARD_ON_DATA := true
 
 ### ENCRYPTED FILESYSTEMS
 TW_INCLUDE_CRYPTO := true
-ifneq ($(filter lilac poplar poplar_canada poplar_dsds, $(TARGET_DEVICE)),)
+ifneq ($(filter lilac poplar poplar_canada poplar_dsds poplar_kddi, $(TARGET_DEVICE)),)
     # ext4 file based crypto
     TW_INCLUDE_CRYPTO_FBE := true
 endif
