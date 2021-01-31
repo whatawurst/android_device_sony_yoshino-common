@@ -3,7 +3,7 @@
 typeattribute wfdservice data_between_core_and_vendor_violators;
 
 unix_socket_connect(wfdservice, property, init)
-allow wfdservice wfd_prop:property_service set;
+set_prop(wfdservice, wfd_prop)
 allow wfdservice property_socket:sock_file write;
 
 allow wfdservice wfd_vendor_data_file:dir { rw_dir_perms };
