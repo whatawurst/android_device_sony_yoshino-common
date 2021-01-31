@@ -61,10 +61,6 @@ PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
     $(PLATFORM_PATH)/config/media/media_profiles_vendor.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml
 
-### SENSORS
-PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/config/sensors/sensors_settings:system/etc/sensors/sensors_settings
-
 ### STAGEFRIGHT
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
