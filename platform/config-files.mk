@@ -18,11 +18,11 @@ PRODUCT_COPY_FILES += \
 
 ### KEYLAYOUT
 PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/system/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
+    $(PLATFORM_PATH)/config/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
 
 ### IDC
 PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/system/idc/clearpad.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/clearpad.idc
+    $(PLATFORM_PATH)/config/idc/clearpad.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/clearpad.idc
 
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += \
