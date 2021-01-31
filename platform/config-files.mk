@@ -28,10 +28,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/gps/gps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf
 
-### ISRC
-PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/config/irsc/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
-
 ### KEYLAYOUT
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/gpio-keys.kl
