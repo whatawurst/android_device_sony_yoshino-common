@@ -21,6 +21,9 @@ endif
 ifeq ($(TARGET_DEVICE),poplar_dsds)
 	$(hide) ln -sf amss_fsg_poplar_dsds_tar.mbn $@/default
 endif
+ifeq ($(TARGET_DEVICE),poplar_kddi)
+	$(hide) ln -sf amss_fsg_poplar_tar.mbn $@/default
+endif
 ifeq ($(TARGET_DEVICE),maple)
 	$(hide) ln -sf amss_fsg_maple_tar.mbn $@/default
 endif
