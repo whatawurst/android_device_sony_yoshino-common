@@ -145,9 +145,9 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
 
 ### RECOVERY
 ifneq ($(filter maple maple_dsds, $(TARGET_DEVICE)),)
-TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab_maple.recovery
+TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/fstab_maple.recovery
 else
-TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab.recovery
+TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/fstab.recovery
 endif
 
 ### PROPS
@@ -169,7 +169,3 @@ BUILD_BROKEN_DUP_RULES := true
 
 ### BUILD_COPY_HEADERS ALLOWED
 BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
-
-ifeq ($(WITH_TWRP),true)
--include $(PLATFORM_PATH)/twrp.mk
-endif
