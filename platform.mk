@@ -48,23 +48,11 @@ PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
 
 ### RECOVERY
-ifeq ($(WITH_TWRP),true)
-# Add Timezone database
-PRODUCT_COPY_FILES += \
-    system/timezone/output_data/iana/tzdata:recovery/root/system/usr/share/zoneinfo/tzdata
+include $(PLATFORM_PATH)/platform/*.mk
 
-# Add manifest for hwservicemanager
-PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/recovery/root/system/etc/vintf/manifest.xml:recovery/root/system/etc/vintf/manifest.xml \
-    $(PLATFORM_PATH)/recovery/root/vendor/etc/vintf/manifest.xml:recovery/root/vendor/etc/vintf/manifest.xml
-
-else # WITH_TWRP
 ### VERITY
 ifeq ($(WITH_VERITY),true)
 PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/soc/1da4000.ufshc/by-name/system
 PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc/1da4000.ufshc/by-name/vendor
 $(call inherit-product, build/target/product/verity.mk)
-endif # WITH_VERITY
-
-include $(PLATFORM_PATH)/platform/*.mk
-endif # WITH_TWRP
+endif
