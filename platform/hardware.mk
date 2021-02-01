@@ -127,10 +127,6 @@ PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service
 
-# NFC
-PRODUCT_PACKAGES += \
-    android.hardware.nfc@1.1-service
-
 # POWER
 PRODUCT_PACKAGES += \
     android.hardware.power-service-qti
