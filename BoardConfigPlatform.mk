@@ -39,8 +39,8 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a73
 ### KERNEL
 TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_CLANG_VERSION := r383902b
-TARGET_KERNEL_VERSION := 4.4
 TARGET_KERNEL_SOURCE  := kernel/sony/msm8998
+TARGET_KERNEL_VERSION := 4.4
 
 # Taken from unpacked stock boot.img / README_Xperia in Kernel source
 BOARD_KERNEL_CMDLINE += user_debug=31
@@ -66,11 +66,6 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_ROOT_EXTRA_FOLDERS := ocm
 TARGET_USERIMAGES_USE_EXT4 := true
 
-### FILESYSTEM
-TARGET_FS_CONFIG_GEN := \
-    $(PLATFORM_PATH)/fs/config.aid \
-    $(PLATFORM_PATH)/fs/config.fs
-
 ### DEXPREOPT
 # Enable dexpreopt for everything to speed boot time
 ifeq ($(HOST_OS),linux)
@@ -80,27 +75,83 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
-### GRAPHICS
-TARGET_USES_ION := true
+### BLUETOOTH
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
+BOARD_HAVE_BLUETOOTH_QCOM := true
 
-### DISPLAY
-TARGET_USES_HWC2 := true
-TARGET_USES_GRALLOC1 := true
-
-# RENDERSCRIPT
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
-
-### INIT
-TARGET_INIT_VENDOR_LIB := //$(PLATFORM_PATH):libinit_yoshino
-TARGET_RECOVERY_DEVICE_MODULES := libinit_yoshino
+### BUILD_COPY_HEADERS ALLOWED
+BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
 
 ### CAMERA
 BOARD_QTI_CAMERA_32BIT_ONLY := true
 MALLOC_SVELTE_FOR_LIBC32 := true
 TARGET_USES_QTI_CAMERA_DEVICE := true
 
+### DISPLAY
+TARGET_USES_HWC2 := true
+TARGET_USES_GRALLOC1 := true
+
 ### DRM
 TARGET_ENABLE_MEDIADRM_64 := true
+
+### ENCRYPTION
+TARGET_HW_DISK_ENCRYPTION := true
+
+### FILESYSTEM
+TARGET_FS_CONFIG_GEN := \
+    $(PLATFORM_PATH)/fs/config.aid \
+    $(PLATFORM_PATH)/fs/config.fs
+
+### GRAPHICS
+TARGET_USES_ION := true
+
+### HIDL
+DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
+
+### INIT
+TARGET_INIT_VENDOR_LIB := //$(PLATFORM_PATH):libinit_yoshino
+TARGET_RECOVERY_DEVICE_MODULES := libinit_yoshino
+
+### POWER HAL
+TARGET_USES_INTERACTION_BOOST := true
+
+### PROPS
+# This is a reset, add more in devices if needed
+TARGET_SYSTEM_PROP := $(PLATFORM_PATH)/system.prop
+TARGET_VENDOR_PROP := $(PLATFORM_PATH)/vendor.prop
+
+### RECOVERY
+ifneq ($(filter maple maple_dsds, $(TARGET_DEVICE)),)
+TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/fstab_maple.recovery
+else
+TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/fstab.recovery
+endif
+
+### RENDERSCRIPT
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+
+### RIL
+TARGET_PER_MGR_ENABLED := true
+TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
+TARGET_USES_OLD_MNC_FORMAT := true
+
+### SEPOLICY
+include device/qcom/sepolicy-legacy-um/SEPolicy.mk
+BOARD_VENDOR_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
+
+### TREBLE
+# Enable treble
+PRODUCT_FULL_TREBLE_OVERRIDE ?= true
+# Split build properties
+BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+
+### VENDOR FILE OVERRIDE
+BUILD_BROKEN_DUP_RULES := true
+
+### VENDOR SECURITY PATCH LEVEL
+VENDOR_SECURITY_PATCH := 2019-09-01
 
 ### WIFI
 BOARD_HAS_QCOM_WLAN := true
@@ -116,54 +167,3 @@ WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
-
-### BLUETOOTH
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
-BOARD_HAVE_BLUETOOTH_QCOM := true
-
-### RIL
-TARGET_PER_MGR_ENABLED := true
-TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
-TARGET_USES_OLD_MNC_FORMAT := true
-
-### POWER HAL
-TARGET_USES_INTERACTION_BOOST := true
-
-### HIDL
-DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
-
-### ENCRYPTION
-TARGET_HW_DISK_ENCRYPTION := true
-
-### SEPOLICY
-include device/qcom/sepolicy-legacy-um/SEPolicy.mk
-BOARD_VENDOR_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
-
-### RECOVERY
-ifneq ($(filter maple maple_dsds, $(TARGET_DEVICE)),)
-TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/fstab_maple.recovery
-else
-TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/fstab.recovery
-endif
-
-### PROPS
-# This is a reset, add more in devices if needed
-TARGET_SYSTEM_PROP := $(PLATFORM_PATH)/system.prop
-TARGET_VENDOR_PROP := $(PLATFORM_PATH)/vendor.prop
-
-### TREBLE
-# Enable treble
-PRODUCT_FULL_TREBLE_OVERRIDE ?= true
-# Split build properties
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-
-### VENDOR SECURITY PATCH LEVEL
-VENDOR_SECURITY_PATCH := 2019-09-01
-
-### VENDOR FILE OVERRIDE
-BUILD_BROKEN_DUP_RULES := true
-
-### BUILD_COPY_HEADERS ALLOWED
-BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
