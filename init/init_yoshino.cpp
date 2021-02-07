@@ -41,8 +41,6 @@
 
 #include "ta.h"
 
-#include "target_init.h"
-
 using android::base::GetProperty;
 using android::base::WaitForProperty;
 using android::base::ReadFileToString;
