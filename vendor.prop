@@ -93,9 +93,6 @@ vendor.qcom.bluetooth.soc=cherokee
 ### CAMERA
 camera.disable_zsl_mode=1
 
-### CHARGER
-ro.charger.enable_suspend=true
-
 ### DISPLAY
 # CABL
 ro.vendor.display.cabl=2

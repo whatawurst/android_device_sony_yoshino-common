@@ -46,6 +46,9 @@ ro.bluetooth.wipower=true
 ### CAMERA
 vendor.camera.aux.packagelist=org.codeaurora.snapcam,org.lineageos.snap,com.google.android.GoogleCamera
 
+### CHARGER
+ro.charger.enable_suspend=true
+
 ### DISPLAY
 # Assertive display
 ro.qcom.ad=1
