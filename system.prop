@@ -1,5 +1,3 @@
-# system prop for yoshino-common
-
 ### AUDIO
 # AAC 5.1 output enabled
 media.aac_51_output_enabled=true
