@@ -41,10 +41,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/irqbalance/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
 
-### PERF
-PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/config/perf/perfboostsconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfboostsconfig.xml
-
 ### QTI_LOW_POWER_WHITELIST
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/power/qti_whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/qti_whitelist.xml
