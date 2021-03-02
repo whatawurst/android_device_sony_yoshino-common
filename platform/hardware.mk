@@ -129,10 +129,7 @@ PRODUCT_PACKAGES += \
 
 # POWER
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.2-service-qti \
-    android.hardware.power.stats@1.0-service.mock \
-    vendor.qti.hardware.perf@2.0 \
-    vendor.qti.hardware.perf@2.0.vendor
+    android.hardware.power.stats@1.0-service.mock
 
 # RADIO
 PRODUCT_PACKAGES += \

@@ -149,9 +149,6 @@ DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
 TARGET_INIT_VENDOR_LIB := //$(PLATFORM_PATH):libinit_yoshino
 TARGET_RECOVERY_DEVICE_MODULES := libinit_yoshino
 
-### POWER HAL
-TARGET_USES_INTERACTION_BOOST := true
-
 ### PROPS
 # This is a reset, add more in devices if needed
 TARGET_SYSTEM_PROP := $(PLATFORM_PATH)/system.prop
