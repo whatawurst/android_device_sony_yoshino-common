@@ -5,6 +5,8 @@ genfscon debugfs /icnss/crash_reason/wlan_pdr_crash_reason              u:object
 genfscon debugfs /rmt_storage                                           u:object_r:debugfs_rmt_storage:s0
 genfscon debugfs /wcd_cpe/err_status                                    u:object_r:ssr_crash_reason_file:s0
 genfscon debugfs /wlan0/power_stats                                     u:object_r:debugfs_wlan_power:s0
+genfscon debugfs /rpm_stats                                             u:object_r:debugfs_rpm:s0
+genfscon debugfs /system_stats                                          u:object_r:debugfs_rpm:s0
 
 # sysfs
 genfscon sysfs /class/qns                                               u:object_r:sysfs_qns:s0
@@ -52,3 +54,7 @@ genfscon sysfs /devices/soc/780000.qcom,msm-core/uio/uio1/name          u:object
 
 genfscon sysfs /devices/virtual/input/input6/wakeup_gesture             u:object_r:sysfs_touchpad:s0
 genfscon sysfs /devices/virtual/switch/lid/state                        u:object_r:sysfs_switch_lid:s0
+
+# Needed by PowerHAL
+genfscon sysfs /devices/soc/soc:qcom,cpubw            u:object_r:sysfs_msm_subsys:s0
+genfscon sysfs /devices/soc/soc:qcom,mincpubw         u:object_r:sysfs_msm_subsys:s0
