@@ -141,10 +141,6 @@ persist.vendor.mmi.misc_dev_path=/dev/block/sda54
 # OEM unlock reporting
 ro.oem_unlock_supported=1
 
-### PERFORMANCE
-# Power balancing
-ro.vendor.extension_library=libqti-perfd-client.so
-
 ### RADIO
 DEVICE_PROVISIONED=1
 persist.vendor.data.iwlan.enable=true
