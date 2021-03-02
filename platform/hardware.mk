@@ -127,12 +127,6 @@ PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service
 
-# POWER
-PRODUCT_PACKAGES += \
-    android.hardware.power-service-qti \
-    vendor.qti.hardware.perf@2.0 \
-    vendor.qti.hardware.perf@2.0.vendor
-
 # RADIO
 PRODUCT_PACKAGES += \
     android.hardware.broadcastradio@1.0-impl \
