@@ -12,9 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-on early-init
-    write /proc/sys/kernel/sched_boost 1
-
 on init
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
@@ -168,4 +165,3 @@ on property:sys.boot_completed=1
 
     write /dev/cpuset/background/cpus "0-3"
     write /dev/cpuset/system-background/cpus "0-3"
-    write /proc/sys/kernel/sched_boost 0
