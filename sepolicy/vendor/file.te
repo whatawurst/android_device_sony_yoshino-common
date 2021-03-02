@@ -1,7 +1,10 @@
 # file.te
 
 # debugfs
+type debugfs_power_stats, fs_type, debugfs_type;
 type debugfs_rmt_storage, fs_type, debugfs_type;
+type debugfs_rpm, fs_type, debugfs_type;
+type debugfs_wlan, fs_type, debugfs_type;
 type debugfs_wlan_power, fs_type, debugfs_type;
 type ssr_crash_reason_file, file_type, debugfs_type;
 
