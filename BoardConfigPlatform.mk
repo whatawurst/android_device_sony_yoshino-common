@@ -175,10 +175,6 @@ include device/qcom/sepolicy-legacy-um/sepolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
 
-### TREBLE
-# Split build properties
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-
 ### VENDOR FILE OVERRIDE
 BUILD_BROKEN_DUP_RULES := true
 
