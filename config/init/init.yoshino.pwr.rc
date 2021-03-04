@@ -110,6 +110,10 @@ on boot
     chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
     chmod 0660 /dev/cpuset/camera-daemon/tasks
 
+on post-fs
+    chmod 0664 /sys/devices/virtual/graphics/fb0/idle_time
+    chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
+
 on post-fs-data
     # Setup permission for powerHAL
     chown system system /dev/stune/top-app/schedtune.boost
