@@ -113,6 +113,7 @@ on boot
 on post-fs
     chmod 0664 /sys/devices/virtual/graphics/fb0/idle_time
     chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
+    write /sys/devices/virtual/graphics/fb0/idle_time 100
 
 on post-fs-data
     # Setup permission for powerHAL
