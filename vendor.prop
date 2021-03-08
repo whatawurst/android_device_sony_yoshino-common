@@ -150,6 +150,7 @@ persist.vendor.data.iwlan.enable=true
 persist.vendor.radio.custom_ecc=1
 persist.vendor.radio.mt_sms_ack=19
 persist.vendor.radio.oem_socket=true
+persist.vendor.radio.procedure_bytes=SKIP
 persist.vendor.radio.rat_on=combine
 persist.vendor.radio.report_codec=1
 persist.vendor.radio.sib16_support=1
@@ -159,11 +160,7 @@ persist.vendor.radio.wait_for_pbm=1
 persist.vendor.dpm.feature=1
 
 # IMS
-persist.radio.calls.on.ims=1
-persist.vendor.ims.vcel_rtcp_report=5
-persist.vendor.radio.calls.on.ims=1
-persist.vendor.radio.ims_call_transfer=true
-vendor.service.qti.ims.enabled=1
+persist.vendor.qti.telephony.vt_cam_interface=1
 
 # Netmgr
 persist.vendor.radio.aosp_usr_pref_sel=true
@@ -192,6 +189,7 @@ net.tcp.buffersize.umts=4094,87380,110208,4096,16384,110208
 
 # Telephony
 ro.telephony.call_ring.multiple=false
+ro.telephony.iwlan_operation_mode=legacy
 
 ### SENSORS
 debug.vendor.sns.daemon=0
@@ -205,7 +203,6 @@ ro.hardware.thermal=somc
 ### USB
 persist.vendor.usb.config.extra=none
 vendor.usb.rndis.func.name=gsi
-
 
 ### WFD
 # Property for WfdService.apk to fix WFD for some apps when 
