@@ -1,5 +1,3 @@
-ifeq ($(BOARD_MODEM_CUSTOMIZATIONS),true)
-
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -46,5 +44,3 @@ LOCAL_MODULE := ta_cust_version
 LOCAL_SRC_FILES := ta_cust_version.c
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_EXECUTABLES)
 include $(BUILD_EXECUTABLE)
-
-endif
