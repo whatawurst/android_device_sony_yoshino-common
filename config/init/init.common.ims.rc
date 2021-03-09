@@ -16,7 +16,7 @@ service vendor.imsqmidaemon /system/vendor/bin/imsqmidaemon
     class main
     user radio
     socket ims_qmid stream 0660 system radio
-    group radio log diag
+    group radio vendor_qti_diag log
 
 service vendor.imsdatadaemon /system/vendor/bin/imsdatadaemon
     class main
@@ -36,8 +36,7 @@ service vendor.ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
 service vendor.imsrcsservice /system/vendor/bin/imsrcsd
     class main
     user radio
-    group radio diag inet log wakelock
+    group radio vendor_qti_diag log inet wakelock
 
 on property:vendor.ims.DATA_DAEMON_STATUS=1
     restart vendor.ims_rtp_daemon
-
