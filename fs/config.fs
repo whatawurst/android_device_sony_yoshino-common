@@ -70,8 +70,6 @@ user: AID_SYSTEM
 group: AID_SYSTEM
 caps: NET_BIND_SERVICE
 
-
-
 [vendor/firmware_mnt/]
 mode: 0771
 user: AID_SYSTEM
