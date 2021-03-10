@@ -1,5 +1,6 @@
 # thermal-engine.te
 
+allow thermal-engine hal_idd_default:binder { call };
 allow thermal-engine hwservicemanager:binder { call };
 
 get_prop(thermal-engine, hwservicemanager_prop)
@@ -11,6 +12,9 @@ allow thermal-engine illumination_socket:sock_file write;
 # /tmp/test_sensor.in
 rw_dir_file(thermal-engine, tmpfs)
 
+# /sys/class/kgsl
+r_dir_file(thermal-engine, sysfs_kgsl)
+
 # /sys/devices/soc/0.qcom,rmtfs_sharedmem
 r_dir_file(thermal-engine, sysfs_rmtfs)
 
@@ -19,6 +23,3 @@ allow thermal-engine sysfs_batteryinfo:file r_file_perms;
 
 # /sys/class/devfreq
 allow thermal-engine sysfs_devfreq:dir r_dir_perms;
-
-# /sys/devices/virtual
-dontaudit thermal-engine sysfs:dir { open read };
