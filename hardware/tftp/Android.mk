@@ -1,5 +1,3 @@
-ifneq ($(filter sdm660 msm8998 sdm845,$(TARGET_BOARD_PLATFORM)),)
-
 include $(CLEAR_VARS)
 
 ### APQ
@@ -142,5 +140,3 @@ ALL_DEFAULT_INSTALLED_MODULES += \
     $(RFS_MSM_CDSP_SYMLINKS) \
     $(RFS_MSM_MPSS_SYMLINKS) \
     $(RFS_MSM_SLPI_SYMLINKS)
-
-endif
