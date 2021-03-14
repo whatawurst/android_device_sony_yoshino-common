@@ -142,7 +142,6 @@ persist.rmnet.data.enable=true
 
 # Telephony
 ro.com.android.dataroaming=false
-persist.ims.disableUserAgent=1
 telephony.lteOnCdmaDevice=0
 
 ### SD
