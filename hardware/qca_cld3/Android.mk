@@ -1,5 +1,3 @@
-ifeq ($(BOARD_WLAN_DEVICE),qcwcn)
-
 include $(CLEAR_VARS)
 WCNSS_INI_SYMLINK := $(TARGET_OUT_VENDOR)/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini
 $(WCNSS_INI_SYMLINK): $(LOCAL_INSTALLED_MODULE)
@@ -26,5 +24,3 @@ ALL_DEFAULT_INSTALLED_MODULES += \
     $(WCNSS_INI_SYMLINK) \
     $(WCNSS_BDWLAN_SYMLINK) \
     $(WCNSS_MAC_SYMLINK)
-
-endif
