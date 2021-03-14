@@ -39,20 +39,6 @@ on init
     chown oem_2997 oem_2997 /dev/block/sda1
     chmod 0770 /dev/block/sda1
 
-    # Required for tad and modem-switcher
-    restorecon /dev/block/bootdevice/by-name/fsc
-    restorecon /dev/block/bootdevice/by-name/fsg
-    restorecon /dev/block/bootdevice/by-name/modemst1
-    restorecon /dev/block/bootdevice/by-name/modemst2
-    restorecon /dev/block/bootdevice/by-name/TA
-
-    # Start tad and miscta hidl service
-    class_start trimarea
-
-    # These are needed for MiscTA HIDL service
-    start hwservicemanager
-    start hidl_memory
-
     # UFS firmware update
     exec u:r:vendor_ffu:s0 -- /vendor/bin/ffu
 
@@ -91,6 +77,20 @@ on fs
 on post-fs
     # Start qseecomd for vold
     start vendor.qseecomd
+
+    # Required for tad and modem-switcher
+    restorecon /dev/block/bootdevice/by-name/fsc
+    restorecon /dev/block/bootdevice/by-name/fsg
+    restorecon /dev/block/bootdevice/by-name/modemst1
+    restorecon /dev/block/bootdevice/by-name/modemst2
+    restorecon /dev/block/bootdevice/by-name/TA
+
+    # Start tad and miscta hidl service
+    class_start trimarea
+
+    # These are needed for MiscTA HIDL service
+    start hwservicemanager
+    start hidl_memory
 
     # Display
     chown system system /sys/devices/mdss_dsi_panel/c_mode
