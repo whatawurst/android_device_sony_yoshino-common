@@ -1,8 +1,3 @@
-# fstab
-PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/config/init/idd.fstab:$(TARGET_COPY_OUT_VENDOR)/etc/idd.fstab \
-    $(PLATFORM_PATH)/config/init/qns.fstab:$(TARGET_COPY_OUT_VENDOR)/etc/qns.fstab
-
 # init rc
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/init/init.common.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.common.rc \
