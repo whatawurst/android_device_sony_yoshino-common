@@ -52,6 +52,14 @@ on init
     chown system system /sys/devices/soc/soc:qcom,cpubw/devfreq/soc:qcom,cpubw/bw_hwmon/hist_memory
     chown system system /sys/devices/soc/soc:qcom,cpubw/devfreq/soc:qcom,cpubw/bw_hwmon/hyst_length
 
+    # Add a cpuset for the camera daemon
+    mkdir /dev/cpuset/camera-daemon
+    write /dev/cpuset/camera-daemon/cpus 0
+    write /dev/cpuset/camera-daemon/mems 0
+    chown cameraserver cameraserver /dev/cpuset/camera-daemon
+    chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
+    chmod 0660 /dev/cpuset/camera-daemon/tasks
+
 on charger
     # Set runtime stune value
     write /dev/stune/schedtune.prefer_idle 0
@@ -95,14 +103,8 @@ on boot
     write /dev/cpuset/background/cpus "0-7"
     write /dev/cpuset/system-background/cpus "0-7"
 
-    # Add a cpuset for the camera daemon
     # We want all cores for camera
-    mkdir /dev/cpuset/camera-daemon
     write /dev/cpuset/camera-daemon/cpus "0-3"
-    write /dev/cpuset/camera-daemon/mems 0
-    chown cameraserver cameraserver /dev/cpuset/camera-daemon
-    chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
-    chmod 0660 /dev/cpuset/camera-daemon/tasks
 
 on post-fs
     chmod 0664 /sys/devices/virtual/graphics/fb0/idle_time
