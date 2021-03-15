@@ -57,7 +57,6 @@ on fs
     # SONY: setup idd, qns and rca partitions
     chown oem_2987 oem_2987 /mnt/idd
     chmod 0751 /mnt/idd
-    setprop vendor.idd.partitions_ready 1
     chown oem_2985 oem_2985 /mnt/qns
     chmod 0750 /mnt/qns
     restorecon_recursive /mnt/qns
@@ -442,6 +441,10 @@ service iddd /vendor/bin/iddd
     user oem_2987
     group oem_2987 log inet oem_2993
     writepid /dev/cpuset/system-background/tasks
+
+on property:sys.user.0.ce_available=true
+    # Setting property to inform that partitions are mounted
+    setprop vendor.idd.partitions_ready 1
 
 on charger
     setprop persist.sys.usb.config mass_storage
