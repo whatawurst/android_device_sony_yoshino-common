@@ -95,6 +95,7 @@ service vendor.atfwd /vendor/bin/ATFWD-daemon
     class late_start
     user system
     group system radio
+    writepid /dev/cpuset/system-background/tasks
 
 on property:persist.vendor.radio.atfwd.start=false
     stop vendor.atfwd
@@ -160,6 +161,7 @@ service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/m
     class core
     user root
     group root
+    writepid /dev/cpuset/system-background/tasks
 
 ### SENSORS
 service vendor.sensors.qti /vendor/bin/sensors.qti
@@ -172,6 +174,7 @@ service vendor.qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
+    writepid /dev/cpuset/system-background/tasks
 
 ### Thermal Manager
 service thermal-engine /system/vendor/bin/thermal-engine
@@ -182,12 +185,14 @@ service thermal-engine /system/vendor/bin/thermal-engine
     socket thermal-recv-passive-client stream 0666 system system
     socket thermal-send-rule stream 0660 system system
     group root oem_2993 oem_2929
+    writepid /dev/cpuset/system-background/tasks
 
 ### ADSP FastRPC
 service adsprpcd /system/vendor/bin/adsprpcd
    class main
    user media
    group media
+   writepid /dev/cpuset/system-background/tasks
 
 ### TimeService
 service time_daemon /system/vendor/bin/time_daemon
@@ -225,6 +230,7 @@ service energy-awareness /system/vendor/bin/energy-awareness
     user root
     group system
     oneshot
+    writepid /dev/cpuset/system-background/tasks
 
 ### SSR (subsystem restart)
 service vendor.ssr_setup /system/vendor/bin/ssr_setup
