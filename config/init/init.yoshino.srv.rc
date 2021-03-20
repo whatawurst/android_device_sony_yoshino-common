@@ -1,0 +1,335 @@
+# Copyright 2014 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+### ADB OVER NETWORK
+on property:adb.network.port.es=*
+    setprop service.adb.tcp.port ${adb.network.port.es}
+
+on property:service.adb.tcp.port=5555
+    stop adbd
+    start adbd
+
+on property:service.adb.tcp.port=-1
+    stop adbd
+    start adbd
+
+### ADSP FastRPC
+service adsprpcd /system/vendor/bin/adsprpcd
+   class main
+   user media
+   group media
+   writepid /dev/cpuset/system-background/tasks
+
+### CHARGER
+# QCOM Quick Charge
+service vendor.hvdcp_opti /system/vendor/bin/hvdcp_opti
+    user root
+    group system wakelock
+    disabled
+
+# Charge service
+service charge_service /vendor/bin/charge_service
+    user system
+    # Add oem_2993 to the group of charge_service for access MiscTA.
+    # Add wakelock to the group of charge_service for access "/sys/power/wake_lock" and "/sys/power/wake_unlock".
+    group system root oem_2993 wakelock
+    # For reducing CPU loads, charge service runs as system-background process.
+    writepid /dev/cpuset/system-background/tasks
+    disabled
+
+# Qns
+service qns /vendor/bin/qns -d /mnt/qns -l /mnt/qns
+    user oem_2985
+    group oem_2985
+    socket qnsbsd stream 660 oem_2985 system
+    disabled
+
+### CND
+service vendor.cnd /system/vendor/bin/cnd
+    class main
+    user system
+    group system wifi inet radio wakelock net_admin
+
+### CNSS
+service cnss-daemon /system/vendor/bin/cnss-daemon -n -l
+    class late_start
+    user system
+    group system inet net_admin wifi
+    capabilities NET_ADMIN
+
+on shutdown
+    stop cnss-daemon
+
+### DISPLAY
+service vendor.ppd /vendor/bin/mm-pp-dpps
+    class late_start
+    user system
+    group system graphics
+    socket pps stream 0660 system system
+    disabled
+
+on property:init.svc.vendor.hwcomposer-2-1=stopped
+    stop vendor.ppd
+
+on property:init.svc.vendor.hwcomposer-2-1=running
+    start vendor.ppd
+
+on property:init.svc.vendor.hwcomposer-2-1=restarting
+    stop vendor.ppd
+
+# DRM WIDEVINE
+service wvkbd_installer /vendor/bin/wvkbd
+    class late_start
+    user system
+    group system
+    oneshot
+
+### GNSS
+service mlid /vendor/bin/mlid
+    class late_start
+    user gps
+    group gps
+    socket mlid stream 0666 gps gps
+
+# loc_launcher will start as root and set its uid to gps
+service loc_launcher /system/vendor/bin/loc_launcher
+    class late_start
+    user gps
+    group gps
+
+### IRSC
+service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
+    class core
+    user root
+    oneshot
+
+### MSM IRQBALANCE
+service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+    class core
+    user root
+    group root
+    writepid /dev/cpuset/system-background/tasks
+
+### OFFLINE CHARGER
+service charger /system/bin/charger
+    class charger
+    user system
+    group system graphics input log
+    capabilities SYS_BOOT
+    seclabel u:r:charger:s0
+    writepid /dev/cpuset/system-background/tasks
+
+service qbcharger /charger -m 1
+    disabled
+    oneshot
+
+on property:sys.qbcharger.enable=true
+    start qbcharger
+
+on property:sys.qbcharger.enable=false
+    stop qbcharger
+
+### PD MAPPER
+service pd_mapper /system/vendor/bin/pd-mapper
+     class core
+
+### PERF
+service energy-awareness /system/vendor/bin/energy-awareness
+    class main
+    user root
+    group system
+    oneshot
+    writepid /dev/cpuset/system-background/tasks
+
+### PERIPHERAL MANAGER
+service vendor.per_mgr /vendor/bin/pm-service
+    class core
+    user system
+    group system
+    ioprio rt 4
+
+service vendor.per_proxy /vendor/bin/pm-proxy
+    class core
+    user system
+    group system
+    disabled
+
+on property:init.svc.vendor.per_mgr=running
+    start vendor.per_proxy
+
+on shutdown
+    stop vendor.per_proxy
+
+### RADIO
+service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
+    class main
+    user system
+    group radio system
+
+service vendor.atfwd /vendor/bin/ATFWD-daemon
+    class late_start
+    user system
+    group system radio
+    writepid /dev/cpuset/system-background/tasks
+
+service vendor.dataadpl /system/vendor/bin/adpl
+    class main
+    user radio
+    group radio oem_2901 diag usb net_admin
+
+service vendor.dataqti /system/vendor/bin/qti
+    class main
+    user radio
+    group radio oem_2901 diag usb net_admin
+
+service vendor.netmgrd /system/vendor/bin/netmgrd
+    class main
+
+service vendor.port-bridge /system/vendor/bin/port-bridge
+    class main
+    user radio
+    group radio system inet
+    oneshot
+
+service vendor.ril-daemon2 /vendor/bin/hw/rild -c 2
+    class main
+    user radio
+    disabled
+    group radio cache inet misc audio sdcard_r sdcard_rw diag oem_2901 log oem_2993
+    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
+
+on property:persist.radio.multisim.config=dsds
+    enable vendor.ril-daemon2
+
+service vendor.rmt_storage /vendor/bin/rmt_storage
+    class core
+    user root
+    shutdown critical
+    ioprio rt 0
+
+service vendor.tftp_server /vendor/bin/tftp_server
+    class core
+    user root
+
+on property:vold.decrypt=trigger_restart_framework
+    start ril-daemon
+    start vendor.ipacm
+    start vendor.dataqti
+    start vendor.dataadpl
+    start vendor.netmgrd
+    start vendor.port-bridge
+
+### SENSORS
+service vendor.sensors.qti /vendor/bin/sensors.qti
+    class core
+    user system
+    group system
+
+### SONY IDD
+service iddd /vendor/bin/iddd
+    class core
+    user oem_2987
+    group oem_2987 log inet oem_2993
+    writepid /dev/cpuset/system-background/tasks
+
+on property:sys.user.0.ce_available=true
+    # Setting property to inform that partitions are mounted
+    setprop vendor.idd.partitions_ready 1
+
+### SONY MODEM SWITCHER
+service modem_switcher /system/bin/sony-modem-switcher
+    class main
+    user root
+    group root system oem_2993 cache
+    disabled
+    oneshot
+
+### SSGQMIGD
+service vendor.ssgqmigd /vendor/bin/ssgqmigd
+    class late_start
+    user radio
+    group radio gps system
+    socket ssgqmig seqpacket 0660 radio inet
+
+### SSR (subsystem restart)
+service vendor.ssr_setup /system/vendor/bin/ssr_setup
+    oneshot
+    disabled
+
+on property:persist.vendor.ssr.restart_level=*
+    start vendor.ssr_setup
+
+on property:persist.sys.ssr.enable_debug=*
+    write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
+
+on property:persist.sys.mba_boot_timeout=*
+    write /sys/module/pil_msa/parameters/pbl_mba_boot_timeout_ms ${persist.sys.mba_boot_timeout}
+
+on property:persist.sys.modem_auth_timeout=*
+    write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
+
+on property:persist.sys.pil_proxy_timeout=*
+    write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
+
+service ssr_dumper /system/bin/ssr_dumper
+    class main
+    user root
+    group root system
+    seclabel u:r:ssr_dumper:s0
+
+service vendor.ss_ramdump /system/vendor/bin/subsystem_ramdump
+    class main
+    user system
+    group system
+    disabled
+
+on property:persist.vendor.ssr.enable_ramdumps=1
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
+    mkdir /data/vendor/ramdump_ssr 770 system system
+    start vendor.ss_ramdump
+
+on property:persist.vendor.ssr.enable_ramdumps=0
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
+
+### TEE
+service vendor.qseecomd /vendor/bin/qseecomd
+    class core
+    user root
+    group root
+    writepid /dev/cpuset/system-background/tasks
+
+### THERMAL MANAGER
+service thermal-engine /system/vendor/bin/thermal-engine
+    class main
+    user root
+    socket thermal-send-client stream 0666 system system
+    socket thermal-recv-client stream 0660 system system
+    socket thermal-recv-passive-client stream 0666 system system
+    socket thermal-send-rule stream 0660 system system
+    group root oem_2993 oem_2929
+    writepid /dev/cpuset/system-background/tasks
+
+### TIMESERVICE
+service time_daemon /system/vendor/bin/time_daemon
+    class main
+    user root
+    group root
+
+### TRIM AREA DAEMON
+# Last 2 args: start block(blk size 128k), number of blocks(partitionsize(kb)/128(kb))
+service tad /vendor/bin/tad /dev/block/bootdevice/by-name/TA 0,16
+    user oem_2997
+    group oem_2997 root
+    socket tad stream 0660 system oem_2993
+    class trimarea
