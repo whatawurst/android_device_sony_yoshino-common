@@ -269,8 +269,6 @@ on early-boot
     chmod 0664 /sys/class/graphics/fb2/lineptr_value
     chown system graphics /sys/class/graphics/fb2/msm_fb_persist_mode
     chmod 0664 /sys/class/graphics/fb2/msm_fb_persist_mode
-    # Graphics props
-    setprop vendor.gpu.available_frequencies "710000000 670000000 596000000 515000000 414000000 342000000 257000000"
     # Start atfwd
     setprop persist.vendor.radio.atfwd.start true
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.qcom.early_boot.sh
