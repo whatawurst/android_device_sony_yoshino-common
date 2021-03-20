@@ -281,7 +281,3 @@ on property:ro.vendor.ril.mbn_copy_completed=1
 on property:persist.debug.trace=1
     mkdir /data/core 0777 root root
     write /proc/sys/kernel/core_pattern "/data/core/%E.%p.%e"
-
-#Set gpu available frequencies property
-on property:vendor.gpu.available_frequencies=*
-    setprop ro.gpu.available_frequencies ${vendor.gpu.available_frequencies}
