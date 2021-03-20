@@ -12,20 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import /vendor/etc/init/hw/init.common.rc
-import /vendor/etc/init/hw/init.common.srv.rc
-import /vendor/etc/init/hw/init.common.ims.rc
-import /vendor/etc/init/hw/init.common.qcom.rc
-
-import /vendor/etc/init/hw/init.yoshino.usb.rc
+import /vendor/etc/init/hw/init.yoshino.ims.rc
 import /vendor/etc/init/hw/init.yoshino.pwr.rc
+import /vendor/etc/init/hw/init.yoshino.qcom.rc
+import /vendor/etc/init/hw/init.yoshino.srv.rc
+import /vendor/etc/init/hw/init.yoshino.usb.rc
 
 on early-init
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
+
     write /sys/module/msm_rtb/parameters/enable 0
 
     write /sys/devices/soc/soc:fpc1145/uevent add
 
 on init
+    chmod 0664 /proc/rdtag
+    chown root system /proc/rdtag
+
     # Setup subsystem restart_level
     # This will be configured with the ssr_setup service
     setprop persist.vendor.ssr.restart_level "venus adsp slpi modem cdsp"
@@ -39,7 +43,17 @@ on init
     # UFS firmware update
     exec u:r:vendor_ffu:s0 -- /vendor/bin/ffu
 
+on late-init
+    mkdir /mnt/tmp 0775
+    mount tmpfs tmpfs /mnt/tmp nosuid mode=0775,uid=0,gid=0
+
 on fs
+    chown root system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
+
+    restorecon_recursive /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/data 0700 system system
+
     # SONY: create mount points for idd, qns and rca
     mkdir /mnt/idd 0751 oem_2987 oem_2987
     mkdir /mnt/qns 0750 oem_2985 oem_2985
@@ -78,6 +92,35 @@ on fs
 on post-fs
     # Start qseecomd for vold
     start vendor.qseecomd
+
+    # led RGB
+    chown system system /sys/class/leds/rgb/sync_state
+    chown system system /sys/class/leds/rgb/start_blink
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/red/lut_pwm
+    chown system system /sys/class/leds/red/step_duration
+    chown system system /sys/class/leds/red/pause_lo_multi
+    chown system system /sys/class/leds/red/pause_hi_multi
+    chown system system /sys/class/leds/red/max_single_brightness
+    chown system system /sys/class/leds/red/max_mix_brightness
+    chown system system /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/green/lut_pwm
+    chown system system /sys/class/leds/green/step_duration
+    chown system system /sys/class/leds/green/pause_lo_multi
+    chown system system /sys/class/leds/green/pause_hi_multi
+    chown system system /sys/class/leds/green/max_single_brightness
+    chown system system /sys/class/leds/green/max_mix_brightness
+    chown system system /sys/class/leds/blue/brightness
+    chown system system /sys/class/leds/blue/lut_pwm
+    chown system system /sys/class/leds/blue/step_duration
+    chown system system /sys/class/leds/blue/pause_lo_multi
+    chown system system /sys/class/leds/blue/pause_hi_multi
+    chown system system /sys/class/leds/blue/max_single_brightness
+    chown system system /sys/class/leds/blue/max_mix_brightness
+
+    # set aggressive read ahead for sda during boot up
+    write /sys/block/sda/queue/read_ahead_kb 2048
+    write /sys/block/sda/queue/nr_requests 256
 
     # Required for tad and modem-switcher
     restorecon /dev/block/bootdevice/by-name/fsc
@@ -122,6 +165,29 @@ on post-fs
     start modem_switcher
 
 on post-fs-data
+    # To observe dnsmasq.leases file for dhcp information of soft ap.
+    chown dhcp system /data/misc/dhcp
+
+    mkdir /data/system 0775 system system
+
+    # Create directory from IMS services
+    mkdir /data/shared 0755
+    chown system system /data/shared
+
+    setprop vold.post_fs_data_done 1
+
+    # The charge_service/chargemon/hvdcp_opti use wakelock before on boot, so add permission here.
+    chown radio wakelock /sys/power/wake_lock
+    chown radio wakelock /sys/power/wake_unlock
+    chmod 0660 /sys/power/wake_lock
+    chmod 0660 /sys/power/wake_unlock
+
+    # Create directory to dump bt crash reason
+    mkdir /mnt/tmp/bluetooth 0755 bluetooth bluetooth
+
+    # Create directory for partial dump
+    mkdir /data/crashdata 0770 root system
+
     # SONY: Camera
     chown cameraserver camera /sys/devices/sony_camera_0/info
     chmod 0770 /sys/devices/sony_camera_0/info
@@ -206,6 +272,15 @@ on post-fs-data
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
 
 on early-boot
+    chown system system /mnt/vendor/persist/sensors
+    chown system system /mnt/vendor/persist/sensors/registry
+    chown system system /mnt/vendor/persist/sensors/registry/registry
+    chown system system /mnt/vendor/persist/sensors/registry/registry/sensors_registry
+    chown system system /mnt/vendor/persist/sensors/sensors_settings
+    chown system system /mnt/vendor/persist/sensors/registry/sns_reg_config
+    chown system system /mnt/vendor/persist/sensors/registry/config
+    chmod 0664 /mnt/vendor/persist/sensors/sensors_settings
+
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_cdsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
@@ -290,6 +365,56 @@ on early-boot
     restorecon /sys/devices/virtual/input/clearpad/fwinfo
 
 on boot
+    #Create QMUX deamon socket area
+    mkdir /dev/socket/qmux_radio 0770 radio radio
+    chmod 2770 /dev/socket/qmux_radio
+    mkdir /dev/socket/qmux_audio 0770 media audio
+    chmod 2770 /dev/socket/qmux_audio
+    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
+    chmod 2770 /dev/socket/qmux_bluetooth
+    mkdir /dev/socket/qmux_gps 0770 gps gps
+    chmod 2770 /dev/socket/qmux_gps
+
+    #Create NETMGR daemon socket area
+    mkdir /dev/socket/netmgr 0750 radio radio
+
+    # Cameralight
+    chown cameraserver system /sys/class/leds/led:flash_0/brightness
+    chown cameraserver system /sys/class/leds/led:flash_1/brightness
+    chown cameraserver system /sys/class/leds/led:flash_0/max_brightness
+    chown cameraserver system /sys/class/leds/led:flash_1/max_brightness
+    chown cameraserver system /sys/class/leds/led:flash_0/ires_ua
+    chown cameraserver system /sys/class/leds/led:flash_1/ires_ua
+    chown cameraserver system /sys/class/leds/led:flash_0/strobe
+    chown cameraserver system /sys/class/leds/led:flash_1/strobe
+    chown cameraserver system /sys/class/leds/led:flash_0/duration
+    chown cameraserver system /sys/class/leds/led:flash_1/duration
+    chown cameraserver system /sys/class/leds/led:torch_0/brightness
+    chown cameraserver system /sys/class/leds/led:torch_1/brightness
+    chown cameraserver system /sys/class/leds/led:torch_0/max_brightness
+    chown cameraserver system /sys/class/leds/led:torch_1/max_brightness
+    chown cameraserver system /sys/class/leds/led:torch_0/ires_ua
+    chown cameraserver system /sys/class/leds/led:torch_1/ires_ua
+    chown cameraserver system /sys/class/leds/led:switch_0/brightness
+    chown cameraserver system /sys/class/leds/led:switch_0/fault_status
+
+    # Assign TCP buffer thresholds to be ceiling value of technology maximums
+    # Increased technology maximums should be reflected here.
+    write /proc/sys/net/core/rmem_max 16777216
+    write /proc/sys/net/core/wmem_max 8388608
+
+    # To prevent out of order acknowledgements from making
+    # connection tracking to treat them as not belonging to
+    # the connection they belong to.
+    # Otherwise, a weird issue happens in which some long
+    # connections on high-throughput links get dropped when
+    # an ack packet comes out of order
+    write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
+
+    # Set the console loglevel to < KERN_INFO
+    # Set the default message loglevel to KERN_INFO
+    write /proc/sys/kernel/printk "6 6 1 7"
+
     # Glove mode
     chown system system /sys/devices/virtual/input/clearpad/glove
     chmod 0600 /sys/devices/virtual/input/clearpad/glove
@@ -348,53 +473,6 @@ on property:wlan.driver.status=ok
     # Change owner after the module has been loaded by the wifi service
     chown wifi wifi /sys/module/wlan/parameters/fwpath
     restorecon /sys/module/wlan/parameters/fwpath
-
-# QMI DPM
-service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
-    class main
-    user system
-    group radio system
-
-service modem_switcher /system/bin/sony-modem-switcher
-    class main
-    user root
-    group root system oem_2993 cache
-    disabled
-    oneshot
-
-# QCOM Quick Charge
-service vendor.hvdcp_opti /system/vendor/bin/hvdcp_opti
-    user root
-    group system wakelock
-    disabled
-
-# Charge service
-service charge_service /vendor/bin/charge_service
-    user system
-    # Add oem_2993 to the group of charge_service for access MiscTA.
-    # Add wakelock to the group of charge_service for access "/sys/power/wake_lock" and "/sys/power/wake_unlock".
-    group system root oem_2993 wakelock
-    # For reducing CPU loads, charge service runs as system-background process.
-    writepid /dev/cpuset/system-background/tasks
-    disabled
-
-# Qns
-service qns /vendor/bin/qns -d /mnt/qns -l /mnt/qns
-    user oem_2985
-    group oem_2985
-    socket qnsbsd stream 660 oem_2985 system
-    disabled
-
-# Iddd
-service iddd /vendor/bin/iddd
-    class core
-    user oem_2987
-    group oem_2987 log inet oem_2993
-    writepid /dev/cpuset/system-background/tasks
-
-on property:sys.user.0.ce_available=true
-    # Setting property to inform that partitions are mounted
-    setprop vendor.idd.partitions_ready 1
 
 on charger
     setprop persist.sys.usb.config mass_storage
