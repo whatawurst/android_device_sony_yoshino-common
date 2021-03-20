@@ -290,8 +290,6 @@ on early-boot
     restorecon /sys/devices/virtual/input/clearpad/fwinfo
 
 on boot
-    start vendor.rmt_storage
-
     ####Regionalization config and prop files####
     chmod 0644 /persist/speccfg/spec
     chmod 0644 /persist/speccfg/devicetype
