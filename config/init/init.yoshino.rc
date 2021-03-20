@@ -535,9 +535,6 @@ on property:sys.boot_completed=1
 
     write /sys/class/block/mmcblk0/bdi/max_ratio 1
 
-    # SONY: Enable wakeup irq module
-    write /sys/devices/platform/wakeup_debug.0/enable 1
-
 # Touch
 on property:dev.bootcomplete=1 && property:vendor.smartstamina.touchreport=*
    write /sys/devices/virtual/input/clearpad/stamina_mode ${vendor.smartstamina.touchreport}
