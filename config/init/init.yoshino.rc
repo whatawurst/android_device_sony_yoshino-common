@@ -545,9 +545,6 @@ on property:vendor.backlight_on=1
 on property:sys.boot_completed=1
     # Partly from init.qcom.post_boot.sh
 
-    # This initializes vendor.qti.hardware.perf@1.0-service
-    setprop vendor.post_boot.parsed 1
-
     # Configure memory parameters
     write /sys/module/lowmemorykiller/parameters/adj_max_shift 606
     write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 105984
