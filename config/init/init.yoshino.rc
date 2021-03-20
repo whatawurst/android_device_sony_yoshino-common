@@ -512,9 +512,6 @@ on property:sys.boot_completed=1
 
     write /sys/class/block/mmcblk0/bdi/max_ratio 1
 
-    # SONY: Enable wakeup irq module
-    write /sys/devices/platform/wakeup_debug.0/enable 1
-
 # Touch
 on property:dev.bootcomplete=1 && property:persist.sys.touch.glove_mode=*
     write /sys/devices/virtual/input/clearpad/glove ${persist.sys.touch.glove_mode}
