@@ -104,9 +104,6 @@ vendor.gralloc.enable_fb_ubwc=1
 # HDR
 vendor.display.disable_hdr_lut_gen=1
 
-# OpenGLES version
-ro.opengles.version=196610
-
 # SurfaceFlinger
 debug.sf.early_phase_offset_ns=1500000
 debug.sf.early_app_phase_offset_ns=1500000
