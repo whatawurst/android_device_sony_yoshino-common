@@ -269,8 +269,6 @@ on early-boot
     chmod 0664 /sys/class/graphics/fb2/lineptr_value
     chown system graphics /sys/class/graphics/fb2/msm_fb_persist_mode
     chmod 0664 /sys/class/graphics/fb2/msm_fb_persist_mode
-    # Start atfwd
-    setprop persist.vendor.radio.atfwd.start true
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.qcom.early_boot.sh
 
     # This is normally set by init.qcom.sh but the script does nothing,
