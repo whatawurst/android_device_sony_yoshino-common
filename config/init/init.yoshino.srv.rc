@@ -177,6 +177,12 @@ service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
     user system
     group radio system
 
+service qcom-radio-sh /vendor/bin/init.qcom.radio.sh
+    class late_start
+    user root
+    group root system radio
+    oneshot
+
 service vendor.atfwd /vendor/bin/ATFWD-daemon
     class late_start
     user system
