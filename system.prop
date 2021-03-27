@@ -109,6 +109,7 @@ ro.nfc.se.smx.enable=false
 ### RADIO
 # CNE
 persist.vendor.cne.feature=1
+persist.vendor.dpm.tcm=1
 
 # OpenCS
 ro.semc.version.opencs=1
