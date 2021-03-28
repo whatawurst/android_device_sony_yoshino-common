@@ -94,6 +94,10 @@ vendor.qcom.bluetooth.soc=cherokee
 camera.disable_zsl_mode=1
 
 ### DISPLAY
+# ADRENO
+ro.hardware.egl=adreno
+ro.hardware.vulkan=adreno
+
 # CABL
 ro.vendor.display.cabl=2
 
