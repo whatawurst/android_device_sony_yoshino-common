@@ -52,7 +52,7 @@ genfscon sysfs /devices/soc/c900000.qcom,mdss_rotator/video4linux/video5/name  u
 
 genfscon sysfs /devices/soc/780000.qcom,msm-core/uio/uio1/name          u:object_r:sysfs_uio:s0
 
-genfscon sysfs /devices/virtual/input/input6/wakeup_gesture             u:object_r:sysfs_touchpad:s0
+genfscon sysfs /devices/virtual/input/clearpad/wakeup_gesture           u:object_r:sysfs_touchpad:s0
 genfscon sysfs /devices/virtual/switch/lid/state                        u:object_r:sysfs_switch_lid:s0
 
 # Needed by PowerHAL
