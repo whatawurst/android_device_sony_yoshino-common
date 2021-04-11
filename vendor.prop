@@ -75,6 +75,9 @@ ro.vendor.audio.sdk.ssr=false
 # Tunnel encoding disable
 vendor.audio.tunnel.encode=false
 
+# Stamina mode
+vendor.smartstamina.touchreport=0
+
 # Volume steps
 ro.config.media_vol_steps=30
 ro.config.vc_call_vol_steps=8
