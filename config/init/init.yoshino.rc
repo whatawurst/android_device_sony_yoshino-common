@@ -419,6 +419,11 @@ on boot
     chmod 0600 /sys/devices/virtual/input/clearpad/glove
     restorecon /sys/devices/virtual/input/clearpad/glove
 
+    # Smart Stamina mode
+    chown system system /sys/devices/virtual/input/clearpad/stamina_mode
+    chmod 0600 /sys/devices/virtual/input/clearpad/stamina_mode
+    restorecon /sys/devices/virtual/input/clearpad/stamina_mode
+
     # Tof sensor
     chown cameraserver camera /dev/i2c-8
     chmod 666 /dev/i2c-8

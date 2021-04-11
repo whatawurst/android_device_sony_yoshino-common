@@ -22,5 +22,6 @@ vendor.pcc.mdp.rgb                   u:object_r:vendor_pcc_mdp_prop:s0
 vendor.powerhal.                       u:object_r:vendor_power_prop:s0
 vendor.somc.hdcp.                    u:object_r:vendor_somc_hdcp_prop:s0
 vendor.cover_state                   u:object_r:vendor_cover_state_prop:s0
+vendor.smartstamina.touchreport      u:object_r:vendor_clearpad_prop:s0
 
 wifi.active.interface                u:object_r:wifi_active_prop:s0
