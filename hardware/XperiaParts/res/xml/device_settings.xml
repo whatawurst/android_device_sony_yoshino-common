@@ -24,6 +24,13 @@
             android:summary="@string/glove_mode_summary"
             android:title="@string/glove_mode" />
 
+         <SwitchPreference
+            android:defaultValue="false"
+            android:icon="@drawable/ic_outline_touch_app_24"
+            android:key="smart_stamina_mode"
+            android:summary="@string/smart_stamina_summary"
+            android:title="@string/smart_stamina_mode" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
