@@ -216,7 +216,6 @@ net.tcp.buffersize.umts=4094,87380,110208,4096,16384,110208
 
 # Telephony
 ro.telephony.call_ring.multiple=false
-ro.telephony.iwlan_operation_mode=legacy
 
 ### SENSORS
 debug.vendor.sns.daemon=0
