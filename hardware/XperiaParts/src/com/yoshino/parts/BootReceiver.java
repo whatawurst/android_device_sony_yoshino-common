@@ -22,6 +22,8 @@ import android.provider.Settings;
 
 import static com.yoshino.parts.Constants.GLOVE_MODE;
 import static com.yoshino.parts.Constants.GLOVE_PROP;
+import static com.yoshino.parts.Constants.SMART_STAMINA_MODE;
+import static com.yoshino.parts.Constants.SMART_STAMINA_PROP;
 
 public class BootReceiver extends BroadcastReceiver {
 
@@ -33,5 +35,8 @@ public class BootReceiver extends BroadcastReceiver {
 
         boolean isGloveModeEnabled = Settings.System.getInt(context.getContentResolver(), GLOVE_MODE, 0) == 1;
         SystemProperties.set(GLOVE_PROP, isGloveModeEnabled ? "1" : "0");
+
+        boolean isSmartStaminaModeEnabled = Settings.System.getInt(context.getContentResolver(), SMART_STAMINA_MODE, 0) == 1;
+        SystemProperties.set(SMART_STAMINA_PROP, isSmartStaminaModeEnabled ? "1" : "0");
     }
 }

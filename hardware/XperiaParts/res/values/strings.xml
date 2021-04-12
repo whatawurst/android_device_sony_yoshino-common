@@ -20,6 +20,8 @@
     <string name="gesture">Gesture</string>
     <string name="glove_mode">Glove Mode</string>
     <string name="glove_mode_summary">Allow screen to respond to touch with gloves on</string>
+    <string name="smart_stamina_mode">Smart-Stamina Mode</string>
+    <string name="smart_stamina_summary">Increases the time range in which the clearpad driver scans if there are new inputs</string>
     <string name="network_switcher">Network Switcher</string>
     <string name="status">Status</string>
     <string name="sony_modem_notification">Sony Modem Notification</string>

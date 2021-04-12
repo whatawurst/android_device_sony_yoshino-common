@@ -21,6 +21,9 @@ public class Constants {
     public static final String GLOVE_MODE = "glove_mode";
     public static final String GLOVE_PROP = "persist.sys.touch.glove_mode";
 
+    public static final String SMART_STAMINA_MODE = "smart_stamina_mode";
+    public static final String SMART_STAMINA_PROP = "vendor.smartstamina.touchreport";
+
     public static final String CS_LOG = "cs_log";
     public static final String CS_STATUS = "cs_status";
     public static final String CS_NOTIFICATION = "cs_notification";
