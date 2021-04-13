@@ -82,7 +82,7 @@ PRODUCT_PACKAGES += \
 # BLUETOOTH
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0.vendor \
-    android.hardware.bluetooth.audio@2.0-impl
+    android.hardware.bluetooth.audio@2.1-impl
 
 # CAMERA
 PRODUCT_PACKAGES += \
