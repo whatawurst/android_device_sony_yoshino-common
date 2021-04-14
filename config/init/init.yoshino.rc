@@ -462,6 +462,9 @@ on boot
 on shutdown
     write /sys/class/power_supply/battery/int_cld 1
 
+on property:persist.sys.locale=*
+    setprop persist.vendor.radio.locale ${persist.sys.locale}
+
 on property:wlan.driver.status=ok
     # WLAN firmware config
     wait /sys/module/wlan/parameters/fwpath
