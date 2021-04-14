@@ -51,15 +51,15 @@ on fs
     chown root system /mnt/vendor/persist
     chmod 0771 /mnt/vendor/persist
 
-    restorecon_recursive /mnt/vendor/persist
-    mkdir /mnt/vendor/persist/data 0700 system system
-
     # SONY: create mount points for idd, qns and rca
     mkdir /mnt/idd 0751 oem_2987 oem_2987
     mkdir /mnt/qns 0750 oem_2985 oem_2985
     mkdir /mnt/rca 0750 oem_2987 oem_2987
 
     mount_all /vendor/etc/fstab.${ro.hardware}
+
+    restorecon_recursive /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/data 0700 system system
 
     swapon_all /vendor/etc/fstab.${ro.hardware}
 
