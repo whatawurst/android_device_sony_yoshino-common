@@ -27,6 +27,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Snap
 
+### CARRIERCONFIG
+PRODUCT_PACKAGES += \
+    CarrierConfigOverlay
+
 ### CHARGER
 PRODUCT_PACKAGES += \
     charger_res_images
