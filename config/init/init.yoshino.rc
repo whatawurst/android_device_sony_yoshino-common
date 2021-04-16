@@ -43,6 +43,9 @@ on init
     # UFS firmware update
     exec u:r:vendor_ffu:s0 -- /vendor/bin/ffu
 
+    # ZRAM setup
+    write /sys/block/zram0/comp_algorithm lz4
+
 on late-init
     mkdir /mnt/tmp 0775
     mount tmpfs tmpfs /mnt/tmp nosuid mode=0775,uid=0,gid=0
