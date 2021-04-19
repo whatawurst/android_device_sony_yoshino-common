@@ -1,0 +1,3 @@
+# vendor_pd_mapper.te
+
+allow vendor_pd_mapper vendor_file:dir r_dir_perms;
