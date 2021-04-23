@@ -74,7 +74,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
         Preference slotPref = findPreference(NS_SLOT);
         SwitchPreference nsService = findPreference(NS_SERVICE);
         if (slotPref != null && nsService != null) {
-            if (getContext().getSystemService(TelephonyManager.class).getActiveModemCount() > 1) {
+            if (getContext().getSystemService(TelephonyManager.class).getPhoneCount() > 1) {
                 slotPref.setVisible(true);
 
                 int slot = Settings.System.getInt(nsService.getContext().getContentResolver(), NS_SLOT, -1);
