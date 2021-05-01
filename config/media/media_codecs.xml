@@ -301,6 +301,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="frame-rate" range="1-240" />
             <Feature name="adaptive-playback" />
             <Limit name="concurrent-instances" max="16" />
+            <Limit name="performance-point-1920x1088" value="30" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.vc1.secure" type="video/x-ms-wmv" >
             <Quirk name="requires-allocate-on-input-ports" />
@@ -314,6 +315,7 @@ Only the three quirks included above are recognized at this point:
             <Feature name="adaptive-playback" />
             <Feature name="secure-playback" required="true" />
             <Limit name="concurrent-instances" max="16" />
+            <Limit name="performance-point-1920x1088" value="30" />
         </MediaCodec>
 -->
 <!--
@@ -328,6 +330,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="frame-rate" range="1-240" />
             <Feature name="adaptive-playback" />
             <Limit name="concurrent-instances" max="16" />
+            <Limit name="performance-point-1920x1088" value="30" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.divx311" type="video/divx311" >
             <Quirk name="requires-allocate-on-input-ports" />
@@ -340,6 +343,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="frame-rate" range="1-240" />
             <Feature name="adaptive-playback" />
             <Limit name="concurrent-instances" max="16" />
+            <Limit name="performance-point-720x480" value="30" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.divx4" type="video/divx4" >
             <Quirk name="requires-allocate-on-input-ports" />
@@ -352,6 +356,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="frame-rate" range="1-240" />
             <Feature name="adaptive-playback" />
             <Limit name="concurrent-instances" max="16" />
+            <Limit name="performance-point-1920x1088" value="30" />
         </MediaCodec>
 -->
         <MediaCodec name="OMX.qcom.video.decoder.vp8" type="video/x-vnd.on2.vp8" >
