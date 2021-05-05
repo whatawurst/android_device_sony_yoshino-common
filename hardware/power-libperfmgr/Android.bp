@@ -14,24 +14,6 @@
 // limitations under the License.
 
 cc_library {
-    name: "libadpf",
-    relative_install_path: "hw",
-    proprietary: true,
-    vendor: true,
-    srcs: [
-        "adpf/PowerHintSession.cpp",
-    ],
-    shared_libs: [
-        "android.hardware.power-V2-ndk",
-        "libbase",
-        "libbinder_ndk",
-        "libcutils",
-        "liblog",
-        "libutils",
-    ],
-}
-
-cc_library {
     name: "libdisppower-msm8998",
     proprietary: true,
     srcs: ["disp-power/InteractionHandler.cpp"],
@@ -52,7 +34,6 @@ cc_binary {
     vendor: true,
     shared_libs: [
         "android.hardware.power-V2-ndk",
-        "libadpf",
         "libbase",
         "libcutils",
         "liblog",
@@ -66,5 +47,7 @@ cc_binary {
         "aidl/service.cpp",
         "aidl/Power.cpp",
         "aidl/PowerExt.cpp",
+        "aidl/PowerHintSession.cpp",
+        "aidl/PowerSessionManager.cpp",
     ],
 }
