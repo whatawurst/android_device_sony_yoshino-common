@@ -253,7 +253,6 @@ gralloc1_error_t BufferManager::ImportHandleLocked(private_handle_t *hnd) {
   }
   // Initialize members that aren't transported
   hnd->size = static_cast<unsigned int>(lseek(hnd->fd, 0, SEEK_END));
-  hnd->offset = 0;
   hnd->offset_metadata = 0;
   hnd->base = 0;
   hnd->base_metadata = 0;
