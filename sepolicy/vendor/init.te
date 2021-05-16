@@ -1,16 +1,5 @@
 # init.te
 
-# /dev/block/bootdevice/by-name/idd (sda58)
-allow init idd_block_device:blk_file rw_file_perms;
-
-# /mnt/rca
-allow init idd_rca_dir:dir { mounton };
-allow init idd_rca_file:dir { mounton };
-
-# /mnt/idd
-allow init idd_root_dir:dir { mounton };
-allow init idd_data_file:dir { mounton };
-
 # /oem
 allow init oem_block_device:lnk_file relabelto;
 

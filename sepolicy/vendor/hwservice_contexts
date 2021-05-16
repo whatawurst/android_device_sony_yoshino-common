@@ -5,8 +5,6 @@ com.fingerprints.extension::IFingerprintSensorTest                  u:object_r:h
 com.fingerprints.extension::IFingerprintAuthenticator               u:object_r:hal_fingerprint_hwservice:s0
 vendor.somc.hardware.camera.provider::IVendorSomcCameraProvider     u:object_r:hal_camera_hwservice:s0
 vendor.semc.hardware.thermal::ISomcThermalEngineWrapper             u:object_r:hal_thermal_hwservice:s0
-vendor.semc.system.idd.fallback::IIddFallback                       u:object_r:hal_idd_fallback_hwservice:s0
-vendor.semc.system.idd::IIdd                                        u:object_r:hal_idd_hwservice:s0
 vendor.nxp.nxpnfc::INxpNfc                                          u:object_r:hal_nfc_hwservice:s0
 vendor.nxp.nxpese::INxpEse                                          u:object_r:hal_secure_element_hwservice:s0
 vendor.semc.hardware.light::IExtLight                               u:object_r:hal_light_hwservice:s0
