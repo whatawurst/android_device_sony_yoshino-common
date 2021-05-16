@@ -8,10 +8,6 @@ init_daemon_domain(hal_fingerprint_fpc)
 
 unix_socket_connect(hal_fingerprint_fpc, illumination, illumination_service)
 
-binder_call(hal_fingerprint_fpc, hal_idd_default)
-
-allow hal_fingerprint_fpc hal_idd_hwservice:hwservice_manager { find };
-
 # /dev/qseecom
 allow hal_fingerprint_fpc tee_device:chr_file rw_file_perms;
 
@@ -46,3 +42,6 @@ allow hal_fingerprint_fpc fingerprintd_data_file:file create_file_perms;
 
 # /dev/socket/fpc_oem
 allow hal_fingerprint_fpc fpc_socket:sock_file write;
+
+# Don't log attempts to look for idd
+dontaudit hal_fingerprint_fpc default_android_hwservice:hwservice_manager find;

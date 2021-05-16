@@ -70,10 +70,8 @@ on fs
     chown root system /mnt/vendor/persist
     chmod 0771 /mnt/vendor/persist
 
-    # SONY: create mount points for idd, qns and rca
-    mkdir /mnt/idd 0751 oem_2987 oem_2987
+    # SONY: create mount points for qns
     mkdir /mnt/qns 0750 oem_2985 oem_2985
-    mkdir /mnt/rca 0750 oem_2987 oem_2987
 
     mount_all /vendor/etc/fstab.${ro.hardware}
 
@@ -84,14 +82,10 @@ on fs
 
     write /sys/devices/soc/c0a4900.sdhci/mmc_host/mmc0/clkgate_delay 1
 
-    # SONY: setup idd, qns and rca partitions
-    chown oem_2987 oem_2987 /mnt/idd
-    chmod 0751 /mnt/idd
+    # SONY: setup qns partition
     chown oem_2985 oem_2985 /mnt/qns
     chmod 0750 /mnt/qns
     restorecon_recursive /mnt/qns
-    chown oem_2987 oem_2987 /mnt/rca
-    chmod 0750 /mnt/rca
 
     # qns
     chown oem_2985 oem_2985 /sys/class/qns
@@ -217,26 +211,9 @@ on post-fs-data
     # Fingerprint data folder
     mkdir /data/vendor/fpc 0770 system system
 
-    # We expect that vold has already started and would not unmount the partitions again.
-    exec - system system -- /system/bin/rm -r /mnt/idd/lost+found
-    exec - system system -- /system/bin/rm -r /mnt/rca/lost+found
-
     # Remove lost+found in user and userdebug
     exec - system system -- /system/bin/rm -r /data/lost+found/.*
     exec - system system -- /system/bin/rm -r /cache/lost+found/.*
-    exec - system system -- /system/bin/rm -r /idd/lost+found/.*
-
-    # Resoving iddd failed to launch scenario due to
-    # iddd have no permission to access iddd.pid(root:root)
-    chown oem_2987 oem_2987 /mnt/idd/iddd.pid
-    mkdir /mnt/idd/lost+found 0770 root root
-    mkdir /mnt/idd/output 0755 oem_2987 oem_2987
-    mkdir /mnt/idd/socket 0711 oem_2987 oem_2987
-    mkdir /mnt/idd/startup-prober 0700 root root
-
-    restorecon_recursive -F /mnt/idd
-    mkdir /mnt/rca/plugins 0750 oem_2987 oem_2987
-    restorecon_recursive -F /mnt/rca
 
     #### CHARGING
     # power_supply sysfs
