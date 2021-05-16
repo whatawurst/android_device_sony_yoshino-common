@@ -1,6 +1,5 @@
 # thermal-engine.te
 
-allow thermal-engine hal_idd_default:binder { call };
 allow thermal-engine hwservicemanager:binder { call };
 
 get_prop(thermal-engine, hwservicemanager_prop)
@@ -23,3 +22,6 @@ allow thermal-engine sysfs_batteryinfo:file r_file_perms;
 
 # /sys/class/devfreq
 allow thermal-engine sysfs_devfreq:dir r_dir_perms;
+
+# Don't log attempts to look for idd
+dontaudit thermal-engine default_android_hwservice:hwservice_manager find;
