@@ -22,15 +22,6 @@ PRODUCT_SOONG_NAMESPACES += \
 
 QCOM_SOONG_NAMESPACE := $(PLATFORM_PATH)/hardware/qcom-caf
 
-### PLATFORM INIT
-PRODUCT_PACKAGES += \
-    init.yoshino.usb \
-    init.yoshino.pwr \
-    init.yoshino.idd.rc \
-    init.yoshino.qns.rc \
-    idd.fstab \
-    qns.fstab
-
 # For android_filesystem_config.h permissions
 PRODUCT_PACKAGES += \
     fs_config_files \
