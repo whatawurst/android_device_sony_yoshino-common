@@ -146,6 +146,7 @@
 /system/bin/updatemiscta                                        u:object_r:updatemiscta_exec:s0
 
 # vendor services
+/(vendor|system/vendor)/bin/hw/android\.hardware\.power\.stats@1\.0-service\.mock  u:object_r:hal_power_stats_default_exec:s0
 /(vendor|system/vendor)/bin/hw/display_cb                       u:object_r:display_cb_exec:s0
 /(vendor|system/vendor)/bin/hw/fpc_fingerprint@2\.1_HIDL-service    u:object_r:hal_fingerprint_fpc_exec:s0
 /(vendor|system/vendor)/bin/hw/illumination_service             u:object_r:illumination_service_exec:s0
