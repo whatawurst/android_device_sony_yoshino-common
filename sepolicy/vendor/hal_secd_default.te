@@ -6,13 +6,9 @@ hal_server_domain(hal_secd_default, hal_secd)
 init_daemon_domain(hal_secd_default)
 add_hwservice(hal_secd_default, hal_secd_hwservice);
 
-binder_call(hal_secd_default, hal_idd_default)
-
 unix_socket_connect(hal_secd_default, tad, tad)
 
 get_prop(hal_secd_default, vendor_tee_listener_prop)
-
-allow hal_secd_default hal_idd_hwservice:hwservice_manager { find };
 
 # Allow to preload libta_drm_ext for secd
 #allow init hal_secd_default:process { noatsecure };
@@ -36,3 +32,6 @@ allow hal_secd_default mnt_vendor_file:file create_file_perms;
 
 # /mnt/vendor/persist/credmgr.db
 allow hal_secd_default credmgrd_vendor_data_file:file create_file_perms;
+
+# Don't log attempts to look for idd
+dontaudit hal_secd_default default_android_hwservice:hwservice_manager find;

@@ -242,17 +242,6 @@ service vendor.sensors.qti /vendor/bin/sensors.qti
     user system
     group system
 
-### SONY IDD
-service iddd /vendor/bin/iddd
-    class core
-    user oem_2987
-    group oem_2987 log inet oem_2993
-    writepid /dev/cpuset/system-background/tasks
-
-on property:sys.user.0.ce_available=true
-    # Setting property to inform that partitions are mounted
-    setprop vendor.idd.partitions_ready 1
-
 ### SONY MODEM SWITCHER
 service modem_switcher /system/bin/sony-modem-switcher
     class main
