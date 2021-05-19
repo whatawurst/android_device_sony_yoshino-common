@@ -209,7 +209,7 @@ TARGET_HW_DISK_ENCRYPTION := true
 
 ### SEPOLICY
 include device/qcom/sepolicy-legacy-um/sepolicy.mk
-BOARD_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
+BOARD_VENDOR_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
 
 ### RECOVERY
@@ -229,11 +229,11 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 ### VENDOR SECURITY PATCH LEVEL
 VENDOR_SECURITY_PATCH := 2019-09-01
 
-# APEX IMAGE
-DEXPREOPT_GENERATE_APEX_IMAGE := true
-
 ### ALLOW VENDOR FILE OVERRIDE
 BUILD_BROKEN_DUP_RULES := true
+
+### ALLOW USE OF BUILD_COPY_HEADERS
+BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
 
 ifeq ($(WITH_TWRP),true)
 -include $(PLATFORM_PATH)/twrp.mk

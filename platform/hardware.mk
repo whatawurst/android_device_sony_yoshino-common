@@ -28,6 +28,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     FlipFlap
 
+### DPM
+PRODUCT_PACKAGES += \
+    libshim_dpmframework
+
 ### GRAPHICS
 PRODUCT_PACKAGES += \
     copybit.msm8998 \
@@ -66,9 +70,9 @@ PRODUCT_PACKAGES += \
 ### SERVICES
 # AUDIO
 PRODUCT_PACKAGES += \
-    android.hardware.audio@4.0-impl \
+    android.hardware.audio@5.0-impl \
     android.hardware.audio@2.0-service \
-    android.hardware.audio.effect@4.0-impl \
+    android.hardware.audio.effect@5.0-impl \
     android.hardware.audio.effect@2.0-service \
     android.hardware.soundtrigger@2.2-impl \
     android.hardware.soundtrigger@2.0-service
@@ -126,7 +130,8 @@ PRODUCT_PACKAGES += \
 
 # POWER
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.2-service-qti
+    android.hardware.power@1.2-service-qti \
+    android.hardware.power.stats@1.0-service.mock
 
 # RADIO
 PRODUCT_PACKAGES += \
