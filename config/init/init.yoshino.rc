@@ -23,14 +23,6 @@ import /vendor/etc/init/hw/init.yoshino.pwr.rc
 on early-init
     write /sys/module/msm_rtb/parameters/enable 0
 
-    # Kernel modules for SIM, vibrator, bus and NFC
-    insmod /vendor/lib/modules/bu520x1nvx.ko
-    insmod /vendor/lib/modules/sim_detect.ko
-    insmod /vendor/lib/modules/ldo_vibrator.ko
-    insmod /vendor/lib/modules/pn553.ko
-
-    # Kernel module for fingerprint sensor
-    insmod /vendor/lib/modules/fpc1145_platform.ko
     write /sys/devices/soc/soc:fpc1145/uevent add
 
 on init
@@ -70,9 +62,6 @@ on fs
     swapon_all /vendor/etc/fstab.${ro.hardware}
 
     write /sys/devices/soc/c0a4900.sdhci/mmc_host/mmc0/clkgate_delay 1
-
-    # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
-    insmod /vendor/lib/modules/kscl.ko
 
     # SONY: creat mount point for qns
     mkdir /mnt/qns 0750 oem_2985 oem_2985
@@ -390,9 +379,6 @@ on boot
 
     write /proc/sys/vm/dirty_ratio 5
     write /proc/sys/vm/dirty_background_ratio 1
-
-    # Kernel module for wifi
-    insmod /vendor/lib/modules/wlan.ko
 
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath

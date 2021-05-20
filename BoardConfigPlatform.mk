@@ -38,9 +38,8 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a73
 
 ### KERNEL
 TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_VERSION := 4.4
 TARGET_KERNEL_SOURCE  := kernel/sony/msm8998
-TARGET_COMPILE_WITH_MSM_KERNEL := true
+TARGET_KERNEL_VERSION := 4.4
 
 # Taken from unpacked stock boot.img / README_Xperia in Kernel source
 BOARD_KERNEL_CMDLINE += user_debug=31
@@ -60,8 +59,6 @@ BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
 BOARD_RAMDISK_OFFSET     := 0x01000000
 
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_HEADER_ARCH := arm64
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 
 ### PARTITIONS
@@ -77,11 +74,6 @@ BOARD_ROOT_EXTRA_FOLDERS := ocm
 # Build ext4 tools - system/vold
 TARGET_USERIMAGES_USE_EXT4 := true
 
-### FILESYSTEM
-TARGET_FS_CONFIG_GEN := \
-    $(PLATFORM_PATH)/fs/config.aid \
-    $(PLATFORM_PATH)/fs/config.fs
-
 ### DEXPREOPT
 # Enable dexpreopt for everything to speed boot time
 ifeq ($(HOST_OS),linux)
@@ -91,28 +83,7 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
-### GRAPHICS
-USE_OPENGL_RENDERER := true
-BOARD_USES_ADRENO := true
-TARGET_USES_ION := true
-
-### DISPLAY
-MAX_EGL_CACHE_KEY_SIZE := 12*1024
-MAX_EGL_CACHE_SIZE := 2048*1024
-# qcom/display-caf/msm8998/common.mk
-TARGET_USES_COLOR_METADATA := true
-TARGET_USES_HWC2 := true
-TARGET_USES_GRALLOC1 := true
-
-# RENDERSCRIPT
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
-
-### INIT
-TARGET_INIT_VENDOR_LIB := //$(PLATFORM_PATH):libinit_yoshino
-TARGET_RECOVERY_DEVICE_MODULES := libinit_yoshino
-
 ### AUDIO
-# BOARD_SUPPORTS_QAHW := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 
 BOARD_SUPPORTS_SOUND_TRIGGER := true
@@ -133,11 +104,16 @@ USE_XML_AUDIO_POLICY_CONF := 1
 USE_LEGACY_AUDIO_DAEMON := false
 USE_LEGACY_AUDIO_MEASUREMENT := false
 
+### BLUETOOTH
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
+BOARD_HAVE_BLUETOOTH_QCOM := true
+
+### BUILD_COPY_HEADERS ALLOWED
+BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
+
 ### CAMERA
 BOARD_QTI_CAMERA_32BIT_ONLY := true
-TARGET_USES_MEDIA_EXTENSIONS := true
 USE_DEVICE_SPECIFIC_CAMERA := true
-
 # frameworks/av/camera/Android.mk
 TARGET_USES_QTI_CAMERA_DEVICE := true
 
@@ -146,12 +122,72 @@ WITH_LINEAGE_CHARGER := false
 # system/core/healthd/Android.mk
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
-# device/sony/treble/core/healthd
-# FIXME Linking issues with libminui, it is not a dep to libhealthd
-#BOARD_HAL_STATIC_LIBRARIES += libhealthd.$(TARGET_DEVICE)
+### DISPLAY
+TARGET_USES_HWC2 := true
+TARGET_USES_GRALLOC1 := true
 
 ### DRM
 TARGET_ENABLE_MEDIADRM_64 := true
+
+### ENCRYPTION
+TARGET_HW_DISK_ENCRYPTION := true
+
+### FILESYSTEM
+TARGET_FS_CONFIG_GEN := \
+    $(PLATFORM_PATH)/fs/config.aid \
+    $(PLATFORM_PATH)/fs/config.fs
+
+### GRAPHICS
+USE_OPENGL_RENDERER := true
+TARGET_USES_ION := true
+
+### HIDL
+DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
+
+### INIT
+TARGET_INIT_VENDOR_LIB := //$(PLATFORM_PATH):libinit_yoshino
+TARGET_RECOVERY_DEVICE_MODULES := libinit_yoshino
+
+### POWER HAL
+TARGET_USES_INTERACTION_BOOST := true
+
+### PROPS
+# This is a reset, add more in devices if needed
+TARGET_SYSTEM_PROP := $(PLATFORM_PATH)/system.prop
+TARGET_VENDOR_PROP := $(PLATFORM_PATH)/vendor.prop
+
+### RECOVERY
+ifneq ($(filter maple maple_dsds, $(TARGET_DEVICE)),)
+TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/fstab_maple.recovery
+else
+TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/fstab.recovery
+endif
+
+### RENDERSCRIPT
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+
+### RIL
+TARGET_PER_MGR_ENABLED := true
+TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
+TARGET_USES_OLD_MNC_FORMAT := true
+
+### SEPOLICY
+include device/qcom/sepolicy-legacy-um/sepolicy.mk
+BOARD_VENDOR_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
+
+### TREBLE
+# Enable treble
+PRODUCT_FULL_TREBLE_OVERRIDE ?= true
+# Split build properties
+BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+
+### VENDOR FILE OVERRIDE
+BUILD_BROKEN_DUP_RULES := true
+
+### VENDOR SECURITY PATCH LEVEL
+VENDOR_SECURITY_PATCH := 2019-09-01
 
 ### WIFI
 BOARD_HAS_QCOM_WLAN := true
@@ -161,10 +197,6 @@ BOARD_WLAN_DEVICE := qcwcn
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
 HOSTAPD_VERSION := VER_0_8_X
-# This doesn't work because wifi driver is a background task
-# we would need to wait till the fwpath is ready
-# WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
-# WIFI_DRIVER_MODULE_NAME := "wlan"
 WIFI_DRIVER_FW_PATH_AP  := "ap"
 WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WIFI_DRIVER_FW_PATH_STA := "sta"
@@ -174,62 +206,6 @@ WIFI_DRIVER_STATE_CTRL_PARAM := "/dev/wlan"
 WIFI_DRIVER_STATE_ON := ON
 WIFI_DRIVER_STATE_OFF := OFF
 WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
+WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
-WIFI_DRIVER_OPERSTATE_PATH := "/sys/class/net/wlan0/operstate"
 WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
-
-### BLUETOOTH
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
-BOARD_HAVE_BLUETOOTH_QCOM := true
-
-### RIL
-TARGET_RIL_VARIANT := caf
-TARGET_PER_MGR_ENABLED := true
-TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
-TARGET_USES_OLD_MNC_FORMAT := true
-PROTOBUF_SUPPORTED := true
-
-### TIMESERVICE
-BOARD_USES_QC_TIME_SERVICES := true
-
-### POWER HAL
-TARGET_USES_INTERACTION_BOOST := true
-
-### HIDL
-DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
-
-# vendor/qcom/opensource/cryptfs_hw
-TARGET_HW_DISK_ENCRYPTION := true
-
-### SEPOLICY
-include device/qcom/sepolicy-legacy-um/sepolicy.mk
-BOARD_VENDOR_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
-
-### RECOVERY
-TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/ramdisk/fstab.recovery
-
-### PROPS
-# This is a reset, add more in devices if needed
-TARGET_SYSTEM_PROP := $(PLATFORM_PATH)/system.prop
-TARGET_VENDOR_PROP := $(PLATFORM_PATH)/vendor.prop
-
-### TREBLE
-# Enable treble
-PRODUCT_FULL_TREBLE_OVERRIDE ?= true
-# Split build properties
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-
-### VENDOR SECURITY PATCH LEVEL
-VENDOR_SECURITY_PATCH := 2019-09-01
-
-### ALLOW VENDOR FILE OVERRIDE
-BUILD_BROKEN_DUP_RULES := true
-
-### ALLOW USE OF BUILD_COPY_HEADERS
-BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
-
-ifeq ($(WITH_TWRP),true)
--include $(PLATFORM_PATH)/twrp.mk
-endif

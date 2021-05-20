@@ -1,5 +1,3 @@
-# system prop for yoshino-common
-
 ### AUDIO
 # AAC 5.1 output enabled
 media.aac_51_output_enabled=true
@@ -45,6 +43,9 @@ ro.bluetooth.wipower=true
 
 ### CAMERA
 vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.sonyericsson.android.camera,com.google.android.GoogleCamera
+
+### CHARGER
+ro.charger.enable_suspend=true
 
 ### DISPLAY
 # Assertive display
@@ -111,7 +112,7 @@ sched.colocate.enable=1
 persist.vendor.cne.feature=1
 
 # OpenCS
-ro.semc.version.opencs=1;
+ro.semc.version.opencs=1
 
 # Mobile data disable on first boot after clean flash
 ro.com.android.prov_mobiledata=false
