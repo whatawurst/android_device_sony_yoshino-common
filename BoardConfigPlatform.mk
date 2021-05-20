@@ -180,12 +180,7 @@ WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 
 ### BLUETOOTH
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
-BOARD_HAVE_BLUETOOTH := true
-# Build libbthost_if
-TARGET_USE_QTI_BT_STACK := true
-# We have a rome soc (libbt-vendor)
-# Support libbtnv.so
-QCOM_BT_USE_BTNV := true
+BOARD_HAVE_BLUETOOTH_QCOM := true
 
 ### RIL
 TARGET_RIL_VARIANT := caf
