@@ -41,9 +41,6 @@ ro.bluetooth.a4wp=false
 ro.bluetooth.emb_wp_mode=true
 ro.bluetooth.wipower=true
 
-### CAMERA
-vendor.camera.aux.packagelist=org.codeaurora.snapcam,org.lineageos.snap,com.google.android.GoogleCamera
-
 ### CHARGER
 ro.charger.disable_init_blank=true
 ro.charger.enable_suspend=true
