@@ -41,6 +41,11 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
         glovePref.setChecked(Settings.System.getInt(glovePref.getContext().getContentResolver(), GLOVE_MODE, 0) == 1);
         glovePref.setOnPreferenceChangeListener(this);
 
+        SwitchPreference smartStaminPref = findPreference(SMART_STAMINA_MODE);
+        assert smartStaminPref != null;
+        smartStaminPref.setChecked(Settings.System.getInt(smartStaminPref.getContext().getContentResolver(), SMART_STAMINA_MODE, 0) == 1);
+        smartStaminPref.setOnPreferenceChangeListener(this);
+
         SwitchPreference notificationPref = findPreference(CS_NOTIFICATION);
         assert notificationPref != null;
         notificationPref.setChecked(Settings.System.getInt(notificationPref.getContext().getContentResolver(),
@@ -177,6 +182,10 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
             case GLOVE_MODE:
                 Settings.System.putInt(preference.getContext().getContentResolver(), GLOVE_MODE, (boolean) o ? 1 : 0);
                 SystemProperties.set(GLOVE_PROP, (boolean) o ? "1" : "0");
+                return true;
+            case SMART_STAMINA_MODE:
+                Settings.System.putInt(preference.getContext().getContentResolver(), SMART_STAMINA_MODE, (boolean) o ? 1 : 0);
+                SystemProperties.set(SMART_STAMINA_PROP, (boolean) o ? "1" : "0");
                 return true;
             case CS_NOTIFICATION:
                 Settings.System.putInt(preference.getContext().getContentResolver(), CS_NOTIFICATION, (boolean) o ? 1 : 0);

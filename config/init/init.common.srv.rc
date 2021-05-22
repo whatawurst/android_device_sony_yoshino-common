@@ -95,6 +95,7 @@ service vendor.atfwd /vendor/bin/ATFWD-daemon
     class late_start
     user system
     group system radio
+    writepid /dev/cpuset/system-background/tasks
 
 on property:persist.vendor.radio.atfwd.start=false
     stop vendor.atfwd
@@ -103,23 +104,23 @@ on property:vendor.radio.atfwd.start=false
     stop vendor.atfwd
 
 ### Peripheral Manager
-service per_mgr /vendor/bin/pm-service
+service vendor.per_mgr /vendor/bin/pm-service
     class core
     user system
     group system
     ioprio rt 4
 
-service per_proxy /vendor/bin/pm-proxy
+service vendor.per_proxy /vendor/bin/pm-proxy
     class core
     user system
     group system
     disabled
 
-on property:init.svc.per_mgr=running
-    start per_proxy
+on property:init.svc.vendor.per_mgr=running
+    start vendor.per_proxy
 
 on shutdown
-    stop per_proxy
+    stop vendor.per_proxy
 
 # QCOM prop
 service pd_mapper /system/vendor/bin/pd-mapper
@@ -160,6 +161,7 @@ service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/m
     class core
     user root
     group root
+    writepid /dev/cpuset/system-background/tasks
 
 ### SENSORS
 service vendor.sensors.qti /vendor/bin/sensors.qti
@@ -172,6 +174,7 @@ service vendor.qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
+    writepid /dev/cpuset/system-background/tasks
 
 ### Thermal Manager
 service thermal-engine /system/vendor/bin/thermal-engine
@@ -182,12 +185,14 @@ service thermal-engine /system/vendor/bin/thermal-engine
     socket thermal-recv-passive-client stream 0666 system system
     socket thermal-send-rule stream 0660 system system
     group root oem_2993 oem_2929
+    writepid /dev/cpuset/system-background/tasks
 
 ### ADSP FastRPC
 service adsprpcd /system/vendor/bin/adsprpcd
    class main
    user media
    group media
+   writepid /dev/cpuset/system-background/tasks
 
 ### TimeService
 service time_daemon /system/vendor/bin/time_daemon
@@ -196,7 +201,7 @@ service time_daemon /system/vendor/bin/time_daemon
     group root
 
 ### Display
-service ppd /vendor/bin/mm-pp-dpps
+service vendor.ppd /vendor/bin/mm-pp-dpps
     class late_start
     user system
     group system graphics
@@ -204,20 +209,20 @@ service ppd /vendor/bin/mm-pp-dpps
     disabled
 
 # QCOM prop
-service ssgqmigd /vendor/bin/ssgqmigd
+service vendor.ssgqmigd /vendor/bin/ssgqmigd
     class late_start
     user radio
     group radio gps system
     socket ssgqmig seqpacket 0660 radio inet
 
 on property:init.svc.vendor.hwcomposer-2-1=stopped
-    stop ppd
+    stop vendor.ppd
 
 on property:init.svc.vendor.hwcomposer-2-1=running
-    start ppd
+    start vendor.ppd
 
 on property:init.svc.vendor.hwcomposer-2-1=restarting
-    stop ppd
+    stop vendor.ppd
 
 ### PERF
 service energy-awareness /system/vendor/bin/energy-awareness
@@ -225,6 +230,7 @@ service energy-awareness /system/vendor/bin/energy-awareness
     user root
     group system
     oneshot
+    writepid /dev/cpuset/system-background/tasks
 
 ### SSR (subsystem restart)
 service vendor.ssr_setup /system/vendor/bin/ssr_setup

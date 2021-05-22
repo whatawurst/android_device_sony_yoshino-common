@@ -16,7 +16,6 @@ on init
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
     # Disable UFS powersaving
-    write /sys/devices/soc/${ro.boot.bootdevice}/clkscale_enable 0
     write /sys/devices/soc/${ro.boot.bootdevice}/clkgate_enable 0
     write /sys/module/lpm_levels/parameters/sleep_disabled Y
 
@@ -44,14 +43,6 @@ on init
     write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/guard_band_mbps 0
     write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/up_scale 250
     write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/idle_mbps 1600
-
-    # Enable dynamic memory bus latency control
-    write /sys/class/devfreq/soc:qcom,memlat-cpu0/governor "mem_latency"
-    write /sys/class/devfreq/soc:qcom,memlat-cpu0/polling_interval 10
-    write /sys/class/devfreq/soc:qcom,memlat-cpu0/mem_latency/ratio_ceil 400
-    write /sys/class/devfreq/soc:qcom,memlat-cpu4/governor "mem_latency"
-    write /sys/class/devfreq/soc:qcom,memlat-cpu4/polling_interval 10
-    write /sys/class/devfreq/soc:qcom,memlat-cpu4/mem_latency/ratio_ceil 400
 
     write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
 
@@ -95,9 +86,11 @@ on boot
     # For cpusets initialize for Silver Only first and then Silver + Gold
     # Silver Only configuration cannot work with 0-7
     write /dev/cpuset/top-app/cpus "0-3"
+    write /dev/cpuset/foreground/cpus "0-3"
     write /dev/cpuset/background/cpus "0-3"
     write /dev/cpuset/system-background/cpus "0-3"
     write /dev/cpuset/top-app/cpus "0-7"
+    write /dev/cpuset/foreground/cpus "0-7"
     write /dev/cpuset/background/cpus "0-7"
     write /dev/cpuset/system-background/cpus "0-7"
 
@@ -154,10 +147,8 @@ on property:sys.boot_completed=1
     write /sys/module/lpm_levels/system/pwr/pwr-l2-ret/idle_enabled N
     write /sys/module/lpm_levels/system/perf/perf-l2-dynret/idle_enabled N
     write /sys/module/lpm_levels/system/perf/perf-l2-ret/idle_enabled N
-    write /sys/module/lpm_levels/parameters/sleep_disabled N
 
     # Enable UFS powersaving
-    write /sys/devices/soc/${ro.boot.bootdevice}/clkscale_enable 1
     write /sys/devices/soc/${ro.boot.bootdevice}/clkgate_enable 1
     write /sys/module/lpm_levels/parameters/sleep_disabled N
 
@@ -168,5 +159,6 @@ on property:sys.boot_completed=1
     # Enable PowerHAL hint processing
     setprop vendor.powerhal.init 1
 
+    write /dev/cpuset/foreground/cpus "0-3,6-7"
     write /dev/cpuset/background/cpus "0-3"
     write /dev/cpuset/system-background/cpus "0-3"
