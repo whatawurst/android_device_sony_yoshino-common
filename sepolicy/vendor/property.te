@@ -1,5 +1,6 @@
 # property.te
 
+type vendor_power_prop, property_type;
 type secureadb_prop, property_type;
 type semc_product_prop, property_type;
 type semc_sim_prop, property_type;

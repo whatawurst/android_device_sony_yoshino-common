@@ -99,14 +99,6 @@ ro.nfc.port=I2C
 ro.nfc.se.sim.enable=true
 ro.nfc.se.smx.enable=false
 
-### PERFORMANCE
-# Core control max/min CPU's
-ro.vendor.qti.core_ctl_max_cpu=4
-ro.vendor.qti.core_ctl_min_cpu=2
-
-# Sched colocation
-sched.colocate.enable=1
-
 ### RADIO
 # CNE
 persist.vendor.cne.feature=1

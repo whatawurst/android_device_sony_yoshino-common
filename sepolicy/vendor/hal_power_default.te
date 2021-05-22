@@ -3,5 +3,25 @@
 #/sys/devices/virtual/input/clearpad( -> input6)/wakeup_gesture
 allow hal_power_default sysfs_touchpad:file w_file_perms;
 
-# /sys/kernel/debug/wlan0/power_stats
 allow hal_power_default debugfs_wlan_power:file r_file_perms;
+allow hal_power_default debugfs_rpm:file r_file_perms;
+r_dir_file(hal_power_default, debugfs_power_stats)
+r_dir_file(hal_power_default, debugfs_rpm)
+r_dir_file(hal_power_default, debugfs_wlan)
+
+# To do powerhint on nodes defined in powerhint.json
+allow hal_power_default sysfs_devfreq:dir search;
+allow hal_power_default sysfs_devfreq:{ file lnk_file } rw_file_perms;
+allow hal_power_default sysfs_graphics:file r_file_perms;
+allow hal_power_default sysfs_kgsl:dir search;
+allow hal_power_default sysfs_kgsl:{ file lnk_file } rw_file_perms;
+allow hal_power_default sysfs_msm_subsys:dir search;
+allow hal_power_default sysfs_msm_subsys:file rw_file_perms;
+allow hal_power_default sysfs_devices_system_cpu:file rw_file_perms;
+allow hal_power_default device_latency:chr_file rw_file_perms;
+
+# To get/set powerhal state property
+set_prop(hal_power_default, vendor_power_prop)
+
+# To dump
+allow hal_power_default cgroup:file rw_file_perms;
