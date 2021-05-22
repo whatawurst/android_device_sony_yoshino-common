@@ -95,6 +95,7 @@ vendor.qcom.bluetooth.soc=cherokee
 
 ### CAMERA
 camera.disable_zsl_mode=1
+persist.vendor.camera.expose.aux=1
 
 ### DISPLAY
 # CABL
