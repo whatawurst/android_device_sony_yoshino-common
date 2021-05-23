@@ -39,39 +39,29 @@ on init
     chown oem_2997 oem_2997 /dev/block/sda1
     chmod 0770 /dev/block/sda1
 
-    # Required for tad and modem-switcher
-    restorecon /dev/block/bootdevice/by-name/fsc
-    restorecon /dev/block/bootdevice/by-name/fsg
-    restorecon /dev/block/bootdevice/by-name/modemst1
-    restorecon /dev/block/bootdevice/by-name/modemst2
-    restorecon /dev/block/bootdevice/by-name/TA
-
-    # Start tad and miscta hidl service
-    class_start trimarea
-
-    # These are needed for MiscTA HIDL service
-    start hwservicemanager
-    start hidl_memory
-
     # UFS firmware update
     exec u:r:vendor_ffu:s0 -- /vendor/bin/ffu
 
 on fs
+    # SONY: create mount points for idd, qns and rca
+    mkdir /mnt/idd 0751 oem_2987 oem_2987
+    mkdir /mnt/qns 0750 oem_2985 oem_2985
+    mkdir /mnt/rca 0750 oem_2987 oem_2987
+
     mount_all /vendor/etc/fstab.${ro.hardware}
 
     swapon_all /vendor/etc/fstab.${ro.hardware}
 
     write /sys/devices/soc/c0a4900.sdhci/mmc_host/mmc0/clkgate_delay 1
 
-    # SONY: creat mount point for qns
-    mkdir /mnt/qns 0750 oem_2985 oem_2985
-    wait /dev/block/bootdevice/by-name/Qnovo
-    mount_all /vendor/etc/qns.fstab --early
-
-    # SONY: setup qns partition
+    # SONY: setup idd, qns and rca partitions
+    chown oem_2987 oem_2987 /mnt/idd
+    chmod 0751 /mnt/idd
     chown oem_2985 oem_2985 /mnt/qns
     chmod 0750 /mnt/qns
     restorecon_recursive /mnt/qns
+    chown oem_2987 oem_2987 /mnt/rca
+    chmod 0750 /mnt/rca
 
     # qns
     chown oem_2985 oem_2985 /sys/class/qns
@@ -91,6 +81,20 @@ on fs
 on post-fs
     # Start qseecomd for vold
     start vendor.qseecomd
+
+    # Required for tad and modem-switcher
+    restorecon /dev/block/bootdevice/by-name/fsc
+    restorecon /dev/block/bootdevice/by-name/fsg
+    restorecon /dev/block/bootdevice/by-name/modemst1
+    restorecon /dev/block/bootdevice/by-name/modemst2
+    restorecon /dev/block/bootdevice/by-name/TA
+
+    # Start tad and miscta hidl service
+    class_start trimarea
+
+    # These are needed for MiscTA HIDL service
+    start hwservicemanager
+    start hidl_memory
 
     # Display
     chown system system /sys/devices/mdss_dsi_panel/c_mode
@@ -132,17 +136,6 @@ on post-fs-data
     mkdir /data/vendor/fpc 0770 system system
 
     # We expect that vold has already started and would not unmount the partitions again.
-    mkdir /mnt/idd 0751 oem_2987 oem_2987
-    mkdir /mnt/rca 0750 oem_2987 oem_2987
-
-    mount_all /vendor/etc/idd.fstab --early
-
-    chown oem_2987 oem_2987 /mnt/idd
-    chmod 0751 /mnt/idd
-
-    chown oem_2987 oem_2987 /mnt/rca
-    chmod 0750 /mnt/rca
-
     exec - system system -- /system/bin/rm -r /mnt/idd/lost+found
     exec - system system -- /system/bin/rm -r /mnt/rca/lost+found
 
@@ -332,15 +325,6 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
-    # Add a cpuset for the camera daemon
-    # we want all the little cores for camera
-    mkdir /dev/cpuset/camera-daemon
-    write /dev/cpuset/camera-daemon/cpus 0-3
-    write /dev/cpuset/camera-daemon/mems 0
-    chown cameraserver cameraserver /dev/cpuset/camera-daemon
-    chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
-    chmod 0660 /dev/cpuset/camera-daemon/tasks
-
     # Smart Stamina mode
     chown system system /sys/devices/virtual/input/clearpad/stamina_mode
     chmod 0600 /sys/devices/virtual/input/clearpad/stamina_mode
@@ -451,10 +435,6 @@ service qns /vendor/bin/qns -d /mnt/qns -l /mnt/qns
     socket qnsbsd stream 660 oem_2985 system
     disabled
 
-on property:sys.user.0.ce_available=true
-    # Remounting partitions here just in case vold restarts
-    mount_all /vendor/etc/qns.fstab --early
-
 # Iddd
 service iddd /vendor/bin/iddd
     class core
@@ -463,8 +443,6 @@ service iddd /vendor/bin/iddd
     writepid /dev/cpuset/system-background/tasks
 
 on property:sys.user.0.ce_available=true
-    # Remounting partitions here just in case vold restarts
-    mount_all /vendor/etc/idd.fstab --early
     # Setting property to inform that partitions are mounted
     setprop vendor.idd.partitions_ready 1
 

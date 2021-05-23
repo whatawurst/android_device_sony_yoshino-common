@@ -1,0 +1,8 @@
+# clean_scratch_files.te
+
+type clean_scratch_files, domain;
+type clean_scratch_files_exec, exec_type, file_type, system_file_type;
+
+typeattribute clean_scratch_files coredomain;
+
+init_daemon_domain(clean_scratch_files)
