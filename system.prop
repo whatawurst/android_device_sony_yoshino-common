@@ -141,7 +141,6 @@ persist.rmnet.data.enable=true
 
 # Telephony
 ro.com.android.dataroaming=false
-persist.ims.disableUserAgent=1
 telephony.lteOnCdmaDevice=0
 
 ### SD
@@ -194,6 +193,9 @@ ro.vendor.qf_use_report_period=false
 
 ### USB
 sys.usb.controller=a800000.dwc3
+
+### VALUE-ADD
+ro.vendor.qti.va_aosp.support=1
 
 ### WFD
 # Property to enable user to access Google WFD settings.

@@ -150,6 +150,7 @@ TARGET_INIT_VENDOR_LIB := //$(PLATFORM_PATH):libinit_yoshino
 TARGET_RECOVERY_DEVICE_MODULES := libinit_yoshino
 
 ### PROPS
+TARGET_ODM_PROP += $(PLATFORM_PATH)/odm.prop
 # This is a reset, add more in devices if needed
 TARGET_SYSTEM_PROP := $(PLATFORM_PATH)/system.prop
 TARGET_VENDOR_PROP := $(PLATFORM_PATH)/vendor.prop
@@ -173,12 +174,6 @@ TARGET_USES_OLD_MNC_FORMAT := true
 include device/qcom/sepolicy-legacy-um/sepolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
-
-### TREBLE
-# Enable treble
-PRODUCT_FULL_TREBLE_OVERRIDE ?= true
-# Split build properties
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
 ### VENDOR FILE OVERRIDE
 BUILD_BROKEN_DUP_RULES := true

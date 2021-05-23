@@ -10,6 +10,3 @@ set_prop(rild, vendor_radio_prop)
 
 allow rild vendor_shell_exec:file { execute_no_trans };
 allow rild vendor_toolbox_exec:file { execute_no_trans };
-
-# /vendor/radio/qcril_database/qcril.db
-dontaudit rild vendor_file:file { ioctl };
