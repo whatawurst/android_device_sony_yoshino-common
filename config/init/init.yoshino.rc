@@ -298,9 +298,6 @@ on boot
     chmod 0600 /sys/devices/virtual/input/clearpad/glove
     restorecon /sys/devices/virtual/input/clearpad/glove
 
-    # Allow access for CCID command/response timeout configuration
-    chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
-
     # Smart Stamina mode
     chown system system /sys/devices/virtual/input/clearpad/stamina_mode
     chmod 0600 /sys/devices/virtual/input/clearpad/stamina_mode
