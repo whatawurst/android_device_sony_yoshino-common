@@ -107,19 +107,14 @@ vendor.gralloc.enable_fb_ubwc=1
 # HDR
 vendor.display.disable_hdr_lut_gen=1
 
-# OpenGLES version
-ro.opengles.version=196610
-
 # SurfaceFlinger
+debug.sf.disable_backpressure=1
 debug.sf.early_phase_offset_ns=1500000
 debug.sf.early_app_phase_offset_ns=1500000
 debug.sf.early_gl_phase_offset_ns=3000000
 debug.sf.early_gl_app_phase_offset_ns=15000000
-debug.sf.enable_gl_backpressure=1
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
 ro.surface_flinger.protected_contents=true
-ro.surface_flinger.vsync_event_phase_offset_ns=2000000
-ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
 
 # Touch
 vendor.backlight_on=1
@@ -146,8 +141,10 @@ ro.oem_unlock_supported=1
 
 ### RADIO
 DEVICE_PROVISIONED=1
+persist.vendor.clat.forceipv4v6=true
 persist.vendor.data.iwlan.enable=true
 persist.vendor.radio.custom_ecc=1
+persist.vendor.radio.manual_nw_rej_ct=1
 persist.vendor.radio.mt_sms_ack=19
 persist.vendor.radio.oem_socket=true
 persist.vendor.radio.procedure_bytes=SKIP
