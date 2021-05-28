@@ -18,6 +18,8 @@ r_dir_file(thermal-engine, sysfs_kgsl)
 # /sys/devices/soc/0.qcom,rmtfs_sharedmem
 r_dir_file(thermal-engine, sysfs_rmtfs)
 
+allow thermal-engine sysfs:dir read;
+
 # in_temp_skin_temp_input
 allow thermal-engine sysfs_batteryinfo:file r_file_perms;
 
