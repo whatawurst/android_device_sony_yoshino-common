@@ -125,6 +125,9 @@ qemu.hw.mainkeys=0
 ### DRM
 drm.service.enabled=true
 
+### Graphics
+ro.hardware.egl=adreno
+
 ### MEDIA
 debug.stagefright.omx_default_rank.sw-audio=1
 debug.stagefright.omx_default_rank=0
