@@ -286,11 +286,12 @@ static int get_wlan_low_power_stats(struct PowerStateSubsystem &subsystem) {
     struct PowerStateSubsystemSleepState *state;
     int ret;
 
+    subsystem.name = "wlan";
+
     ret = extract_wlan_stats(stats);
     if (ret)
         return ret;
 
-    subsystem.name = "wlan";
     subsystem.states.resize(WLAN_STATES_COUNT);
 
     /* Update statistics for Active State */
