@@ -6,14 +6,12 @@ hal_server_domain(hal_camera_somc, hal_camera)
 hal_client_domain(hal_camera_somc, hal_configstore)
 init_daemon_domain(hal_camera_somc)
 
-binder_call(hal_camera_somc, hal_idd_default)
 binder_call(hal_camera_somc, hal_configstore_default)
 binder_call(hal_camera_somc, cacaoserver)
 
 unix_socket_connect(hal_camera_somc, tad, tad)
 
 allow hal_camera_somc hal_graphics_mapper_hwservice:hwservice_manager find;
-allow hal_camera_somc hal_idd_hwservice:hwservice_manager find;
 allow hal_camera_somc hal_configstore_ISurfaceFlingerConfigs:hwservice_manager find;
 
 # /dev/socket/cammw_tintless
@@ -45,3 +43,6 @@ allow hal_camera_somc sysfs_leds:file rw_file_perms;
 
 # vendor.somc.hardware.camera.provider@1.0-service
 allow hal_camera_somc lensctrl_device:chr_file rw_file_perms;
+
+# Don't log attempts to look for idd
+dontaudit hal_camera_somc default_android_hwservice:hwservice_manager find;

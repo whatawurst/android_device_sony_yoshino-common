@@ -1,14 +1,6 @@
 # file_contexts
 
 ### ROOT
-/mnt/rca(/.*)?                                                  u:object_r:idd_rca_file:s0
-/mnt/idd(/.*)?                                                  u:object_r:idd_data_file:s0
-/mnt/idd/crashdata(/.*)?                                        u:object_r:idd_crashdata_file:s0
-/mnt/idd/fsck(/.*)?                                             u:object_r:idd_fsck_file:s0
-/mnt/idd/lost\+found(/.*)?                                      u:object_r:idd_lostfound_file:s0
-/mnt/idd/output(/.*)?                                           u:object_r:idd_output_file:s0
-/mnt/idd/socket(/.*)?                                           u:object_r:idd_socket_file:s0
-/mnt/idd/startup-prober(/.*)?                                   u:object_r:startupprober_file:s0
 /mnt/qns(/.*)?                                                  u:object_r:qns_file:s0
 
 # BACKWARD COMPATIBILITY
@@ -42,10 +34,8 @@
 /dev/block/platform/soc/1da4000\.ufshc/by-name/FOTAKernel       u:object_r:recovery_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/Qnovo            u:object_r:qnovo_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/TA               u:object_r:tad_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/appslog          u:object_r:appslog_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/diag             u:object_r:diag_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/dsp              u:object_r:adsprpc_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/idd              u:object_r:idd_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/oem              u:object_r:oem_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/rdimage          u:object_r:ramdump_block_device:s0
 
@@ -137,13 +127,10 @@
 /sbin/tad_static                                                u:object_r:rootfs:s0
 
 # system services
-/system/bin/bt_ssr_dumper                                       u:object_r:ssr_dumper_exec:s0
 /system/bin/cacaoserver                                         u:object_r:cacaoserver_exec:s0
 /system/bin/clean_scratch_files                                 u:object_r:clean_scratch_files_exec:s0
 /system/bin/mssconfig                                           u:object_r:mss_config_exec:s0
 /system/bin/sony-modem-switcher                                 u:object_r:modem_switcher_exec:s0
-/system/bin/ssr_dumper                                          u:object_r:ssr_dumper_exec:s0
-/system/bin/startup-logger                                      u:object_r:startup-logger_exec:s0
 /system/bin/taimport                                            u:object_r:taimport_exec:s0
 /system/bin/updatemiscta                                        u:object_r:updatemiscta_exec:s0
 
@@ -158,8 +145,6 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.power@1\.3-service\.yoshino      u:object_r:hal_power_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.semc\.hardware\.secd@1\.0-service    u:object_r:hal_secd_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.semc\.hardware\.thermal@(.*)?    u:object_r:hal_somc_thermal_daemon_exec:s0
-/(vendor|system/vendor)/bin/hw/vendor\.semc\.system\.idd@1\.0-service   u:object_r:hal_idd_default_exec:s0
-/(vendor|system/vendor)/bin/hw/vendor\.semc\.system\.idd\.fallback@1\.0-service u:object_r:hal_idd_fallback_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.camera\.provider@1\.0-service    u:object_r:hal_camera_somc_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.miscta@1\.0-service  u:object_r:hal_miscta_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.somc\.hardware\.wifi@2\.0-service    u:object_r:hal_wifi_hostapd_default_exec:s0
@@ -167,8 +152,6 @@
 /(vendor|system/vendor)/bin/chargemon                           u:object_r:chargemon_exec:s0
 /(vendor|system/vendor)/bin/chargemon_shutdown                  u:object_r:chargemon_exec:s0
 /(vendor|system/vendor)/bin/ffu                                 u:object_r:vendor_ffu_exec:s0
-/(vendor|system/vendor)/bin/idd-logreader                       u:object_r:idd_exec:s0
-/(vendor|system/vendor)/bin/iddd                                u:object_r:idd_exec:s0
 /(vendor|system/vendor)/bin/init\.qcom\.radio\.sh               u:object_r:qti_init_shell_exec:s0
 /(vendor|system/vendor)/bin/keyprovd                            u:object_r:keyprovd_exec:s0
 /(vendor|system/vendor)/bin/mlog_qmi_service                    u:object_r:mlog_qmi_service_exec:s0
