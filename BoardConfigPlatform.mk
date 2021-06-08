@@ -137,6 +137,7 @@ endif
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 ### RIL
+DEFAULT_APNS_FILE := $(PLATFORM_PATH)/config/telephony/apns-conf.xml
 DISABLE_RILD_OEM_HOOK := true
 TARGET_PER_MGR_ENABLED := true
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
