@@ -70,6 +70,9 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_ROOT_EXTRA_FOLDERS := ocm
 TARGET_USERIMAGES_USE_EXT4 := true
 
+### POWER
+TARGET_USE_CUSTOM_POWERHINT ?= FALSE
+
 ### DEXPREOPT
 # Enable dexpreopt for everything to speed boot time
 ifeq ($(HOST_OS),linux)
@@ -137,6 +140,7 @@ endif
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 ### RIL
+DEFAULT_APNS_FILE := $(PLATFORM_PATH)/config/telephony/apns-conf.xml
 DISABLE_RILD_OEM_HOOK := true
 TARGET_PER_MGR_ENABLED := true
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
