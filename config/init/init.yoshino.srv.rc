@@ -29,7 +29,7 @@ service adsprpcd /system/vendor/bin/adsprpcd
    class main
    user media
    group media
-   writepid /dev/cpuset/system-background/tasks
+   task_profiles ServiceCapacityLow
 
 ### CHARGER
 # QCOM Quick Charge
@@ -45,7 +45,7 @@ service charge_service /vendor/bin/charge_service
     # Add wakelock to the group of charge_service for access "/sys/power/wake_lock" and "/sys/power/wake_unlock".
     group system root oem_2993 wakelock
     # For reducing CPU loads, charge service runs as system-background process.
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
     disabled
 
 # Qns
@@ -112,7 +112,7 @@ service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/m
     class core
     user root
     group root
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
 
 ### OFFLINE CHARGER
 service charger /system/bin/charger
@@ -121,7 +121,7 @@ service charger /system/bin/charger
     group system graphics input log
     capabilities SYS_BOOT
     seclabel u:r:charger:s0
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
 
 service qbcharger /charger -m 1
     disabled
@@ -143,7 +143,7 @@ service energy-awareness /system/vendor/bin/energy-awareness
     user root
     group system
     oneshot
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
 
 ### PERIPHERAL MANAGER
 service vendor.per_mgr /vendor/bin/pm-service
@@ -181,7 +181,7 @@ service vendor.atfwd /vendor/bin/ATFWD-daemon
     class late_start
     user system
     group system radio
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
 
 service vendor.netmgrd /system/vendor/bin/netmgrd
     class main
@@ -239,7 +239,7 @@ service vendor.qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
 
 ### THERMAL MANAGER
 service thermal-engine /system/vendor/bin/thermal-engine
@@ -250,7 +250,7 @@ service thermal-engine /system/vendor/bin/thermal-engine
     socket thermal-recv-passive-client stream 0666 system system
     socket thermal-send-rule stream 0660 system system
     group root oem_2993 oem_2929
-    writepid /dev/cpuset/system-background/tasks
+    task_profiles ServiceCapacityLow
 
 ### TIMESERVICE
 service time_daemon /system/vendor/bin/time_daemon
