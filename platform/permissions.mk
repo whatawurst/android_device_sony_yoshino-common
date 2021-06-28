@@ -20,7 +20,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/permissions/privapp-permissions-fdroid.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-fdroid.xml \
     $(PLATFORM_PATH)/config/permissions/privapp-permissions-qti.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-qti.xml \
-    $(PLATFORM_PATH)/config/permissions/privapp-permissions-sony.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-sony.xml
+    $(PLATFORM_PATH)/config/permissions/privapp-permissions-sony.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-sony.xml \
+    $(PLATFORM_PATH)/config/permissions/privapp-permissions-google_prebuilt.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-google_prebuilt.xml
 
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/permissions/product-privapp-permissions-qti.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/product-privapp-permissions-qti.xml
