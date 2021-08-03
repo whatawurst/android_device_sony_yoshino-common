@@ -54,12 +54,22 @@ public class NetworkSwitcher extends Service {
 
     private AirplaneModeObserver airplaneModeObserver;
     private SimServiceObserver simServiceObserver;
+    // Set until the phone is unlocked
+    private BroadcastReceiver unlockObserver;
 
     @Override
     public void onCreate() {
         d("onCreate");
         airplaneModeObserver = new AirplaneModeObserver(getApplicationContext(), new Handler(getMainLooper()));
         simServiceObserver = new SimServiceObserver(getApplicationContext());
+        unlockObserver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                unregisterReceiver(unlockObserver);
+                unlockObserver = null;
+            }
+        };
+        registerReceiver(unlockObserver, new IntentFilter(Intent.ACTION_USER_UNLOCKED));
 
         // Start process
         try {
@@ -118,7 +128,11 @@ public class NetworkSwitcher extends Service {
         if (isLTE(currentNetwork)) {
             toggle(tm, subID, currentNetwork);
 
-            if (StorageManager.isFileEncryptedNativeOrEmulated()) {
+            if (StorageManager.isFileEncryptedNativeOrEmulated() && unlockObserver != null) {
+                // Delay resetting the network until phone is unlocked.
+                // The current unlock observer is no longer required
+                unregisterReceiver(unlockObserver);
+                unlockObserver = null;
                 registerReceiver(new BroadcastReceiver() {
                     @Override
                     public void onReceive(Context context, Intent intent) {
