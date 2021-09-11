@@ -134,9 +134,6 @@ else
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/fstab.recovery
 endif
 
-### RENDERSCRIPT
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
-
 ### RIL
 TARGET_PER_MGR_ENABLED := true
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true

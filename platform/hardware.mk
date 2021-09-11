@@ -180,10 +180,6 @@ PRODUCT_PACKAGES += \
     android.hardware.radio.deprecated@1.0 \
     android.hardware.radio.deprecated@1.0.vendor
 
-# RENDERSCRIPT
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
-
 # SECURE ELEMENT
 PRODUCT_PACKAGES += \
     android.hardware.secure_element@1.0 \
