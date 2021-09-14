@@ -35,6 +35,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     FlipFlap
 
+### DISPLAY
+PRODUCT_PACKAGES += \
+    vendor.display.config@1.3
+
 ### DPM
 PRODUCT_PACKAGES += \
     libshim_dpmframework
@@ -190,10 +194,6 @@ PRODUCT_PACKAGES += \
     android.hardware.wifi@1.1-impl \
     android.hardware.wifi@1.0-service \
     android.hardware.wifi.offload@1.0
-
-# WIFI DISPLAY
-PRODUCT_PACKAGES += \
-    vendor.display.config@1.3
 
 ### TETHERING
 PRODUCT_PACKAGES += \
