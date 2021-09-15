@@ -72,9 +72,6 @@ BOARD_ROOT_EXTRA_FOLDERS := ocm
 # Build ext4 tools - system/vold
 TARGET_USERIMAGES_USE_EXT4 := true
 
-### POWER
-TARGET_USE_CUSTOM_POWERHINT ?= FALSE
-
 ### DEXPREOPT
 # Enable dexpreopt for everything to speed boot time
 ifeq ($(HOST_OS),linux)
