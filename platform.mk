@@ -41,6 +41,9 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
 
+### POWER
+TARGET_USE_CUSTOM_POWERHINT ?= false
+
 ### RECOVERY
 include $(PLATFORM_PATH)/platform/*.mk
 
