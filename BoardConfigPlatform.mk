@@ -70,9 +70,6 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_ROOT_EXTRA_FOLDERS := ocm
 TARGET_USERIMAGES_USE_EXT4 := true
 
-### POWER
-TARGET_USE_CUSTOM_POWERHINT ?= FALSE
-
 ### DEXPREOPT
 # Enable dexpreopt for everything to speed boot time
 ifeq ($(HOST_OS),linux)

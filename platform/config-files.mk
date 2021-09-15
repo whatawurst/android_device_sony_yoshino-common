@@ -53,8 +53,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/irqbalance/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
 
-ifeq ($(TARGET_USE_CUSTOM_POWERHINT),false)
 ### POWER
+ifeq ($(TARGET_USE_CUSTOM_POWERHINT),false)
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/power/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 endif
