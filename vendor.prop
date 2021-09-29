@@ -201,6 +201,10 @@ debug.vendor.sns.libsensor1=0
 persist.camera.gyro.disable=0
 persist.vendor.debug.sensors.hal=0
 
+### SOC
+ro.soc.manufacturer=Qualcomm
+ro.soc.model=MSM8998
+
 ### THERMAL
 ro.hardware.thermal=somc
 
