@@ -59,6 +59,11 @@ PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/power/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 endif
 
+### POWER CGROUPS
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/config/power/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
+    $(PLATFORM_PATH)/config/power/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
+
 ### QTI_LOW_POWER_WHITELIST
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/power/qti_whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/qti_whitelist.xml
