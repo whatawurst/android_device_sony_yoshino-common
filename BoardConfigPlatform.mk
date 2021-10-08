@@ -113,6 +113,7 @@ TARGET_USES_ION := true
 
 ### HIDL
 DEVICE_FRAMEWORK_MANIFEST_FILE := $(PLATFORM_PATH)/framework_manifest.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(PLATFORM_PATH)/device_framework_manifest.xml
 DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
 
