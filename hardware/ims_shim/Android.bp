@@ -15,6 +15,16 @@
 //
 
 cc_library_shared {
+    name: "libgui_shim",
+    shared_libs: [
+        "libgui",
+        "libutils",
+    ],
+    srcs: ["gui_shim.cpp"],
+    product_specific: true,
+}
+
+cc_library_shared {
     name: "libui_shim",
     shared_libs: ["libui"],
     srcs: ["GraphicBuffer.cpp"],
