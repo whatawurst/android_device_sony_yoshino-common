@@ -834,9 +834,7 @@
   <apn carrier="Telavox MMS" mcc="240" mnc="01" apn="tel.tmhmms" proxy="" port="" user="" password="" mmsc="http://mmss/" mmsproxy="193.209.134.132" mmsport="80" type="mms" />
   <apn carrier="Telavox internet" mcc="240" mnc="01" apn="telavox.tmhgprs.se" proxy="" port="" user="" password="" mmsc="" type="default,supl" />
   <apn carrier="Telia IMS" mcc="240" mnc="01" apn="ims" type="ims" protocol="IPV4V6" roaming_protocol="IPV4V6" user_visible="false" />
-  <apn carrier="Telia Internet" mcc="240" mnc="01" apn="online.telia.se" proxy="10.254.254.254" port="8080" mmsc="" user="" password="" type="default,supl" spn="Telia" />
   <apn carrier="Telia Internet" mcc="240" mnc="01" apn="online.telia.se" proxy="" port="" user="" password="" mmsc="" type="default,supl" />
-  <apn carrier="Telia MMS" mcc="240" mnc="01" apn="mms.telia.se" proxy="" port="" mmsproxy="193.209.134.132" mmsport="80" mmsc="http://mmss" user="" password="" type="mms" spn="Telia" />
   <apn carrier="Telia MMS" mcc="240" mnc="01" apn="mms.telia.se" proxy="" port="" user="" password="" mmsc="http://mmss/" mmsproxy="193.209.134.132" mmsport="80" type="mms" />
   <apn carrier="Telogic MMS" mcc="240" mnc="01" apn="telogicmms.telia.se" proxy="" port="" user="" password="" mmsc="http://mmss/" mmsproxy="193.209.134.132" mmsport="80" type="mms" />
   <apn carrier="Telogic internet" mcc="240" mnc="01" apn="telogic.telia.se" proxy="" port="" user="" password="" mmsc="" type="default,supl" />
