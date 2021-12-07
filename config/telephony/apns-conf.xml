@@ -72,7 +72,7 @@
   <apn carrier="Sphone Pelephone" mcc="204" mnc="04" apn="sphone.pelephone.net.il" user="pcl@3g" password="pcl" type="default,supl" />
   <apn carrier="Truphone" mcc="204" mnc="04" apn="truphone.com" type="default,dun" mvno_match_data="204043914" mvno_type="imsi" />
   <apn carrier="Truphone" mcc="204" mnc="04" apn="truphone.com" type="default,dun" mvno_match_data="20404794" mvno_type="imsi" />
-  <apn carrier="Vodafone Live" mcc="204" mnc="04" apn="live.vodafone.com" proxy="" port="" user="" password="" mmsc="" mmsproxy="" mmsport="" type="default" authtype="1" roaming_protocol="IPV4" />
+  <apn carrier="Vodafone Live" mcc="204" mnc="04" apn="live.vodafone.com" proxy="" port="" user="" password="" mmsc="" mmsproxy="" mmsport="" type="default" authtype="1" roaming_protocol="IP" />
   <apn carrier="Vodafone MMS Business" mcc="204" mnc="04" apn="office.vodafone.nl" user="vodafone" password="vodafone" mmsc="http://mmsc.mms.vodafone.nl" mmsproxy="192.168.251.150" mmsport="8799" type="mms" />
   <apn carrier="Ziggo Mobiel" mcc="204" mnc="04" apn="ziggo.dataxs.mobi" authtype="1" type="default,supl" />
   <apn carrier="hollandsnieuwe (type 1)" mcc="204" mnc="04" apn="data.dataxs.mobi" proxy="" port="" user="hollandsnieuwe" password="hollandsnieuwe" mmsc="" authtype="1" type="default,supl" />
@@ -362,7 +362,7 @@
   <apn carrier="ERONET MMS" mcc="218" mnc="03" apn="mms.eronet.ba" proxy="" port="" user="" password="" mmsc="http://mms.gprs.eronet.ba/mms/wapenc" mmsproxy="10.12.3.11" mmsport="8080" type="mms" />
   <apn carrier="ERONET START" mcc="218" mnc="03" apn="gprs.eronet.ba" proxy="" port="" user="" password="" mmsc="" type="default,supl" />
   <apn carrier="M-tel" mcc="218" mnc="05" apn="3g1" proxy="192.168.61.10" port="80" type="default,supl" />
-  <apn carrier="M-tel Frend" mcc="218" mnc="05" apn="mtelfrend" proxy="" port="" user="" password="" mmsc="" type="default,supl" protocol="IPV4" roaming_protocol="IPV4" />
+  <apn carrier="M-tel Frend" mcc="218" mnc="05" apn="mtelfrend" proxy="" port="" user="" password="" mmsc="" type="default,supl" protocol="IP" roaming_protocol="IP" />
   <apn carrier="M-tel mms" mcc="218" mnc="05" apn="mtelmms" mmsc="http://mmsc.mtel.ba/mms/wapenc" mmsproxy="192.168.61.11" mmsport="8080" type="mms" />
   <apn carrier="BH Mobile" mcc="218" mnc="90" apn="active.bhmobile.ba" proxy="" port="" user="" password="" mmsc="" type="default,supl" />
   <apn carrier="BH Mobile MMS" mcc="218" mnc="90" apn="mms.bhmobile.ba" proxy="" port="" user="" password="" mmsc="http://mms.bhmobile.ba/cmmsc/post" mmsproxy="195.222.56.41" mmsport="8080" type="mms" />
@@ -602,7 +602,7 @@
   <apn carrier="TelecomMMS" mcc="234" mnc="10" apn="wap.telecom.co.nz" proxy="" port="" mmsproxy="210.55.11.73" mmsport="8080" mmsc="http://lsmmsc.xtra.co.nz" user="" password="" authtype="3" type="mms" />
   <apn carrier="Tesco Mobile" mcc="234" mnc="10" apn="prepay.tesco-mobile.com" proxy="193.113.200.195" port="8080" user="tescowap" password="password" mmsc="http://mmsc.mms.o2.co.uk:10021/mmsc" mmsproxy="193.113.200.195" mmsport="8080" mvno_type="spn" mvno_match_data="TESCO" authtype="1" type="default,supl,mms" />
   <apn carrier="Tesco UK" mcc="234" mnc="10" apn="prepay.tesco-mobile.com" proxy="193.113.200.195" port="8080" user="tescowap" password="password" mmsc="http://mmsc.mms.02.co.uk:8002" mmsproxy="193.113.200.195" mmsport="8080" mvno_type="spn" mvno_match_data="TESCO" type="default,supl,mms,wap" />
-  <apn carrier="giffgaff" mcc="234" mnc="10" apn="giffgaff.com" user="gg" password="p" mmsc="http://mmsc.mediamessaging.co.uk:8002" authtype="1" mvno_type="spn" mvno_match_data="giffgaff" protocol="IPV4V6" roaming_protocol="IPV4" type="default,hipri,supl,mms,ims" />
+  <apn carrier="giffgaff" mcc="234" mnc="10" apn="giffgaff.com" user="gg" password="p" mmsc="http://mmsc.mediamessaging.co.uk:8002" authtype="1" mvno_type="spn" mvno_match_data="giffgaff" protocol="IPV4V6" roaming_protocol="IP" type="default,hipri,supl,mms,ims" />
   <apn carrier="o2 MMS" mcc="234" mnc="10" apn="payandgo.o2.co.uk" proxy="" port="" mmsproxy="193.113.200.195" mmsport="8080" mmsc="http://mmsc.mms.o2.co.uk:8002" user="payandgo" password="password" type="mms" />
   <apn carrier="o2 Mobile Web" mcc="234" mnc="10" apn="mobile.o2.co.uk" user="mobileweb" password="password" type="default,supl" />
   <apn carrier="O2 IMS" mcc="234" mnc="11" apn="ims" type="ims" protocol="IPV4V6" roaming_protocol="IPV4V6" user_visible="false" />
@@ -3772,7 +3772,7 @@
   <apn carrier="DiGi Internet" mcc="502" mnc="146" apn="diginet" type="default,supl" />
   <apn carrier="DiGi MMS" mcc="502" mnc="146" apn="digimms" user="mms" password="mms" mmsc="http://mms.digi.com.my/servlets/mms" mmsproxy="203.92.128.160" mmsport="80" authtype="1" type="mms" />
   <apn carrier="Celcom Internet" mcc="502" mnc="148" apn="celcom4g" mmsproxy="10.128.1.242" mmsport="8080" mmsc="http://mms.celcom.net.my" type="default,supl,mms" />
-  <apn carrier="Belong Internet/MMS" mcc="505" mnc="01" apn="mdata.net.au" mmsc="http://mmsc.mdata.net.au:8003" mmsproxy="10.1.1.180" mmsport="80" type="default,dun,supl,mms" protocol="IPV4V6" roaming_protocol="IPV4" />
+  <apn carrier="Belong Internet/MMS" mcc="505" mnc="01" apn="mdata.net.au" mmsc="http://mmsc.mdata.net.au:8003" mmsproxy="10.1.1.180" mmsport="80" type="default,dun,supl,mms" protocol="IPV4V6" roaming_protocol="IP" />
   <apn carrier="Telstra 3G Pay by Time" mcc="505" mnc="01" apn="telstra.pcpack" password="telstra" type="default,supl,mms" />
   <apn carrier="Telstra Broadband" mcc="505" mnc="01" apn="telstra.internet" user="" password="" type="dun" />
   <apn carrier="Telstra IMS" mcc="505" mnc="01" apn="ims" type="ims" protocol="IPV4V6" roaming_protocol="IPV4V6" user_visible="false" />
