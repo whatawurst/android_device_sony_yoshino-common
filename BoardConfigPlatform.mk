@@ -146,6 +146,10 @@ include device/qcom/sepolicy-legacy-um/SEPolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino-common/sepolicy/private
 
+### TREBLE
+# Enable treble
+PRODUCT_FULL_TREBLE_OVERRIDE ?= true
+
 ### VENDOR FILE OVERRIDE
 BUILD_BROKEN_DUP_RULES := true
 
