@@ -1,0 +1,10 @@
+# netmgrd.te
+
+typeattribute netmgrd vendor_executes_system_violators;
+
+# Allow execution of commands in shell
+allow netmgrd system_file:file x_file_perms;
+
+# Read those files
+allow netmgrd system_file:file { open read };
+
