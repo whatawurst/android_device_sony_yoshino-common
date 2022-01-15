@@ -1,0 +1,17 @@
+type xperia_parts_app, domain;
+
+app_domain(xperia_parts_app)
+allow xperia_parts_app activity_service:service_manager find;
+# R/W of system properties
+set_prop(xperia_parts_app, system_prop)
+set_prop(xperia_parts_app, exported_system_prop)
+set_prop(xperia_parts_app, exported2_system_prop)
+set_prop(xperia_parts_app, exported3_system_prop)
+set_prop(xperia_parts_app, dynamic_system_prop)
+
+# Read and write /data/data subdirectory.
+allow xperia_parts_app system_app_data_file:dir create_dir_perms;
+allow xperia_parts_app system_app_data_file:{ file lnk_file } create_file_perms;
+
+# Allow Xperia Parts to enable/disable SmartStamina
+set_prop(xperia_parts_app, vendor_clearpad_prop)
