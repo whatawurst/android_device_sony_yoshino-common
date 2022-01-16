@@ -24,6 +24,7 @@ import static com.yoshino.parts.Constants.GLOVE_MODE;
 import static com.yoshino.parts.Constants.GLOVE_PROP;
 import static com.yoshino.parts.Constants.SMART_STAMINA_MODE;
 import static com.yoshino.parts.Constants.SMART_STAMINA_PROP;
+import com.yoshino.parts.QSUltraDim;
 
 public class BootReceiver extends BroadcastReceiver {
 
@@ -38,5 +39,7 @@ public class BootReceiver extends BroadcastReceiver {
 
         boolean isSmartStaminaModeEnabled = Settings.System.getInt(context.getContentResolver(), SMART_STAMINA_MODE, 0) == 1;
         SystemProperties.set(SMART_STAMINA_PROP, isSmartStaminaModeEnabled ? "1" : "0");
+
+        QSUltraDim.init(context);
     }
 }

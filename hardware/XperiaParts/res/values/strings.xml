@@ -37,4 +37,7 @@
     <string name="sim_slot_summary">Select the sim slot you want network switcher to work for.\nSelected Slot:</string>
     <string name="ims_title">IMS Features</string>
     <string name="ims_summary">Enables features such as IMS, VoLTE, VoWiFi or WiFi calling <b>if it worked on stock</b>.</string>
+    <string name="ultra_dim_name">Ultra-Dim</string>
+    <string name="ultra_dim_label_enabled">Restore screen brightness</string>
+    <string name="ultra_dim_label_disabled">Reduce screen brightness</string>
 </resources>

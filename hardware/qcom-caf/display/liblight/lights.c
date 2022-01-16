@@ -46,6 +46,7 @@ static struct light_state_t g_notification;
 static struct light_state_t g_battery;
 static int g_last_backlight_mode = BRIGHTNESS_MODE_USER;
 static int g_attention = 0;
+static int max_lcd_brightness = -1;
 
 char const*const RED_LED_FILE
         = "/sys/class/leds/red/brightness";
@@ -59,8 +60,14 @@ char const*const BLUE_LED_FILE
 char const*const LCD_FILE
         = "/sys/class/leds/lcd-backlight/brightness";
 
+char const*const LCD_MAX_FILE
+		= "/sys/class/leds/lcd-backlight/max_brightness";
+
 char const*const LCD_FILE2
         = "/sys/class/backlight/panel0-backlight/brightness";
+
+char const*const LCD_MAX_FILE2
+		= "/sys/class/backlight/panel0-backlight/max_brightness";
 
 char const*const BUTTON_FILE
         = "/sys/class/leds/button-backlight/brightness";
@@ -80,11 +87,17 @@ char const*const PERSISTENCE_FILE
 /**
  * device methods
  */
+static int read_int(char const* path);
 
 void init_globals(void)
 {
     // init the mutex
     pthread_mutex_init(&g_lock, NULL);
+    if (!access(LCD_MAX_FILE, F_OK)) {
+        max_lcd_brightness = read_int(LCD_MAX_FILE);
+    } else if(!access(LCD_MAX_FILE2, F_OK)) {
+        max_lcd_brightness = read_int(LCD_MAX_FILE2);
+    }
 }
 
 static int
@@ -107,6 +120,27 @@ write_int(char const* path, int value)
         }
         return -errno;
     }
+}
+
+static int
+read_int(char const* path)
+{
+	static int already_warned = 0;
+	int fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd >= 0) {
+		char read_str[10] = {0,0,0,0,0,0,0,0,0,0};
+		ssize_t err = read(fd, &read_str, sizeof(read_str));
+		close(fd);
+		return err < 2 ? -errno : atoi(read_str);
+	} else {
+		if (already_warned == 0) {
+			ALOGE("read_int failed to open %s\n", path);
+			already_warned = 1;
+		}
+		return -errno;
+	};
 }
 
 static int
@@ -134,6 +168,7 @@ set_light_backlight(struct light_device_t* dev,
     if(!dev) {
         return -1;
     }
+    ALOGI("Setting brightness to %d (color=%u)", brightness, state->color);
 
     pthread_mutex_lock(&g_lock);
     // Toggle low persistence mode state
@@ -152,6 +187,10 @@ set_light_backlight(struct light_device_t* dev,
     g_last_backlight_mode = state->brightnessMode;
 
     if (!err) {
+        if (brightness && max_lcd_brightness > 0) {
+            // Scale by max brightness but make sure the min and max values are 1 and max_lcd_brightness
+            brightness = (brightness == 255) ? max_lcd_brightness : ((brightness - 1) * max_lcd_brightness) / 255 + 1;
+        }
         if (!access(LCD_FILE, F_OK)) {
             err = write_int(LCD_FILE, brightness);
         } else {
@@ -190,7 +229,7 @@ set_speaker_light_locked(struct light_device_t* dev,
 
     colorRGB = state->color;
 
-#if 0
+#if 1
     ALOGD("set_speaker_light_locked mode %d, colorRGB=%08X, onMS=%d, offMS=%d\n",
             state->flashMode, colorRGB, onMS, offMS);
 #endif

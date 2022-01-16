@@ -134,9 +134,14 @@ PRODUCT_PACKAGES += \
     android.hardware.health@2.0-service
 
 # LIGHT
-PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service
+ifneq ($(TARGET_USE_YOSHINO_LIGHT_SERVICE),true)
+    PRODUCT_PACKAGES += \
+        android.hardware.light@2.0-impl \
+        android.hardware.light@2.0-service
+else
+    TARGET_PROVIDES_LIBLIGHT := true
+    PRODUCT_PACKAGES += android.hardware.light@2.0-service.yoshino
+endif
 
 # MEMTRACK
 PRODUCT_PACKAGES += \

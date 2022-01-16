@@ -149,6 +149,7 @@ on post-fs
     chown system system /sys/devices/mdss_dsi_panel/c_mode
 
     # backlight
+    chown system system /sys/class/leds/wled/fs_curr_ua
     chown system system /sys/class/leds/wled/bl_scale
     chown system system /sys/class/leds/wled/area_count
 
