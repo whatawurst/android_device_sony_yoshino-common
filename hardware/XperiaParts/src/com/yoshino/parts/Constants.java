@@ -35,5 +35,5 @@ public class Constants {
     public static final String ULTRA_DIM = "ultra_dim";
     public static final String ULTRA_DIM_DEFAULT_PROP = "vendor.ultra_dim.default";
     public static final String ULTRA_DIM_LOW_PROP = "vendor.ultra_dim.low";
-    public static final String ULTRA_DIM_FILE = "/sys/class/leds/wled/fs_curr_ua";
+    public static final String ULTRA_DIM_CURRENT_PROP = "vendor.ultra_dim.current";
 }

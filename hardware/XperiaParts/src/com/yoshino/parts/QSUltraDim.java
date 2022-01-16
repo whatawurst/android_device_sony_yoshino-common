@@ -6,10 +6,6 @@ import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.util.Log;
-import java.io.File;
-import java.io.FileReader;
-import java.io.PrintWriter;
-import java.io.BufferedReader;
 import com.yoshino.parts.Constants;
 import com.yoshino.parts.BootReceiver;
 
@@ -20,24 +16,6 @@ public class QSUltraDim extends TileService {
     private static int lowValue = 5000;
     private boolean mIsSupported = false;
 
-    private static int readFSCurr() {
-        try {
-            File file = new File(Constants.ULTRA_DIM_FILE);
-            if (file.exists()) {
-                BufferedReader br = new BufferedReader(new FileReader(file));
-                String data = br.readLine();
-                br.close();
-                Log.d(TAG, "Read FSCurr: " + data);
-                return Integer.parseInt(data);
-            } else {
-                return -1;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
     private static void setValue(Context context, boolean enabled) {
         int value;
         if (enabled)
@@ -46,14 +24,7 @@ public class QSUltraDim extends TileService {
             value = (defaultValue > 0) ? defaultValue : 17500;
         Log.d(TAG, "writeUltraDim: Setting to " + value);
         Settings.System.putInt(context.getContentResolver(), Constants.ULTRA_DIM, enabled ? 1 : 0);
-        try {
-            PrintWriter writer = new PrintWriter(new File(Constants.ULTRA_DIM_FILE));
-            writer.println(value);
-            writer.flush();
-            writer.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        SystemProperties.set(Constants.ULTRA_DIM_CURRENT_PROP, String.valueOf(value));
     }
     
     private boolean isEnabled() {
@@ -73,24 +44,20 @@ public class QSUltraDim extends TileService {
 
     /// Init after Boot
     public static void init(Context context) {
-        // Read defaults possibly set by device-specific config
         readConfigProperties();
-        // If unset read from sysfs and set property in case the service crashes and is restarted
-        if(defaultValue == -1) {
-            defaultValue = readFSCurr();
-            SystemProperties.set(Constants.ULTRA_DIM_DEFAULT_PROP, String.valueOf(defaultValue));
-        }
         if (isEnabled(context) && defaultValue > 0)
             setValue(context, true);
     }
 
     private void updateTile(boolean enabled) {
         Tile tile = getQsTile();
-        if(!mIsSupported)
+        if(!mIsSupported) {
             tile.setState(Tile.STATE_UNAVAILABLE);
-        else
+            tile.setSubtitle(getString(R.string.ultra_dim_label_unsupported));
+        } else {
             tile.setState(enabled ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-        tile.setSubtitle(getString(enabled ? R.string.ultra_dim_label_enabled : R.string.ultra_dim_label_disabled));
+            tile.setSubtitle(getString(enabled ? R.string.ultra_dim_label_enabled : R.string.ultra_dim_label_disabled));
+        }
         tile.updateTile();
     }
 

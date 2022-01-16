@@ -580,3 +580,7 @@ on property:dev.bootcomplete=1 && property:persist.sys.touch.glove_mode=*
 
 on property:dev.bootcomplete=1 && property:persist.sys.touch.cover_mode_enabled=*
     write /sys/devices/virtual/input/clearpad/cover_mode_enabled ${persist.sys.touch.cover_mode_enabled}
+
+# Ultra-Dim
+on property:dev.bootcomplete=1 && property:vendor.ultra_dim.current=*
+   write /sys/class/leds/wled/fs_curr_ua ${vendor.ultra_dim.current}
