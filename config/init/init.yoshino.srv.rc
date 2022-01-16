@@ -88,13 +88,6 @@ on property:init.svc.vendor.hwcomposer-2-1=running
 on property:init.svc.vendor.hwcomposer-2-1=restarting
     stop vendor.ppd
 
-# DRM WIDEVINE
-service wvkbd_installer /vendor/bin/wvkbd
-    class late_start
-    user system
-    group system
-    oneshot
-
 ### GNSS
 service mlid /vendor/bin/mlid
     class late_start
