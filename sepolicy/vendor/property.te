@@ -1,20 +1,20 @@
 # property.te
 
-type vendor_power_prop, property_type;
-type secureadb_prop, property_type;
-type semc_product_prop, property_type;
-type semc_sim_prop, property_type;
-type semc_version_prop, property_type;
-type sony_prop, property_type;
-type suntory_prop, property_type;
-type taimport_prop, property_type;
-type tareset_notfirstboot_prop, property_type;
-type vendor_backlighton_prop, property_type;
-type vendor_clearpad_prop, property_type;
-type vendor_cover_state_prop, property_type;
-type vendor_pcc_mdp_prop, property_type;
-type vendor_semc_version_cust_active_prop, property_type;
-type vendor_somc_hdcp_prop, property_type;
-type wfd_prop, property_type;
-type wifi_active_prop, property_type;
-type wigig_prop, property_type;
+system_internal_prop(secureadb_prop)
+system_internal_prop(semc_sim_prop)
+system_internal_prop(semc_version_prop)
+system_internal_prop(sony_prop)
+system_internal_prop(taimport_prop)
+system_internal_prop(tareset_notfirstboot_prop)
+system_internal_prop(vendor_clearpad_prop)
+system_internal_prop(wfd_prop)
+vendor_internal_prop(vendor_power_prop)
+vendor_internal_prop(semc_product_prop)
+vendor_internal_prop(suntory_prop)
+vendor_internal_prop(vendor_backlighton_prop)
+vendor_internal_prop(vendor_cover_state_prop)
+vendor_internal_prop(vendor_pcc_mdp_prop)
+vendor_internal_prop(vendor_semc_version_cust_active_prop)
+vendor_internal_prop(vendor_somc_hdcp_prop)
+vendor_internal_prop(wifi_active_prop)
+vendor_internal_prop(wigig_prop)
