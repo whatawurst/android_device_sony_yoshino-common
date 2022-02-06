@@ -94,13 +94,17 @@ PRODUCT_PACKAGES += \
 
 # BLUETOOTH
 PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0.vendor \
     android.hardware.bluetooth.audio@2.0-impl
 
 # CAMERA
 PRODUCT_PACKAGES += \
     android.hardware.camera.common@1.0-impl \
+    android.hardware.camera.provider@2.4 \
     android.hardware.camera.provider@2.4-impl \
-    camera.device@3.2-impl
+    camera.device@3.2-impl \
+    vendor.qti.hardware.camera.device@1.0 \
+    vendor.qti.hardware.camera.device@1.0.vendor
 
 # CONFIGSTORE
 PRODUCT_PACKAGES += \
@@ -114,15 +118,23 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
+    android.hardware.drm@1.1.vendor \
     android.hardware.drm@1.4-service.clearkey
 
 # FINGERPRINT
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1
+    android.hardware.biometrics.fingerprint@2.1 \
+    android.hardware.biometrics.fingerprint@2.1.vendor
+
+# GATEKEEPER
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0 \
+    android.hardware.gatekeeper@1.0.vendor
 
 # GNSS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@2.0
+    android.hardware.gnss@2.0 \
+    android.hardware.gnss@2.1.vendor
 
 # GRAPHICS
 PRODUCT_PACKAGES += \
@@ -138,6 +150,11 @@ PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl.recovery \
     android.hardware.health@2.1-service
 
+# KEYMASTER
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0 \
+    android.hardware.keymaster@3.0.vendor
+
 # LIGHT
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
@@ -148,8 +165,14 @@ PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service
 
+# NETD
+PRODUCT_PACKAGES += \
+    android.system.net.netd@1.1.vendor
+
 # POWER
 PRODUCT_PACKAGES += \
+    android.hardware.power@1.2 \
+    android.hardware.power@1.2.vendor \
     android.hardware.power@1.3-service.yoshino
 
 # RADIO
@@ -157,14 +180,23 @@ PRODUCT_PACKAGES += \
     android.hardware.broadcastradio@1.0-impl \
     android.hardware.radio@1.1 \
     android.hardware.radio.config@1.0 \
-    android.hardware.radio.deprecated@1.0
+    android.hardware.radio.config@1.0.vendor \
+    android.hardware.radio.deprecated@1.0 \
+    android.hardware.radio.deprecated@1.0.vendor
 
 # RENDERSCRIPT
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
 
+# SECURE ELEMENT
+PRODUCT_PACKAGES += \
+    android.hardware.secure_element@1.0 \
+    android.hardware.secure_element@1.0.vendor
+
 # SENSORS
 PRODUCT_PACKAGES += \
+    android.frameworks.sensorservice@1.0 \
+    android.frameworks.sensorservice@1.0.vendor \
     android.hardware.sensors@1.0-impl \
     android.hardware.sensors@1.0-service
 
