@@ -41,8 +41,10 @@ PRODUCT_PACKAGES += \
 
 ### HIDL
 PRODUCT_PACKAGES += \
+    android.hidl.allocator@1.0.vendor \
     android.hidl.base@1.0 \
     android.hidl.base@1.0.vendor \
+    android.hidl.memory@1.0.vendor \
     android.hidl.manager@1.0 \
     android.hidl.manager-V1.0-java \
     libhidltransport \
@@ -107,10 +109,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libavservices_minijail \
     libjson \
+    libjson.vendor \
     libion \
     libminijail \
     libstdc++.vendor \
     libtinyxml \
+    libtinyxml.vendor \
     libxml2
 
 ### TELEPHONY
