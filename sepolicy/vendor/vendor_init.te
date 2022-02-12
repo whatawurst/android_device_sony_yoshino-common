@@ -47,3 +47,12 @@ allow vendor_init wpa_socket:dir { setattr };
 
 # /dev/pts
 allow vendor_init devpts:chr_file { rw_file_perms };
+
+# adb.network.port.es
+get_prop(vendor_init, adb_network_prop)
+
+# persist.debug.trace
+get_prop(vendor_init, persist_debug_prop)
+
+# vendor.smartstamina.touchreport
+get_prop(vendor_init, vendor_clearpad_prop)
