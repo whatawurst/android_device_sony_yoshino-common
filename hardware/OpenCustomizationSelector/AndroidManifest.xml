@@ -34,6 +34,7 @@
             android:theme="@style/AppTheme"
             android:label="Status Activity"
             android:icon="@drawable/debug_icon"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
@@ -41,12 +42,14 @@
             android:theme="@style/AppTheme"
             android:label="Log Activity"
             android:icon="@drawable/debug_icon"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.sonymobile.customizationselector.CustomizationSelectorActivity"
             android:enabled="false"
             android:label="@string/app_name"
+            android:exported="false"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme">
             <intent-filter android:priority="2">
@@ -60,6 +63,7 @@
         <activity
             android:name="com.sonymobile.customizationselector.CustomizationSelectorSUWActivity"
             android:label="@string/app_name"
+            android:exported="false"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="com.sonymobile.customizationselector.action.SETUPWIZARD" />
@@ -71,6 +75,7 @@
             android:name="com.sonymobile.customizationselector.ModemSwitcherActivity"
             android:configChanges="orientation"
             android:icon="@drawable/debug_icon"
+            android:exported="false"
             android:label="Modem Switcher"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
@@ -95,19 +100,19 @@
             android:name="com.sonymobile.customizationselector.MapleStarter"
             android:enabled="true" />
 
-        <receiver android:name="com.sonymobile.customizationselector.EventReceiver">
+        <receiver android:name="com.sonymobile.customizationselector.EventReceiver" android:exported="false">
             <intent-filter android:priority="999">
                 <action android:name="android.telephony.action.CARRIER_CONFIG_CHANGED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.sonymobile.customizationselector.MasterClearReceiver">
+        <receiver android:name="com.sonymobile.customizationselector.MasterClearReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MASTER_CLEAR_NOTIFICATION" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.sonymobile.customizationselector.NotificationReceiver" />
-        <receiver android:name="com.sonymobile.customizationselector.NS.NSBootReceiver">
+        <receiver android:name="com.sonymobile.customizationselector.NotificationReceiver" android:exported="false" />
+        <receiver android:name="com.sonymobile.customizationselector.NS.NSBootReceiver" android:exported="false">
             <intent-filter android:priority="999">
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
