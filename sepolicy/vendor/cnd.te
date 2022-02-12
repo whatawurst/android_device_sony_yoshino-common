@@ -1,3 +1,5 @@
 # cnd.te
 
 allow cnd system_app:binder { transfer };
+
+get_prop(cnd, wifi_hal_prop)

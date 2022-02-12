@@ -4,3 +4,6 @@
 
 # rm -r /cache/lost+found
 allow toolbox cache_file:dir { read write getattr search rmdir open };
+
+# /data/media
+allow toolbox rootfs:dir { open read setattr };

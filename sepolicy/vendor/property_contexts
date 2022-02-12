@@ -1,5 +1,7 @@
 # property_contexts
 
+adb.network.port.es                  u:object_r:adb_network_prop:s0
+
 persist.keyprovd.suntory.prov        u:object_r:suntory_prop:s0
 persist.sys.sim_config_ids           u:object_r:semc_sim_prop:s0
 persist.tareset.notfirstboot         u:object_r:tareset_notfirstboot_prop:s0
@@ -19,7 +21,7 @@ ro.vendor.semc.version.cust.active   u:object_r:vendor_semc_version_cust_active_
 
 vendor.backlight_on                  u:object_r:vendor_backlighton_prop:s0
 vendor.pcc.mdp.rgb                   u:object_r:vendor_pcc_mdp_prop:s0
-vendor.powerhal.                       u:object_r:vendor_power_prop:s0
+vendor.powerhal.                     u:object_r:vendor_power_prop:s0
 vendor.somc.hdcp.                    u:object_r:vendor_somc_hdcp_prop:s0
 vendor.cover_state                   u:object_r:vendor_cover_state_prop:s0
 vendor.smartstamina.touchreport      u:object_r:vendor_clearpad_prop:s0
