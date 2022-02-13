@@ -75,10 +75,7 @@
 
     <!-- Vibrator pattern for feedback about a long screen/key press -->
     <integer-array name="config_longPressVibePattern">
-        <item>0</item>
         <item>40</item>
-        <item>0</item>
-        <item>0</item>
     </integer-array>
 
     <!-- Make things go fast -->
@@ -86,10 +83,7 @@
 
     <!-- Vibrator pattern for feedback about touching a virtual key -->
     <integer-array name="config_virtualKeyVibePattern">
-        <item>0</item>
         <item>40</item>
-        <item>0</item>
-        <item>0</item>
     </integer-array>
 
     <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
@@ -99,10 +93,7 @@
 
     <!-- Vibrator pattern for feedback about hitting a scroll barrier -->
     <integer-array name="config_scrollBarrierVibePattern">
-        <item>0</item>
         <item>60</item>
-        <item>0</item>
-        <item>0</item>
     </integer-array>
 
     <!-- MMS user agent string -->
