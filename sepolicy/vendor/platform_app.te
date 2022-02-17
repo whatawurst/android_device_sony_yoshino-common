@@ -5,3 +5,8 @@ allow platform_app cacaoserver_service:service_manager find;
 
 get_prop(platform_app, semc_version_prop)
 get_prop(platform_app, vendor_semc_version_cust_active_prop)
+
+# Direct access to vold-mounted storage under /mnt/media_rw
+# This is a performance optimization that allows platform apps to bypass the FUSE layer
+allow platform_app sdcard_posix_contextmount_type:dir create_dir_perms;
+allow platform_app sdcard_posix_contextmount_type:file create_file_perms;
