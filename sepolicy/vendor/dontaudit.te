@@ -1,0 +1,47 @@
+# dontaudit.te
+
+# Ignore attempts to read unused OnePlus props due to kanged libqmi_cci.so
+dontaudit {
+  adpl
+  atfwd
+  cnd
+  hal_bluetooth_qti
+  hal_dpmQmiMgr
+  hal_gnss_qti
+  hal_imsrtp
+  hal_rcsservice
+  hal_sensors_default
+  ims
+  location
+  netmgrd
+  qti
+  qtidataservices_app
+  rild
+  sensors
+  thermal-engine
+  time_daemon
+  vendor_pd_mapper
+  vendor_per_mgr
+  wcnss_service
+} oneplus_prop:file read;
+
+
+# Ignore attempts to read unused persist.vendor.data.target_id via libdsutils.so
+dontaudit {
+  adpl
+  cnd
+  hal_dpmQmiMgr
+  hal_gnss_qti
+  hal_imsrtp
+  hal_rcsservice
+  ims
+  location
+  netmgrd
+  port-bridge
+  qti
+  qtidataservices_app
+  rild
+  thermal-engine
+  time_daemon
+  wcnss_service
+  } vendor_target_id_prop:file read;
