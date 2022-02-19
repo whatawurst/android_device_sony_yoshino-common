@@ -5,3 +5,6 @@ allow hal_audio_default sysfs:dir { r_dir_perms };
 
 # /dev/sony_hweffect_params
 allow hal_audio_default audio_hweffect_device:chr_file { rw_file_perms };
+
+# audio.ear_protection.fade
+get_prop(hal_audio_default, semc_audio_prop)
