@@ -13,11 +13,16 @@ hw.wfd.                              u:object_r:wfd_prop:s0
 
 init.taimport                        u:object_r:taimport_prop:s0
 
+ro.network.auto_selection_only       u:object_r:vendor_radio_prop:s0
+
 ro.semc.version.                     u:object_r:semc_version_prop:s0
 ro.semc.product.                     u:object_r:semc_product_prop:s0
 ro.somc.secureadb                    u:object_r:secureadb_prop:s0
 
 ro.sony                              u:object_r:sony_prop:s0
+
+ro.vendor.ril.svdo                   u:object_r:vendor_radio_prop:s0
+ro.vendor.ril.svlte1x                u:object_r:vendor_radio_prop:s0
 
 ro.vendor.semc.version.cust.active   u:object_r:vendor_semc_version_cust_active_prop:s0
 
