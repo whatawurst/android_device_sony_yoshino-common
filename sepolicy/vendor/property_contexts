@@ -13,6 +13,11 @@ hw.wfd.                              u:object_r:wfd_prop:s0
 
 init.taimport                        u:object_r:taimport_prop:s0
 
+persist.sys.assert.panic             u:object_r:oneplus_prop:s0
+
+persist.vendor.qmi_log_on            u:object_r:oneplus_prop:s0
+persist.vendor.data.target_id        u:object_r:vendor_target_id_prop:s0
+
 ro.network.auto_selection_only       u:object_r:vendor_radio_prop:s0
 
 ro.semc.version.                     u:object_r:semc_version_prop:s0
