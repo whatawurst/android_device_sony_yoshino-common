@@ -96,7 +96,7 @@ public class EventReceiver extends BroadcastReceiver {
                                     "\nCust ID: " + SystemProperties.get(Configurator.PROP_TA_AC_VERSION, "N/A")))
                     .setColorized(true)
                     .addAction(R.drawable.ic_baseline_sim_card_24, "Disable Notification",
-                            PendingIntent.getBroadcast(context, 1, new Intent(context, NotificationReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT))
+                            PendingIntent.getBroadcast(context, 1, new Intent(context, NotificationReceiver.class), PendingIntent.FLAG_MUTABLE))
                     .build());
         }
     }
