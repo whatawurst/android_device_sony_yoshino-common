@@ -30,6 +30,7 @@ android_app {
     certificate: "platform",
     system_ext_specific: true,
     privileged: true,
+    enforce_uses_libs: false,
 
     static_libs: [
         "androidx.core_core",
