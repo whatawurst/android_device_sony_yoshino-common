@@ -36,6 +36,10 @@ public final class R {
         public static final int file_not_found = 2131427342;
     }
 
+    public static final class style {
+        public static final int AppDialog = 2131623930;
+    }
+
     public static final class xml {
         public static final int configuration_selectors = 2131623936;
         public static final int service_providers = 2131623937;
