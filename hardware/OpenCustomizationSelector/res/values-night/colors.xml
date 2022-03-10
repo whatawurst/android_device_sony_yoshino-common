@@ -2,6 +2,6 @@
 <resources>
     <color name="colorPrimary">#121212</color>
     <color name="colorPrimaryDark">#121212</color>
-    <color name="colorAccent">#82B1FF</color>
+    <color name="colorAccent">@android:color/system_accent1_200</color>
     <color name="textColor">#F3F3F3</color>
 </resources>
