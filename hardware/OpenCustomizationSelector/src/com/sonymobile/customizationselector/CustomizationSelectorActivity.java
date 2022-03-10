@@ -31,7 +31,7 @@ public class CustomizationSelectorActivity extends Activity implements OnClickLi
 
     private void startDialog() {
         if (mAlertDialog == null) {
-            Builder builder = new Builder(this);
+            Builder builder = new Builder(this, R.style.AppDialog);
             builder.setCancelable(false);
             builder.setMessage(R.string.customization_restart_desc_txt);
             builder.setPositiveButton("OK", this);

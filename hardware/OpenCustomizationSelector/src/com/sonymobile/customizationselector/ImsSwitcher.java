@@ -38,7 +38,7 @@ public class ImsSwitcher {
         try {
             String currentModem = ModemSwitcher.getCurrentModemConfig().replace(ModemSwitcher.MODEM_FS_PATH, "");
             if (CommonUtil.isModemDefault(currentModem)) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppDialog);
                 builder.setMessage("Your modem is already default, no reboot required");
                 builder.setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss());
                 AlertDialog dialog = builder.create();
@@ -80,7 +80,7 @@ public class ImsSwitcher {
         CSLog.d(TAG, "Turning to default to: " + modem);
 
         if (new ModemSwitcher().setModemConfiguration(ModemSwitcher.MODEM_FS_PATH + modem)) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppDialog);
             builder.setCancelable(false);
             builder.setMessage("Your device has now switched to default modem " + modem + "\nReboot required.");
             builder.setPositiveButton("Reboot", (dialogInterface, i) -> {
