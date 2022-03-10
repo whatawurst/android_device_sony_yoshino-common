@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.text.Editable;
@@ -32,7 +33,7 @@ public class ModemSwitcherActivity extends Activity {
         CSLog.d(TAG, "selected modem is " + str);
 
         if (mModemSwitcher.setModemConfiguration(ModemSwitcher.MODEM_FS_PATH + str)) {
-            ((PowerManager) getSystemService("power")).reboot(getApplicationContext().getString(R.string.reboot_reason_modem_debug));
+            ((PowerManager) getSystemService(Context.POWER_SERVICE)).reboot(getApplicationContext().getString(R.string.reboot_reason_modem_debug));
         }
     }
 
@@ -60,7 +61,7 @@ public class ModemSwitcherActivity extends Activity {
         mPreference = (CommonUtil.isDirectBootEnabled() ? createDeviceProtectedStorageContext() : this)
                 .getSharedPreferences(Configurator.PREF_PKG, Context.MODE_PRIVATE);
 
-        setRequestedOrientation(1);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mModemSwitcher = new ModemSwitcher();
         try {
             int i2;

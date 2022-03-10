@@ -14,19 +14,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
             android:text="@string/modem_switcher_report"
-            android:textAppearance="@android:style/TextAppearance.Material.Title" />
+            android:textAppearance="@android:style/TextAppearance.Material.Title"
+            android:textColor="@color/colorAccent" />
 
         <TextView
             android:id="@+id/m_report_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="24dp"
             android:lineSpacingExtra="4dp"
             android:textAppearance="@android:style/TextAppearance.Material.Body2"
             android:textColor="@color/textColor"
@@ -37,7 +38,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_margin="16dp"
+        android:layout_margin="24dp"
         android:background="@color/colorAccent" />
 
     <LinearLayout
@@ -48,19 +49,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="24dp"
             android:text="@string/modem_switcher_status"
-            android:textAppearance="@android:style/TextAppearance.Material.Title" />
+            android:textAppearance="@android:style/TextAppearance.Material.Title"
+            android:textColor="@color/colorAccent" />
 
         <TextView
             android:id="@+id/m_status_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="24dp"
             android:lineSpacingExtra="4dp"
             android:textAppearance="@android:style/TextAppearance.Material.Body2"
             android:textColor="@color/textColor"
