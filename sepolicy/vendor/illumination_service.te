@@ -11,7 +11,7 @@ allow illumination_service self:capability {
 };
 
 wakelock_use(illumination_service)
-domain_trans(init, socket_device, illumination_service)
+domain_trans(init, socket_device, illumination_socket)
 vndbinder_use(illumination_service)
 
 allow illumination_service sysfs_dsi_panel:file r_file_perms;
