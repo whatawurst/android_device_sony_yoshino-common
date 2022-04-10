@@ -138,6 +138,7 @@ endif
 TARGET_PER_MGR_ENABLED := true
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 TARGET_USES_OLD_MNC_FORMAT := true
+TARGET_USES_PRE_UPLINK_FEATURES_NETMGRD := true
 
 ### SEPOLICY
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
