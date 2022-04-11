@@ -164,7 +164,6 @@ persist.vendor.dpm.feature=1
 # IMS
 persist.vendor.radio.calls.on.ims=1
 persist.vendor.ims.disableUserAgent=1
-persist.vendor.qti.telephony.vt_cam_interface=1
 
 # Netmgr
 persist.vendor.radio.aosp_usr_pref_sel=true
