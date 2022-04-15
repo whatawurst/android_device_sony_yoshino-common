@@ -97,9 +97,6 @@
         <service
             android:name="com.sonymobile.customizationselector.NS.NetworkSwitcher"
             android:enabled="true" />
-        <service
-            android:name="com.sonymobile.customizationselector.MapleStarter"
-            android:enabled="true" />
 
         <receiver
             android:name="com.sonymobile.customizationselector.EventReceiver"
