@@ -17,51 +17,6 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#pragma push_macro("PROPERTY_VALUE_MAX")
-
-#if !defined(OS_GENERIC)
-#include <cutils/properties.h>
-#include <string.h>
-
-static inline const char* getBTDefaultName()
-{
-    char device[PROPERTY_VALUE_MAX];
-    property_get("ro.boot.hardware", device, "");
-
-    if (!strcmp("maple", device)) {
-        return "Xperia XZ Premium";
-    }
-
-    if (!strcmp("maple_dsds", device)) {
-        return "Xperia XZ Premium Dual";
-    }
-
-    if (!strcmp("poplar", device)) {
-        return "Xperia XZ1";
-    }
-
-    if (!strcmp("poplar_canada", device)) {
-        return "Xperia XZ1";
-    }
-
-    if (!strcmp("poplar_dsds", device)) {
-        return "Xperia XZ1 Dual";
-    }
-
-    if (!strcmp("poplar_kddi", device)) {
-        return "Xperia XZ1";
-    }
-
-    if (!strcmp("lilac", device)) {
-        return "Xperia XZ1 Compact";
-    }
-
-    return "Xperia";
-}
-
-#define BTM_DEF_LOCAL_NAME getBTDefaultName()
-#endif // OS_GENERIC
-
 // Disables read remote device feature
 #define MAX_ACL_CONNECTIONS   16
 #define MAX_L2CAP_CHANNELS    16
@@ -69,5 +24,4 @@ static inline const char* getBTDefaultName()
 // Vendor extensions
 #define BLE_VND_INCLUDED TRUE
 
-#pragma pop_macro("PROPERTY_VALUE_MAX")
 #endif
