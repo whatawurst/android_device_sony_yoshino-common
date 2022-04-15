@@ -37,7 +37,6 @@
 /dev/block/platform/soc/1da4000\.ufshc/by-name/TA               u:object_r:tad_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/diag             u:object_r:diag_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/dsp              u:object_r:adsprpc_block_device:s0
-/dev/block/platform/soc/1da4000\.ufshc/by-name/oem              u:object_r:oem_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/rdimage          u:object_r:ramdump_block_device:s0
 
 /dev/socket/cammw_tintless                                      u:object_r:camera_somc_socket:s0
@@ -56,9 +55,6 @@
 
 # LENSCTRL
 /dev/i2c-8                                                      u:object_r:lensctrl_device:s0
-
-### OEM WORKAROUND
-/ocm                                                            u:object_r:oem_block_device:s0
 
 # PERSIST
 /mnt/vendor/persist/pc(/.*)?                                    u:object_r:simpin_cache_data_file:s0

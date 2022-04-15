@@ -1,8 +1,5 @@
 # init.te
 
-# /oem
-allow init oem_block_device:lnk_file relabelto;
-
 # /mnt/qns
 allow init qns_file:dir { mounton };
 

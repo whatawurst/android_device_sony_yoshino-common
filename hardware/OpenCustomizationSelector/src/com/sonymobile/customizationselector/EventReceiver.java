@@ -33,16 +33,6 @@ public class EventReceiver extends BroadcastReceiver {
             return;
         }
 
-        String buildFlavor = SystemProperties.get("ro.build.flavor", "--");
-        if (buildFlavor.contains("maple")) {
-            CSLog.d(TAG, "DEVICE IS MAPLE !");
-            if (!MapleStarter.mStarted) {
-                MapleStarter.mStarted = true;
-                context.startService(new Intent(context, MapleStarter.class));
-            }
-            return;
-        }
-
         if (Settings.System.getInt(context.getContentResolver(), "cs_ims", 0) == 0) {
             CSLog.d(TAG, "IMS disabled, not parsing");
             int subID = getSubId(context, intent);
