@@ -1,5 +1,7 @@
 # property_contexts
 
+DEVICE_PROVISIONED                   u:object_r:device_provisioned_prop:s0
+
 adb.network.port.es                  u:object_r:adb_network_prop:s0
 
 audio.ear_protection.fade            u:object_r:semc_audio_prop:s0
@@ -13,10 +15,16 @@ hw.wfd.                              u:object_r:wfd_prop:s0
 
 init.taimport                        u:object_r:taimport_prop:s0
 
+persist.debug.wfd.appmonitoring      u:object_r:debug_wfd_prop:s0
+
+persist.camera.gyro.disable          u:object_r:vendor_persist_camera_prop:s0
+
 persist.sys.assert.panic             u:object_r:oneplus_prop:s0
 
 persist.vendor.qmi_log_on            u:object_r:oneplus_prop:s0
 persist.vendor.data.target_id        u:object_r:vendor_target_id_prop:s0
+
+rild.libpath                         u:object_r:vendor_rild_libpath_prop:s0
 
 ro.network.auto_selection_only       u:object_r:vendor_radio_prop:s0
 
@@ -26,6 +34,8 @@ ro.somc.secureadb                    u:object_r:secureadb_prop:s0
 ro.somc.radio.                       u:object_r:somc_radio_prop:s0
 
 ro.sony                              u:object_r:sony_prop:s0
+
+ro.vendor.btstack.hfp.ver            u:object_r:vendor_bluetooth_prop:s0
 
 ro.vendor.ril.svdo                   u:object_r:vendor_radio_prop:s0
 ro.vendor.ril.svlte1x                u:object_r:vendor_radio_prop:s0

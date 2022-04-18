@@ -56,3 +56,16 @@ get_prop(vendor_init, persist_debug_prop)
 
 # vendor.smartstamina.touchreport
 get_prop(vendor_init, vendor_clearpad_prop)
+
+# Allow setting props from /vendor/build.prop
+set_prop(vendor_init, debug_wfd_prop)
+set_prop(vendor_init, device_provisioned_prop)
+set_prop(vendor_init, vendor_backlighton_prop)
+set_prop(vendor_init, vendor_bluetooth_prop)
+set_prop(vendor_init, vendor_clearpad_prop)
+set_prop(vendor_init, vendor_persist_dpm_prop)
+set_prop(vendor_init, vendor_mmi_prop)
+set_prop(vendor_init, vendor_persist_camera_prop)
+set_prop(vendor_init, vendor_qcom_ims_prop)
+set_prop(vendor_init, vendor_rild_libpath_prop)
+set_prop(vendor_init, vendor_sensors_dbg_prop)
