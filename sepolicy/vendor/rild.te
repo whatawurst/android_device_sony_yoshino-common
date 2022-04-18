@@ -9,6 +9,7 @@ unix_socket_connect(rild, tad, tad)
 get_prop(rild, sony_prop)
 get_prop(rild, vendor_semc_version_cust_active_prop)
 set_prop(rild, vendor_radio_prop)
+set_prop(rild, somc_radio_prop)
 
 allow rild vendor_shell_exec:file { execute_no_trans };
 allow rild vendor_toolbox_exec:file { execute_no_trans };
