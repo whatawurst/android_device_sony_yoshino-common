@@ -23,6 +23,7 @@ ro.network.auto_selection_only       u:object_r:vendor_radio_prop:s0
 ro.semc.version.                     u:object_r:semc_version_prop:s0
 ro.semc.product.                     u:object_r:semc_product_prop:s0
 ro.somc.secureadb                    u:object_r:secureadb_prop:s0
+ro.somc.radio.                       u:object_r:somc_radio_prop:s0
 
 ro.sony                              u:object_r:sony_prop:s0
 
