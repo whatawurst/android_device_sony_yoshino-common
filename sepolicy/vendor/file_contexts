@@ -159,4 +159,3 @@
 /(vendor|system/vendor)/bin/ta_qmi_service                      u:object_r:ta_qmi_service_exec:s0
 /(vendor|system/vendor)/bin/tad                                 u:object_r:tad_exec:s0
 /(vendor|system/vendor)/bin/taimport_vendor                     u:object_r:taimport_vendor_exec:s0
-/(vendor|system/vendor)/bin/wvkbd                               u:object_r:vendor_wvkbd_exec:s0
