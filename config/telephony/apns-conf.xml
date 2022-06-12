@@ -1467,8 +1467,9 @@
   <apn carrier="Project Fi - T" mcc="310" mnc="260" apn="h2g2" user="none" server="*" password="none" mmsc="http://mmsc1.g-mms.com/mms/wapenc" protocol="IPV6" roaming_protocol="IP" mvno_match_data="31026097" mvno_type="IMSI" />
   <apn carrier="Red Pocket Mobile" carrier_id="10011" mcc="310" mnc="260" apn="wholesale" mmsc="http://wholesale.mmsmvno.com/mms/wapenc" type="default,mms,supl" mvno_type="gid" mvno_match_data="4201" />
   <apn carrier="ROK mobile" mcc="310" mnc="260" apn="wholesale" port="" mmsc="http://wholesale.mmsmvno.com/mms/wapenc" type="default,mms,supl,admin" />
-  <apn carrier="Simple" mcc="310" mnc="260" apn="simple" port="" mmsc="http://smpl.mms.msg.eng.t-mobile.com/mms/wapenc" mvno_type="gid" mvno_match_data="534d" type="default,mms,supl" />
-  <apn carrier="Simple" mcc="310" mnc="260" apn="simple" proxy="216.155.165.50" port="8080" user="" password="" mmsc="http://smpl.mms.msg.eng.t-mobile.com/mms/wapenc" mmsproxy="216.155.165.50" mmsport="8080" type="default,supl,mms" />
+  <apn carrier="SIMPLE" carrier_id="2078" mcc="310" mnc="260" apn="simple" mmsc="http://smpl.mms.msg.eng.t-mobile.com/mms/wapenc" type="default,mms,supl,hipri,fota" mvno_type="gid" mvno_match_data="534D" />
+  <apn carrier="SIMPLE IMS" carrier_id="2078" mcc="310" mnc="260" apn="ims" type="ims" protocol="IPV6" bearer_bitmask="14|20" mtu="1440" mvno_type="gid" mvno_match_data="534D" user_visible="false" />
+  <apn carrier="SIMPLE IMS" carrier_id="2078" mcc="310" mnc="260" apn="ims" type="ims" protocol="IPV6" roaming_protocol="IPV6" bearer_bitmask="18" mtu="1440" mvno_type="gid" mvno_match_data="534D" user_visible="false" />
   <apn carrier="Straight Talk" mcc="310" mnc="260" apn="wap.tracfone" port="8080" mmsc="http://mms.tracfone.com" mvno_type="gid" mvno_match_data="deff" type="default,mms,supl" />
   <apn carrier="StraightTalk T-Mobile" mcc="310" mnc="260" apn="wap.tracfone" proxy="" port="8080" user="" password="" mmsc="http://mmsc.tracfone.com" type="default,supl,mms" />
   <apn carrier="T-Mobile US IMS" carrier_id="1" mcc="310" mnc="260" apn="ims" type="ims" protocol="IPV6" bearer_bitmask="14|19|20" mtu="1440" user_visible="false" />
