@@ -1476,7 +1476,6 @@
   <apn carrier="T-Mobile US" carrier_id="1" mcc="310" mnc="260" apn="fast.t-mobile.com" mmsc="http://mms.msg.eng.t-mobile.com/mms/wapenc" type="default,supl,ia,mms" protocol="IPV6" bearer_bitmask="1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17" mtu="1440" user_editable="false" />
   <apn carrier="T-Mobile Tethering" carrier_id="1" mcc="310" mnc="260" apn="pcweb.tmobile.com" type="dun" protocol="IPV4V6" user_visible="false" />
   <apn carrier="T-Mobile IMS" mcc="310" mnc="260" apn="ims" type="ims" modem_cognitive="true" protocol="IPV6" />
-  <apn carrier="Telcel America" mcc="310" mnc="260" apn="wap.tracfone" port="" mmsc="http://mms.tracfone.com" mmsproxy="216.155.165.40" mmsport="8080" type="default,mms,supl" />
   <apn carrier="TFWAP" carrier_id="10001" mcc="310" mnc="260" apn="wap.tracfone" mmsc="http://TF.mmsmvno.com/mms/wapenc" type="default,mms,supl" protocol="IP" roaming_protocol="IP" bearer_bitmask="1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17" mvno_type="gid" mvno_match_data="DDFF" />
   <apn carrier="TFWAP" carrier_id="10001" mcc="310" mnc="260" apn="wap.tracfone" mmsc="http://TF.mmsmvno.com/mms/wapenc" type="default,mms,supl" protocol="IP" roaming_protocol="IP" bearer_bitmask="1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17" mvno_type="gid" mvno_match_data="DEFF" />
   <apn carrier="Ting Data" carrier_id="2080" mcc="310" mnc="260" apn="wholesale" mvno_type="gid" mvno_match_data="6135" type="default,admin,fota,mms,supl,hipri,internet,dun" protocol="IPV6" roaming_protocol="IPV6" />
