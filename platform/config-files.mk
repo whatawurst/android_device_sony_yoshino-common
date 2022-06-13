@@ -64,6 +64,10 @@ PRODUCT_COPY_FILES += \
     system/core/libprocessgroup/profiles/cgroups_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
     system/core/libprocessgroup/profiles/task_profiles_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
 
+### QMI_
+PRODUCT_COPY_FILES += \
+    $(PLATFORM_PATH)/config/qmi/qmi_fw.conf:$(TARGET_COPY_OUT_VENDOR)/etc/qmi_fw.conf
+
 ### QTI_LOW_POWER_WHITELIST
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/power/qti_whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/qti_whitelist.xml
