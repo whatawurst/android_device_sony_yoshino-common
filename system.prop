@@ -147,6 +147,7 @@ persist.rmnet.data.enable=true
 
 # Telephony
 ro.com.android.dataroaming=false
+ro.telephony.handle_audio_direction_changes_between_call_state_changes=false
 telephony.lteOnCdmaDevice=0
 
 ### SD
