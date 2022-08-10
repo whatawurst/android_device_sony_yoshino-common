@@ -39,10 +39,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.display.config@1.3
 
-### DPM
-PRODUCT_PACKAGES += \
-    libshim_dpmframework
-
 ### GRAPHICS
 PRODUCT_PACKAGES += \
     copybit.msm8998 \
