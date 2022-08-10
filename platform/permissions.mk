@@ -23,7 +23,7 @@ PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/permissions/privapp-permissions-sony.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-sony.xml
 
 PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/config/permissions/product-privapp-permissions-qti.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/product-privapp-permissions-qti.xml
+    $(PLATFORM_PATH)/config/permissions/telephony_system-ext_privapp-permissions-qti.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/telephony_system-ext_privapp-permissions-qti.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \

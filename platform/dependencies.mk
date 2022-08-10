@@ -56,9 +56,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     ims-ext-common \
     ims-ext-common_system \
-    ims_ext_common.xml \
-    libgui_shim \
-    libui_shim
+    ims_ext_common.xml
 
 PRODUCT_BOOT_JARS += \
     ims-ext-common_system
@@ -70,6 +68,7 @@ PRODUCT_PACKAGES += \
 
 ### MEDIA
 PRODUCT_PACKAGES += \
+    libavservices_minijail.vendor \
     libqdMetaData.system
 
 ### NETMGR
@@ -138,4 +137,6 @@ PRODUCT_PACKAGES += \
 # VNDFWK_DETECT
 PRODUCT_PACKAGES += \
     libqti_vndfwk_detect \
-    libqti_vndfwk_detect.vendor
+    libqti_vndfwk_detect.vendor \
+    libvndfwk_detect_jni.qti \
+    libvndfwk_detect_jni.qti.vendor

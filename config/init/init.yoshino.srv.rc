@@ -166,6 +166,7 @@ on shutdown
 
 ### RADIO
 service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
+    interface com.qualcomm.qti.dpm.api@1.0::IdpmQmi dpmQmiService
     class main
     user system
     group radio system
@@ -181,16 +182,6 @@ service vendor.atfwd /vendor/bin/ATFWD-daemon
     user system
     group system radio
     writepid /dev/cpuset/system-background/tasks
-
-service vendor.dataadpl /system/vendor/bin/adpl
-    class main
-    user radio
-    group radio oem_2901 diag usb net_admin
-
-service vendor.dataqti /system/vendor/bin/qti
-    class main
-    user radio
-    group radio oem_2901 diag usb net_admin
 
 service vendor.netmgrd /system/vendor/bin/netmgrd
     class main
@@ -224,8 +215,6 @@ service vendor.tftp_server /vendor/bin/tftp_server
 on property:vold.decrypt=trigger_restart_framework
     start ril-daemon
     start vendor.ipacm
-    start vendor.dataqti
-    start vendor.dataadpl
     start vendor.netmgrd
     start vendor.port-bridge
 
