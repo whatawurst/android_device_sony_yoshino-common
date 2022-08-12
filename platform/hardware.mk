@@ -170,16 +170,17 @@ PRODUCT_PACKAGES += \
 # RADIO
 PRODUCT_PACKAGES += \
     android.hardware.broadcastradio@1.0-impl:64 \
-    android.hardware.radio@1.1 \
-    android.hardware.radio.config@1.0 \
-    android.hardware.radio.config@1.0.vendor \
+    android.hardware.radio@1.5 \
+    android.hardware.radio@1.5.vendor \
+    android.hardware.radio.config@1.2 \
+    android.hardware.radio.config@1.2.vendor \
     android.hardware.radio.deprecated@1.0 \
     android.hardware.radio.deprecated@1.0.vendor
 
 # SECURE ELEMENT
 PRODUCT_PACKAGES += \
-    android.hardware.secure_element@1.0 \
-    android.hardware.secure_element@1.0.vendor
+    android.hardware.secure_element@1.2 \
+    android.hardware.secure_element@1.2.vendor
 
 # SENSORS
 PRODUCT_PACKAGES += \

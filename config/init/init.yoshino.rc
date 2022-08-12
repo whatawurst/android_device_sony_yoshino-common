@@ -448,6 +448,8 @@ on boot
     chown wifi wifi /sys/module/wlan/parameters/fwpath
     chown wifi wifi /sys/kernel/boot_wlan/boot_wlan
 
+    start vendor.qcrild
+
 on shutdown
     write /sys/class/power_supply/battery/int_cld 1
 
