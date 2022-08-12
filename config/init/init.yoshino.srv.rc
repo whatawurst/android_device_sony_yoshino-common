@@ -192,15 +192,8 @@ service vendor.port-bridge /system/vendor/bin/port-bridge
     group radio system inet
     oneshot
 
-service vendor.ril-daemon2 /vendor/bin/hw/rild -c 2
-    class main
-    user radio
-    disabled
-    group radio cache inet misc audio sdcard_r sdcard_rw diag oem_2901 log oem_2993
-    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
-
-on property:persist.radio.multisim.config=dsds
-    enable vendor.ril-daemon2
+on boot && property:persist.radio.multisim.config=dsds
+    start vendor.qcrild2
 
 service vendor.rmt_storage /vendor/bin/rmt_storage
     class core
@@ -213,10 +206,10 @@ service vendor.tftp_server /vendor/bin/tftp_server
     user root
 
 on property:vold.decrypt=trigger_restart_framework
-    start ril-daemon
     start vendor.ipacm
     start vendor.netmgrd
     start vendor.port-bridge
+    start vendor.qcrild
 
 ### SENSORS
 service vendor.sensors.qti /vendor/bin/sensors.qti

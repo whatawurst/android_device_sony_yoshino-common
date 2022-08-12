@@ -130,9 +130,9 @@ TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/fstab.recovery
 endif
 
 ### RIL
+ENABLE_VENDOR_RIL_SERVICE := true
 TARGET_PER_MGR_ENABLED := true
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
-TARGET_USES_PRE_UPLINK_FEATURES_NETMGRD := true
 
 ### SEPOLICY
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
