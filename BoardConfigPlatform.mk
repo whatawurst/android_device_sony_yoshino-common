@@ -15,6 +15,9 @@
 
 PLATFORM_PATH := device/sony/yoshino-common
 
+### PROPRIETARY VENDOR FILES
+include vendor/sony/yoshino-common/BoardConfigVendor.mk
+
 ### BOARD
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_VENDOR := sony
