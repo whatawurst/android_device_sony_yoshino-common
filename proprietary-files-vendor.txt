@@ -355,8 +355,6 @@ vendor/lib64/vendor.qti.latency@2.1.so|47f0d25338274af94764be9d39eabef8cf5ca790
 # DISPLAY
 vendor/bin/mm-pp-dpps
 vendor/etc/ad_calib.cfg
-vendor/firmware/leia_pfp_470.fw
-vendor/firmware/leia_pm4_470.fw
 vendor/lib/libdisp-aba.so
 vendor/lib64/libdisp-aba.so
 
