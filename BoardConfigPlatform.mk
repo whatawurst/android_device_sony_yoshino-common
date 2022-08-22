@@ -114,7 +114,11 @@ TARGET_USES_ION := true
 
 ### HIDL
 BOARD_VNDK_VERSION := current
+ifneq ($(filter poplar_dsds maple_dsds, $(TARGET_DEVICE)),)
+DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest_dsds.xml
+else
 DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
+endif
 DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
 
 ### PROPS
