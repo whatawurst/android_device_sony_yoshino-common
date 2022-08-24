@@ -1,6 +1,6 @@
 ## All proprietary files from this list, unless pinned and noted otherwise,
-## are from Xperia XZ Premium (DSDS) (), XZ1 (CanaDSDS/ 
-## and XZ1 Compact (47.2.A.11.228).
+## are from either Xperia XZ Premium (DSDS) (47.2.A.10.107), Xperia XZ1
+## (Canada / DSDS / KDDI) (47.2.A.11.228) and Xperia XZ1 Compact (47.2.A.11.228).
 
 # ADSP
 vendor/bin/adsprpcd
