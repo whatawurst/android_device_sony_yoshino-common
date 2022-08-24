@@ -31,16 +31,12 @@ vendor/lib/libfastcrc.so
 vendor/lib/libfastcvadsp_stub.so
 vendor/lib/libfastcvopt.so
 vendor/lib/libfastrpc_utf_stub.so
-vendor/lib/libmdsprpc.so
-vendor/lib/libseemore.so
 vendor/lib64/libadsp_default_listener.so
 vendor/lib64/libadsprpc.so
 vendor/lib64/libcdsprpc.so
 vendor/lib64/libfastcrc.so
 vendor/lib64/libfastcvadsp_stub.so
 vendor/lib64/libfastrpc_utf_stub.so
-vendor/lib64/libmdsprpc.so
-vendor/lib64/libseemore.so
 
 # AUDIO
 vendor/etc/acdbdata/Fluid/msm8998-tavil-snd-card/Fluid_WCD9340_Bluetooth_cal.acdb
@@ -210,9 +206,7 @@ vendor/camera/SOI20BS2_BU64747GWZ_XCF.dat
 vendor/camera/SOI20BS2_BU64747GWZ_XFW.dat
 vendor/etc/init/vendor.somc.hardware.camera.provider@1.0-service.rc
 vendor/etc/flashled_calc_parameters.cfg
-vendor/lib/libdualcameraddm.so
 vendor/lib/libmmcamera_tintless_algo.so
-vendor/lib/libscveFaceLandmarks.so
 vendor/lib/libsomc_alfort.so
 vendor/lib/libsomc_alfortlp.so
 vendor/lib/libsomc_alfortlpserv.so
@@ -265,21 +259,6 @@ vendor/firmware/cpp_firmware_v1_5_1.fw
 vendor/firmware/cpp_firmware_v1_5_2.fw
 vendor/firmware/cpp_firmware_v1_6_0.fw
 vendor/firmware/cpp_firmware_v1_8_0.fw
-
-# CAMERA_POSTPROCESSING
-vendor/lib/libchromaflash.so
-vendor/lib/liboptizoom.so
-vendor/lib/libscveBlobDescriptor.so
-vendor/lib/libscveBlobDescriptor_stub.so
-vendor/lib/libscveCommon.so
-vendor/lib/libscveCommon_stub.so
-vendor/lib/libscveFaceRecognition.so
-vendor/lib/libscveObjectSegmentation.so
-vendor/lib/libscveObjectTracker.so
-vendor/lib/libscveObjectTracker_stub.so
-vendor/lib/libscvePanorama.so
-vendor/lib/libscvePanorama_lite.so
-vendor/lib/libubifocus.so
 
 # CHARGER
 vendor/bin/hvdcp_opti
