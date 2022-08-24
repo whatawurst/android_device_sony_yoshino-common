@@ -81,7 +81,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
     android.hardware.audio.effect@4.0-impl:32 \
     android.hardware.audio.effect@2.0-service \
-    android.hardware.soundtrigger@2.2-impl \
+    android.hardware.soundtrigger@2.2-impl:32 \
     android.hardware.soundtrigger@2.0-service:32
 
 # BLUETOOTH
@@ -91,10 +91,10 @@ PRODUCT_PACKAGES += \
 
 # CAMERA
 PRODUCT_PACKAGES += \
-    android.hardware.camera.common@1.0-impl \
+    android.hardware.camera.common@1.0-impl:32 \
     android.hardware.camera.provider@2.4 \
-    android.hardware.camera.provider@2.4-impl \
-    camera.device@3.2-impl \
+    android.hardware.camera.provider@2.4-impl:32 \
+    camera.device@3.2-impl:32 \
     vendor.qti.hardware.camera.device@1.0 \
     vendor.qti.hardware.camera.device@1.0.vendor
 
