@@ -225,13 +225,6 @@ service modem_switcher /system/bin/sony-modem-switcher
     disabled
     oneshot
 
-### SSGQMIGD
-service vendor.ssgqmigd /vendor/bin/ssgqmigd
-    class late_start
-    user radio
-    group radio gps system
-    socket ssgqmig seqpacket 0660 radio inet
-
 on property:persist.sys.mba_boot_timeout=*
     write /sys/module/pil_msa/parameters/pbl_mba_boot_timeout_ms ${persist.sys.mba_boot_timeout}
 
