@@ -10,4 +10,3 @@ vendor.nxp.nxpese::INxpEse                                          u:object_r:h
 vendor.semc.hardware.light::IExtLight                               u:object_r:hal_light_hwservice:s0
 vendor.somc.hardware.security.secd::IDeviceSecurity                 u:object_r:hal_secd_hwservice:s0
 vendor.somc.hardware.miscta::IMisctaGlobal                          u:object_r:hal_miscta_hwservice:s0
-vendor.somc.hardware.wifi::ISomcWifi                                u:object_r:hal_wifi_somc_hwservice:s0

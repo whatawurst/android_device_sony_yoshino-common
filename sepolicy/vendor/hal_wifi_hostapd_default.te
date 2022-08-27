@@ -1,3 +1,0 @@
-# hal_wifi_hostapd_default.te
-
-add_hwservice(hal_wifi_hostapd_default, hal_wifi_somc_hwservice)
