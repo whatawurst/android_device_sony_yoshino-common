@@ -20,7 +20,6 @@ PRODUCT_PACKAGES += \
     libaudioutils \
     libtinyalsa \
     libtinycompress \
-    libtinycompress_vendor \
     tinymix
 
 # Audio effects
@@ -30,14 +29,6 @@ PRODUCT_PACKAGES += \
     libqcomvoiceprocessingdescriptors \
     libqcompostprocbundle \
     libvolumelistener
-
-### CAMERA
-PRODUCT_PACKAGES += \
-    libmmcamera_interface \
-    libmmjpeg_interface \
-    libmmlib2d_interface \
-    libmm-qcamera \
-    libqomx_core
 
 ### HIDL
 PRODUCT_PACKAGES += \
@@ -61,11 +52,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     ims-ext-common_system
 
-### IPV6
-PRODUCT_PACKAGES += \
-    ebtables \
-    ethertypes
-
 ### MEDIA
 PRODUCT_PACKAGES += \
     libavservices_minijail.vendor \
@@ -84,7 +70,6 @@ PRODUCT_PACKAGES += \
     libOmxG711Enc \
     libOmxQcelp13Enc \
     libOmxVdec \
-    libOmxVdecHevc \
     libOmxVenc \
     libc2dcolorconvert \
     libmm-omxcore \
@@ -95,13 +80,6 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-full-vendorcompat \
     libprotobuf-cpp-lite-vendorcompat
 
-### RCS
-PRODUCT_PACKAGES += \
-    rcs_service_aidl \
-    rcs_service_aidl.xml \
-    rcs_service_api \
-    rcs_service_api.xml
-
 ### RIL
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full
@@ -110,12 +88,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libavservices_minijail \
     libjson \
-    libjson.vendor \
     libion \
     libminijail \
     libstdc++.vendor \
     libtinyxml \
-    libtinyxml.vendor \
     libxml2
 
 ### TELEPHONY
@@ -131,8 +107,7 @@ PRODUCT_BOOT_JARS += \
 
 ### VNDK
 PRODUCT_PACKAGES += \
-    vndk_package \
-    vndk-sp
+    vndk_package
 
 # VNDFWK_DETECT
 PRODUCT_PACKAGES += \
