@@ -13,4 +13,4 @@ PRODUCT_COPY_FILES += \
 
 # ueventd
 PRODUCT_COPY_FILES += \
-    $(PLATFORM_PATH)/config/init/ueventd.yoshino.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
+    $(PLATFORM_PATH)/config/init/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
