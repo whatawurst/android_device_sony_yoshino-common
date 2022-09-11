@@ -40,12 +40,10 @@ PRODUCT_PACKAGES += \
 
 ### GRAPHICS
 PRODUCT_PACKAGES += \
-    copybit.msm8998 \
     gralloc.msm8998 \
     hwcomposer.msm8998 \
     memtrack.msm8998 \
-    libdisplayconfig \
-    liboverlay
+    libdisplayconfig
 
 ### IPACM
 PRODUCT_PACKAGES += \
@@ -79,9 +77,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@4.0-impl:32 \
     android.hardware.audio@2.0-service \
     android.hardware.audio.effect@4.0-impl:32 \
-    android.hardware.audio.effect@2.0-service \
-    android.hardware.soundtrigger@2.2-impl:32 \
-    android.hardware.soundtrigger@2.0-service:32
+    android.hardware.soundtrigger@2.2-impl:32
 
 # BLUETOOTH
 PRODUCT_PACKAGES += \
@@ -90,7 +86,6 @@ PRODUCT_PACKAGES += \
 
 # CAMERA
 PRODUCT_PACKAGES += \
-    android.hardware.camera.common@1.0-impl:32 \
     android.hardware.camera.provider@2.4 \
     android.hardware.camera.provider@2.4-impl:32 \
     camera.device@3.2-impl:32 \
@@ -131,7 +126,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.composer@2.1-service \
     android.hardware.graphics.mapper@2.0-impl-2.1
 
@@ -214,8 +208,6 @@ PRODUCT_PACKAGES += \
 
 # WIFI
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-impl \
-    android.hardware.wifi@1.1-impl \
     android.hardware.wifi@1.0-service \
     android.hardware.wifi.offload@1.0
 
@@ -231,7 +223,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     hostapd \
     libwpa_client \
-    p2p_supplicant.conf \
     wificond \
     WifiOverlay \
     wpa_supplicant \
