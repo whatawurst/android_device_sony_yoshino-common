@@ -14,7 +14,7 @@
 // limitations under the License.
 
 cc_library {
-    name: "libdisppower-msm8998",
+    name: "libdisppower",
     proprietary: true,
     srcs: ["disp-power/InteractionHandler.cpp"],
     shared_libs: [
@@ -39,7 +39,7 @@ cc_binary {
         "liblog",
         "libutils",
         "libbinder_ndk",
-        "libdisppower-msm8998",
+        "libdisppower",
         "libperfmgr",
         "libprocessgroup",
         "pixel-power-ext-V1-ndk",
