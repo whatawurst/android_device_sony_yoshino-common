@@ -164,8 +164,4 @@ public class Configurator {
             CSLog.e(TAG, "reApplyModem - There was exception getting current modem: ", e);
         }
     }
-
-    public boolean isFirstApply() {
-        return getTargetContext().getSharedPreferences(PREF_PKG, Context.MODE_PRIVATE).getBoolean("first_boot_cs", true);
-    }
 }
