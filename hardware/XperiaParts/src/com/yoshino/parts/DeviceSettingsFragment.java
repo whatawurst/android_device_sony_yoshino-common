@@ -174,6 +174,11 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
             }
             return true;
         });
+
+        SwitchPreference modemPref = findPreference(CS_RE_APPLY_MODEM);
+        assert modemPref != null;
+        modemPref.setChecked(Settings.System.getInt(modemPref.getContext().getContentResolver(), CS_RE_APPLY_MODEM, 0) == 1);
+        modemPref.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -192,6 +197,9 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
                 return true;
             case NS_SERVICE:
                 Settings.System.putInt(preference.getContext().getContentResolver(), NS_SERVICE, (boolean) o ? 1 : 0);
+                return true;
+            case CS_RE_APPLY_MODEM:
+                Settings.System.putInt(preference.getContext().getContentResolver(), CS_RE_APPLY_MODEM, (boolean) o ? 1 : 0);
                 return true;
         }
         return false;

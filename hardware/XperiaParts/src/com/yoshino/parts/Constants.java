@@ -28,6 +28,7 @@ public class Constants {
     public static final String CS_STATUS = "cs_status";
     public static final String CS_NOTIFICATION = "cs_notification";
     public static final String CS_IMS = "cs_ims";
+    public static final String CS_RE_APPLY_MODEM = "cs_re_apply_modem";
 
     public static final String NS_SLOT = "ns_slot";
     public static final String NS_SERVICE = "ns_service";
