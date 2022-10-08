@@ -33,14 +33,15 @@ public class EventReceiver extends BroadcastReceiver {
             return;
         }
 
-        if (Settings.System.getInt(context.getContentResolver(), "cs_ims", 0) == 0) {
+        int subID = getSubId(context, intent);
+        if (subID != -1) {
+            CSLog.d(TAG, "Saving sub ID for later");
+            context.createDeviceProtectedStorageContext().getSharedPreferences(Configurator.PREF_PKG, Context.MODE_PRIVATE)
+                    .edit().putInt("event_subID", getSubId(context, intent)).apply();
+        }
+
+        if (Settings.System.getInt(context.getContentResolver(), "cs_ims", 1) == 0) {
             CSLog.d(TAG, "IMS disabled, not parsing");
-            int subID = getSubId(context, intent);
-            if (subID != -1) {
-                CSLog.d(TAG, "Saving sub ID for later");
-                context.createDeviceProtectedStorageContext().getSharedPreferences(Configurator.PREF_PKG, Context.MODE_PRIVATE)
-                        .edit().putInt("event_subID", getSubId(context, intent)).apply();
-            }
             if (!CommonUtil.isModemDefault(readModemFile()[1])) {
                 CSLog.d(TAG, "Modem not default but IMS turned off as per settings.");
                 new ImsSwitcher(context).switchOffIMS();
