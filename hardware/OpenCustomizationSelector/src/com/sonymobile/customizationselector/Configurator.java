@@ -3,6 +3,7 @@ package com.sonymobile.customizationselector;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.os.SystemProperties;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.sonymobile.miscta.MiscTA;
@@ -133,6 +134,10 @@ public class Configurator {
     }
 
     public void reApplyModem() {
+        if (Settings.System.getInt(getTargetContext().getContentResolver(), "cs_re_apply_modem", 0) == 0) {
+            CSLog.d(TAG, "reApplyModem: Preference false. Returning ...");
+            return;
+        }
         try {
             String modem = ModemSwitcher.getCurrentModemConfig();
             if (!TextUtils.isEmpty(modem)) {

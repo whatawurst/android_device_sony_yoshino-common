@@ -51,6 +51,13 @@
             android:title="@string/ims_title" />
 
         <SwitchPreference
+            android:defaultValue="false"
+            android:icon="@drawable/ic_outline_phonelink_setup_24"
+            android:key="cs_re_apply_modem"
+            android:summary="@string/modem_summary"
+            android:title="@string/modem_title" />
+
+        <SwitchPreference
             android:defaultValue="true"
             android:icon="@drawable/ic_outline_notifications_active_24"
             android:key="cs_notification"
