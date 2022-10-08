@@ -44,7 +44,7 @@
             android:title="@string/status" />
 
         <SwitchPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:icon="@drawable/ic_outline_wifi_calling_24"
             android:key="cs_ims"
             android:summary="@string/ims_summary"

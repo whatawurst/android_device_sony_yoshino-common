@@ -118,7 +118,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
 
         SwitchPreference imsPref = findPreference(CS_IMS);
         assert imsPref != null;
-        if (Settings.System.getInt(imsPref.getContext().getContentResolver(), CS_IMS, 0) == 0) {
+        if (Settings.System.getInt(imsPref.getContext().getContentResolver(), CS_IMS, 1) == 0) {
             imsPref.setChecked(false);
             notificationPref.setEnabled(false);
             msActPref.setEnabled(false);
@@ -128,7 +128,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
             msActPref.setEnabled(true);
         }
         imsPref.setOnPreferenceClickListener(preference -> {
-            int ims = Settings.System.getInt(imsPref.getContext().getContentResolver(), CS_IMS, 0);
+            int ims = Settings.System.getInt(imsPref.getContext().getContentResolver(), CS_IMS, 1);
             if (ims == 1) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(imsPref.getContext());
                 builder.setCancelable(false);
@@ -199,7 +199,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
 
     private void sendBroadcast(Context context) {
         Intent broadcast = new Intent()
-                .putExtra(CS_IMS, Settings.System.getInt(context.getContentResolver(), CS_IMS, 0))
+                .putExtra(CS_IMS, Settings.System.getInt(context.getContentResolver(), CS_IMS, 1))
                 .addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
                 .setComponent(new ComponentName("com.sonymobile.customizationselector",
                         "com.sonymobile.customizationselector.PreferenceReceiver"));
