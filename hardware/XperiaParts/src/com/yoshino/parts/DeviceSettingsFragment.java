@@ -17,14 +17,12 @@ package com.yoshino.parts;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.SwitchPreference;
 
@@ -142,7 +140,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
                     notificationPref.setEnabled(false);
                     msActPref.setEnabled(false);
 
-                    sendBroadcast(preference.getContext());
+                    sendBroadcast(preference.getContext(), 0);
                 });
                 builder.setNegativeButton("Cancel", (dialogInterface, i) -> {
                     dialogInterface.dismiss();
@@ -164,7 +162,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
                     notificationPref.setEnabled(true);
                     msActPref.setEnabled(true);
 
-                    sendBroadcast(preference.getContext());
+                    sendBroadcast(preference.getContext(), 0);
                 });
                 builder.setNegativeButton("Cancel", (dialogInterface, i) -> {
                     dialogInterface.dismiss();
@@ -178,7 +176,27 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
         SwitchPreference modemPref = findPreference(CS_RE_APPLY_MODEM);
         assert modemPref != null;
         modemPref.setChecked(Settings.System.getInt(modemPref.getContext().getContentResolver(), CS_RE_APPLY_MODEM, 0) == 1);
-        modemPref.setOnPreferenceChangeListener(this);
+        modemPref.setOnPreferenceClickListener(preference -> {
+            int applyModem = Settings.System.getInt(modemPref.getContext().getContentResolver(), CS_RE_APPLY_MODEM, 0);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(modemPref.getContext());
+            builder.setCancelable(false);
+            builder.setTitle("Reboot required");
+            builder.setMessage("A reboot is required to " + (applyModem == 0 ? "enable" : "disable") + " this feature. Are you sure you want to reboot ?");
+            builder.setPositiveButton("Reboot", (dialogInterface, i) -> {
+                dialogInterface.dismiss();
+                Settings.System.putInt(modemPref.getContext().getContentResolver(), CS_RE_APPLY_MODEM, (applyModem ^ 1));
+                modemPref.setChecked(applyModem == 0);
+
+                sendBroadcast(preference.getContext(), 1);
+            });
+            builder.setNegativeButton("Cancel", (dialogInterface, i) -> {
+                dialogInterface.dismiss();
+                modemPref.setChecked(applyModem == 1);
+            });
+            builder.create().show();
+            return true;
+        });
     }
 
     @Override
@@ -198,19 +216,18 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
             case NS_SERVICE:
                 Settings.System.putInt(preference.getContext().getContentResolver(), NS_SERVICE, (boolean) o ? 1 : 0);
                 return true;
-            case CS_RE_APPLY_MODEM:
-                Settings.System.putInt(preference.getContext().getContentResolver(), CS_RE_APPLY_MODEM, (boolean) o ? 1 : 0);
-                return true;
         }
         return false;
     }
 
-    private void sendBroadcast(Context context) {
-        Intent broadcast = new Intent()
-                .putExtra(CS_IMS, Settings.System.getInt(context.getContentResolver(), CS_IMS, 1))
-                .addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
-                .setComponent(new ComponentName("com.sonymobile.customizationselector",
-                        "com.sonymobile.customizationselector.PreferenceReceiver"));
+    private void sendBroadcast(Context context, int pref) {
+        Intent broadcast = new Intent();
+        broadcast.putExtra("pref", pref);
+        if (pref == 0) broadcast.putExtra(CS_IMS, Settings.System.getInt(context.getContentResolver(), CS_IMS, 1));
+        if (pref == 1)
+            broadcast.putExtra(CS_RE_APPLY_MODEM, Settings.System.getInt(context.getContentResolver(), CS_RE_APPLY_MODEM, 0));
+        broadcast.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES).setComponent(new ComponentName("com.sonymobile.customizationselector",
+                "com.sonymobile.customizationselector.PreferenceReceiver"));
         context.sendBroadcast(broadcast);
     }
 }

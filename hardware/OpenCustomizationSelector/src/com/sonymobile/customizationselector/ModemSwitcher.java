@@ -289,4 +289,32 @@ public class ModemSwitcher {
             CSLog.e(TAG, "reApplyModem - There was exception getting current modem: ", e);
         }
     }
+
+    public static void revertReApplyModem(Context ctx) {
+        try {
+            String modem = getCurrentModemConfig();
+            if (modem == null || modem.isEmpty()) {
+                CSLog.e(TAG, "revertReApplyModem - Modem is EMPTY !");
+                return;
+            }
+            CSLog.d(TAG, "revertReApplyModem - current modem: " + modem);
+            CSLog.d(TAG, "revertReApplyModem - clearing 2405");
+
+            // Way of writing to Misc TA - ModemSwitcher:226
+            if (writeModemToMiscTA("")) {
+                CSLog.i(TAG, "revertReApplyModem - 2405 was cleared successfully");
+
+                try {
+                    MiscTA.write(TA_FOTA_INTERNAL, new File(modem).getName().getBytes(StandardCharsets.UTF_8));
+                    CSLog.i(TAG, "revertReApplyModem - Modem Switcher 2404 was written with: " + modem.replace(MODEM_FS_PATH, ""));
+                } catch (MiscTaException e) {
+                    CSLog.e(TAG, "revertReApplyModem - There was an error writing 2404: ", e);
+                }
+            } else {
+                CSLog.e(TAG, "revertReApplyModem - 2405 was NOT cleared");
+            }
+        } catch (IOException e) {
+            CSLog.e(TAG, "revertReApplyModem - There was exception getting current modem: ", e);
+        }
+    }
 }
