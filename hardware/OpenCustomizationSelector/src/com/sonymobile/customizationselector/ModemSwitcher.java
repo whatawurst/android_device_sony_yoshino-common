@@ -1,6 +1,8 @@
 package com.sonymobile.customizationselector;
 
+import android.content.Context;
 import android.os.Environment;
+import android.provider.Settings;
 import com.sonymobile.miscta.MiscTA;
 import com.sonymobile.miscta.MiscTaException;
 
@@ -18,6 +20,7 @@ public class ModemSwitcher {
     private static final byte MODEM_COMMAND_CHANGE = (byte) 1;
     private static final byte MODEM_MISC_TA_MAGIC1 = (byte) -16;
     private static final byte MODEM_MISC_TA_MAGIC2 = (byte) 122;
+    private static final int TA_FOTA_INTERNAL = 2404;
 
     private static final String DEFAULT_MODEM = "default";
     private static final String RESET_MODEM_ST1 = "reset_modemst1";
@@ -248,6 +251,42 @@ public class ModemSwitcher {
         } catch (MiscTaException e) {
             CSLog.e(TAG, "Unable to write to miscta:" + e);
             return false;
+        }
+    }
+
+    public static void reApplyModem(Context ctx) {
+        if (Settings.System.getInt(ctx.getContentResolver(), "cs_re_apply_modem", 0) == 0) {
+            CSLog.d(TAG, "reApplyModem: Preference false. Returning ...");
+            return;
+        }
+        try {
+            String modem = getCurrentModemConfig();
+            if (modem == null || modem.isEmpty()) {
+                CSLog.e(TAG, "reApplyModem - Modem is EMPTY !");
+                return;
+            }
+            CSLog.d(TAG, "reApplyModem - current modem: " + modem);
+            CSLog.d(TAG, "reApplyModem - Re-writing 2405 with modem " + modem.replace(MODEM_FS_PATH, ""));
+
+            // Store preference without checks - ModemConfiguration:75
+            ctx.getSharedPreferences(Configurator.PREF_PKG, Context.MODE_PRIVATE).edit()
+                    .putString(ModemConfiguration.SAVED_MODEM_CONFIG, modem).apply();
+
+            // Way of writing to Misc TA - ModemSwitcher:226
+            if (writeModemToMiscTA(new File(modem).getName())) {
+                CSLog.i(TAG, "reApplyModem - 2405 was re-written successfully");
+
+                try {
+                    MiscTA.write(TA_FOTA_INTERNAL, "temporary_modem".getBytes(StandardCharsets.UTF_8));
+                    CSLog.i(TAG, "reApplyModem - Modem Switcher 2404 cleared");
+                } catch (MiscTaException e) {
+                    CSLog.e(TAG, "reApplyModem - There was an error clearing 2404: ", e);
+                }
+            } else {
+                CSLog.e(TAG, "reApplyModem - 2405 was NOT re-written");
+            }
+        } catch (IOException e) {
+            CSLog.e(TAG, "reApplyModem - There was exception getting current modem: ", e);
         }
     }
 }
