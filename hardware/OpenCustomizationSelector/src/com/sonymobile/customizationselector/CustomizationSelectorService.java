@@ -46,7 +46,7 @@ public class CustomizationSelectorService extends IntentService {
                     configurator.saveConfigurationKey();
                     CSLog.d(TAG, "isNewConfigurationNeeded - No new configuration.");
 
-                    configurator.reApplyModem();
+                    ModemSwitcher.reApplyModem(context);
                 }
             } catch (Exception e) {
                 CSLog.e(TAG, "evaluateCarrierBundle - ERROR: ", e);

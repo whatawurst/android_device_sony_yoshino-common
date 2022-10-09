@@ -32,7 +32,6 @@ public class Configurator {
     public static final String PROP_TA_AC_VERSION = "ro.semc.version.cust.active";
 
     private static final int TA_AC_VERSION = 2212;
-    private static final int TA_FOTA_INTERNAL = 2404;
 
     private final PersistableBundle mBundle;
     private final Context mContext;
@@ -130,43 +129,6 @@ public class Configurator {
                 new ModemConfiguration(getTargetContext().getSharedPreferences(PREF_PKG, Context.MODE_PRIVATE))
                         .setConfiguration(mModem);
             }
-        }
-    }
-
-    public void reApplyModem() {
-        if (Settings.System.getInt(getTargetContext().getContentResolver(), "cs_re_apply_modem", 0) == 0) {
-            CSLog.d(TAG, "reApplyModem: Preference false. Returning ...");
-            return;
-        }
-        try {
-            String modem = ModemSwitcher.getCurrentModemConfig();
-            if (!TextUtils.isEmpty(modem)) {
-                CSLog.d(TAG, "reApplyModem - current modem: " + modem);
-                CSLog.d(TAG, "reApplyModem - Re-writing 2405 with modem " +
-                        modem.replace(ModemSwitcher.MODEM_FS_PATH, ""));
-
-                // Store preference without checks - ModemConfiguration:75
-                getTargetContext().getSharedPreferences(PREF_PKG, Context.MODE_PRIVATE).edit()
-                        .putString(ModemConfiguration.SAVED_MODEM_CONFIG, modem).apply();
-
-                // Way of writing to Misc TA - ModemSwitcher:226
-                if (ModemSwitcher.writeModemToMiscTA(new File(modem).getName())) {
-                    CSLog.i(TAG, "reApplyModem - 2405 was re-written successfully");
-
-                    try {
-                        MiscTA.write(TA_FOTA_INTERNAL, "temporary_modem".getBytes(StandardCharsets.UTF_8));
-                        CSLog.i(TAG, "reApplyModem - Modem Switcher 2404 cleared");
-                    } catch (MiscTaException e) {
-                        CSLog.e(TAG, "reApplyModem - There was an error clearing 2404: ", e);
-                    }
-                } else {
-                    CSLog.e(TAG, "reApplyModem - 2405 was NOT re-written");
-                }
-            } else {
-                CSLog.e(TAG, "reApplyModem - Modem is EMPTY !");
-            }
-        } catch (IOException e) {
-            CSLog.e(TAG, "reApplyModem - There was exception getting current modem: ", e);
         }
     }
 }
