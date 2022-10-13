@@ -77,6 +77,8 @@ public class CSLog {
         }
     }
 
+    private static boolean sizeCheckDone = false;
+
     private static void writeLog(String tag, String msg, String type) {
         File logDir = new File("/data/user_de/0/com.sonymobile.customizationselector/files");
         File logFile = new File("/data/user_de/0/com.sonymobile.customizationselector/files/cs.log");
@@ -91,6 +93,11 @@ public class CSLog {
                 if (!logFile.createNewFile()) {
                     return;
                 }
+            }else if(!sizeCheckDone) {
+                // Delete file if it grows larger than 1 MB
+                if(logFile.length() > 1024 * 1024)
+                    logFile.delete();
+                sizeCheckDone = true;
             }
             brw = new BufferedWriter(new FileWriter(logFile, logFile.exists()));
 
