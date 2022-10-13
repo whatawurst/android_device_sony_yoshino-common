@@ -31,6 +31,7 @@ public class Constants {
 
     public static final String NS_SLOT = "ns_slot";
     public static final String NS_SERVICE = "ns_service";
+    public static final String NS_LOWER_NETWORK = "ns_lowNet";
 
     public static final String ULTRA_DIM = "ultra_dim";
     public static final String ULTRA_DIM_DEFAULT_PROP = "vendor.ultra_dim.default";

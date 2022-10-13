@@ -90,6 +90,13 @@
             android:summary="@string/ns_summary"
             android:title="@string/network_switcher_service" />
 
+        <Preference
+            android:icon="@drawable/ic_round_import_export_24"
+            android:key="ns_lowNet"
+            android:defaultValue="3"
+            android:summary="@string/lower_network_summary"
+            android:title="@string/lower_network" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

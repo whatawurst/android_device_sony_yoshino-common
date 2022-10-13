@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.telephony.CellSignalStrength;
+import android.telephony.RadioAccessFamily;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import com.android.internal.telephony.RILConstants;
@@ -18,10 +19,9 @@ import com.sonymobile.customizationselector.CommonUtil;
 
 /**
  * Service to handle Network mode
- * <p>
- * - On shutdown/reboot, get the preference if network was 3G
- * - If no, then toggle to 3G and the system process continues else do nothing
- * - On boot, if preference was 3G, do nothing, else toggle to LTE
+ * - On boot if preference network is set to LTE switch to the selected lower network (e.g. 3G)
+ * - When the device is unlocked and the SIM has got service connection
+ *   switch back to the previous network and exit
  *
  * @author shank03
  */
@@ -33,24 +33,8 @@ public class NetworkSwitcher extends Service {
     }
 
     private static final String TAG = "NetworkSwitcher";
-
-    // Network bitmasks
-    // 2G
-    private static final long GSM = TelephonyManager.NETWORK_TYPE_BITMASK_GSM | TelephonyManager.NETWORK_TYPE_BITMASK_GPRS |
-            TelephonyManager.NETWORK_TYPE_BITMASK_EDGE;
-
-    private static final long CDMA = TelephonyManager.NETWORK_TYPE_BITMASK_CDMA | TelephonyManager.NETWORK_TYPE_BITMASK_1xRTT;
-
-    // 3G
-    private static final long EVDO = TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_0 | TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_A |
-            TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_B | TelephonyManager.NETWORK_TYPE_BITMASK_EHRPD;
-
-    private static final long WCDMA = TelephonyManager.NETWORK_TYPE_BITMASK_HSUPA |
-            TelephonyManager.NETWORK_TYPE_BITMASK_HSDPA | TelephonyManager.NETWORK_TYPE_BITMASK_HSPA |
-            TelephonyManager.NETWORK_TYPE_BITMASK_HSPAP | TelephonyManager.NETWORK_TYPE_BITMASK_UMTS;
-
-    // 4G
-    private static final long LTE = TelephonyManager.NETWORK_TYPE_BITMASK_LTE | TelephonyManager.NETWORK_TYPE_BITMASK_LTE_CA;
+    private static final String NS_LOWER_NETWORK = "ns_lowNet";
+    private static final String NS_PREFERRED = "ns_preferred";
 
     private AirplaneModeObserver airplaneModeObserver;
     private SimServiceObserver simServiceObserver;
@@ -108,16 +92,16 @@ public class NetworkSwitcher extends Service {
 
     private void initProcess(int subID) {
         if (CommonUtil.isSIMLoaded(getApplicationContext(), subID)) {
-            new Handler(getMainLooper()).postDelayed(() -> task(subID), 1400);
+            new Handler(getMainLooper()).postDelayed(() -> switchDown(subID), 1400);
         } else {
             new SlotObserver(getApplicationContext()).register(subID,
-                    () -> new Handler(getMainLooper()).postDelayed(() -> task(subID), 1400));
+                    () -> new Handler(getMainLooper()).postDelayed(() -> switchDown(subID), 1400));
         }
     }
 
-    private void task(int subID) {
+    private void switchDown(int subID) {
         if (subID < 0) {
-            d("task: Error, invalid subID");
+            d("switchDown: Error, invalid subID");
             stopSelf();
             return;
         }
@@ -126,7 +110,8 @@ public class NetworkSwitcher extends Service {
 
         int currentNetwork = getPreferredNetwork(subID);
         if (isLTE(currentNetwork)) {
-            toggle(tm, subID, currentNetwork);
+            setOriginalNetwork(subID, currentNetwork);
+            changeNetwork(tm, subID, getLowerNetwork());
 
             if (StorageManager.isFileEncryptedNativeOrEmulated() && unlockObserver != null) {
                 // Delay resetting the network until phone is unlocked.
@@ -158,7 +143,7 @@ public class NetworkSwitcher extends Service {
                     } else {
                         simServiceObserver.register(subID, () -> {
                             airplaneModeObserver.unregister();
-                            toggle(tm, subID, getPreferredNetwork(subID));
+                            changeNetwork(tm, subID, getOriginalNetwork(subID));
                             stopSelf();
                         });
                     }
@@ -166,11 +151,11 @@ public class NetworkSwitcher extends Service {
             });
         } else {
             if (tm.getSignalStrength() != null && tm.getSignalStrength().getLevel() != CellSignalStrength.SIGNAL_STRENGTH_NONE_OR_UNKNOWN) {
-                toggle(tm, subID, getPreferredNetwork(subID));
+                changeNetwork(tm, subID, getOriginalNetwork(subID));
                 stopSelf();
             } else {
                 new SimServiceObserver(getApplicationContext()).register(subID, () -> {
-                    toggle(tm, subID, getPreferredNetwork(subID));
+                    changeNetwork(tm, subID, getOriginalNetwork(subID));
                     stopSelf();
                 });
             }
@@ -178,24 +163,18 @@ public class NetworkSwitcher extends Service {
     }
 
     /**
-     * The method to toggle the network
+     * The method to change the network
      *
      * @param tm             {@link TelephonyManager} specific to subID
      * @param subID          the subscription ID from [subscriptionsChangedListener]
-     * @param currentNetwork current preferred network mode from [task]
+     * @param newNetwork     network to change to
      */
-    private void toggle(TelephonyManager tm, int subID, int currentNetwork) {
-        int networkToChange = getToggledNetwork(currentNetwork);
-        d("toggle: To be changed to = " + logPrefNetwork(networkToChange));
+    private void changeNetwork(TelephonyManager tm, int subID, int newNetwork) {
+        d("changeNetwork: To be changed to = " + networkToString(newNetwork));
 
-        if (networkToChange == -99) {
-            d("toggle: Couldn't get proper network to change");
-            return;
-        }
-
-        if (tm.setPreferredNetworkTypeBitmask(getNetworkBitmask(networkToChange))) {
-            Settings.Global.putInt(getApplicationContext().getContentResolver(), Settings.Global.PREFERRED_NETWORK_MODE + subID, networkToChange);
-            d("toggle: Successfully changed to " + logPrefNetwork(networkToChange));
+        if (tm.setPreferredNetworkTypeBitmask(RadioAccessFamily.getRafFromNetworkType(newNetwork))) {
+            Settings.Global.putInt(getApplicationContext().getContentResolver(), Settings.Global.PREFERRED_NETWORK_MODE + subID, newNetwork);
+            d("changeNetwork: Successfully changed to " + networkToString(newNetwork));
         }
     }
 
@@ -210,65 +189,32 @@ public class NetworkSwitcher extends Service {
     }
 
     /**
-     * Returns whether
+     * Get the original network mode preference
      *
-     * @param network is LTE or not
+     * @return Stored value, defaults to {@link RILConstants#NETWORK_MODE_LTE_GSM_WCDMA}
+     */
+    private int getOriginalNetwork(int subID) {
+        return Settings.System.getInt(getApplicationContext().getContentResolver(), NS_PREFERRED + subID,
+                                      RILConstants.NETWORK_MODE_LTE_GSM_WCDMA);
+    }
+
+    private void setOriginalNetwork(int subID, int network) {
+        Settings.System.putInt(getApplicationContext().getContentResolver(), NS_PREFERRED + subID, network);
+    }
+
+    /**
+     * Returns whether @param network is LTE or not
      */
     private boolean isLTE(int network) {
-        return network == RILConstants.NETWORK_MODE_GLOBAL
-                || network == RILConstants.NETWORK_MODE_LTE_CDMA_EVDO
-                || network == RILConstants.NETWORK_MODE_LTE_GSM_WCDMA
-                || network == RILConstants.NETWORK_MODE_LTE_ONLY
-                || network == RILConstants.NETWORK_MODE_LTE_WCDMA
-                || network == RILConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA
-                || network == RILConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
-                || network == RILConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA
-                || network == RILConstants.NETWORK_MODE_LTE_TDSCDMA_GSM
-                || network == RILConstants.NETWORK_MODE_LTE_TDSCDMA
-                || network == RILConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA;
+        int lteMask = RadioAccessFamily.RAF_LTE | RadioAccessFamily.RAF_LTE_CA;
+        return (RadioAccessFamily.getRafFromNetworkType(network) & lteMask) != 0;
     }
 
     /**
-     * This method returns the toggled network between 3G and LTE
+     * This method returns the lower network to switch to
      */
-    private int getToggledNetwork(int currentNetwork) {
-        switch (currentNetwork) {
-            // 3G to LTE
-            case RILConstants.NETWORK_MODE_WCDMA_PREF:
-            case RILConstants.NETWORK_MODE_WCDMA_ONLY:
-            case RILConstants.NETWORK_MODE_GSM_UMTS:
-            case RILConstants.NETWORK_MODE_GSM_ONLY:
-                return RILConstants.NETWORK_MODE_LTE_GSM_WCDMA;
-
-            // LTE to 3G
-            case RILConstants.NETWORK_MODE_LTE_GSM_WCDMA:
-            case RILConstants.NETWORK_MODE_LTE_ONLY:
-            case RILConstants.NETWORK_MODE_LTE_WCDMA:
-            case RILConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
-            case RILConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
-                return RILConstants.NETWORK_MODE_WCDMA_PREF;
-
-            // Global to GSM ?, vice-versa
-            case RILConstants.NETWORK_MODE_GLOBAL:
-                return RILConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA;
-            default:
-                return -99;
-        }
-    }
-
-    /**
-     * @param network is the returned value from {@link #getToggledNetwork(int)}
-     * @return network bitmask as per the toggled network
-     */
-    private long getNetworkBitmask(int network) {
-        switch (network) {
-            case RILConstants.NETWORK_MODE_LTE_GSM_WCDMA:
-                return LTE | GSM | WCDMA;
-            case RILConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
-                return LTE | CDMA | EVDO | GSM | WCDMA;
-            default:
-                return GSM | WCDMA;    // 3G default
-        }
+    private int getLowerNetwork() {
+        return Settings.System.getInt(getApplicationContext().getContentResolver(), NS_LOWER_NETWORK, RILConstants.NETWORK_MODE_WCDMA_PREF);
     }
 
     /**
@@ -276,7 +222,7 @@ public class NetworkSwitcher extends Service {
      * <p>
      * Too lazy to refer the {@link RILConstants}
      */
-    private String logPrefNetwork(int network) {
+    private String networkToString(int network) {
         switch (network) {
             case RILConstants.NETWORK_MODE_WCDMA_PREF:
                 return "NETWORK_MODE_WCDMA_PREF";
@@ -297,9 +243,9 @@ public class NetworkSwitcher extends Service {
             case RILConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
                 return "NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA";
             case RILConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
-                return "NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA --> NETWORK_MODE_WCDMA_PREF";
+                return "NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA";
             default:
-                return "N/A";
+                return "N/A(" + network + ")";
         }
     }
 

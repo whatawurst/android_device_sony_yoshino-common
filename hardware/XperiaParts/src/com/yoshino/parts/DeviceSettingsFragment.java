@@ -16,6 +16,7 @@ package com.yoshino.parts;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.SwitchPreference;
+import com.android.internal.telephony.RILConstants;
 
 import static com.yoshino.parts.Constants.*;
 
@@ -78,28 +80,30 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
 
         Preference slotPref = findPreference(NS_SLOT);
         SwitchPreference nsService = findPreference(NS_SERVICE);
+        Preference nsLowerNetwork = findPreference(NS_LOWER_NETWORK);
         if (slotPref != null && nsService != null) {
             if (getContext().getSystemService(TelephonyManager.class).getPhoneCount() > 1) {
                 slotPref.setVisible(true);
 
-                int slot = Settings.System.getInt(nsService.getContext().getContentResolver(), NS_SLOT, -1);
+                int slot = Settings.System.getInt(slotPref.getContext().getContentResolver(), NS_SLOT, -1);
                 slotPref.setSummary(slotPref.getContext().getString(R.string.sim_slot_summary) + (slot == -1 ? " INVALID" : " " + (slot + 1)));
 
                 slotPref.setOnPreferenceClickListener(preference -> {
-                    int nSlot = Settings.System.getInt(nsService.getContext().getContentResolver(), NS_SLOT, -1);
+                    final ContentResolver resolver = preference.getContext().getContentResolver();
+                    int nSlot = Settings.System.getInt(resolver, NS_SLOT, -1);
                     switch (nSlot) {
                         case 0:
-                            Settings.System.putInt(nsService.getContext().getContentResolver(), NS_SLOT, 1);
+                            Settings.System.putInt(resolver, NS_SLOT, 1);
                             slotPref.setSummary(slotPref.getContext().getString(R.string.sim_slot_summary) + " 2");
                             nsService.setEnabled(true);
                             break;
                         case 1:
-                            Settings.System.putInt(nsService.getContext().getContentResolver(), NS_SLOT, -1);
+                            Settings.System.putInt(resolver, NS_SLOT, -1);
                             slotPref.setSummary(slotPref.getContext().getString(R.string.sim_slot_summary) + " INVALID");
                             nsService.setEnabled(false);
                             break;
                         case -1:
-                            Settings.System.putInt(nsService.getContext().getContentResolver(), NS_SLOT, 0);
+                            Settings.System.putInt(resolver, NS_SLOT, 0);
                             slotPref.setSummary(slotPref.getContext().getString(R.string.sim_slot_summary) + " 1");
                             nsService.setEnabled(true);
                             break;
@@ -114,6 +118,21 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
             }
             nsService.setChecked(Settings.System.getInt(nsService.getContext().getContentResolver(), NS_SERVICE, 0) == 1);
             nsService.setOnPreferenceChangeListener(this);
+
+            updateLowerNetworkPref(nsLowerNetwork, nsService.isChecked());
+            nsLowerNetwork.setOnPreferenceClickListener(preference -> {
+                final ContentResolver resolver = preference.getContext().getContentResolver();
+                int network = getLowerNetwork(resolver);
+                if(network == RILConstants.NETWORK_MODE_WCDMA_PREF)
+                    network = RILConstants.NETWORK_MODE_GSM_ONLY;
+                else if(network == RILConstants.NETWORK_MODE_GSM_ONLY)
+                    network = RILConstants.NETWORK_MODE_GSM_UMTS;
+                else
+                    network = RILConstants.NETWORK_MODE_WCDMA_PREF;
+                Settings.System.putInt(resolver, NS_LOWER_NETWORK, network);
+                updateLowerNetworkPref(preference, true);
+                return true;
+            });
         }
 
         SwitchPreference imsPref = findPreference(CS_IMS);
@@ -153,7 +172,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
             if (ims == 0) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(imsPref.getContext());
                 builder.setCancelable(false);
-                builder.setTitle("Enable IMS features ?");
+                builder.setTitle("Enable IMS features?");
                 builder.setMessage("This will allow you to use the provided carrier specific features such as VoLTE, " +
                         "VoWiFi and WiFi Calling; only if it worked on stock.\n\nYour device will prompt reboot if it " +
                         "found carrier specific modem.");
@@ -176,25 +195,50 @@ public class DeviceSettingsFragment extends PreferenceFragment implements Prefer
         });
     }
 
+    private static int getLowerNetwork(ContentResolver resolver)
+    {
+        return Settings.System.getInt(resolver, NS_LOWER_NETWORK, RILConstants.NETWORK_MODE_WCDMA_PREF);
+    }
+
+    private static String getNetworkName(int network) {
+        switch(network) {
+            case RILConstants.NETWORK_MODE_GSM_ONLY:
+                return "2G";
+            case RILConstants.NETWORK_MODE_WCDMA_PREF:
+                return "3G";
+            case RILConstants.NETWORK_MODE_GSM_UMTS:
+                return "2G/3G";
+            default:
+                return "N/A";
+        }
+    }
+
+    private static void updateLowerNetworkPref(Preference lnPref, boolean enabled) {
+        int network = getLowerNetwork(lnPref.getContext().getContentResolver());
+        lnPref.setSummary(lnPref.getContext().getString(R.string.lower_network_summary) + getNetworkName(network));
+        lnPref.setEnabled(enabled);
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
+        boolean enabled = (boolean) o;
         switch (preference.getKey()) {
             case GLOVE_MODE:
-                Settings.System.putInt(preference.getContext().getContentResolver(), GLOVE_MODE, (boolean) o ? 1 : 0);
                 SystemProperties.set(GLOVE_PROP, (boolean) o ? "1" : "0");
-                return true;
+                break;
             case SMART_STAMINA_MODE:
-                Settings.System.putInt(preference.getContext().getContentResolver(), SMART_STAMINA_MODE, (boolean) o ? 1 : 0);
                 SystemProperties.set(SMART_STAMINA_PROP, (boolean) o ? "1" : "0");
-                return true;
+                break;
             case CS_NOTIFICATION:
-                Settings.System.putInt(preference.getContext().getContentResolver(), CS_NOTIFICATION, (boolean) o ? 1 : 0);
-                return true;
+                break;
             case NS_SERVICE:
-                Settings.System.putInt(preference.getContext().getContentResolver(), NS_SERVICE, (boolean) o ? 1 : 0);
-                return true;
+                updateLowerNetworkPref(findPreference(NS_LOWER_NETWORK), enabled);
+                break;
+            default:
+                return false;
         }
-        return false;
+        Settings.System.putInt(preference.getContext().getContentResolver(), preference.getKey(), enabled ? 1 : 0);
+        return true;
     }
 
     private void sendBroadcast(Context context) {
