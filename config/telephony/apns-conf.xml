@@ -348,6 +348,9 @@
   <apn carrier="Telenor Net" mcc="216" mnc="01" apn="net" type="default,supl" />
   <apn carrier="Telenor Net" mcc="216" mnc="01" apn="net" proxy="" port="" user="" password="" mmsc="" type="default,supl" />
   <apn carrier="Telenor online" mcc="216" mnc="01" apn="online" user="" password="" type="default,supl" />
+  <apn carrier="DIGI HU internet" mcc="216" mnc="03" apn="internet" type="default,ia,supl" protocol="IPV4V6" />
+  <apn carrier="DIGI HU IMS" mcc="216" mnc="03" apn="ims" type="ims" protocol="IPV4V6" user_visible="false" />
+  <apn carrier="DIGI HU Ut" mcc="216" mnc="03" apn="hos" type="xcap" protocol="IPV4V6" user_visible="false" />
   <apn carrier="T-Mobile HU" mcc="216" mnc="30" apn="wnw" proxy="" port="" user="" password="" mmsc="http://mms.t-mobile.hu/servlets/mms" mmsproxy="212.51.126.10" mmsport="8080" type="default,supl" />
   <apn carrier="T-Mobile MMS" mcc="216" mnc="30" apn="mms" proxy="" port="" mmsproxy="212.051.126.010" mmsport="8080" mmsc="http://mms.t-mobile.hu/servlets/mms" user="mms" password="mms" authtype="1" type="mms" />
   <apn carrier="T-Mobile NET GPRS" mcc="216" mnc="30" apn="internet" proxy="" port="" user="" password="" mmsc="" type="default,supl" />
