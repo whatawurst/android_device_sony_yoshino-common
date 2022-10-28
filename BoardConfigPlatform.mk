@@ -173,6 +173,7 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 TARGET_PER_MGR_ENABLED := true
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 TARGET_USES_OLD_MNC_FORMAT := true
+CUSTOM_APNS_FILE := $(PLATFORM_PATH)/config/apns.xml
 
 ### SEPOLICY
 include device/qcom/sepolicy-legacy-um/sepolicy.mk
