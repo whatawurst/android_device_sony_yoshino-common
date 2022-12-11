@@ -42,6 +42,8 @@ ro.vendor.ril.svlte1x                u:object_r:vendor_radio_prop:s0
 
 ro.vendor.semc.version.cust.active   u:object_r:vendor_semc_version_cust_active_prop:s0
 
+sdm.disable_hdr_lut_gen              u:object_r:vendor_display_prop:s0
+
 vendor.backlight_on                  u:object_r:vendor_backlighton_prop:s0
 vendor.pcc.mdp.rgb                   u:object_r:vendor_pcc_mdp_prop:s0
 vendor.powerhal.                     u:object_r:vendor_power_prop:s0
