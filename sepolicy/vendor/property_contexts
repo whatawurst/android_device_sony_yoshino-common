@@ -52,3 +52,7 @@ vendor.cover_state                   u:object_r:vendor_cover_state_prop:s0
 vendor.smartstamina.touchreport      u:object_r:vendor_clearpad_prop:s0
 
 wifi.active.interface                u:object_r:wifi_active_prop:s0
+
+# Camera
+vendor.camera.sensor.name.front      u:object_r:vendor_somc_camera_prop:s0
+vendor.libcameralight.force_off      u:object_r:vendor_somc_camera_prop:s0

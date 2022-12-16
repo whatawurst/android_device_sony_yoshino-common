@@ -32,6 +32,8 @@ allow hal_camera_somc sysfs_tof_rgbcir:file rw_file_perms;
 # /dev/socket/cammw_tintless
 allow hal_camera_somc camera_somc_socket:sock_file r_file_perms;
 
+get_prop(hal_camera_somc, vendor_somc_camera_prop)
+
 ## Camera Flash
 # /sys/class/power_supply/battery/voltage_now
 allow hal_camera_somc sysfs_battery_supply:dir r_dir_perms;
