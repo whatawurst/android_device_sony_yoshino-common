@@ -95,6 +95,8 @@
 /sys/devices/soc/soc:fpc1145/spi_prepare                        u:object_r:sysfs_fpc_spi_prepare:s0
 /sys/devices/soc/soc:fpc1145/wakeup_enable                      u:object_r:sysfs_fpc_wakeup:s0
 
+/sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/block/sda/queue/discard_max_bytes   u:object_r:sysfs_mmc_host:s0
+
 /sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/model  u:object_r:sysfs_ufs:s0
 /sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/rev    u:object_r:sysfs_ufs:s0
 /sys/devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0/vendor u:object_r:sysfs_ufs:s0
