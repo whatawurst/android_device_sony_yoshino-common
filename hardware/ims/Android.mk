@@ -1,6 +1,14 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
+IMS_LIBQDMETADATA_SYMLINK := $(TARGET_OUT_SYSTEM_EXT)/lib64/libqdMetaData.so
+$(IMS_LIBQDMETADATA_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@echo "Create ims libqdMetaData link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /system/lib64/libqdMetaData.system.so $@
+
+include $(CLEAR_VARS)
 IMS_CAMERA_SYMLINK := $(TARGET_OUT_SYSTEM_EXT)/priv-app/ims/lib/arm64/libimscamera_jni.so
 $(IMS_CAMERA_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 	@echo "Create ims camera jni link: $@"
@@ -17,5 +25,6 @@ $(IMS_MEDIA_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /system/system_ext/lib64/libimsmedia_jni.so $@
 
 ALL_DEFAULT_INSTALLED_MODULES += \
+	$(IMS_LIBQDMETADATA_SYMLINK) \
 	$(IMS_CAMERA_SYMLINK) \
 	$(IMS_MEDIA_SYMLINK)
