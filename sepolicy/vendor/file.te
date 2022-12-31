@@ -53,6 +53,7 @@ type sysfs_sony_camera, fs_type, sysfs_type;
 type sysfs_switch_lid, fs_type, sysfs_type;
 type sysfs_tof_rgbcir, fs_type, sysfs_type;
 type sysfs_touchpad, fs_type, sysfs_type;
+type sysfs_usb_extcon, fs_type, sysfs_type;
 type sysfs_msm_subsys, fs_type, sysfs_type;
 type sysfs_wlan, fs_type, sysfs_type;
 type sysfs_ufs, fs_type, sysfs_type;
