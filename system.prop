@@ -66,9 +66,6 @@ debug.gralloc.enable_fb_ubwc=1
 vendor.display.disable_scaler=1
 vendor.display.perf_hint_window=50
 
-# HWUI
-debug.hwui.use_buffer_age=false
-
 # Display default color mode enable
 vendor.display.enable_default_color_mode=1
 
