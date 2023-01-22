@@ -320,9 +320,6 @@ system_ext/priv-app/ims/ims.apk|bed959752f39386d6a7045f8cf96226a14e31dfd
 system_ext/etc/permissions/qti_libpermissions.xml|593bcb72cce68ceb0a70f50bcae7d460114e7c62
 system_ext/etc/permissions/qti_permissions.xml|e6ff4572352b1a4f91b6b9d7cbb1cad9924410a0
 
-# QTI_QTEECONNECTOR
-lib64/vendor.qti.hardware.qteeconnector@1.0.so
-
 # QTI_RADIO - from SLD_sprout - RKQ1.210607.001-00WW_3_710
 system_ext/lib64/vendor.qti.hardware.radio.am@1.0.so|bbcfa6105ab4e496bcb3a7c008b2c52dd918c687
 system_ext/lib64/vendor.qti.hardware.radio.lpa@1.0.so|d3e0d7fd1abbf66eccef4482cf2bf13612e7251d
