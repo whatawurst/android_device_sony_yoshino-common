@@ -143,6 +143,10 @@ PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
     android.hardware.light@2.0-service
 
+# LINEAGE HEALTH
+PRODUCT_PACKAGES += \
+    vendor.lineage.health-service.default
+
 # MEMTRACK
 PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-impl \
