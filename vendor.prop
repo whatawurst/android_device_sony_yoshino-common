@@ -106,6 +106,7 @@ bluetooth.profile.sap.server.enabled=true
 ro.vendor.bt.bdaddr_path=/data/vendor/etc/bluetooth_bdaddr
 ro.vendor.btstack.hfp.ver=1.7
 persist.vendor.bt.enable.splita2dp=false
+persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxhd-aac
 persist.vendor.service.bdroid.ssrlvl=3
 vendor.qcom.bluetooth.soc=cherokee
 
