@@ -32,7 +32,6 @@ media.stagefright.audio.deep=true
 
 ### BLUETOOTH
 bt.max.hfpclient.connections=1
-persist.vendor.btstack.a2dp_offload_cap=false
 
 # A4WP profile support
 ro.bluetooth.a4wp=false
