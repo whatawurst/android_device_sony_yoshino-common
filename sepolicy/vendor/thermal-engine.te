@@ -9,7 +9,7 @@ unix_socket_connect(thermal-engine, illumination, illumination_service)
 allow thermal-engine illumination_socket:sock_file write;
 
 # /tmp/test_sensor.in
-rw_dir_file(thermal-engine, tmpfs)
+rw_rw_dir_file(thermal-engine, tmpfs)
 
 # /sys/class/kgsl
 r_dir_file(thermal-engine, sysfs_kgsl)
