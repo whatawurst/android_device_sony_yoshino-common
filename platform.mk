@@ -59,10 +59,3 @@ TARGET_USE_CUSTOM_POWERHINT ?= false
 
 ### RECOVERY
 include $(PLATFORM_PATH)/platform/*.mk
-
-### VERITY
-ifeq ($(WITH_VERITY),true)
-PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/soc/1da4000.ufshc/by-name/system
-PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc/1da4000.ufshc/by-name/vendor
-$(call inherit-product, build/target/product/verity.mk)
-endif
