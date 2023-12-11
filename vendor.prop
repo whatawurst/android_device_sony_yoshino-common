@@ -122,6 +122,9 @@ ro.vendor.display.cabl=2
 vendor.gralloc.disable_ubwc=0
 vendor.gralloc.enable_fb_ubwc=1
 
+# Graphics
+ro.hardware.egl=adreno
+
 # HDR
 vendor.display.disable_hdr_lut_gen=1
 
