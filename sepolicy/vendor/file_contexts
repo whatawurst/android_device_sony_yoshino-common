@@ -103,8 +103,6 @@
 
 /sys/devices/soc/780000.qcom,msm-core/uio/uio1/name             u:object_r:sysfs_uio:s0
 
-/sys/devices/virtual/graphics/fb([0-3])+/idle_state             u:object_r:sysfs_graphics:s0
-
 /sys/devices/virtual/input/input[0-9]+/als_Itime                u:object_r:sysfs_tof_rgbcir:s0
 /sys/devices/virtual/input/input[0-9]+/als_gain                 u:object_r:sysfs_tof_rgbcir:s0
 /sys/devices/virtual/input/input[0-9]+/als_power_state          u:object_r:sysfs_tof_rgbcir:s0
