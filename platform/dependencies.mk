@@ -75,7 +75,8 @@ PRODUCT_PACKAGES += \
 # PROTOBUF
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full-vendorcompat \
-    libprotobuf-cpp-lite-vendorcompat
+    libprotobuf-cpp-lite-vendorcompat \
+    libprotobuf-cpp-lite-3.9.1-vendorcompat
 
 ### RIL
 PRODUCT_PACKAGES += \
