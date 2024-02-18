@@ -32,9 +32,6 @@ on init
 
     wait /dev/block/platform/soc/1da4000.ufshc
     symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
-    wait /dev/block/sda1
-    chown oem_2997 oem_2997 /dev/block/sda1
-    chmod 0770 /dev/block/sda1
 
     # UFS firmware update
     exec u:r:vendor_ffu:s0 -- /vendor/bin/ffu
@@ -120,6 +117,10 @@ on post-fs
     restorecon /dev/block/bootdevice/by-name/modemst1
     restorecon /dev/block/bootdevice/by-name/modemst2
     restorecon /dev/block/bootdevice/by-name/TA
+
+    # Setup owner and permissions of TA for tad
+    chown oem_2997 oem_2997 /dev/block/sda1
+    chmod 0770 /dev/block/sda1
 
     # Start tad and miscta hidl service
     class_start trimarea
