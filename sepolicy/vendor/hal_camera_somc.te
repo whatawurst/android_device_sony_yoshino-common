@@ -32,6 +32,7 @@ allow hal_camera_somc sysfs_tof_rgbcir:file rw_file_perms;
 # /dev/socket/cammw_tintless
 allow hal_camera_somc camera_somc_socket:sock_file r_file_perms;
 
+get_prop(hal_camera_somc, graphics_config_writable_prop)
 get_prop(hal_camera_somc, vendor_somc_camera_prop)
 
 ## Camera Flash
