@@ -3,6 +3,7 @@
 binder_call(rild, hal_secd_default)
 # NOT ALLOWED allow rild default_android_hwservice:hwservice_manager { find };
 allow rild hal_secd_hwservice:hwservice_manager { find };
+allow rild qtidataservices_app:binder call;
 
 unix_socket_connect(rild, tad, tad)
 
