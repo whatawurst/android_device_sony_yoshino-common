@@ -2,9 +2,14 @@
 
 binder_call(system_app, cacaoserver)
 binder_call(system_app, cnd)
+binder_call(system_app, hal_audio_default)
+binder_call(system_app, hal_power_default)
 binder_call(system_app, hal_rcsservice)
+binder_call(system_app, hal_wifi_default)
 
 allow system_app hal_datafactory_hwservice:hwservice_manager find;
+
+allow system_app proc_vmallocinfo:file { r_file_perms };
 
 # Allow com.android.settings to read zram info via sysfs
 allow system_app sysfs_zram:dir { search };
