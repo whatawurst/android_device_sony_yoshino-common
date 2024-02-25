@@ -186,7 +186,9 @@ PRODUCT_PACKAGES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service.basic
+    android.hardware.usb@1.0 \
+    android.hardware.usb@1.1 \
+    android.hardware.usb@1.0-service
 
 # USB TRUST HAL
 PRODUCT_PACKAGES += \
