@@ -23,7 +23,7 @@ public class CustomizationSelectorService extends IntentService {
                 CSLog.logVersion(context, TAG);
                 CSLog.logSimValues(context, TAG);
 
-                if (!CommonUtil.isDirectBootEnabled()) {
+                if (CommonUtil.isDirectBootEnabled()) {
                     UserManager userManager = context.getSystemService(UserManager.class);
                     if (userManager != null && !userManager.isUserUnlocked()) {
                         CSLog.d(TAG, "user is locked. private app data storage is not available.");
