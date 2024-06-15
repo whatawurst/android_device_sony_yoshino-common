@@ -119,7 +119,6 @@ TARGET_SYSTEM_PROP := $(PLATFORM_PATH)/system.prop
 TARGET_VENDOR_PROP := $(PLATFORM_PATH)/vendor.prop
 
 ### RECOVERY
-BOARD_USES_FULL_RECOVERY_IMAGE := false
 ifneq ($(filter maple maple_dsds, $(TARGET_DEVICE)),)
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery/fstab_maple.recovery
 else
