@@ -177,12 +177,6 @@ service qcom-radio-sh /vendor/bin/init.qcom.radio.sh
     group root system radio
     oneshot
 
-service vendor.atfwd /vendor/bin/ATFWD-daemon
-    class late_start
-    user system
-    group system radio
-    task_profiles ServiceCapacityLow
-
 on boot && property:persist.radio.multisim.config=dsds
     start vendor.qcrild2
 

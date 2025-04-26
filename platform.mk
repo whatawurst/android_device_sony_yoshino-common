@@ -16,13 +16,20 @@
 
 PLATFORM_PATH := device/sony/yoshino-common
 
+# Add common definitions for Qualcomm
+$(call inherit-product, hardware/qcom-caf/common/common.mk)
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/non_ab_device.mk)
+
 ### PROPRIETARY VENDOR FILES
 $(call inherit-product, vendor/sony/yoshino-common/yoshino-common-vendor.mk)
 
 PRODUCT_SOONG_NAMESPACES += \
     $(PLATFORM_PATH) \
     hardware/google/interfaces \
-    hardware/google/pixel
+    hardware/google/pixel \
+    hardware/lineage/interfaces/power-libperfmgr \
+    hardware/qcom-caf/common/libqti-perfd-client
 
 QCOM_SOONG_NAMESPACE := $(PLATFORM_PATH)/hardware/qcom-caf
 
@@ -31,7 +38,6 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
 # For android_filesystem_config.h permissions
 PRODUCT_PACKAGES += \
-    fs_config_files \
     fs_config_dirs
 
 # Enable dynamic partition size

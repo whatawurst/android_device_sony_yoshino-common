@@ -55,8 +55,6 @@ PRODUCT_PACKAGES += \
 ### NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
-    NfcNci \
-    SecureElement \
     Tag
 
 ### OPENCUSTOMIZATIONSELECTOR
@@ -69,15 +67,17 @@ PRODUCT_PACKAGES += \
 
 ### SENSORS
 PRODUCT_PACKAGES += \
-    libsensorndkbridge
+    libsensorndkbridge \
+    libpower.vendor
 
 ### SERVICES
 # AUDIO
 PRODUCT_PACKAGES += \
-    android.hardware.audio@4.0-impl:32 \
-    android.hardware.audio@2.0-service \
-    android.hardware.audio.effect@4.0-impl:32 \
-    android.hardware.soundtrigger@2.2-impl:32
+    android.hardware.audio@6.0-impl:32 \
+    android.hardware.audio.effect@6.0-impl:32 \
+    android.hardware.audio.service \
+    android.hardware.soundtrigger@2.2-impl:32 \
+    libaudioroute.vendor
 
 # BLUETOOTH
 PRODUCT_PACKAGES += \
@@ -91,10 +91,6 @@ PRODUCT_PACKAGES += \
     camera.device@3.2-impl:32 \
     vendor.qti.hardware.camera.device@1.0 \
     vendor.qti.hardware.camera.device@1.0.vendor
-
-# CONFIGSTORE
-PRODUCT_PACKAGES += \
-    android.hardware.configstore@1.1-service
 
 # DISPLAY
 PRODUCT_PACKAGES += \
@@ -158,9 +154,9 @@ PRODUCT_PACKAGES += \
 
 # POWER
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.2 \
+    android.hardware.power-service.lineage-libperfmgr \
     android.hardware.power@1.2.vendor \
-    android.hardware.power-service.yoshino-libperfmgr
+    libqti-perfd-client
 
 # RADIO
 PRODUCT_PACKAGES += \
@@ -186,8 +182,6 @@ PRODUCT_PACKAGES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0 \
-    android.hardware.usb@1.1 \
     android.hardware.usb@1.3-service.dual_role_usb
 
 # VIBRATOR
@@ -224,6 +218,11 @@ PRODUCT_PACKAGES += \
     WifiOverlay \
     wpa_supplicant \
     wpa_supplicant.conf
+
+PRODUCT_PACKAGES += \
+    firmware_wlan_bdwlan.bin_symlink \
+    firmware_wlan_mac.bin_symlink \
+    firmware_WCNSS_qcom_cfg.ini_symlink
 
 ### XPERIAPARTS
 PRODUCT_PACKAGES += \

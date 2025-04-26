@@ -81,15 +81,6 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 endif
 TARGET_COPY_OUT_VENDOR := vendor
 
-### DEXPREOPT
-# Enable dexpreopt for everything to speed boot time
-ifeq ($(HOST_OS),linux)
-  ifneq ($(TARGET_BUILD_VARIANT),eng)
-      WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := false
-      WITH_DEXPREOPT := true
-  endif
-endif
-
 ### BUILD_COPY_HEADERS ALLOWED
 BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
 
@@ -113,11 +104,17 @@ TARGET_USES_ION := true
 
 ### HIDL
 BOARD_VNDK_VERSION := current
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
+    $(PLATFORM_PATH)/device_framework_matrix.xml \
+    hardware/qcom-caf/common/vendor_framework_compatibility_matrix.xml \
+    hardware/qcom-caf/common/vendor_framework_compatibility_matrix_legacy.xml \
+    vendor/lineage/config/device_framework_matrix.xml
 ifneq ($(filter poplar_dsds maple_dsds, $(TARGET_DEVICE)),)
 DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest_dsds.xml
 else
 DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
 endif
+DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
 
 ### PROPS
 TARGET_ODM_PROP += $(PLATFORM_PATH)/odm.prop
@@ -135,9 +132,9 @@ endif
 ### RIL
 ENABLE_VENDOR_RIL_SERVICE := true
 TARGET_PER_MGR_ENABLED := true
-TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 
 ### SEPOLICY
+include device/lineage/sepolicy/libperfmgr/sepolicy.mk
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/vendor
 PRODUCT_PRIVATE_SEPOLICY_DIRS += device/sony/yoshino-common/sepolicy/private
@@ -147,7 +144,6 @@ BUILD_BROKEN_TREBLE_SYSPROP_NEVERALLOW := true
 ### VENDOR FILE OVERRIDE
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
-BUILD_BROKEN_INCORRECT_PARTITION_IMAGES := true
 
 ### VENDOR SECURITY PATCH LEVEL
 VENDOR_SECURITY_PATCH := 2019-09-01

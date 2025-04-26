@@ -264,9 +264,9 @@ vendor/firmware/cpp_firmware_v1_8_0.fw
 vendor/bin/hvdcp_opti
 
 # CNE - from from FP3 - 6.A.025.0
-vendor/app/CACertService/CACertService.apk|e33ff0c06356a8fa843f49dfa27ee21c77733738
-vendor/app/CneApp/CneApp.apk|551d0e3251eeda3af8dfa8bb55cd83b858365db8
-vendor/app/IWlanService/IWlanService.apk|a8bdac9638bc711e23269d2eead3f46a7b3b6a25
+vendor/app/CACertService/CACertService.apk|a430eb051f565ff00f4d8d2aa2dd2a7c8c3bec90
+vendor/app/CneApp/CneApp.apk;REQUIRED=CneApp.libvndfwk_detect_jni.qti_symlink|6e355ca21e53c8a84794f06e1057e62ff2df1a58
+vendor/app/IWlanService/IWlanService.apk|08472592f4a21ad806c487fc0c70c10bbe7c7ac2
 vendor/bin/cnd|78d2771551abf43a093a0fbe0aba933c9f6a8097
 vendor/etc/cne/wqeclient/ATT/ATT_profile1.xml|578f3f8f56059bfdbef926bcc68d01c15e06951f
 vendor/etc/cne/wqeclient/ATT/ATT_profile2.xml|1fb42c672a12b6660bdce3ea94e0c43719dd9de8
@@ -381,11 +381,11 @@ vendor/lib64/libmm-hdcpmgr.so
 
 # GRAPHICS
 vendor/lib/egl/eglSubDriverAndroid.so
-vendor/lib/egl/libEGL_adreno.so
+vendor/lib/egl/libEGL_adreno.so;SYMLINK=vendor/lib/libEGL_adreno.so
 vendor/lib/egl/libGLESv1_CM_adreno.so
-vendor/lib/egl/libGLESv2_adreno.so
+vendor/lib/egl/libGLESv2_adreno.so;SYMLINK=vendor/lib/libGLESv2_adreno.so
 vendor/lib/egl/libQTapGLES.so
-vendor/lib/egl/libq3dtools_adreno.so
+vendor/lib/egl/libq3dtools_adreno.so;SYMLINK=vendor/lib/libq3dtools_adreno.so
 vendor/lib/egl/libq3dtools_esx.so
 vendor/lib/hw/vulkan.msm8998.so
 vendor/lib/libC2D2.so
@@ -397,11 +397,11 @@ vendor/lib/libgsl.so
 vendor/lib/libllvm-glnext.so
 vendor/lib/libllvm-qcom.so
 vendor/lib64/egl/eglSubDriverAndroid.so
-vendor/lib64/egl/libEGL_adreno.so
+vendor/lib64/egl/libEGL_adreno.so;SYMLINK=vendor/lib64/libEGL_adreno.so
 vendor/lib64/egl/libGLESv1_CM_adreno.so
-vendor/lib64/egl/libGLESv2_adreno.so
+vendor/lib64/egl/libGLESv2_adreno.so;SYMLINK=vendor/lib64/libGLESv2_adreno.so
 vendor/lib64/egl/libQTapGLES.so
-vendor/lib64/egl/libq3dtools_adreno.so
+vendor/lib64/egl/libq3dtools_adreno.so;SYMLINK=vendor/lib64/libq3dtools_adreno.so
 vendor/lib64/egl/libq3dtools_esx.so
 vendor/lib64/hw/vulkan.msm8998.so
 vendor/lib64/libC2D2.so
@@ -484,7 +484,6 @@ vendor/etc/seccomp_policy/mediaextractor.policy
 vendor/lib/libAlacSwDec.so
 vendor/lib/libApeSwDec.so
 vendor/lib/libFlacSwDec.so
-vendor/lib/libI420colorconvert.so
 vendor/lib/libOmxAlacDecSw.so
 vendor/lib/libOmxApeDecSw.so
 vendor/lib/libOmxDsdDec.so
@@ -492,19 +491,16 @@ vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libOmxVideoDSMode.so
 vendor/lib/libgpustats.so
-vendor/lib/libmm-color-convertor.so
 vendor/lib/libvpphvx.so
 vendor/lib/libvqzip.so
 vendor/lib64/libAlacSwDec.so
 vendor/lib64/libApeSwDec.so
 vendor/lib64/libFlacSwDec.so
-vendor/lib64/libI420colorconvert.so
 vendor/lib64/libOmxAlacDecSw.so
 vendor/lib64/libOmxApeDecSw.so
 vendor/lib64/libOmxEvrcDec.so
 vendor/lib64/libOmxQcelp13Dec.so
 vendor/lib64/libgpustats.so
-vendor/lib64/libmm-color-convertor.so
 vendor/lib64/libvpphvx.so
 
 # MISCTA - from tama - 52.1.A.3.49
@@ -640,7 +636,6 @@ vendor/lib64/hw/vendor.qti.hardware.qteeconnector@1.0-impl.so
 
 # RADIO - from from FP3 - 6.A.025.0
 vendor/bin/hw/qcrild|9ebae4b7b4bc8fb31371f3926634206737d73bb2
-vendor/bin/ATFWD-daemon|8d2b9db2e2f3cfa59f7aede4ab912d20066f77ea
 vendor/bin/netmgrd|f3eafb4d5e31e3f90544f380667625dfdc22aa37
 vendor/bin/port-bridge|aeff25bb226f44e45ed062e0525651804f261c21
 vendor/bin/qrtr-cfg|24385c1df959d914aee005e607ad89ef5b5b28e0
@@ -658,7 +653,6 @@ vendor/etc/init/port-bridge.rc|e52d61a0de5e8a3b21bfbfca929e862422645377
 vendor/etc/init/qcrild.rc|17cf4934bf443cf6469d8b3ff622eeb0e4a0aac6
 vendor/etc/init/vendor.qti.rmt_storage.rc|bc212c6353c2ded44ae4d759605fbbe55aa4fa3f
 vendor/etc/init/vendor.qti.tftp.rc|b27f188cbffba470a4510d50e46ff7c8446c22cb
-vendor/etc/seccomp_policy/atfwd@2.0.policy|74fdb7d47bdb6d0cb06b13701a96a76c9171ab5d
 vendor/lib64/libconfigdb.so|6634f23eebd1156c9053b5a77163ee7a058a1916
 vendor/lib64/libdsutils.so|0b466344eb6628feb1b5aba00d1ef3f680e5aa9a
 vendor/lib64/liblqe.so|02191d7bfeca08ec8b89550a27bef02c3291609e
@@ -695,7 +689,6 @@ vendor/lib64/qcrild_librilutils.so|0644fb4cfdd39557115ada179a76aab0aa0f1d89
 vendor/lib64/qtibus.so|0b387ecd1b898f3d3aee6c51783817767a6d1e70
 vendor/lib64/qtimutex.so|fc156f485519be1cd683f1af3ebb6194ce4ba2d5
 vendor/lib64/vendor.qti.hardware.radio.am@1.0.so|4cc14bfabf63aa20f02ad069933bdf09651aa86e
-vendor/lib64/vendor.qti.hardware.radio.atcmdfwd@1.0.so|037caa6b6dacc4d64b38e0f435d8415f007b2890
 vendor/lib64/vendor.qti.hardware.radio.internal.deviceinfo@1.0.so|33c17b96df825d02aa31ca6bd42a91547a741619
 vendor/lib64/vendor.qti.hardware.radio.lpa@1.0.so|0895d68405d960b54a11e21ac1d5d06444324f0e
 vendor/lib64/vendor.qti.hardware.radio.lpa@1.1.so|a5f2a41df2aedcd97a77a3e4ec546f36879ece3b

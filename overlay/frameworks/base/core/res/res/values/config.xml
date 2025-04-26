@@ -82,11 +82,6 @@
         <item>40</item>
     </integer-array>
 
-    <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
-    <integer-array name="config_keyboardTapVibePattern">
-        <item>60</item>
-    </integer-array>
-
     <!-- Vibrator pattern for feedback about hitting a scroll barrier -->
     <integer-array name="config_scrollBarrierVibePattern">
         <item>60</item>
@@ -98,9 +93,6 @@
     <!-- SD Card can be removed without removing battery -->
     <bool name="config_batterySdCardAccessibility">true</bool>
 
-    <!-- Doze -->
-    <bool name="config_enableAutoPowerModes">true</bool>
-
     <!-- True if the device supports Sustained Performance Mode -->
     <bool name="config_sustainedPerformanceModeSupported">true</bool>
 
@@ -108,7 +100,7 @@
          rat-name:rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max
          If no value is found for the rat-name in use, the system default will be applied.
     -->
-    <string-array name="config_mobile_tcp_buffers">
+    <string-array translatable="false" name="config_mobile_tcp_buffers">
         <item>5gnr:2097152,6291456,16777216,512000,2097152,8388608</item>
         <item>lte:524288,1048576,8388608,262144,524288,4194304</item>
         <item>lte_ca:1048576,2097152,16777216,524288,1048576,8388608</item>
@@ -141,12 +133,6 @@
         <item>"/system/bin/surfaceflinger"</item>
     </string-array>
 
-    <!-- Keep chosen default camera app pinned in memory for faster launching -->
-    <bool name="config_pinnerCameraApp">true</bool>
-
-    <!-- Should the pinner service pin the Home application? -->
-    <bool name="config_pinnerHomeApp">true</bool>
-
     <!-- Indicate whether to allow the device to suspend when the screen is off
          due to the proximity sensor.  This resource should only be set to true
          if the sensor HAL correctly handles the proximity sensor as a wake-up source.
@@ -174,14 +160,14 @@
 
     <!-- IWLAN data service package name to bind to by default. If none is specified in an overlay, an
          empty string is passed in -->
-    <string name="config_wlan_data_service_package">vendor.qti.iwlan</string>
+    <string name="config_wlan_data_service_package" translatable="false">vendor.qti.iwlan</string>
 
     <!-- IWLAN network service package name to bind to by default. If none is specified in an overlay, an
          empty string is passed in -->
-    <string name="config_wlan_network_service_package">vendor.qti.iwlan</string>
+    <string name="config_wlan_network_service_package" translatable="false">vendor.qti.iwlan</string>
 
     <!-- Telephony qualified networks service package name to bind to by default. -->
-    <string name="config_qualified_networks_service_package">vendor.qti.iwlan</string>
+    <string name="config_qualified_networks_service_package" translatable="false">vendor.qti.iwlan</string>
 
     <!-- Flag indicating if the speed up audio on mt call code should be executed -->
     <bool name="config_speed_up_audio_on_mt_calls">true</bool>

@@ -74,7 +74,7 @@ sed -i 's/version\=\"2\.0\"/version\=\"1\.0\"/g' "${DEVICE_COMMON_ROOT}"/product
 sed -i 's/version\=\"2\.0\"/version\=\"1\.0\"/g' "${DEVICE_COMMON_ROOT}"/product/etc/permissions/vendor.qti.hardware.data.connection-V1.1-java.xml
 
 # Add a restorecon for /persist/wlan to taimport_vendor.rc
-sed -i '4 a\    restorecon /persist/wlan' "${DEVICE_COMMON_ROOT}"/vendor/etc/init/taimport_vendor.rc
+grep -q "restorecon /persist/wlan" "${DEVICE_COMMON_ROOT}"/vendor/etc/init/taimport_vendor.rc || sed -i '4 a\    restorecon /persist/wlan' "${DEVICE_COMMON_ROOT}"/vendor/etc/init/taimport_vendor.rc
 
 # Patch lib-imsvideocodec.so to load libgui_shim.so
 grep -q "libgui_shim.so" "${DEVICE_COMMON_ROOT}"/system_ext/lib64/lib-imsvideocodec.so || "${PATCHELF}" --add-needed "libgui_shim.so" "${DEVICE_COMMON_ROOT}"/system_ext/lib64/lib-imsvideocodec.so
