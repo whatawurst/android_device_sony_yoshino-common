@@ -50,7 +50,7 @@ on boot
     setprop vendor.usb.rndis.func.name "rndis_bam"
     setprop vendor.usb.rmnet.func.name "rmnet_bam"
 
-    setprop sys.usb.config adb
+    setprop sys.usb.config mtp,adb
 
 # USB compositions
 on property:sys.usb.config=none
