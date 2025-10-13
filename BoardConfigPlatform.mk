@@ -152,6 +152,21 @@ BUILD_BROKEN_INCORRECT_PARTITION_IMAGES := true
 ### VENDOR SECURITY PATCH LEVEL
 VENDOR_SECURITY_PATCH := 2019-09-01
 
+# VERIFIED BOOT / SIGNING
+# Enable signing builds with custom keys.
+# With these vars, build/make/core/Makefile will write 'avb_avbtool=avbtool'
+# to misc_info.txt, so sign_target_files_apks will not crash with a KeyError.
+# https://gitlab.com/LineageOS/issues/android/-/issues/3388
+# https://review.lineageos.org/c/LineageOS/android_device_xiaomi_sdm845-common/+/308710
+BOARD_AVB_ENABLE := true
+BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
+BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
+# Disable AVB hashtree & rollback features on these unlocked devices.
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 2
+
 ### WIFI
 BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_qcwcn
